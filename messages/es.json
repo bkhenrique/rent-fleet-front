@@ -20,13 +20,44 @@
     "logout": "Cerrar sesión",
     "loadError": "No se pudieron cargar los datos de la empresa."
   },
-  "home": {
-    "welcome": "Hola, {name}",
-    "logout": "Cerrar sesión",
-    "goToLogin": "Ir a iniciar sesión"
-  },
   "nav": {
     "language": "Idioma"
+  },
+  "dashboard": {
+    "title": "Panel de la empresa de alquiler",
+    "loadError": "No se pudieron cargar los datos del panel.",
+    "overview": {
+      "total": "Vehículos",
+      "disponivel": "Disponibles",
+      "alugado": "Alquilados",
+      "manutencao": "En mantenimiento",
+      "alertasVeiculos": "Alertas de vehículos",
+      "alertasContratos": "Contratos por vencer"
+    },
+    "map": {
+      "title": "Mapa de la flota",
+      "live": "En vivo",
+      "offline": "Desconectado",
+      "empty": "Ningún vehículo tiene una posición registrada todavía.",
+      "origem": {
+        "tempo_real": "Rastreador en tiempo real",
+        "manual": "Posición manual"
+      }
+    },
+    "alerts": {
+      "title": "Alertas",
+      "empty": "No hay alertas por ahora.",
+      "vencido": "Vencido",
+      "atrasado": "Atrasado",
+      "venceEm": "Vence en {dias, plural, =1 {1 día} other {# días}}",
+      "devolucao": "devolución el",
+      "item": {
+        "seguro": "Seguro",
+        "itv": "ITV",
+        "licenciamento": "Matriculación",
+        "revisao": "Revisión"
+      }
+    }
   },
   "admin": {
     "title": "Empresas de alquiler",

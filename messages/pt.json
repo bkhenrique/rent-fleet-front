@@ -20,13 +20,44 @@
     "logout": "Sair",
     "loadError": "Não foi possível carregar os dados da locadora."
   },
-  "home": {
-    "welcome": "Olá, {name}",
-    "logout": "Sair",
-    "goToLogin": "Ir para o login"
-  },
   "nav": {
     "language": "Idioma"
+  },
+  "dashboard": {
+    "title": "Painel da locadora",
+    "loadError": "Não foi possível carregar os dados do painel.",
+    "overview": {
+      "total": "Veículos",
+      "disponivel": "Disponíveis",
+      "alugado": "Alugados",
+      "manutencao": "Em manutenção",
+      "alertasVeiculos": "Alertas de veículos",
+      "alertasContratos": "Contratos vencendo"
+    },
+    "map": {
+      "title": "Mapa da frota",
+      "live": "Ao vivo",
+      "offline": "Desconectado",
+      "empty": "Nenhum veículo com posição registrada ainda.",
+      "origem": {
+        "tempo_real": "Rastreador em tempo real",
+        "manual": "Posição manual"
+      }
+    },
+    "alerts": {
+      "title": "Alertas",
+      "empty": "Nenhum alerta no momento.",
+      "vencido": "Vencido",
+      "atrasado": "Atrasado",
+      "venceEm": "Vence em {dias, plural, =1 {1 dia} other {# dias}}",
+      "devolucao": "devolução em",
+      "item": {
+        "seguro": "Seguro",
+        "itv": "ITV",
+        "licenciamento": "Licenciamento",
+        "revisao": "Revisão"
+      }
+    }
   },
   "admin": {
     "title": "Locadoras",

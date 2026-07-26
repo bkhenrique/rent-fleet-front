@@ -20,13 +20,44 @@
     "logout": "Sign out",
     "loadError": "Couldn't load the rental company's data."
   },
-  "home": {
-    "welcome": "Hello, {name}",
-    "logout": "Sign out",
-    "goToLogin": "Go to sign in"
-  },
   "nav": {
     "language": "Language"
+  },
+  "dashboard": {
+    "title": "Rental company dashboard",
+    "loadError": "Couldn't load the dashboard data.",
+    "overview": {
+      "total": "Vehicles",
+      "disponivel": "Available",
+      "alugado": "Rented",
+      "manutencao": "In maintenance",
+      "alertasVeiculos": "Vehicle alerts",
+      "alertasContratos": "Contracts due"
+    },
+    "map": {
+      "title": "Fleet map",
+      "live": "Live",
+      "offline": "Offline",
+      "empty": "No vehicle has a registered position yet.",
+      "origem": {
+        "tempo_real": "Real-time tracker",
+        "manual": "Manual position"
+      }
+    },
+    "alerts": {
+      "title": "Alerts",
+      "empty": "No alerts right now.",
+      "vencido": "Overdue",
+      "atrasado": "Late",
+      "venceEm": "Due in {dias, plural, =1 {1 day} other {# days}}",
+      "devolucao": "return on",
+      "item": {
+        "seguro": "Insurance",
+        "itv": "Inspection",
+        "licenciamento": "Registration",
+        "revisao": "Service"
+      }
+    }
   },
   "admin": {
     "title": "Rental companies",
