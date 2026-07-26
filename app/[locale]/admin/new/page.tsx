@@ -1,0 +1,155 @@
+'use client';
+
+import { useState, type FormEvent } from 'react';
+import { useTranslations } from 'next-intl';
+import { useRouter } from '@/i18n/navigation';
+import { RequireRole } from '@/components/require-role';
+import { SUPER_ADMIN_ONLY } from '@/lib/roles';
+import { useApiClient } from '@/lib/use-api-client';
+import { ApiError } from '@/lib/api-client';
+import type { BillingCycle, CreateTenantPayload, Tenant } from '@/lib/types/tenant';
+
+function NewTenantForm() {
+  const t = useTranslations('admin');
+  const router = useRouter();
+  const apiClient = useApiClient();
+
+  const [nome, setNome] = useState('');
+  const [documento, setDocumento] = useState('');
+  const [ciclo, setCiclo] = useState<BillingCycle>('mensal');
+  const [adminName, setAdminName] = useState('');
+  const [adminEmail, setAdminEmail] = useState('');
+  const [adminPassword, setAdminPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  async function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+    setError(null);
+    setIsSubmitting(true);
+
+    const payload: CreateTenantPayload = {
+      nome,
+      documento,
+      ciclo,
+      admin: { name: adminName, email: adminEmail, password: adminPassword },
+    };
+
+    try {
+      const tenant = await apiClient<Tenant>('/tenants', { method: 'POST', body: JSON.stringify(payload) });
+      router.push(`/admin/${tenant._id}`);
+    } catch (err) {
+      if (err instanceof ApiError && err.status === 409) {
+        setError(t('form.conflictError'));
+      } else {
+        setError(t('form.genericError'));
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
+  return (
+    <div className="mx-auto max-w-md px-4 py-10">
+      <h1 className="mb-6 text-xl font-semibold">{t('newTenant')}</h1>
+
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <label className="flex flex-col gap-1">
+          <span className="text-sm font-medium">{t('form.nome')}</span>
+          <input
+            required
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+          />
+        </label>
+
+        <label className="flex flex-col gap-1">
+          <span className="text-sm font-medium">{t('form.documento')}</span>
+          <input
+            required
+            value={documento}
+            onChange={(e) => setDocumento(e.target.value)}
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+          />
+        </label>
+
+        <label className="flex flex-col gap-1">
+          <span className="text-sm font-medium">{t('form.ciclo')}</span>
+          <select
+            value={ciclo}
+            onChange={(e) => setCiclo(e.target.value as BillingCycle)}
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+          >
+            <option value="mensal">{t('ciclo.mensal')}</option>
+            <option value="anual">{t('ciclo.anual')}</option>
+          </select>
+        </label>
+
+        <fieldset className="flex flex-col gap-4 rounded border border-black/10 p-4 dark:border-white/10">
+          <legend className="px-1 text-sm font-medium">{t('form.adminSectionTitle')}</legend>
+
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-medium">{t('form.adminName')}</span>
+            <input
+              required
+              value={adminName}
+              onChange={(e) => setAdminName(e.target.value)}
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            />
+          </label>
+
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-medium">{t('form.adminEmail')}</span>
+            <input
+              type="email"
+              required
+              value={adminEmail}
+              onChange={(e) => setAdminEmail(e.target.value)}
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            />
+          </label>
+
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-medium">{t('form.adminPassword')}</span>
+            <input
+              type="password"
+              required
+              minLength={6}
+              value={adminPassword}
+              onChange={(e) => setAdminPassword(e.target.value)}
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            />
+          </label>
+        </fieldset>
+
+        {error && (
+          <p role="alert" className="text-sm text-red-600 dark:text-red-400">
+            {error}
+          </p>
+        )}
+
+        <div className="flex gap-3">
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="rounded bg-foreground px-4 py-2 font-medium text-background disabled:opacity-60"
+          >
+            {isSubmitting ? t('form.saving') : t('form.create')}
+          </button>
+          <button type="button" onClick={() => router.push('/admin')} className="rounded px-4 py-2 text-sm underline">
+            {t('form.cancel')}
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}
+
+export default function NewTenantPage() {
+  return (
+    <RequireRole roles={SUPER_ADMIN_ONLY}>
+      <NewTenantForm />
+    </RequireRole>
+  );
+}

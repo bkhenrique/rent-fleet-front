@@ -27,5 +27,52 @@
   },
   "nav": {
     "language": "Language"
+  },
+  "admin": {
+    "title": "Rental companies",
+    "newTenant": "New rental company",
+    "backToList": "Back",
+    "loadError": "Couldn't load the rental companies.",
+    "empty": "No rental companies registered yet.",
+    "table": {
+      "nome": "Name",
+      "documento": "Document",
+      "status": "Status",
+      "ciclo": "Cycle",
+      "ativoAte": "Active until"
+    },
+    "status": {
+      "ativo": "Active",
+      "inadimplente": "Overdue",
+      "suspenso": "Suspended",
+      "cortesia": "Complimentary"
+    },
+    "ciclo": {
+      "mensal": "Monthly",
+      "anual": "Annual"
+    },
+    "form": {
+      "nome": "Name",
+      "documento": "Document",
+      "ciclo": "Billing cycle",
+      "adminSectionTitle": "Rental company admin user",
+      "adminName": "Name",
+      "adminEmail": "Email",
+      "adminPassword": "Password",
+      "create": "Create rental company",
+      "save": "Save",
+      "saving": "Saving...",
+      "cancel": "Cancel",
+      "genericError": "Couldn't save. Please try again.",
+      "conflictError": "A rental company or user with this data already exists."
+    },
+    "detail": {
+      "markAsPaid": "Mark as paid",
+      "markingAsPaid": "Marking...",
+      "markPaidSuccess": "Payment recorded.",
+      "changeStatusTitle": "Force status manually",
+      "lastPayment": "Last payment",
+      "never": "Never"
+    }
   }
 }

@@ -27,5 +27,52 @@
   },
   "nav": {
     "language": "Idioma"
+  },
+  "admin": {
+    "title": "Empresas de alquiler",
+    "newTenant": "Nueva empresa",
+    "backToList": "Volver",
+    "loadError": "No se pudieron cargar las empresas de alquiler.",
+    "empty": "Todavía no hay empresas registradas.",
+    "table": {
+      "nome": "Nombre",
+      "documento": "Documento",
+      "status": "Estado",
+      "ciclo": "Ciclo",
+      "ativoAte": "Activo hasta"
+    },
+    "status": {
+      "ativo": "Activo",
+      "inadimplente": "Moroso",
+      "suspenso": "Suspendido",
+      "cortesia": "Cortesía"
+    },
+    "ciclo": {
+      "mensal": "Mensual",
+      "anual": "Anual"
+    },
+    "form": {
+      "nome": "Nombre",
+      "documento": "Documento",
+      "ciclo": "Ciclo de cobro",
+      "adminSectionTitle": "Usuario administrador de la empresa",
+      "adminName": "Nombre",
+      "adminEmail": "Correo electrónico",
+      "adminPassword": "Contraseña",
+      "create": "Crear empresa",
+      "save": "Guardar",
+      "saving": "Guardando...",
+      "cancel": "Cancelar",
+      "genericError": "No se pudo guardar. Inténtalo de nuevo.",
+      "conflictError": "Ya existe una empresa o usuario con esos datos."
+    },
+    "detail": {
+      "markAsPaid": "Marcar como pagado",
+      "markingAsPaid": "Marcando...",
+      "markPaidSuccess": "Pago registrado.",
+      "changeStatusTitle": "Forzar estado manualmente",
+      "lastPayment": "Último pago",
+      "never": "Nunca"
+    }
   }
 }

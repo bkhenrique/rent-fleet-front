@@ -27,5 +27,52 @@
   },
   "nav": {
     "language": "Idioma"
+  },
+  "admin": {
+    "title": "Locadoras",
+    "newTenant": "Nova locadora",
+    "backToList": "Voltar",
+    "loadError": "Não foi possível carregar as locadoras.",
+    "empty": "Nenhuma locadora cadastrada ainda.",
+    "table": {
+      "nome": "Nome",
+      "documento": "Documento",
+      "status": "Status",
+      "ciclo": "Ciclo",
+      "ativoAte": "Ativo até"
+    },
+    "status": {
+      "ativo": "Ativo",
+      "inadimplente": "Inadimplente",
+      "suspenso": "Suspenso",
+      "cortesia": "Cortesia"
+    },
+    "ciclo": {
+      "mensal": "Mensal",
+      "anual": "Anual"
+    },
+    "form": {
+      "nome": "Nome",
+      "documento": "Documento",
+      "ciclo": "Ciclo de cobrança",
+      "adminSectionTitle": "Usuário administrador da locadora",
+      "adminName": "Nome",
+      "adminEmail": "E-mail",
+      "adminPassword": "Senha",
+      "create": "Criar locadora",
+      "save": "Salvar",
+      "saving": "Salvando...",
+      "cancel": "Cancelar",
+      "genericError": "Não foi possível salvar. Tente novamente.",
+      "conflictError": "Já existe uma locadora ou usuário com esses dados."
+    },
+    "detail": {
+      "markAsPaid": "Marcar como pago",
+      "markingAsPaid": "Marcando...",
+      "markPaidSuccess": "Pagamento registrado.",
+      "changeStatusTitle": "Forçar status manualmente",
+      "lastPayment": "Último pagamento",
+      "never": "Nunca"
+    }
   }
 }
