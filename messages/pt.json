@@ -2,6 +2,56 @@
   "app": {
     "name": "RentFleet"
   },
+  "landing": {
+    "hero": {
+      "title": "Sua frota de aluguel, sob controle",
+      "subtitle": "Veículos, contratos e localização em tempo real — em um só lugar, feito pra locadoras de qualquer tamanho.",
+      "cta": "Sou Locadora",
+      "ctaSecondary": "Saiba mais"
+    },
+    "problem": {
+      "title": "O problema de gerenciar frota em planilha",
+      "items": [
+        "Documentação (seguro, ITV, licenciamento) vencendo sem aviso",
+        "Carros alugados sem controle real de devolução ou atraso",
+        "Falta de visibilidade em tempo real de onde cada carro está"
+      ]
+    },
+    "features": {
+      "title": "O que o RentFleet resolve",
+      "vehicles": {
+        "title": "Ficha técnica completa",
+        "description": "Documentos, manutenção e alertas automáticos de vencimento."
+      },
+      "tracking": {
+        "title": "Rastreamento em tempo real",
+        "description": "Mapa da frota com qualquer tipo de tracker — GPS, celular ou AirTag."
+      },
+      "contracts": {
+        "title": "Contratos com PDF automático",
+        "description": "Gere o contrato de aluguel automaticamente e anexe a assinatura depois."
+      },
+      "dashboard": {
+        "title": "Painel da locadora",
+        "description": "Veículos disponíveis, alugados e em manutenção, tudo em um painel só."
+      }
+    },
+    "differentials": {
+      "title": "Feito pra crescer junto com a sua locadora",
+      "items": [
+        "Português, inglês e espanhol prontos desde o primeiro dia",
+        "Instalável como app (PWA), com o básico funcionando até offline",
+        "Cada locadora enxerga só a própria frota — isolamento total entre contas"
+      ]
+    },
+    "ctaFinal": {
+      "title": "Pronto pra organizar sua frota?",
+      "cta": "Sou Locadora"
+    },
+    "footer": {
+      "rights": "Todos os direitos reservados."
+    }
+  },
   "login": {
     "title": "Entrar",
     "email": "E-mail",

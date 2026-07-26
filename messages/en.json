@@ -2,6 +2,56 @@
   "app": {
     "name": "RentFleet"
   },
+  "landing": {
+    "hero": {
+      "title": "Your rental fleet, finally under control",
+      "subtitle": "Vehicles, contracts and real-time location, all in one place — built for rental companies of any size.",
+      "cta": "I'm a Rental Company",
+      "ctaSecondary": "Learn more"
+    },
+    "problem": {
+      "title": "Running a fleet on spreadsheets is a problem",
+      "items": [
+        "Insurance, inspection and registration documents expiring without warning",
+        "Rented cars with no real control over returns or delays",
+        "No real-time visibility into where each vehicle actually is"
+      ]
+    },
+    "features": {
+      "title": "What RentFleet takes off your plate",
+      "vehicles": {
+        "title": "Complete vehicle records",
+        "description": "Documents, maintenance history and automatic expiration alerts."
+      },
+      "tracking": {
+        "title": "Real-time tracking",
+        "description": "A live fleet map that works with any tracker — dedicated GPS, a phone or an AirTag."
+      },
+      "contracts": {
+        "title": "Contracts with automatic PDFs",
+        "description": "Generate the rental agreement automatically and attach the signature afterward."
+      },
+      "dashboard": {
+        "title": "Rental company dashboard",
+        "description": "Available, rented and in-maintenance vehicles, all in a single overview."
+      }
+    },
+    "differentials": {
+      "title": "Built to grow alongside your rental company",
+      "items": [
+        "Portuguese, English and Spanish, ready from day one",
+        "Installable as an app (PWA), with the basics working even offline",
+        "Each rental company only sees its own fleet — complete isolation between accounts"
+      ]
+    },
+    "ctaFinal": {
+      "title": "Ready to get your fleet organized?",
+      "cta": "I'm a Rental Company"
+    },
+    "footer": {
+      "rights": "All rights reserved."
+    }
+  },
   "login": {
     "title": "Sign in",
     "email": "Email",

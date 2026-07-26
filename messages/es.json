@@ -2,6 +2,56 @@
   "app": {
     "name": "RentFleet"
   },
+  "landing": {
+    "hero": {
+      "title": "Tu flota de alquiler, por fin bajo control",
+      "subtitle": "Vehículos, contratos y ubicación en tiempo real, todo en un mismo lugar — pensado para empresas de alquiler de cualquier tamaño.",
+      "cta": "Soy una empresa de alquiler",
+      "ctaSecondary": "Saber más"
+    },
+    "problem": {
+      "title": "El problema de gestionar la flota en una hoja de cálculo",
+      "items": [
+        "Documentación (seguro, ITV, matriculación) que vence sin avisar",
+        "Coches alquilados sin un control real de devoluciones o retrasos",
+        "Falta de visibilidad en tiempo real de dónde está cada vehículo"
+      ]
+    },
+    "features": {
+      "title": "Lo que RentFleet resuelve por ti",
+      "vehicles": {
+        "title": "Ficha técnica completa",
+        "description": "Documentos, mantenimiento y alertas automáticas de vencimiento."
+      },
+      "tracking": {
+        "title": "Seguimiento en tiempo real",
+        "description": "Mapa de la flota compatible con cualquier rastreador — GPS dedicado, móvil o AirTag."
+      },
+      "contracts": {
+        "title": "Contratos con PDF automático",
+        "description": "Genera el contrato de alquiler automáticamente y adjunta la firma después."
+      },
+      "dashboard": {
+        "title": "Panel de la empresa de alquiler",
+        "description": "Vehículos disponibles, alquilados y en mantenimiento, todo en un solo panel."
+      }
+    },
+    "differentials": {
+      "title": "Pensado para crecer junto a tu empresa",
+      "items": [
+        "Portugués, inglés y español desde el primer día",
+        "Instalable como app (PWA), con lo básico funcionando incluso sin conexión",
+        "Cada empresa de alquiler ve solo su propia flota — aislamiento total entre cuentas"
+      ]
+    },
+    "ctaFinal": {
+      "title": "¿Listo para organizar tu flota?",
+      "cta": "Soy una empresa de alquiler"
+    },
+    "footer": {
+      "rights": "Todos los derechos reservados."
+    }
+  },
   "login": {
     "title": "Iniciar sesión",
     "email": "Correo electrónico",
