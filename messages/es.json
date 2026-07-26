@@ -25,6 +25,9 @@
   },
   "dashboard": {
     "title": "Panel de la empresa de alquiler",
+    "vehiclesLink": "Vehículos",
+    "customersLink": "Clientes",
+    "contractsLink": "Contratos",
     "loadError": "No se pudieron cargar los datos del panel.",
     "overview": {
       "total": "Vehículos",
@@ -104,6 +107,178 @@
       "changeStatusTitle": "Forzar estado manualmente",
       "lastPayment": "Último pago",
       "never": "Nunca"
+    }
+  },
+  "vehicles": {
+    "title": "Vehículos",
+    "newVehicle": "Nuevo vehículo",
+    "backToList": "Volver",
+    "loadError": "No se pudieron cargar los vehículos.",
+    "empty": "Todavía no hay vehículos registrados.",
+    "lastUpdated": "Última actualización: {date}",
+    "table": {
+      "placa": "Matrícula",
+      "marcaModelo": "Marca / Modelo",
+      "ano": "Año",
+      "status": "Estado"
+    },
+    "statusFilter": {
+      "todos": "Todos",
+      "disponivel": "Disponibles",
+      "alugado": "Alquilados",
+      "manutencao": "En mantenimiento",
+      "inativo": "Inactivos"
+    },
+    "status": {
+      "disponivel": "Disponible",
+      "alugado": "Alquilado",
+      "manutencao": "En mantenimiento",
+      "inativo": "Inactivo"
+    },
+    "form": {
+      "placa": "Matrícula",
+      "marca": "Marca",
+      "modelo": "Modelo",
+      "ano": "Año",
+      "cor": "Color",
+      "chassi": "Chasis",
+      "cambio": "Cambio",
+      "combustivel": "Combustible",
+      "status": "Estado",
+      "documentosSectionTitle": "Documentos",
+      "seguroValidade": "Seguro — vencimiento",
+      "seguroApolice": "Seguro — póliza",
+      "seguroSeguradora": "Seguro — aseguradora",
+      "itvValidade": "ITV — vencimiento",
+      "licenciamentoValidade": "Matriculación — vencimiento",
+      "create": "Crear vehículo",
+      "save": "Guardar",
+      "saving": "Guardando...",
+      "cancel": "Cancelar",
+      "genericError": "No se pudo guardar. Inténtalo de nuevo."
+    },
+    "maintenance": {
+      "title": "Mantenimiento",
+      "empty": "Todavía no hay mantenimientos registrados.",
+      "tipo": "Tipo",
+      "data": "Fecha",
+      "km": "Km",
+      "custo": "Costo",
+      "oficina": "Taller",
+      "add": "Registrar"
+    },
+    "photos": {
+      "title": "Fotos",
+      "empty": "Todavía no hay fotos.",
+      "uploading": "Subiendo...",
+      "uploadError": "No se pudo subir la foto.",
+      "unsupportedType": "Formato no compatible. Usa JPEG, PNG o WebP."
+    },
+    "tracker": {
+      "title": "Rastreador",
+      "tipo": "Tipo",
+      "uniqueId": "IMEI",
+      "create": "Registrar rastreador",
+      "genericError": "No se pudo completar la operación.",
+      "lastPosition": "Última posición",
+      "noPosition": "Todavía no hay posición registrada.",
+      "revealSecret": "Revelar secreto del webhook",
+      "updatePosition": "Actualizar posición",
+      "lat": "Latitud",
+      "lng": "Longitud",
+      "type": {
+        "traccar": "Traccar (GPS dedicado)",
+        "owntracks_app": "App OwnTracks",
+        "airtag_manual": "AirTag / posición manual",
+        "nenhum": "Ninguno"
+      },
+      "origem": {
+        "tempo_real": "tiempo real",
+        "manual": "manual"
+      }
+    }
+  },
+  "customers": {
+    "title": "Clientes",
+    "newCustomer": "Nuevo cliente",
+    "backToList": "Volver",
+    "loadError": "No se pudieron cargar los clientes.",
+    "empty": "Todavía no hay clientes registrados.",
+    "table": {
+      "nome": "Nombre",
+      "documento": "Documento",
+      "telefone": "Teléfono",
+      "email": "Correo electrónico"
+    },
+    "form": {
+      "nome": "Nombre",
+      "documento": "Documento",
+      "cnh": "Carné de conducir",
+      "telefone": "Teléfono",
+      "email": "Correo electrónico",
+      "create": "Crear cliente",
+      "save": "Guardar",
+      "saving": "Guardando...",
+      "cancel": "Cancelar",
+      "genericError": "No se pudo guardar. Inténtalo de nuevo.",
+      "conflictError": "Ya existe un cliente con este documento."
+    },
+    "documents": {
+      "title": "Documentos",
+      "empty": "Todavía no hay documentos.",
+      "uploading": "Subiendo...",
+      "uploadError": "No se pudo subir el documento.",
+      "unsupportedType": "Formato no compatible. Usa JPEG, PNG o WebP."
+    }
+  },
+  "rentalContracts": {
+    "title": "Contratos",
+    "newContract": "Nuevo contrato",
+    "backToList": "Volver",
+    "loadError": "No se pudieron cargar los contratos.",
+    "empty": "Todavía no hay contratos registrados.",
+    "table": {
+      "dataInicio": "Inicio",
+      "dataFim": "Devolución",
+      "valor": "Importe",
+      "status": "Estado"
+    },
+    "status": {
+      "ativo": "Activo",
+      "finalizado": "Finalizado"
+    },
+    "form": {
+      "vehicle": "Vehículo",
+      "customer": "Cliente",
+      "dataInicio": "Fecha de inicio",
+      "dataFim": "Fecha de devolución prevista",
+      "valor": "Importe",
+      "create": "Crear contrato",
+      "saving": "Guardando...",
+      "cancel": "Cancelar",
+      "genericError": "No se pudo guardar. Inténtalo de nuevo.",
+      "noVehicles": "No hay vehículos disponibles para alquilar en este momento.",
+      "noCustomers": "Registra un cliente antes de crear un contrato."
+    },
+    "detail": {
+      "title": "Detalles del contrato",
+      "dataDevolucaoReal": "Devolución real",
+      "openPdf": "Abrir PDF del contrato",
+      "assinaturaTitle": "Foto del contrato firmado",
+      "vistoriaEntregaTitle": "Inspección de entrega",
+      "vistoriaDevolucaoTitle": "Inspección de devolución",
+      "observacoes": "Notas",
+      "save": "Guardar",
+      "saving": "Guardando...",
+      "returnVehicle": "Devolver vehículo",
+      "returning": "Devolviendo...",
+      "genericError": "No se pudo completar la operación."
+    },
+    "attachments": {
+      "empty": "Todavía no hay fotos.",
+      "uploading": "Subiendo...",
+      "uploadError": "No se pudo subir la foto.",
+      "unsupportedType": "Formato no compatible. Usa JPEG, PNG o WebP."
     }
   }
 }

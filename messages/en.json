@@ -25,6 +25,9 @@
   },
   "dashboard": {
     "title": "Rental company dashboard",
+    "vehiclesLink": "Vehicles",
+    "customersLink": "Customers",
+    "contractsLink": "Contracts",
     "loadError": "Couldn't load the dashboard data.",
     "overview": {
       "total": "Vehicles",
@@ -104,6 +107,178 @@
       "changeStatusTitle": "Force status manually",
       "lastPayment": "Last payment",
       "never": "Never"
+    }
+  },
+  "vehicles": {
+    "title": "Vehicles",
+    "newVehicle": "New vehicle",
+    "backToList": "Back",
+    "loadError": "Couldn't load the vehicles.",
+    "empty": "No vehicles registered yet.",
+    "lastUpdated": "Last updated: {date}",
+    "table": {
+      "placa": "Plate",
+      "marcaModelo": "Make / Model",
+      "ano": "Year",
+      "status": "Status"
+    },
+    "statusFilter": {
+      "todos": "All",
+      "disponivel": "Available",
+      "alugado": "Rented",
+      "manutencao": "In maintenance",
+      "inativo": "Inactive"
+    },
+    "status": {
+      "disponivel": "Available",
+      "alugado": "Rented",
+      "manutencao": "In maintenance",
+      "inativo": "Inactive"
+    },
+    "form": {
+      "placa": "Plate",
+      "marca": "Make",
+      "modelo": "Model",
+      "ano": "Year",
+      "cor": "Color",
+      "chassi": "Chassis",
+      "cambio": "Transmission",
+      "combustivel": "Fuel",
+      "status": "Status",
+      "documentosSectionTitle": "Documents",
+      "seguroValidade": "Insurance — expiry",
+      "seguroApolice": "Insurance — policy",
+      "seguroSeguradora": "Insurance — insurer",
+      "itvValidade": "Inspection — expiry",
+      "licenciamentoValidade": "Registration — expiry",
+      "create": "Create vehicle",
+      "save": "Save",
+      "saving": "Saving...",
+      "cancel": "Cancel",
+      "genericError": "Couldn't save. Please try again."
+    },
+    "maintenance": {
+      "title": "Maintenance",
+      "empty": "No maintenance recorded yet.",
+      "tipo": "Type",
+      "data": "Date",
+      "km": "Mileage",
+      "custo": "Cost",
+      "oficina": "Shop",
+      "add": "Add"
+    },
+    "photos": {
+      "title": "Photos",
+      "empty": "No photos yet.",
+      "uploading": "Uploading...",
+      "uploadError": "Couldn't upload the photo.",
+      "unsupportedType": "Unsupported format. Use JPEG, PNG or WebP."
+    },
+    "tracker": {
+      "title": "Tracker",
+      "tipo": "Type",
+      "uniqueId": "IMEI",
+      "create": "Register tracker",
+      "genericError": "Couldn't complete the operation.",
+      "lastPosition": "Last position",
+      "noPosition": "No position registered yet.",
+      "revealSecret": "Reveal webhook secret",
+      "updatePosition": "Update position",
+      "lat": "Latitude",
+      "lng": "Longitude",
+      "type": {
+        "traccar": "Traccar (dedicated GPS)",
+        "owntracks_app": "OwnTracks app",
+        "airtag_manual": "AirTag / manual position",
+        "nenhum": "None"
+      },
+      "origem": {
+        "tempo_real": "real-time",
+        "manual": "manual"
+      }
+    }
+  },
+  "customers": {
+    "title": "Customers",
+    "newCustomer": "New customer",
+    "backToList": "Back",
+    "loadError": "Couldn't load the customers.",
+    "empty": "No customers registered yet.",
+    "table": {
+      "nome": "Name",
+      "documento": "Document",
+      "telefone": "Phone",
+      "email": "Email"
+    },
+    "form": {
+      "nome": "Name",
+      "documento": "Document",
+      "cnh": "Driver's license",
+      "telefone": "Phone",
+      "email": "Email",
+      "create": "Create customer",
+      "save": "Save",
+      "saving": "Saving...",
+      "cancel": "Cancel",
+      "genericError": "Couldn't save. Please try again.",
+      "conflictError": "A customer with this document already exists."
+    },
+    "documents": {
+      "title": "Documents",
+      "empty": "No documents yet.",
+      "uploading": "Uploading...",
+      "uploadError": "Couldn't upload the document.",
+      "unsupportedType": "Unsupported format. Use JPEG, PNG or WebP."
+    }
+  },
+  "rentalContracts": {
+    "title": "Contracts",
+    "newContract": "New contract",
+    "backToList": "Back",
+    "loadError": "Couldn't load the contracts.",
+    "empty": "No contracts registered yet.",
+    "table": {
+      "dataInicio": "Start",
+      "dataFim": "Return",
+      "valor": "Amount",
+      "status": "Status"
+    },
+    "status": {
+      "ativo": "Active",
+      "finalizado": "Finished"
+    },
+    "form": {
+      "vehicle": "Vehicle",
+      "customer": "Customer",
+      "dataInicio": "Start date",
+      "dataFim": "Expected return date",
+      "valor": "Amount",
+      "create": "Create contract",
+      "saving": "Saving...",
+      "cancel": "Cancel",
+      "genericError": "Couldn't save. Please try again.",
+      "noVehicles": "No vehicles available for rent right now.",
+      "noCustomers": "Register a customer before creating a contract."
+    },
+    "detail": {
+      "title": "Contract details",
+      "dataDevolucaoReal": "Actual return",
+      "openPdf": "Open contract PDF",
+      "assinaturaTitle": "Signed contract photo",
+      "vistoriaEntregaTitle": "Handover inspection",
+      "vistoriaDevolucaoTitle": "Return inspection",
+      "observacoes": "Notes",
+      "save": "Save",
+      "saving": "Saving...",
+      "returnVehicle": "Return vehicle",
+      "returning": "Returning...",
+      "genericError": "Couldn't complete the operation."
+    },
+    "attachments": {
+      "empty": "No photos yet.",
+      "uploading": "Uploading...",
+      "uploadError": "Couldn't upload the photo.",
+      "unsupportedType": "Unsupported format. Use JPEG, PNG or WebP."
     }
   }
 }

@@ -1,0 +1,213 @@
+'use client';
+
+import { useEffect, useState, type FormEvent } from 'react';
+import { useTranslations, useLocale } from 'next-intl';
+import { useApiClient } from '@/lib/use-api-client';
+import { ApiError } from '@/lib/api-client';
+import type { CreateTrackerPayload, Tracker, TrackerType } from '@/lib/types/tracker';
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+const TRACKER_TYPE_OPTIONS: TrackerType[] = ['traccar', 'owntracks_app', 'airtag_manual'];
+
+interface TrackerSectionProps {
+  vehicleId: string;
+}
+
+export function TrackerSection({ vehicleId }: TrackerSectionProps) {
+  const t = useTranslations('vehicles');
+  const locale = useLocale();
+  const apiClient = useApiClient();
+
+  const [tracker, setTracker] = useState<Tracker | null | undefined>(undefined);
+  const [tipo, setTipo] = useState<TrackerType>('airtag_manual');
+  const [uniqueId, setUniqueId] = useState('');
+  const [createError, setCreateError] = useState<string | null>(null);
+  const [creating, setCreating] = useState(false);
+
+  const [secret, setSecret] = useState<string | null>(null);
+  const [revealing, setRevealing] = useState(false);
+
+  const [lat, setLat] = useState('');
+  const [lng, setLng] = useState('');
+  const [positionError, setPositionError] = useState<string | null>(null);
+  const [savingPosition, setSavingPosition] = useState(false);
+
+  useEffect(() => {
+    apiClient<Tracker[]>('/trackers')
+      .then((trackers) => setTracker(trackers.find((item) => item.vehicleId === vehicleId) ?? null))
+      .catch(() => setTracker(null));
+  }, [apiClient, vehicleId]);
+
+  async function handleCreate(event: FormEvent) {
+    event.preventDefault();
+    setCreateError(null);
+    setCreating(true);
+
+    const payload: CreateTrackerPayload = {
+      vehicleId,
+      tipo,
+      uniqueId: tipo === 'traccar' ? uniqueId : undefined,
+    };
+
+    try {
+      const created = await apiClient<Tracker>('/trackers', { method: 'POST', body: JSON.stringify(payload) });
+      setTracker(created);
+      setSecret(created.webhookSecret ?? null);
+    } catch (err) {
+      setCreateError(err instanceof ApiError ? err.message : t('tracker.genericError'));
+    } finally {
+      setCreating(false);
+    }
+  }
+
+  async function handleReveal() {
+    if (!tracker) return;
+    setRevealing(true);
+    try {
+      const result = await apiClient<{ webhookSecret: string }>(`/trackers/${tracker._id}/reveal-secret`);
+      setSecret(result.webhookSecret);
+    } finally {
+      setRevealing(false);
+    }
+  }
+
+  async function handleUpdatePosition(event: FormEvent) {
+    event.preventDefault();
+    if (!tracker) return;
+    setPositionError(null);
+    setSavingPosition(true);
+    try {
+      const updated = await apiClient<Tracker>(`/trackers/${tracker._id}/manual-position`, {
+        method: 'PATCH',
+        body: JSON.stringify({ lat: Number(lat), lng: Number(lng) }),
+      });
+      setTracker(updated);
+      setLat('');
+      setLng('');
+    } catch {
+      setPositionError(t('tracker.genericError'));
+    } finally {
+      setSavingPosition(false);
+    }
+  }
+
+  if (tracker === undefined) return null;
+
+  const webhookUrl = tracker && secret ? `${API_URL}/trackers/${tracker._id}/position?secret=${secret}` : null;
+
+  return (
+    <div className="rounded border border-black/10 p-4 dark:border-white/10">
+      <h2 className="mb-3 text-sm font-semibold">{t('tracker.title')}</h2>
+
+      {!tracker && (
+        <form onSubmit={handleCreate} className="flex flex-wrap items-end gap-3">
+          <label className="flex flex-col gap-1">
+            <span className="text-xs font-medium">{t('tracker.tipo')}</span>
+            <select
+              value={tipo}
+              onChange={(e) => setTipo(e.target.value as TrackerType)}
+              className="rounded border border-black/15 px-2 py-1 text-sm dark:border-white/20"
+            >
+              {TRACKER_TYPE_OPTIONS.map((option) => (
+                <option key={option} value={option}>
+                  {t(`tracker.type.${option}`)}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          {tipo === 'traccar' && (
+            <label className="flex flex-col gap-1">
+              <span className="text-xs font-medium">{t('tracker.uniqueId')}</span>
+              <input
+                required
+                value={uniqueId}
+                onChange={(e) => setUniqueId(e.target.value)}
+                className="rounded border border-black/15 px-2 py-1 text-sm dark:border-white/20"
+              />
+            </label>
+          )}
+
+          <button
+            type="submit"
+            disabled={creating}
+            className="rounded bg-foreground px-3 py-1.5 text-sm font-medium text-background disabled:opacity-60"
+          >
+            {creating ? t('form.saving') : t('tracker.create')}
+          </button>
+        </form>
+      )}
+      {createError && <p className="mt-2 text-sm text-red-600 dark:text-red-400">{createError}</p>}
+
+      {tracker && (
+        <div className="flex flex-col gap-3 text-sm">
+          <p>
+            <span className="font-medium">{t('tracker.tipo')}:</span> {t(`tracker.type.${tracker.tipo}`)}
+            {tracker.uniqueId && ` (${tracker.uniqueId})`}
+          </p>
+
+          <p>
+            <span className="font-medium">{t('tracker.lastPosition')}:</span>{' '}
+            {tracker.ultimaPosicao
+              ? `${tracker.ultimaPosicao.lat}, ${tracker.ultimaPosicao.lng} — ${new Date(
+                  tracker.ultimaPosicao.timestamp,
+                ).toLocaleString(locale)} (${t(`tracker.origem.${tracker.ultimaPosicao.origem}`)})`
+              : t('tracker.noPosition')}
+          </p>
+
+          {tracker.tipo !== 'airtag_manual' && (
+            <div>
+              <button
+                type="button"
+                onClick={handleReveal}
+                disabled={revealing}
+                className="rounded border border-black/15 px-3 py-1.5 text-sm font-medium disabled:opacity-60 dark:border-white/20"
+              >
+                {revealing ? t('form.saving') : t('tracker.revealSecret')}
+              </button>
+              {webhookUrl && (
+                <p className="mt-2 break-all rounded bg-foreground/5 p-2 text-xs">{webhookUrl}</p>
+              )}
+            </div>
+          )}
+
+          {tracker.tipo === 'airtag_manual' && (
+            <form onSubmit={handleUpdatePosition} className="flex flex-wrap items-end gap-3">
+              <label className="flex flex-col gap-1">
+                <span className="text-xs font-medium">{t('tracker.lat')}</span>
+                <input
+                  type="number"
+                  step="any"
+                  required
+                  value={lat}
+                  onChange={(e) => setLat(e.target.value)}
+                  className="w-32 rounded border border-black/15 px-2 py-1 text-sm dark:border-white/20"
+                />
+              </label>
+              <label className="flex flex-col gap-1">
+                <span className="text-xs font-medium">{t('tracker.lng')}</span>
+                <input
+                  type="number"
+                  step="any"
+                  required
+                  value={lng}
+                  onChange={(e) => setLng(e.target.value)}
+                  className="w-32 rounded border border-black/15 px-2 py-1 text-sm dark:border-white/20"
+                />
+              </label>
+              <button
+                type="submit"
+                disabled={savingPosition}
+                className="rounded bg-foreground px-3 py-1.5 text-sm font-medium text-background disabled:opacity-60"
+              >
+                {savingPosition ? t('form.saving') : t('tracker.updatePosition')}
+              </button>
+            </form>
+          )}
+          {positionError && <p className="text-sm text-red-600 dark:text-red-400">{positionError}</p>}
+        </div>
+      )}
+    </div>
+  );
+}
