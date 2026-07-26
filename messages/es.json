@@ -1,0 +1,31 @@
+{
+  "app": {
+    "name": "RentFleet"
+  },
+  "login": {
+    "title": "Iniciar sesión",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "submit": "Iniciar sesión",
+    "submitting": "Iniciando sesión...",
+    "invalidCredentials": "Correo o contraseña inválidos.",
+    "genericError": "No se pudo iniciar sesión. Inténtalo de nuevo."
+  },
+  "blocked": {
+    "title": "Acceso bloqueado",
+    "message": "El acceso de tu empresa de alquiler está congelado por un pago pendiente. Contacta con RentFleet para regularizarlo.",
+    "tenantLabel": "Empresa de alquiler",
+    "statusLabel": "Estado",
+    "activeUntilLabel": "Activo hasta",
+    "logout": "Cerrar sesión",
+    "loadError": "No se pudieron cargar los datos de la empresa."
+  },
+  "home": {
+    "welcome": "Hola, {name}",
+    "logout": "Cerrar sesión",
+    "goToLogin": "Ir a iniciar sesión"
+  },
+  "nav": {
+    "language": "Idioma"
+  }
+}

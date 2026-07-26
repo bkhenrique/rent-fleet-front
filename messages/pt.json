@@ -1,0 +1,31 @@
+{
+  "app": {
+    "name": "RentFleet"
+  },
+  "login": {
+    "title": "Entrar",
+    "email": "E-mail",
+    "password": "Senha",
+    "submit": "Entrar",
+    "submitting": "Entrando...",
+    "invalidCredentials": "E-mail ou senha inválidos.",
+    "genericError": "Não foi possível entrar. Tente novamente."
+  },
+  "blocked": {
+    "title": "Acesso bloqueado",
+    "message": "O acesso da sua locadora está congelado por pagamento pendente. Fale com o RentFleet para regularizar.",
+    "tenantLabel": "Locadora",
+    "statusLabel": "Status",
+    "activeUntilLabel": "Ativo até",
+    "logout": "Sair",
+    "loadError": "Não foi possível carregar os dados da locadora."
+  },
+  "home": {
+    "welcome": "Olá, {name}",
+    "logout": "Sair",
+    "goToLogin": "Ir para o login"
+  },
+  "nav": {
+    "language": "Idioma"
+  }
+}

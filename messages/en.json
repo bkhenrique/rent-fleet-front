@@ -1,0 +1,31 @@
+{
+  "app": {
+    "name": "RentFleet"
+  },
+  "login": {
+    "title": "Sign in",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign in",
+    "submitting": "Signing in...",
+    "invalidCredentials": "Invalid email or password.",
+    "genericError": "Couldn't sign in. Please try again."
+  },
+  "blocked": {
+    "title": "Access blocked",
+    "message": "Your rental company's access is frozen due to a pending payment. Contact RentFleet to resolve it.",
+    "tenantLabel": "Rental company",
+    "statusLabel": "Status",
+    "activeUntilLabel": "Active until",
+    "logout": "Sign out",
+    "loadError": "Couldn't load the rental company's data."
+  },
+  "home": {
+    "welcome": "Hello, {name}",
+    "logout": "Sign out",
+    "goToLogin": "Go to sign in"
+  },
+  "nav": {
+    "language": "Language"
+  }
+}
