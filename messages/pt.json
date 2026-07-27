@@ -404,7 +404,8 @@
         "traccar": "Rastreador GPS dedicado (compatível com Traccar). Precisa do IMEI do aparelho — depois de cadastrar, o dispositivo já é registrado automaticamente no servidor Traccar.",
         "owntracks_app": "Para usar o celular do motorista/funcionário como rastreador: instale o app OwnTracks (Android ou iOS), abra as configurações de conexão e cole a URL de webhook mostrada abaixo depois de cadastrar.",
         "airtag_manual": "Para AirTag (Apple) ou Find My Device (Android): esses dispositivos não têm API pública, então não existe integração automática. Confira a localização no app oficial do fabricante (Find My / Find My Device) e atualize aqui manualmente sempre que precisar."
-      }
+      },
+      "pickOnMap": "Clique no mapa pra definir a posição (ou arraste o marcador pra ajustar)."
     }
   },
   "customers": {

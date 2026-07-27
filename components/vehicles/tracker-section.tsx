@@ -1,10 +1,18 @@
 'use client';
 
 import { useEffect, useState, type FormEvent } from 'react';
+import dynamic from 'next/dynamic';
 import { useTranslations, useLocale } from 'next-intl';
 import { useApiClient } from '@/lib/use-api-client';
+import { useTenantSettings } from '@/lib/use-tenant-settings';
+import { MAP_CENTER_BY_COUNTRY } from '@/lib/map-defaults';
 import { ApiError } from '@/lib/api-client';
 import type { CreateTrackerPayload, Tracker, TrackerType } from '@/lib/types/tracker';
+
+const PositionPickerMap = dynamic(
+  () => import('./position-picker-map').then((mod) => mod.PositionPickerMap),
+  { ssr: false },
+);
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -18,6 +26,7 @@ export function TrackerSection({ vehicleId }: TrackerSectionProps) {
   const t = useTranslations('vehicles');
   const locale = useLocale();
   const apiClient = useApiClient();
+  const tenantSettings = useTenantSettings();
 
   const [tracker, setTracker] = useState<Tracker | null | undefined>(undefined);
   const [tipo, setTipo] = useState<TrackerType>('airtag_manual');
@@ -29,14 +38,19 @@ export function TrackerSection({ vehicleId }: TrackerSectionProps) {
   const [revealing, setRevealing] = useState(false);
   const [webhookUrlCopied, setWebhookUrlCopied] = useState(false);
 
-  const [lat, setLat] = useState('');
-  const [lng, setLng] = useState('');
+  const [pickedPosition, setPickedPosition] = useState<[number, number] | null>(null);
   const [positionError, setPositionError] = useState<string | null>(null);
   const [savingPosition, setSavingPosition] = useState(false);
 
   useEffect(() => {
     apiClient<Tracker[]>('/trackers')
-      .then((trackers) => setTracker(trackers.find((item) => item.vehicleId === vehicleId) ?? null))
+      .then((trackers) => {
+        const found = trackers.find((item) => item.vehicleId === vehicleId) ?? null;
+        setTracker(found);
+        if (found?.ultimaPosicao) {
+          setPickedPosition([found.ultimaPosicao.lat, found.ultimaPosicao.lng]);
+        }
+      })
       .catch(() => setTracker(null));
   }, [apiClient, vehicleId]);
 
@@ -75,17 +89,15 @@ export function TrackerSection({ vehicleId }: TrackerSectionProps) {
 
   async function handleUpdatePosition(event: FormEvent) {
     event.preventDefault();
-    if (!tracker) return;
+    if (!tracker || !pickedPosition) return;
     setPositionError(null);
     setSavingPosition(true);
     try {
       const updated = await apiClient<Tracker>(`/trackers/${tracker._id}/manual-position`, {
         method: 'PATCH',
-        body: JSON.stringify({ lat: Number(lat), lng: Number(lng) }),
+        body: JSON.stringify({ lat: pickedPosition[0], lng: pickedPosition[1] }),
       });
       setTracker(updated);
-      setLat('');
-      setLng('');
     } catch {
       setPositionError(t('tracker.genericError'));
     } finally {
@@ -195,33 +207,22 @@ export function TrackerSection({ vehicleId }: TrackerSectionProps) {
           )}
 
           {tracker.tipo === 'airtag_manual' && (
-            <form onSubmit={handleUpdatePosition} className="flex flex-wrap items-end gap-3">
-              <label className="flex flex-col gap-1">
-                <span className="text-xs font-medium">{t('tracker.lat')}</span>
-                <input
-                  type="number"
-                  step="any"
-                  required
-                  value={lat}
-                  onChange={(e) => setLat(e.target.value)}
-                  className="w-32 rounded border border-black/15 px-2 py-1 text-sm dark:border-white/25"
-                />
-              </label>
-              <label className="flex flex-col gap-1">
-                <span className="text-xs font-medium">{t('tracker.lng')}</span>
-                <input
-                  type="number"
-                  step="any"
-                  required
-                  value={lng}
-                  onChange={(e) => setLng(e.target.value)}
-                  className="w-32 rounded border border-black/15 px-2 py-1 text-sm dark:border-white/25"
-                />
-              </label>
+            <form onSubmit={handleUpdatePosition} className="flex flex-col gap-2">
+              <p className="text-xs text-foreground/60">{t('tracker.pickOnMap')}</p>
+              <PositionPickerMap
+                initialCenter={tenantSettings ? MAP_CENTER_BY_COUNTRY[tenantSettings.pais] : MAP_CENTER_BY_COUNTRY.BR}
+                value={pickedPosition}
+                onChange={setPickedPosition}
+              />
+              {pickedPosition && (
+                <p className="text-xs text-foreground/60">
+                  {t('tracker.lat')}: {pickedPosition[0].toFixed(6)} · {t('tracker.lng')}: {pickedPosition[1].toFixed(6)}
+                </p>
+              )}
               <button
                 type="submit"
-                disabled={savingPosition}
-                className="rounded bg-foreground px-3 py-1.5 text-sm font-medium text-background disabled:opacity-60"
+                disabled={savingPosition || !pickedPosition}
+                className="self-start rounded bg-foreground px-3 py-1.5 text-sm font-medium text-background disabled:opacity-60"
               >
                 {savingPosition ? t('form.saving') : t('tracker.updatePosition')}
               </button>

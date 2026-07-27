@@ -404,7 +404,8 @@
         "traccar": "Dedicated GPS tracker (Traccar-compatible). Requires the device IMEI — once registered, the device is automatically enrolled on the Traccar server.",
         "owntracks_app": "To use the driver's/staff's phone as a tracker: install the OwnTracks app (Android or iOS), open its connection settings and paste the webhook URL shown below after creating it.",
         "airtag_manual": "For an Apple AirTag or Android Find My Device: these devices have no public API, so there's no automatic integration. Check the location in the manufacturer's official app (Find My / Find My Device) and update it here manually whenever needed."
-      }
+      },
+      "pickOnMap": "Click the map to set the position (or drag the marker to fine-tune it)."
     }
   },
   "customers": {
