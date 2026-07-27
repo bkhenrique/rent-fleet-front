@@ -88,6 +88,7 @@ function DashboardContent() {
       />
 
       <FleetMap
+        key={tenantSettings?.pais ?? 'loading'}
         positions={positions}
         vehiclesById={vehiclesById}
         connected={connected}

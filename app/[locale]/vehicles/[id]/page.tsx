@@ -313,6 +313,7 @@ function VehicleDetail({ id }: { id: string }) {
       </form>
 
       <FleetMap
+        key={tenantSettings?.pais ?? 'loading'}
         positions={vehiclePositions}
         vehiclesById={vehiclesById}
         connected={connected}
