@@ -8,6 +8,8 @@ import { RequireRole } from '@/components/require-role';
 import { TENANT_ROLES } from '@/lib/roles';
 import { useApiClient } from '@/lib/use-api-client';
 import { useFleetSocket } from '@/lib/use-fleet-socket';
+import { useTenantSettings } from '@/lib/use-tenant-settings';
+import { MAP_CENTER_BY_COUNTRY } from '@/lib/map-defaults';
 import { OverviewCards } from '@/components/dashboard/overview-cards';
 import { AlertsList } from '@/components/dashboard/alerts-list';
 import type { Vehicle, VehicleWithAlerts } from '@/lib/types/vehicle';
@@ -25,6 +27,7 @@ function DashboardContent() {
   const t = useTranslations('dashboard');
   const apiClient = useApiClient();
   const { positions, connected } = useFleetSocket();
+  const tenantSettings = useTenantSettings();
 
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
   const [vehicleAlerts, setVehicleAlerts] = useState<VehicleWithAlerts[]>([]);
@@ -84,7 +87,12 @@ function DashboardContent() {
         contractAlertCount={contractAlerts.length}
       />
 
-      <FleetMap positions={positions} vehiclesById={vehiclesById} connected={connected} />
+      <FleetMap
+        positions={positions}
+        vehiclesById={vehiclesById}
+        connected={connected}
+        fallbackCenter={tenantSettings ? MAP_CENTER_BY_COUNTRY[tenantSettings.pais] : undefined}
+      />
 
       <AlertsList
         vehicleAlerts={vehicleAlerts}

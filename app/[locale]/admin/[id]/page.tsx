@@ -6,9 +6,11 @@ import { Link } from '@/i18n/navigation';
 import { RequireRole } from '@/components/require-role';
 import { SUPER_ADMIN_ONLY } from '@/lib/roles';
 import { useApiClient } from '@/lib/use-api-client';
-import type { BillingCycle, Tenant, TenantStatus, UpdateTenantPayload } from '@/lib/types/tenant';
+import type { BillingCycle, Country, Currency, Tenant, TenantStatus, UpdateTenantPayload } from '@/lib/types/tenant';
 
 const STATUS_OPTIONS: TenantStatus[] = ['ativo', 'inadimplente', 'suspenso', 'cortesia'];
+const COUNTRIES: Country[] = ['BR', 'ES', 'US'];
+const CURRENCIES: Currency[] = ['BRL', 'EUR', 'USD'];
 
 function TenantDetail({ id }: { id: string }) {
   const t = useTranslations('admin');
@@ -21,6 +23,8 @@ function TenantDetail({ id }: { id: string }) {
   const [nome, setNome] = useState('');
   const [documento, setDocumento] = useState('');
   const [ciclo, setCiclo] = useState<BillingCycle>('mensal');
+  const [pais, setPais] = useState<Country>('BR');
+  const [moeda, setMoeda] = useState<Currency>('BRL');
   const [status, setStatus] = useState<TenantStatus>('ativo');
 
   const [savingForm, setSavingForm] = useState(false);
@@ -41,6 +45,8 @@ function TenantDetail({ id }: { id: string }) {
         setNome(found.nome);
         setDocumento(found.documento);
         setCiclo(found.billing.ciclo);
+        setPais(found.pais);
+        setMoeda(found.moeda);
         setStatus(found.status);
       })
       .catch(() => setLoadError(true));
@@ -53,7 +59,7 @@ function TenantDetail({ id }: { id: string }) {
     setFormError(null);
     setSavingForm(true);
     try {
-      const payload: UpdateTenantPayload = { nome, documento, ciclo };
+      const payload: UpdateTenantPayload = { nome, documento, ciclo, pais, moeda };
       const updated = await apiClient<Tenant>(`/tenants/${id}`, {
         method: 'PATCH',
         body: JSON.stringify(payload),
@@ -149,6 +155,38 @@ function TenantDetail({ id }: { id: string }) {
             <option value="anual">{t('ciclo.anual')}</option>
           </select>
         </label>
+
+        <div className="grid grid-cols-2 gap-4">
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-medium">{t('form.pais')}</span>
+            <select
+              value={pais}
+              onChange={(e) => setPais(e.target.value as Country)}
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            >
+              {COUNTRIES.map((option) => (
+                <option key={option} value={option}>
+                  {t(`pais.${option}`)}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-medium">{t('form.moeda')}</span>
+            <select
+              value={moeda}
+              onChange={(e) => setMoeda(e.target.value as Currency)}
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            >
+              {CURRENCIES.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
 
         <button
           type="submit"

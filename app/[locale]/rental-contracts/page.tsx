@@ -6,6 +6,8 @@ import { Link } from '@/i18n/navigation';
 import { RequireRole } from '@/components/require-role';
 import { TENANT_ROLES } from '@/lib/roles';
 import { useApiClient } from '@/lib/use-api-client';
+import { useTenantSettings } from '@/lib/use-tenant-settings';
+import { formatCurrency } from '@/lib/currency';
 import type { RentalContract } from '@/lib/types/rental-contract';
 
 function daysRemaining(dateStr: string): number {
@@ -16,6 +18,7 @@ function RentalContractsList() {
   const t = useTranslations('rentalContracts');
   const locale = useLocale();
   const apiClient = useApiClient();
+  const tenantSettings = useTenantSettings();
 
   const [contracts, setContracts] = useState<RentalContract[] | null>(null);
   const [error, setError] = useState(false);
@@ -71,7 +74,9 @@ function RentalContractsList() {
                   >
                     {new Date(contract.dataFim).toLocaleDateString(locale)}
                   </td>
-                  <td className="py-2 pr-4">{contract.valor}</td>
+                  <td className="py-2 pr-4">
+                    {tenantSettings ? formatCurrency(contract.valor, tenantSettings.moeda) : contract.valor}
+                  </td>
                   <td className="py-2 pr-4">{t(`status.${contract.status}`)}</td>
                 </tr>
               );

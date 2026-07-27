@@ -10,6 +10,10 @@
       "scrollCta": "Ver cómo funciona",
       "mapLive": "En vivo"
     },
+    "showcase": {
+      "title": "Mira toda tu flota en el mapa, en tiempo real",
+      "subtitle": "Cada coche muestra su posición más reciente — ya sea un GPS dedicado, un móvil olvidado en la guantera o una lectura manual de un AirTag. Nunca simulamos tiempo real cuando en realidad es solo la última posición conocida."
+    },
     "problem": {
       "title": "El problema de gestionar la flota en una hoja de cálculo",
       "items": [
@@ -138,10 +142,17 @@
       "mensal": "Mensual",
       "anual": "Anual"
     },
+    "pais": {
+      "BR": "Brasil",
+      "ES": "España",
+      "US": "EE. UU."
+    },
     "form": {
       "nome": "Nombre",
       "documento": "Documento",
       "ciclo": "Ciclo de cobro",
+      "pais": "País",
+      "moeda": "Moneda",
       "adminSectionTitle": "Usuario administrador de la empresa",
       "adminName": "Nombre",
       "adminEmail": "Correo electrónico",

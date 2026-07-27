@@ -3,6 +3,8 @@
 import { useState, type FormEvent } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useApiClient } from '@/lib/use-api-client';
+import { useTenantSettings } from '@/lib/use-tenant-settings';
+import { formatCurrency } from '@/lib/currency';
 import type { CreateMaintenancePayload, Vehicle } from '@/lib/types/vehicle';
 
 interface MaintenanceSectionProps {
@@ -15,6 +17,7 @@ export function MaintenanceSection({ vehicleId, manutencao, onUpdated }: Mainten
   const t = useTranslations('vehicles');
   const locale = useLocale();
   const apiClient = useApiClient();
+  const tenantSettings = useTenantSettings();
 
   const [tipo, setTipo] = useState('');
   const [data, setData] = useState('');
@@ -81,7 +84,9 @@ export function MaintenanceSection({ vehicleId, manutencao, onUpdated }: Mainten
                   <td className="py-1 pr-3">{entry.tipo}</td>
                   <td className="py-1 pr-3">{new Date(entry.data).toLocaleDateString(locale)}</td>
                   <td className="py-1 pr-3">{entry.km ?? '—'}</td>
-                  <td className="py-1 pr-3">{entry.custo ?? '—'}</td>
+                  <td className="py-1 pr-3">
+                    {entry.custo !== null && tenantSettings ? formatCurrency(entry.custo, tenantSettings.moeda) : (entry.custo ?? '—')}
+                  </td>
                   <td className="py-1 pr-3">{entry.oficina ?? '—'}</td>
                 </tr>
               ))}

@@ -7,16 +7,26 @@ import { Reveal } from '@/components/reveal';
 import {
   ContractIcon,
   DashboardIcon,
+  DeviceIcon,
   FleetMapIllustration,
+  GlobeIcon,
+  HeroIllustration,
+  ShieldIcon,
   TrackingIcon,
   VehicleIcon,
 } from '@/components/landing-icons';
 
 const FEATURES = [
-  { key: 'vehicles', Icon: VehicleIcon },
-  { key: 'tracking', Icon: TrackingIcon },
-  { key: 'contracts', Icon: ContractIcon },
-  { key: 'dashboard', Icon: DashboardIcon },
+  { key: 'vehicles', Icon: VehicleIcon, color: 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400' },
+  { key: 'tracking', Icon: TrackingIcon, color: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' },
+  { key: 'contracts', Icon: ContractIcon, color: 'bg-amber-500/10 text-amber-600 dark:text-amber-400' },
+  { key: 'dashboard', Icon: DashboardIcon, color: 'bg-sky-500/10 text-sky-600 dark:text-sky-400' },
+] as const;
+
+const DIFFERENTIALS = [
+  { key: 'languages', Icon: GlobeIcon },
+  { key: 'pwa', Icon: DeviceIcon },
+  { key: 'isolation', Icon: ShieldIcon },
 ] as const;
 
 export async function generateMetadata({
@@ -54,6 +64,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <section className="relative">
           <div
             aria-hidden
+            className="bg-dot-grid absolute inset-0 -z-20 text-foreground/5"
+          />
+          <div
+            aria-hidden
             className="animate-drift absolute -top-40 left-1/2 -z-10 h-128 w-lg -translate-x-1/2 rounded-full bg-accent/10 blur-3xl"
           />
           <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-20 sm:py-28 lg:grid-cols-2 lg:py-32">
@@ -74,8 +88,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </a>
             </div>
 
-            <Reveal>
-              <FleetMapIllustration liveLabel={t('hero.mapLive')} />
+            <Reveal className="transition-transform duration-500 hover:-rotate-1 hover:scale-[1.02]">
+              <HeroIllustration />
             </Reveal>
           </div>
         </section>
@@ -99,16 +113,28 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </Reveal>
         </section>
 
+        <section className="border-t border-black/10 px-4 py-20 dark:border-white/10">
+          <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 lg:grid-cols-2">
+            <Reveal>
+              <FleetMapIllustration liveLabel={t('hero.mapLive')} />
+            </Reveal>
+            <Reveal delay={100} className="flex flex-col gap-4">
+              <h2 className="text-2xl font-semibold sm:text-3xl">{t('showcase.title')}</h2>
+              <p className="text-foreground/70">{t('showcase.subtitle')}</p>
+            </Reveal>
+          </div>
+        </section>
+
         <section id="features" className="border-t border-black/10 px-4 py-20 dark:border-white/10">
           <div className="mx-auto max-w-5xl">
             <Reveal>
               <h2 className="text-center text-2xl font-semibold sm:text-3xl">{t('features.title')}</h2>
             </Reveal>
             <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {FEATURES.map(({ key, Icon }, index) => (
+              {FEATURES.map(({ key, Icon, color }, index) => (
                 <Reveal key={key} delay={index * 80}>
                   <div className="group flex h-full flex-col gap-3 rounded-xl border border-black/10 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-lg hover:shadow-accent/10 dark:border-white/10">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-accent/10 text-accent">
+                    <span className={`flex h-11 w-11 items-center justify-center rounded-lg ${color}`}>
                       <Icon />
                     </span>
                     <h3 className="font-semibold">{t(`features.${key}.title`)}</h3>
@@ -121,19 +147,23 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </section>
 
         <section className="border-t border-black/10 px-4 py-20 dark:border-white/10">
-          <Reveal className="mx-auto max-w-3xl">
-            <h2 className="text-center text-2xl font-semibold sm:text-3xl">{t('differentials.title')}</h2>
-            <ul className="mt-10 flex flex-col gap-3">
-              {differentialItems.map((item) => (
-                <li key={item} className="flex gap-3">
-                  <span aria-hidden className="text-green-600 dark:text-green-400">
-                    ✓
-                  </span>
-                  <span>{item}</span>
-                </li>
+          <div className="mx-auto max-w-5xl">
+            <Reveal>
+              <h2 className="text-center text-2xl font-semibold sm:text-3xl">{t('differentials.title')}</h2>
+            </Reveal>
+            <div className="mt-12 grid gap-5 sm:grid-cols-3">
+              {DIFFERENTIALS.map(({ key, Icon }, index) => (
+                <Reveal key={key} delay={index * 80}>
+                  <div className="flex h-full flex-col items-center gap-3 rounded-xl border border-black/10 p-6 text-center dark:border-white/10">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-green-500/10 text-green-600 dark:text-green-400">
+                      <Icon />
+                    </span>
+                    <p className="text-sm text-foreground/70">{differentialItems[index]}</p>
+                  </div>
+                </Reveal>
               ))}
-            </ul>
-          </Reveal>
+            </div>
+          </div>
         </section>
 
         <section className="relative border-t border-black/10 px-4 py-24 text-center dark:border-white/10">

@@ -94,6 +94,25 @@ body {
   animation: dash-move 1.2s linear infinite;
 }
 
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+.bg-dot-grid {
+  background-image: radial-gradient(circle, currentColor 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
@@ -101,7 +120,8 @@ body {
   .reveal-visible,
   .animate-drift,
   .animate-pulse-ring,
-  .animate-dash {
+  .animate-dash,
+  .animate-float {
     animation: none;
   }
 }

@@ -10,6 +10,10 @@
       "scrollCta": "See how it works",
       "mapLive": "Live"
     },
+    "showcase": {
+      "title": "See your entire fleet on the map, live",
+      "subtitle": "Every car shows its most recent position — whether that's a dedicated GPS, a phone left in the glovebox, or a manually logged AirTag reading. Never pretending something is live when it's really just the last known position."
+    },
     "problem": {
       "title": "Running a fleet on spreadsheets is a problem",
       "items": [
@@ -138,10 +142,17 @@
       "mensal": "Monthly",
       "anual": "Annual"
     },
+    "pais": {
+      "BR": "Brazil",
+      "ES": "Spain",
+      "US": "USA"
+    },
     "form": {
       "nome": "Name",
       "documento": "Document",
       "ciclo": "Billing cycle",
+      "pais": "Country",
+      "moeda": "Currency",
       "adminSectionTitle": "Rental company admin user",
       "adminName": "Name",
       "adminEmail": "Email",

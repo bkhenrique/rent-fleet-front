@@ -7,7 +7,11 @@ import { RequireRole } from '@/components/require-role';
 import { SUPER_ADMIN_ONLY } from '@/lib/roles';
 import { useApiClient } from '@/lib/use-api-client';
 import { ApiError } from '@/lib/api-client';
-import type { BillingCycle, CreateTenantPayload, Tenant } from '@/lib/types/tenant';
+import type { BillingCycle, Country, CreateTenantPayload, Currency, Tenant } from '@/lib/types/tenant';
+
+const COUNTRIES: Country[] = ['BR', 'ES', 'US'];
+const CURRENCIES: Currency[] = ['BRL', 'EUR', 'USD'];
+const DEFAULT_CURRENCY_BY_COUNTRY: Record<Country, Currency> = { BR: 'BRL', ES: 'EUR', US: 'USD' };
 
 function NewTenantForm() {
   const t = useTranslations('admin');
@@ -17,11 +21,18 @@ function NewTenantForm() {
   const [nome, setNome] = useState('');
   const [documento, setDocumento] = useState('');
   const [ciclo, setCiclo] = useState<BillingCycle>('mensal');
+  const [pais, setPais] = useState<Country>('BR');
+  const [moeda, setMoeda] = useState<Currency>('BRL');
   const [adminName, setAdminName] = useState('');
   const [adminEmail, setAdminEmail] = useState('');
   const [adminPassword, setAdminPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  function handlePaisChange(value: Country) {
+    setPais(value);
+    setMoeda(DEFAULT_CURRENCY_BY_COUNTRY[value]);
+  }
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -32,6 +43,8 @@ function NewTenantForm() {
       nome,
       documento,
       ciclo,
+      pais,
+      moeda,
       admin: { name: adminName, email: adminEmail, password: adminPassword },
     };
 
@@ -85,6 +98,38 @@ function NewTenantForm() {
             <option value="anual">{t('ciclo.anual')}</option>
           </select>
         </label>
+
+        <div className="grid grid-cols-2 gap-4">
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-medium">{t('form.pais')}</span>
+            <select
+              value={pais}
+              onChange={(e) => handlePaisChange(e.target.value as Country)}
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            >
+              {COUNTRIES.map((option) => (
+                <option key={option} value={option}>
+                  {t(`pais.${option}`)}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-medium">{t('form.moeda')}</span>
+            <select
+              value={moeda}
+              onChange={(e) => setMoeda(e.target.value as Currency)}
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            >
+              {CURRENCIES.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
 
         <fieldset className="flex flex-col gap-4 rounded border border-black/10 p-4 dark:border-white/10">
           <legend className="px-1 text-sm font-medium">{t('form.adminSectionTitle')}</legend>

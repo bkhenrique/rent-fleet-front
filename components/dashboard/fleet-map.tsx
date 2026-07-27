@@ -4,21 +4,22 @@ import 'leaflet/dist/leaflet.css';
 import { CircleMarker, MapContainer, Popup, TileLayer } from 'react-leaflet';
 import { useTranslations } from 'next-intl';
 import type { TrackerPositionSummary } from '@/lib/types/tracker';
+import { DEFAULT_MAP_CENTER } from '@/lib/map-defaults';
 
 interface FleetMapProps {
   positions: TrackerPositionSummary[];
   vehiclesById: Record<string, { placa: string; marca: string; modelo: string }>;
   connected: boolean;
+  /** Centro exibido antes de qualquer posição real existir — default Brasil se omitido. */
+  fallbackCenter?: [number, number];
 }
-
-const DEFAULT_CENTER: [number, number] = [-15.793889, -47.882778]; // Brasília, fallback sem posições
 
 const ORIGIN_COLOR: Record<'tempo_real' | 'manual', string> = {
   tempo_real: '#16a34a',
   manual: '#f59e0b',
 };
 
-export function FleetMap({ positions, vehiclesById, connected }: FleetMapProps) {
+export function FleetMap({ positions, vehiclesById, connected, fallbackCenter = DEFAULT_MAP_CENTER }: FleetMapProps) {
   const t = useTranslations('dashboard.map');
 
   const withPosition = positions.filter(
@@ -28,7 +29,7 @@ export function FleetMap({ positions, vehiclesById, connected }: FleetMapProps) 
 
   const center: [number, number] = withPosition[0]
     ? [withPosition[0].ultimaPosicao.lat, withPosition[0].ultimaPosicao.lng]
-    : DEFAULT_CENTER;
+    : fallbackCenter;
 
   return (
     <div className="rounded border border-black/10 dark:border-white/10">

@@ -8,6 +8,8 @@ import { RequireRole } from '@/components/require-role';
 import { TENANT_ROLES } from '@/lib/roles';
 import { useApiClient } from '@/lib/use-api-client';
 import { useFleetSocket } from '@/lib/use-fleet-socket';
+import { useTenantSettings } from '@/lib/use-tenant-settings';
+import { MAP_CENTER_BY_COUNTRY } from '@/lib/map-defaults';
 import { MaintenanceSection } from '@/components/vehicles/maintenance-section';
 import { PhotosSection } from '@/components/vehicles/photos-section';
 import { TrackerSection } from '@/components/vehicles/tracker-section';
@@ -39,6 +41,7 @@ function VehicleDetail({ id }: { id: string }) {
   const locale = useLocale();
   const apiClient = useApiClient();
   const { positions, connected } = useFleetSocket();
+  const tenantSettings = useTenantSettings();
 
   const [vehicle, setVehicle] = useState<Vehicle | null>(null);
   const [loadError, setLoadError] = useState(false);
@@ -309,7 +312,12 @@ function VehicleDetail({ id }: { id: string }) {
         </button>
       </form>
 
-      <FleetMap positions={vehiclePositions} vehiclesById={vehiclesById} connected={connected} />
+      <FleetMap
+        positions={vehiclePositions}
+        vehiclesById={vehiclesById}
+        connected={connected}
+        fallbackCenter={tenantSettings ? MAP_CENTER_BY_COUNTRY[tenantSettings.pais] : undefined}
+      />
 
       <TrackerSection vehicleId={vehicle._id} />
 

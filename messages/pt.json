@@ -10,6 +10,10 @@
       "scrollCta": "Ver como funciona",
       "mapLive": "Ao vivo"
     },
+    "showcase": {
+      "title": "Veja sua frota inteira no mapa, em tempo real",
+      "subtitle": "Cada carro aparece com sua posição mais recente — seja um GPS dedicado, um celular deixado no porta-luvas ou a leitura manual de um AirTag. Sem fingir tempo real quando é só a última posição conhecida."
+    },
     "problem": {
       "title": "O problema de gerenciar frota em planilha",
       "items": [
@@ -138,10 +142,17 @@
       "mensal": "Mensal",
       "anual": "Anual"
     },
+    "pais": {
+      "BR": "Brasil",
+      "ES": "Espanha",
+      "US": "EUA"
+    },
     "form": {
       "nome": "Nome",
       "documento": "Documento",
       "ciclo": "Ciclo de cobrança",
+      "pais": "País",
+      "moeda": "Moeda",
       "adminSectionTitle": "Usuário administrador da locadora",
       "adminName": "Nome",
       "adminEmail": "E-mail",

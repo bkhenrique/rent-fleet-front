@@ -6,6 +6,8 @@ import { Link } from '@/i18n/navigation';
 import { RequireRole } from '@/components/require-role';
 import { TENANT_ROLES } from '@/lib/roles';
 import { useApiClient } from '@/lib/use-api-client';
+import { useTenantSettings } from '@/lib/use-tenant-settings';
+import { formatCurrency } from '@/lib/currency';
 import { AttachmentUpload } from '@/components/rental-contracts/attachment-upload';
 import type { RentalContract } from '@/lib/types/rental-contract';
 
@@ -13,6 +15,7 @@ function RentalContractDetail({ id }: { id: string }) {
   const t = useTranslations('rentalContracts');
   const locale = useLocale();
   const apiClient = useApiClient();
+  const tenantSettings = useTenantSettings();
 
   const [contract, setContract] = useState<RentalContract | null>(null);
   const [loadError, setLoadError] = useState(false);
@@ -99,7 +102,7 @@ function RentalContractDetail({ id }: { id: string }) {
         <dt className="font-medium">{t('table.dataFim')}</dt>
         <dd>{new Date(contract.dataFim).toLocaleDateString(locale)}</dd>
         <dt className="font-medium">{t('table.valor')}</dt>
-        <dd>{contract.valor}</dd>
+        <dd>{tenantSettings ? formatCurrency(contract.valor, tenantSettings.moeda) : contract.valor}</dd>
         <dt className="font-medium">{t('table.status')}</dt>
         <dd>{t(`status.${contract.status}`)}</dd>
         {contract.dataDevolucaoReal && (

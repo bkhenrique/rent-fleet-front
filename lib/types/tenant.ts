@@ -1,5 +1,7 @@
 export type TenantStatus = 'ativo' | 'inadimplente' | 'suspenso' | 'cortesia';
 export type BillingCycle = 'mensal' | 'anual';
+export type Country = 'BR' | 'ES' | 'US';
+export type Currency = 'BRL' | 'EUR' | 'USD';
 
 export interface Tenant {
   _id: string;
@@ -12,6 +14,8 @@ export interface Tenant {
     ultimoPagamentoEm: string | null;
   };
   idiomaPadrao: 'pt' | 'en' | 'es';
+  pais: Country;
+  moeda: Currency;
   createdAt: string;
   updatedAt: string;
 }
@@ -20,6 +24,8 @@ export interface CreateTenantPayload {
   nome: string;
   documento: string;
   ciclo: BillingCycle;
+  pais: Country;
+  moeda?: Currency;
   admin: {
     email: string;
     password: string;
@@ -31,4 +37,6 @@ export interface UpdateTenantPayload {
   nome?: string;
   documento?: string;
   ciclo?: BillingCycle;
+  pais?: Country;
+  moeda?: Currency;
 }
