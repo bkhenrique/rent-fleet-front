@@ -97,6 +97,9 @@ function CustomerDetail({ id }: { id: string }) {
           {t('backToList')}
         </Link>
         <h1 className="mt-2 text-xl font-semibold">{customer.nome}</h1>
+        <Link href={`/rental-contracts?customerId=${customer.id}`} className="text-sm underline">
+          {t('viewRentalHistory')}
+        </Link>
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">

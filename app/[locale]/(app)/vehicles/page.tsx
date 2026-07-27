@@ -6,6 +6,7 @@ import { Link } from '@/i18n/navigation';
 import { RequireRole } from '@/components/require-role';
 import { TENANT_ROLES } from '@/lib/roles';
 import { useApiClient } from '@/lib/use-api-client';
+import { VehicleThumbnail } from '@/components/vehicles/vehicle-thumbnail';
 import type { Vehicle, VehicleStatus } from '@/lib/types/vehicle';
 
 const STATUS_FILTERS: Array<VehicleStatus | 'todos'> = ['todos', 'disponivel', 'alugado', 'manutencao', 'inativo'];
@@ -36,7 +37,7 @@ function VehiclesList() {
     <div className="mx-auto max-w-4xl px-4 py-10">
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-xl font-semibold">{t('title')}</h1>
-        <Link href="/vehicles/new" className="rounded bg-foreground px-4 py-2 text-sm font-medium text-background">
+        <Link href="/vehicles/new" className="rounded bg-accent px-4 py-2 text-sm font-medium text-accent-foreground">
           {t('newVehicle')}
         </Link>
       </div>
@@ -63,6 +64,7 @@ function VehiclesList() {
         <table className="w-full border-collapse text-left text-sm">
           <thead>
             <tr className="border-b border-black/10 dark:border-white/15">
+              <th className="py-2 pr-4 font-medium">{t('table.foto')}</th>
               <th className="py-2 pr-4 font-medium">{t('table.placa')}</th>
               <th className="py-2 pr-4 font-medium">{t('table.marcaModelo')}</th>
               <th className="py-2 pr-4 font-medium">{t('table.ano')}</th>
@@ -72,6 +74,9 @@ function VehiclesList() {
           <tbody>
             {vehicles.map((vehicle) => (
               <tr key={vehicle._id} className="border-b border-black/5 dark:border-white/5">
+                <td className="py-2 pr-4">
+                  <VehicleThumbnail fotos={vehicle.fotos} alt={`${vehicle.marca} ${vehicle.modelo}`} />
+                </td>
                 <td className="py-2 pr-4">
                   <Link href={`/vehicles/${vehicle._id}`} className="underline">
                     {vehicle.placa}

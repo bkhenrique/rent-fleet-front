@@ -212,6 +212,10 @@
     "clientes": "Customers",
     "contratos": "Contracts",
     "locadoras": "Rental companies",
+    "equipe": "Team",
+    "changePassword": "Change password",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
     "role": {
       "super_admin": "Super Admin",
       "tenant_admin": "Admin",
@@ -265,7 +269,8 @@
       "documento": "Document",
       "status": "Status",
       "ciclo": "Cycle",
-      "ativoAte": "Active until"
+      "ativoAte": "Active until",
+      "veiculos": "Vehicles"
     },
     "status": {
       "ativo": "Active",
@@ -291,7 +296,7 @@
       "adminSectionTitle": "Rental company admin user",
       "adminName": "Name",
       "adminEmail": "Email",
-      "adminPassword": "Password",
+      "adminPasswordNotice": "The access password will be generated automatically by the system and emailed to the address above.",
       "create": "Create rental company",
       "save": "Save",
       "saving": "Saving...",
@@ -312,17 +317,20 @@
       "never": "Never"
     },
     "overview": {
-      "total": "Total rental companies"
+      "total": "Total rental companies",
+      "totalVeiculos": "Total vehicles"
     }
   },
   "vehicles": {
     "title": "Vehicles",
     "newVehicle": "New vehicle",
     "backToList": "Back",
+    "viewRentalHistory": "View rental history",
     "loadError": "Couldn't load the vehicles.",
     "empty": "No vehicles registered yet.",
     "lastUpdated": "Last updated: {date}",
     "table": {
+      "foto": "Photo",
       "placa": "Plate",
       "marcaModelo": "Make / Model",
       "ano": "Year",
@@ -428,6 +436,7 @@
     "title": "Customers",
     "newCustomer": "New customer",
     "backToList": "Back",
+    "viewRentalHistory": "View rental history",
     "loadError": "Couldn't load the customers.",
     "empty": "No customers registered yet.",
     "table": {
@@ -472,8 +481,19 @@
     "table": {
       "dataInicio": "Start",
       "dataFim": "Return",
+      "veiculo": "Vehicle",
+      "cliente": "Customer",
       "valor": "Amount",
       "status": "Status"
+    },
+    "statusFilter": {
+      "todos": "All",
+      "ativo": "Active",
+      "finalizado": "Finished"
+    },
+    "filters": {
+      "dataInicio": "From",
+      "dataFim": "To"
     },
     "status": {
       "ativo": "Active",
@@ -539,6 +559,45 @@
       "uploading": "Uploading...",
       "uploadError": "Couldn't upload the photo.",
       "unsupportedType": "Unsupported format. Use JPEG, PNG or WebP."
+    }
+  },
+  "account": {
+    "password": {
+      "title": "Change password",
+      "current": "Current password",
+      "new": "New password",
+      "save": "Save",
+      "saving": "Saving...",
+      "success": "Password changed successfully.",
+      "wrongCurrentPassword": "Incorrect current password.",
+      "genericError": "Couldn't change the password. Please try again."
+    }
+  },
+  "team": {
+    "title": "Team",
+    "loadError": "Couldn't load the team.",
+    "empty": "No staff members registered yet.",
+    "table": {
+      "nome": "Name",
+      "email": "Email",
+      "status": "Status"
+    },
+    "status": {
+      "ativo": "Active",
+      "inativo": "Inactive"
+    },
+    "activate": "Activate",
+    "deactivate": "Deactivate",
+    "form": {
+      "title": "New staff member",
+      "name": "Name",
+      "email": "Email",
+      "passwordNotice": "The access password will be generated automatically by the system and emailed to the staff member.",
+      "create": "Add staff member",
+      "saving": "Saving...",
+      "success": "Staff member added. The password was sent by email.",
+      "conflictError": "A user with this email already exists.",
+      "genericError": "Couldn't save. Please try again."
     }
   }
 }

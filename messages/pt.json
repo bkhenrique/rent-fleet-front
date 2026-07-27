@@ -212,6 +212,10 @@
     "clientes": "Clientes",
     "contratos": "Contratos",
     "locadoras": "Locadoras",
+    "equipe": "Equipe",
+    "changePassword": "Trocar senha",
+    "openMenu": "Abrir menu",
+    "closeMenu": "Fechar menu",
     "role": {
       "super_admin": "Super Admin",
       "tenant_admin": "Administrador",
@@ -265,7 +269,8 @@
       "documento": "Documento",
       "status": "Status",
       "ciclo": "Ciclo",
-      "ativoAte": "Ativo até"
+      "ativoAte": "Ativo até",
+      "veiculos": "Veículos"
     },
     "status": {
       "ativo": "Ativo",
@@ -291,7 +296,7 @@
       "adminSectionTitle": "Usuário administrador da locadora",
       "adminName": "Nome",
       "adminEmail": "E-mail",
-      "adminPassword": "Senha",
+      "adminPasswordNotice": "A senha de acesso será gerada automaticamente pelo sistema e enviada por e-mail para o endereço informado acima.",
       "create": "Criar locadora",
       "save": "Salvar",
       "saving": "Salvando...",
@@ -312,17 +317,20 @@
       "never": "Nunca"
     },
     "overview": {
-      "total": "Total de locadoras"
+      "total": "Total de locadoras",
+      "totalVeiculos": "Total de veículos"
     }
   },
   "vehicles": {
     "title": "Veículos",
     "newVehicle": "Novo veículo",
     "backToList": "Voltar",
+    "viewRentalHistory": "Ver histórico de aluguéis",
     "loadError": "Não foi possível carregar os veículos.",
     "empty": "Nenhum veículo cadastrado ainda.",
     "lastUpdated": "Última atualização: {date}",
     "table": {
+      "foto": "Foto",
       "placa": "Placa",
       "marcaModelo": "Marca / Modelo",
       "ano": "Ano",
@@ -428,6 +436,7 @@
     "title": "Clientes",
     "newCustomer": "Novo cliente",
     "backToList": "Voltar",
+    "viewRentalHistory": "Ver histórico de aluguéis",
     "loadError": "Não foi possível carregar os clientes.",
     "empty": "Nenhum cliente cadastrado ainda.",
     "table": {
@@ -472,8 +481,19 @@
     "table": {
       "dataInicio": "Início",
       "dataFim": "Devolução",
+      "veiculo": "Veículo",
+      "cliente": "Cliente",
       "valor": "Valor",
       "status": "Status"
+    },
+    "statusFilter": {
+      "todos": "Todos",
+      "ativo": "Ativo",
+      "finalizado": "Finalizado"
+    },
+    "filters": {
+      "dataInicio": "A partir de",
+      "dataFim": "Até"
     },
     "status": {
       "ativo": "Ativo",
@@ -539,6 +559,45 @@
       "uploading": "Enviando...",
       "uploadError": "Não foi possível enviar a foto.",
       "unsupportedType": "Formato não suportado. Use JPEG, PNG ou WebP."
+    }
+  },
+  "account": {
+    "password": {
+      "title": "Trocar senha",
+      "current": "Senha atual",
+      "new": "Nova senha",
+      "save": "Salvar",
+      "saving": "Salvando...",
+      "success": "Senha alterada com sucesso.",
+      "wrongCurrentPassword": "Senha atual incorreta.",
+      "genericError": "Não foi possível alterar a senha. Tente novamente."
+    }
+  },
+  "team": {
+    "title": "Equipe",
+    "loadError": "Não foi possível carregar a equipe.",
+    "empty": "Nenhum funcionário cadastrado ainda.",
+    "table": {
+      "nome": "Nome",
+      "email": "E-mail",
+      "status": "Status"
+    },
+    "status": {
+      "ativo": "Ativo",
+      "inativo": "Inativo"
+    },
+    "activate": "Ativar",
+    "deactivate": "Desativar",
+    "form": {
+      "title": "Novo funcionário",
+      "name": "Nome",
+      "email": "E-mail",
+      "passwordNotice": "A senha de acesso será gerada automaticamente pelo sistema e enviada por e-mail para o funcionário.",
+      "create": "Cadastrar funcionário",
+      "saving": "Salvando...",
+      "success": "Funcionário cadastrado. A senha foi enviada por e-mail.",
+      "conflictError": "Já existe um usuário com este e-mail.",
+      "genericError": "Não foi possível cadastrar. Tente novamente."
     }
   }
 }

@@ -28,7 +28,6 @@ function NewTenantForm() {
   const [email, setEmail] = useState('');
   const [adminName, setAdminName] = useState('');
   const [adminEmail, setAdminEmail] = useState('');
-  const [adminPassword, setAdminPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -51,7 +50,7 @@ function NewTenantForm() {
       enderecoFiscal: enderecoFiscal || undefined,
       telefone: telefone || undefined,
       email: email || undefined,
-      admin: { name: adminName, email: adminEmail, password: adminPassword },
+      admin: { name: adminName, email: adminEmail },
     };
 
     try {
@@ -194,17 +193,7 @@ function NewTenantForm() {
             />
           </label>
 
-          <label className="flex flex-col gap-1">
-            <span className="text-sm font-medium">{t('form.adminPassword')}</span>
-            <input
-              type="password"
-              required
-              minLength={6}
-              value={adminPassword}
-              onChange={(e) => setAdminPassword(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
-            />
-          </label>
+          <p className="text-xs text-foreground/60">{t('form.adminPasswordNotice')}</p>
         </fieldset>
 
         {error && (
@@ -217,7 +206,7 @@ function NewTenantForm() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="rounded bg-foreground px-4 py-2 font-medium text-background disabled:opacity-60"
+            className="rounded bg-accent px-4 py-2 font-medium text-accent-foreground disabled:opacity-60"
           >
             {isSubmitting ? t('form.saving') : t('form.create')}
           </button>

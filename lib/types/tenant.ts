@@ -19,6 +19,7 @@ export interface Tenant {
   enderecoFiscal: string | null;
   telefone: string | null;
   email: string | null;
+  totalVeiculos: number;
   createdAt: string;
   updatedAt: string;
 }
@@ -34,7 +35,6 @@ export interface CreateTenantPayload {
   email?: string;
   admin: {
     email: string;
-    password: string;
     name: string;
   };
 }

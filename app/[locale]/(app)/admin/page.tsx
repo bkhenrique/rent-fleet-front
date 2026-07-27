@@ -35,22 +35,25 @@ function AdminTenantsList() {
     inadimplente: tenants?.filter((tenant) => tenant.status === 'inadimplente').length ?? 0,
     suspenso: tenants?.filter((tenant) => tenant.status === 'suspenso').length ?? 0,
     cortesia: tenants?.filter((tenant) => tenant.status === 'cortesia').length ?? 0,
+    totalVeiculos: tenants?.reduce((sum, tenant) => sum + tenant.totalVeiculos, 0) ?? 0,
   };
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-xl font-semibold">{t('title')}</h1>
-        <Link href="/admin/new" className="rounded bg-foreground px-4 py-2 text-sm font-medium text-background">
+        <Link href="/admin/new" className="rounded bg-accent px-4 py-2 text-sm font-medium text-accent-foreground">
           {t('newTenant')}
         </Link>
       </div>
 
-      <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-5">
-        {(['total', 'ativo', 'inadimplente', 'suspenso', 'cortesia'] as const).map((key) => (
+      <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+        {(['total', 'ativo', 'inadimplente', 'suspenso', 'cortesia', 'totalVeiculos'] as const).map((key) => (
           <div key={key} className="rounded border border-black/10 px-4 py-3 dark:border-white/15">
             <p className="text-2xl font-semibold">{counts[key]}</p>
-            <p className="text-xs text-foreground/60">{key === 'total' ? t('overview.total') : t(`status.${key}`)}</p>
+            <p className="text-xs text-foreground/60">
+              {key === 'total' || key === 'totalVeiculos' ? t(`overview.${key}`) : t(`status.${key}`)}
+            </p>
           </div>
         ))}
       </div>
@@ -67,6 +70,7 @@ function AdminTenantsList() {
               <th className="py-2 pr-4 font-medium">{t('table.status')}</th>
               <th className="py-2 pr-4 font-medium">{t('table.ciclo')}</th>
               <th className="py-2 pr-4 font-medium">{t('table.ativoAte')}</th>
+              <th className="py-2 pr-4 font-medium">{t('table.veiculos')}</th>
             </tr>
           </thead>
           <tbody>
@@ -83,6 +87,7 @@ function AdminTenantsList() {
                 </td>
                 <td className="py-2 pr-4">{t(`ciclo.${tenant.billing.ciclo}`)}</td>
                 <td className="py-2 pr-4">{new Date(tenant.billing.ativoAte).toLocaleDateString(locale)}</td>
+                <td className="py-2 pr-4">{tenant.totalVeiculos}</td>
               </tr>
             ))}
           </tbody>

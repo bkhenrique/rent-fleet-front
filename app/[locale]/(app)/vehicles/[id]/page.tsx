@@ -155,6 +155,9 @@ function VehicleDetail({ id }: { id: string }) {
           {t('backToList')}
         </Link>
         <h1 className="mt-2 text-xl font-semibold">{vehicle.placa}</h1>
+        <Link href={`/rental-contracts?vehicleId=${vehicle._id}`} className="text-sm underline">
+          {t('viewRentalHistory')}
+        </Link>
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">

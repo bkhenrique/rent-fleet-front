@@ -212,6 +212,10 @@
     "clientes": "Clientes",
     "contratos": "Contratos",
     "locadoras": "Empresas de alquiler",
+    "equipe": "Equipo",
+    "changePassword": "Cambiar contraseña",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
     "role": {
       "super_admin": "Super Admin",
       "tenant_admin": "Administrador",
@@ -265,7 +269,8 @@
       "documento": "Documento",
       "status": "Estado",
       "ciclo": "Ciclo",
-      "ativoAte": "Activo hasta"
+      "ativoAte": "Activo hasta",
+      "veiculos": "Vehículos"
     },
     "status": {
       "ativo": "Activo",
@@ -291,7 +296,7 @@
       "adminSectionTitle": "Usuario administrador de la empresa",
       "adminName": "Nombre",
       "adminEmail": "Correo electrónico",
-      "adminPassword": "Contraseña",
+      "adminPasswordNotice": "La contraseña de acceso se generará automáticamente y se enviará por correo electrónico a la dirección indicada arriba.",
       "create": "Crear empresa",
       "save": "Guardar",
       "saving": "Guardando...",
@@ -312,17 +317,20 @@
       "never": "Nunca"
     },
     "overview": {
-      "total": "Total de empresas"
+      "total": "Total de empresas",
+      "totalVeiculos": "Total de vehículos"
     }
   },
   "vehicles": {
     "title": "Vehículos",
     "newVehicle": "Nuevo vehículo",
     "backToList": "Volver",
+    "viewRentalHistory": "Ver historial de alquileres",
     "loadError": "No se pudieron cargar los vehículos.",
     "empty": "Todavía no hay vehículos registrados.",
     "lastUpdated": "Última actualización: {date}",
     "table": {
+      "foto": "Foto",
       "placa": "Matrícula",
       "marcaModelo": "Marca / Modelo",
       "ano": "Año",
@@ -428,6 +436,7 @@
     "title": "Clientes",
     "newCustomer": "Nuevo cliente",
     "backToList": "Volver",
+    "viewRentalHistory": "Ver historial de alquileres",
     "loadError": "No se pudieron cargar los clientes.",
     "empty": "Todavía no hay clientes registrados.",
     "table": {
@@ -472,8 +481,19 @@
     "table": {
       "dataInicio": "Inicio",
       "dataFim": "Devolución",
+      "veiculo": "Vehículo",
+      "cliente": "Cliente",
       "valor": "Importe",
       "status": "Estado"
+    },
+    "statusFilter": {
+      "todos": "Todos",
+      "ativo": "Activo",
+      "finalizado": "Finalizado"
+    },
+    "filters": {
+      "dataInicio": "Desde",
+      "dataFim": "Hasta"
     },
     "status": {
       "ativo": "Activo",
@@ -539,6 +559,45 @@
       "uploading": "Subiendo...",
       "uploadError": "No se pudo subir la foto.",
       "unsupportedType": "Formato no compatible. Usa JPEG, PNG o WebP."
+    }
+  },
+  "account": {
+    "password": {
+      "title": "Cambiar contraseña",
+      "current": "Contraseña actual",
+      "new": "Nueva contraseña",
+      "save": "Guardar",
+      "saving": "Guardando...",
+      "success": "Contraseña cambiada con éxito.",
+      "wrongCurrentPassword": "Contraseña actual incorrecta.",
+      "genericError": "No se pudo cambiar la contraseña. Inténtalo de nuevo."
+    }
+  },
+  "team": {
+    "title": "Equipo",
+    "loadError": "No se pudo cargar el equipo.",
+    "empty": "Todavía no hay empleados registrados.",
+    "table": {
+      "nome": "Nombre",
+      "email": "Correo electrónico",
+      "status": "Estado"
+    },
+    "status": {
+      "ativo": "Activo",
+      "inativo": "Inactivo"
+    },
+    "activate": "Activar",
+    "deactivate": "Desactivar",
+    "form": {
+      "title": "Nuevo empleado",
+      "name": "Nombre",
+      "email": "Correo electrónico",
+      "passwordNotice": "La contraseña de acceso se generará automáticamente y se enviará por correo electrónico al empleado.",
+      "create": "Registrar empleado",
+      "saving": "Guardando...",
+      "success": "Empleado registrado. La contraseña se envió por correo electrónico.",
+      "conflictError": "Ya existe un usuario con este correo electrónico.",
+      "genericError": "No se pudo guardar. Inténtalo de nuevo."
     }
   }
 }

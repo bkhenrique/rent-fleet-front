@@ -37,6 +37,8 @@ export interface RentalContract {
   contratoAssinadoFotoUrls: string[];
   vistoriaEntrega: VistoriaInfo;
   vistoriaDevolucao: VistoriaInfo;
+  veiculo: { placa: string; marca: string; modelo: string } | null;
+  clienteNome: string | null;
   createdAt: string;
   updatedAt: string;
 }
