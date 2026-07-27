@@ -340,20 +340,20 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <Reveal delay={80} className="relative flex min-h-35 items-end overflow-hidden" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)' }}>
               <Image src="/gallery/chavenamao.jpg" alt={t('gallery.slot2')} fill sizes="(min-width: 640px) 22vw, 100vw" style={{ objectFit: 'cover' }} />
               <div style={{ position: 'relative', width: '100%', padding: 14, background: 'linear-gradient(transparent, rgba(8,9,11,.85) 60%)' }}>
-                <span style={{ fontSize: 13, fontWeight: 500 }}>{t('gallery.slot2')}</span>
+                <span style={{ fontSize: 14, fontWeight: 500 }}>{t('gallery.slot2')}</span>
               </div>
             </Reveal>
             <div className="grid gap-3 sm:grid-rows-2">
               <Reveal delay={140} className="relative flex min-h-35 items-end overflow-hidden" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)' }}>
                 <Image src="/gallery/painelcarro.webp" alt={t('gallery.slot3')} fill sizes="(min-width: 640px) 22vw, 100vw" style={{ objectFit: 'cover' }} />
                 <div style={{ position: 'relative', width: '100%', padding: 14, background: 'linear-gradient(transparent, rgba(8,9,11,.85) 60%)' }}>
-                  <span style={{ fontSize: 13, fontWeight: 500 }}>{t('gallery.slot3')}</span>
+                  <span style={{ fontSize: 14, fontWeight: 500 }}>{t('gallery.slot3')}</span>
                 </div>
               </Reveal>
               <Reveal delay={200} className="relative flex min-h-35 items-end overflow-hidden" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)' }}>
                 <Image src="/gallery/carronaestrada.avif" alt={t('gallery.slot4')} fill sizes="(min-width: 640px) 22vw, 100vw" style={{ objectFit: 'cover' }} />
                 <div style={{ position: 'relative', width: '100%', padding: 14, background: 'linear-gradient(transparent, rgba(8,9,11,.85) 60%)' }}>
-                  <span style={{ fontSize: 13, fontWeight: 500 }}>{t('gallery.slot4')}</span>
+                  <span style={{ fontSize: 14, fontWeight: 500 }}>{t('gallery.slot4')}</span>
                 </div>
               </Reveal>
             </div>
@@ -365,23 +365,26 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <div className="flex flex-col gap-4 lg:sticky lg:top-24 lg:self-start">
               <span className="eyebrow">{t('cost.eyebrow')}</span>
               <h2 className="max-w-sm">{t('cost.title')}</h2>
-              <p className="dim max-w-sm" style={{ fontSize: 15, lineHeight: 1.6 }}>
+              <p className="dim max-w-sm" style={{ fontSize: 16, lineHeight: 1.6 }}>
                 {t('cost.body')}
               </p>
             </div>
             <div className="flex flex-col gap-3">
               {pains.map((pain, index) => (
                 <Reveal key={pain.n} delay={index * 80}>
-                  <div className="surface card-hover grid grid-cols-[26px_1fr] items-start gap-4" style={{ padding: '22px 24px' }}>
-                    <span className="mono" style={{ fontSize: 12, color: 'var(--accent)', paddingTop: 3 }}>
+                  <div
+                    className="surface card-hover grid grid-cols-[40px_1fr] items-start gap-4"
+                    style={{ padding: '24px 26px', borderLeft: '3px solid var(--accent)' }}
+                  >
+                    <span className="mono" style={{ fontSize: 26, fontWeight: 700, color: 'var(--accent)', lineHeight: 1 }}>
                       {pain.n}
                     </span>
-                    <div className="flex flex-col gap-1.5">
-                      <span style={{ fontSize: 16, fontWeight: 500, letterSpacing: '-0.015em' }}>{pain.title}</span>
-                      <span className="dim" style={{ fontSize: 14, lineHeight: 1.55 }}>
+                    <div className="flex flex-col gap-2">
+                      <span style={{ fontSize: 19, fontWeight: 600, letterSpacing: '-0.015em' }}>{pain.title}</span>
+                      <span className="dim" style={{ fontSize: 16, lineHeight: 1.55 }}>
                         {pain.body}
                       </span>
-                      <span className="mt-1.5 flex items-center gap-1.5" style={{ fontSize: 13, color: 'var(--success)' }}>
+                      <span className="mt-1.5 flex items-center gap-1.5" style={{ fontSize: 15, fontWeight: 500, color: 'var(--success)' }}>
                         <CheckIcon />
                         {pain.fix}
                       </span>
@@ -405,7 +408,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 {t('map.badge')}
               </span>
               <h2>{t('map.title')}</h2>
-              <p className="dim max-w-md" style={{ fontSize: 15, lineHeight: 1.65 }}>
+              <p className="dim max-w-md" style={{ fontSize: 16, lineHeight: 1.65 }}>
                 {t('map.body')}
               </p>
               <div className="mt-1 flex flex-col gap-2.5">
@@ -452,10 +455,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   >
                     <Icon />
                   </span>
-                  <span className="mt-1" style={{ fontSize: 16, fontWeight: 600, letterSpacing: '-0.02em' }}>
+                  <span className="mt-1" style={{ fontSize: 18, fontWeight: 600, letterSpacing: '-0.02em' }}>
                     {t(`features.${key}.title`)}
                   </span>
-                  <span className="dim" style={{ fontSize: 14, lineHeight: 1.6 }}>
+                  <span className="dim" style={{ fontSize: 16, lineHeight: 1.6 }}>
                     {t(`features.${key}.body`)}
                   </span>
                 </div>
@@ -476,7 +479,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   <span className="mono" style={{ fontSize: 11, letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--accent-strong)' }}>
                     {item.tag}
                   </span>
-                  <span className="dim" style={{ fontSize: 14, lineHeight: 1.6 }}>
+                  <span className="dim" style={{ fontSize: 16, lineHeight: 1.6 }}>
                     {item.body}
                   </span>
                 </div>
