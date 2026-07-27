@@ -1,4 +1,6 @@
 export type VehicleStatus = 'disponivel' | 'alugado' | 'manutencao' | 'inativo';
+export type FuelType = 'gasolina' | 'diesel' | 'eletrico' | 'hibrido' | 'flex';
+export type TransmissionType = 'manual' | 'automatico';
 
 export interface SeguroInfo {
   validade: string | null;
@@ -34,8 +36,8 @@ export interface Vehicle {
   ano: number;
   cor: string | null;
   chassi: string | null;
-  cambio: string | null;
-  combustivel: string | null;
+  cambio: TransmissionType | null;
+  combustivel: FuelType | null;
   fotos: string[];
   documentos: VehicleDocumentos;
   manutencao: VehicleMaintenanceEntry[];
@@ -53,8 +55,8 @@ export interface CreateVehiclePayload {
   ano: number;
   cor?: string;
   chassi?: string;
-  cambio?: string;
-  combustivel?: string;
+  cambio?: TransmissionType;
+  combustivel?: FuelType;
   documentos?: {
     seguro?: { validade?: string; apolice?: string; seguradora?: string };
     itv?: { validade?: string };

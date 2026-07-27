@@ -357,7 +357,8 @@
       "save": "Save",
       "saving": "Saving...",
       "cancel": "Cancel",
-      "genericError": "Couldn't save. Please try again."
+      "genericError": "Couldn't save. Please try again.",
+      "naoInformado": "Not specified"
     },
     "maintenance": {
       "title": "Maintenance",
@@ -406,6 +407,17 @@
         "airtag_manual": "For an Apple AirTag or Android Find My Device: these devices have no public API, so there's no automatic integration. Check the location in the manufacturer's official app (Find My / Find My Device) and update it here manually whenever needed."
       },
       "pickOnMap": "Click the map to set the position (or drag the marker to fine-tune it)."
+    },
+    "cambioOptions": {
+      "manual": "Manual",
+      "automatico": "Automatic"
+    },
+    "combustivelOptions": {
+      "gasolina": "Gasoline",
+      "diesel": "Diesel",
+      "eletrico": "Electric",
+      "hibrido": "Hybrid",
+      "flex": "Flex fuel"
     }
   },
   "customers": {

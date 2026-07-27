@@ -13,13 +13,15 @@ import { MAP_CENTER_BY_COUNTRY } from '@/lib/map-defaults';
 import { MaintenanceSection } from '@/components/vehicles/maintenance-section';
 import { PhotosSection } from '@/components/vehicles/photos-section';
 import { TrackerSection } from '@/components/vehicles/tracker-section';
-import type { UpdateVehiclePayload, Vehicle, VehicleStatus } from '@/lib/types/vehicle';
+import type { FuelType, TransmissionType, UpdateVehiclePayload, Vehicle, VehicleStatus } from '@/lib/types/vehicle';
 
 const FleetMap = dynamic(() => import('@/components/dashboard/fleet-map').then((mod) => mod.FleetMap), {
   ssr: false,
 });
 
 const STATUS_OPTIONS: VehicleStatus[] = ['disponivel', 'alugado', 'manutencao', 'inativo'];
+const TRANSMISSION_OPTIONS: TransmissionType[] = ['manual', 'automatico'];
+const FUEL_OPTIONS: FuelType[] = ['gasolina', 'diesel', 'eletrico', 'hibrido', 'flex'];
 const DOC_WARNING_DAYS = 30;
 
 function daysRemaining(dateStr: string | null): number | null {
@@ -52,8 +54,8 @@ function VehicleDetail({ id }: { id: string }) {
   const [ano, setAno] = useState(0);
   const [cor, setCor] = useState('');
   const [chassi, setChassi] = useState('');
-  const [cambio, setCambio] = useState('');
-  const [combustivel, setCombustivel] = useState('');
+  const [cambio, setCambio] = useState<TransmissionType | ''>('');
+  const [combustivel, setCombustivel] = useState<FuelType | ''>('');
   const [status, setStatus] = useState<VehicleStatus>('disponivel');
   const [seguroValidade, setSeguroValidade] = useState('');
   const [seguroApolice, setSeguroApolice] = useState('');
@@ -212,19 +214,33 @@ function VehicleDetail({ id }: { id: string }) {
           </label>
           <label className="flex flex-col gap-1">
             <span className="text-sm font-medium">{t('form.cambio')}</span>
-            <input
+            <select
               value={cambio}
-              onChange={(e) => setCambio(e.target.value)}
+              onChange={(e) => setCambio(e.target.value as TransmissionType | '')}
               className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
-            />
+            >
+              <option value="">{t('form.naoInformado')}</option>
+              {TRANSMISSION_OPTIONS.map((option) => (
+                <option key={option} value={option}>
+                  {t(`cambioOptions.${option}`)}
+                </option>
+              ))}
+            </select>
           </label>
           <label className="flex flex-col gap-1">
             <span className="text-sm font-medium">{t('form.combustivel')}</span>
-            <input
+            <select
               value={combustivel}
-              onChange={(e) => setCombustivel(e.target.value)}
+              onChange={(e) => setCombustivel(e.target.value as FuelType | '')}
               className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
-            />
+            >
+              <option value="">{t('form.naoInformado')}</option>
+              {FUEL_OPTIONS.map((option) => (
+                <option key={option} value={option}>
+                  {t(`combustivelOptions.${option}`)}
+                </option>
+              ))}
+            </select>
           </label>
           <label className="flex flex-col gap-1">
             <span className="text-sm font-medium">{t('form.status')}</span>
