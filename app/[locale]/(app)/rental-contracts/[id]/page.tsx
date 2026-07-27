@@ -9,7 +9,9 @@ import { useApiClient } from '@/lib/use-api-client';
 import { useTenantSettings } from '@/lib/use-tenant-settings';
 import { formatCurrency } from '@/lib/currency';
 import { AttachmentUpload } from '@/components/rental-contracts/attachment-upload';
-import type { RentalContract } from '@/lib/types/rental-contract';
+import type { FuelLevel, RentalContract } from '@/lib/types/rental-contract';
+
+const FUEL_LEVEL_OPTIONS: FuelLevel[] = ['cheio', 'tres_quartos', 'metade', 'um_quarto', 'reserva'];
 
 function RentalContractDetail({ id }: { id: string }) {
   const t = useTranslations('rentalContracts');
@@ -21,9 +23,13 @@ function RentalContractDetail({ id }: { id: string }) {
   const [loadError, setLoadError] = useState(false);
 
   const [vistoriaEntregaObs, setVistoriaEntregaObs] = useState('');
+  const [entregaKm, setEntregaKm] = useState('');
+  const [entregaCombustivel, setEntregaCombustivel] = useState<FuelLevel | ''>('');
   const [savingVistoriaEntrega, setSavingVistoriaEntrega] = useState(false);
 
   const [devolucaoObs, setDevolucaoObs] = useState('');
+  const [devolucaoKm, setDevolucaoKm] = useState('');
+  const [devolucaoCombustivel, setDevolucaoCombustivel] = useState<FuelLevel | ''>('');
   const [returning, setReturning] = useState(false);
   const [actionError, setActionError] = useState<string | null>(null);
 
@@ -45,7 +51,11 @@ function RentalContractDetail({ id }: { id: string }) {
     try {
       const updated = await apiClient<RentalContract>(`/rental-contracts/${id}/vistoria-entrega`, {
         method: 'PATCH',
-        body: JSON.stringify({ observacoes: vistoriaEntregaObs }),
+        body: JSON.stringify({
+          observacoes: vistoriaEntregaObs,
+          quilometragem: entregaKm ? Number(entregaKm) : undefined,
+          combustivel: entregaCombustivel || undefined,
+        }),
       });
       setContract(updated);
     } catch {
@@ -62,7 +72,11 @@ function RentalContractDetail({ id }: { id: string }) {
     try {
       const updated = await apiClient<RentalContract>(`/rental-contracts/${id}/devolver`, {
         method: 'POST',
-        body: JSON.stringify({ observacoes: devolucaoObs || undefined }),
+        body: JSON.stringify({
+          observacoes: devolucaoObs || undefined,
+          quilometragem: devolucaoKm ? Number(devolucaoKm) : undefined,
+          combustivel: devolucaoCombustivel || undefined,
+        }),
       });
       setContract(updated);
     } catch {
@@ -111,7 +125,33 @@ function RentalContractDetail({ id }: { id: string }) {
             <dd>{new Date(contract.dataDevolucaoReal).toLocaleDateString(locale)}</dd>
           </>
         )}
+        <dt className="font-medium">{t('detail.localRetirada')}</dt>
+        <dd>{contract.localRetirada ?? '—'}</dd>
+        <dt className="font-medium">{t('detail.localDevolucao')}</dt>
+        <dd>{contract.localDevolucao ?? '—'}</dd>
+        <dt className="font-medium">{t('detail.franquiaKm')}</dt>
+        <dd>{contract.franquiaKm !== null ? `${contract.franquiaKm} km` : t('detail.ilimitada')}</dd>
+        <dt className="font-medium">{t('detail.caucao')}</dt>
+        <dd>
+          {contract.caucao !== null && tenantSettings
+            ? formatCurrency(contract.caucao, tenantSettings.moeda)
+            : (contract.caucao ?? t('detail.naoExigida'))}
+        </dd>
       </dl>
+
+      {contract.condutoresAdicionais.length > 0 && (
+        <div className="rounded border border-black/10 p-4 dark:border-white/15">
+          <h2 className="mb-2 text-sm font-semibold">{t('detail.condutoresTitle')}</h2>
+          <ul className="flex flex-col gap-1 text-sm">
+            {contract.condutoresAdicionais.map((condutor, index) => (
+              <li key={index}>
+                {condutor.nome} — {condutor.documento}
+                {condutor.cnh ? ` — CNH: ${condutor.cnh}` : ''}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {contract.contratoPdfUrl && (
         <a
@@ -142,7 +182,14 @@ function RentalContractDetail({ id }: { id: string }) {
           fotosUrls={contract.vistoriaEntrega.fotosUrls}
           onUploaded={loadContract}
         />
-        <form onSubmit={handleSaveVistoriaEntrega} className="mt-3 flex items-end gap-3">
+        {(contract.vistoriaEntrega.quilometragem !== null || contract.vistoriaEntrega.combustivel !== null) && (
+          <p className="mt-2 text-sm text-foreground/70">
+            {contract.vistoriaEntrega.quilometragem !== null && `${contract.vistoriaEntrega.quilometragem} km`}
+            {contract.vistoriaEntrega.combustivel !== null &&
+              ` — ${t(`detail.fuelLevel.${contract.vistoriaEntrega.combustivel}`)}`}
+          </p>
+        )}
+        <form onSubmit={handleSaveVistoriaEntrega} className="mt-3 flex flex-wrap items-end gap-3">
           <label className="flex flex-1 flex-col gap-1">
             <span className="text-xs font-medium">{t('detail.observacoes')}</span>
             <input
@@ -150,6 +197,31 @@ function RentalContractDetail({ id }: { id: string }) {
               onChange={(e) => setVistoriaEntregaObs(e.target.value)}
               className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
             />
+          </label>
+          <label className="flex flex-col gap-1">
+            <span className="text-xs font-medium">{t('detail.quilometragem')}</span>
+            <input
+              type="number"
+              min={0}
+              value={entregaKm}
+              onChange={(e) => setEntregaKm(e.target.value)}
+              className="w-28 rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+            />
+          </label>
+          <label className="flex flex-col gap-1">
+            <span className="text-xs font-medium">{t('detail.combustivel')}</span>
+            <select
+              value={entregaCombustivel}
+              onChange={(e) => setEntregaCombustivel(e.target.value as FuelLevel | '')}
+              className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+            >
+              <option value="">{t('detail.naoInformado')}</option>
+              {FUEL_LEVEL_OPTIONS.map((option) => (
+                <option key={option} value={option}>
+                  {t(`detail.fuelLevel.${option}`)}
+                </option>
+              ))}
+            </select>
           </label>
           <button
             type="submit"
@@ -172,9 +244,16 @@ function RentalContractDetail({ id }: { id: string }) {
         {contract.vistoriaDevolucao.observacoes && (
           <p className="mt-2 text-sm text-foreground/70">{contract.vistoriaDevolucao.observacoes}</p>
         )}
+        {(contract.vistoriaDevolucao.quilometragem !== null || contract.vistoriaDevolucao.combustivel !== null) && (
+          <p className="mt-1 text-sm text-foreground/70">
+            {contract.vistoriaDevolucao.quilometragem !== null && `${contract.vistoriaDevolucao.quilometragem} km`}
+            {contract.vistoriaDevolucao.combustivel !== null &&
+              ` — ${t(`detail.fuelLevel.${contract.vistoriaDevolucao.combustivel}`)}`}
+          </p>
+        )}
 
         {isActive && (
-          <form onSubmit={handleReturn} className="mt-3 flex items-end gap-3">
+          <form onSubmit={handleReturn} className="mt-3 flex flex-wrap items-end gap-3">
             <label className="flex flex-1 flex-col gap-1">
               <span className="text-xs font-medium">{t('detail.observacoes')}</span>
               <input
@@ -182,6 +261,31 @@ function RentalContractDetail({ id }: { id: string }) {
                 onChange={(e) => setDevolucaoObs(e.target.value)}
                 className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
               />
+            </label>
+            <label className="flex flex-col gap-1">
+              <span className="text-xs font-medium">{t('detail.quilometragem')}</span>
+              <input
+                type="number"
+                min={0}
+                value={devolucaoKm}
+                onChange={(e) => setDevolucaoKm(e.target.value)}
+                className="w-28 rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+              />
+            </label>
+            <label className="flex flex-col gap-1">
+              <span className="text-xs font-medium">{t('detail.combustivel')}</span>
+              <select
+                value={devolucaoCombustivel}
+                onChange={(e) => setDevolucaoCombustivel(e.target.value as FuelLevel | '')}
+                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+              >
+                <option value="">{t('detail.naoInformado')}</option>
+                {FUEL_LEVEL_OPTIONS.map((option) => (
+                  <option key={option} value={option}>
+                    {t(`detail.fuelLevel.${option}`)}
+                  </option>
+                ))}
+              </select>
             </label>
             <button
               type="submit"

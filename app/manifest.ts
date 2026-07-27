@@ -7,16 +7,12 @@ export default function manifest(): MetadataRoute.Manifest {
     description: 'Gestão de frota para rent-a-car',
     start_url: '/',
     display: 'standalone',
-    background_color: '#0a0a0a',
-    theme_color: '#0a0a0a',
+    background_color: '#08090b',
+    theme_color: '#ffb020',
     icons: [
-      {
-        // TODO: substituir por ícones PNG de verdade (192x192 e 512x512) quando a identidade
-        // visual do RentFleet existir — isto é só um placeholder funcional pro manifest ser válido.
-        src: '/icon.svg',
-        sizes: 'any',
-        type: 'image/svg+xml',
-      },
+      { src: '/pwa-icon/192', sizes: '192x192', type: 'image/png' },
+      { src: '/pwa-icon/512', sizes: '512x512', type: 'image/png' },
+      { src: '/pwa-icon/512?maskable=1', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
     ],
   };
 }

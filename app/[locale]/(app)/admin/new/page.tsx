@@ -23,6 +23,9 @@ function NewTenantForm() {
   const [ciclo, setCiclo] = useState<BillingCycle>('mensal');
   const [pais, setPais] = useState<Country>('BR');
   const [moeda, setMoeda] = useState<Currency>('BRL');
+  const [enderecoFiscal, setEnderecoFiscal] = useState('');
+  const [telefone, setTelefone] = useState('');
+  const [email, setEmail] = useState('');
   const [adminName, setAdminName] = useState('');
   const [adminEmail, setAdminEmail] = useState('');
   const [adminPassword, setAdminPassword] = useState('');
@@ -45,6 +48,9 @@ function NewTenantForm() {
       ciclo,
       pais,
       moeda,
+      enderecoFiscal: enderecoFiscal || undefined,
+      telefone: telefone || undefined,
+      email: email || undefined,
       admin: { name: adminName, email: adminEmail, password: adminPassword },
     };
 
@@ -130,6 +136,39 @@ function NewTenantForm() {
             </select>
           </label>
         </div>
+
+        <fieldset className="flex flex-col gap-4 rounded border border-black/10 p-4 dark:border-white/15">
+          <legend className="px-1 text-sm font-medium">{t('form.fiscalSectionTitle')}</legend>
+
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-medium">{t('form.enderecoFiscal')}</span>
+            <input
+              value={enderecoFiscal}
+              onChange={(e) => setEnderecoFiscal(e.target.value)}
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            />
+          </label>
+
+          <div className="grid grid-cols-2 gap-4">
+            <label className="flex flex-col gap-1">
+              <span className="text-sm font-medium">{t('form.telefone')}</span>
+              <input
+                value={telefone}
+                onChange={(e) => setTelefone(e.target.value)}
+                className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+              />
+            </label>
+            <label className="flex flex-col gap-1">
+              <span className="text-sm font-medium">{t('form.emailLocadora')}</span>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+              />
+            </label>
+          </div>
+        </fieldset>
 
         <fieldset className="flex flex-col gap-4 rounded border border-black/10 p-4 dark:border-white/15">
           <legend className="px-1 text-sm font-medium">{t('form.adminSectionTitle')}</legend>

@@ -16,6 +16,9 @@ export interface Tenant {
   idiomaPadrao: 'pt' | 'en' | 'es';
   pais: Country;
   moeda: Currency;
+  enderecoFiscal: string | null;
+  telefone: string | null;
+  email: string | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -26,6 +29,9 @@ export interface CreateTenantPayload {
   ciclo: BillingCycle;
   pais: Country;
   moeda?: Currency;
+  enderecoFiscal?: string;
+  telefone?: string;
+  email?: string;
   admin: {
     email: string;
     password: string;
@@ -39,4 +45,7 @@ export interface UpdateTenantPayload {
   ciclo?: BillingCycle;
   pais?: Country;
   moeda?: Currency;
+  enderecoFiscal?: string;
+  telefone?: string;
+  email?: string;
 }

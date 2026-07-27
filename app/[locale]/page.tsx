@@ -1,13 +1,16 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { Inter, Instrument_Serif, JetBrains_Mono } from 'next/font/google';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
-import type { AppLocale } from '@/i18n/routing';
+import { LOCALES, type AppLocale } from '@/i18n/routing';
 import { AuthRedirect } from '@/components/auth-redirect';
 import { Reveal } from '@/components/reveal';
 import { LeadForm } from '@/components/lead-form';
 import { LandingLocaleSwitcher } from '@/components/landing-locale-switcher';
 import { FleetMapPanel, type MapPin } from '@/components/landing-map-panel';
+import { CountUp } from '@/components/count-up';
+import { TiltCard } from '@/components/tilt-card';
 import { CheckIcon, ContractIcon, DashboardIcon, LogoMarkIcon, TrackingIcon, VehicleIcon } from '@/components/landing-icons';
 import './landing.css';
 
@@ -44,6 +47,8 @@ const BIG_PIN_POS: Omit<MapPin, 'label'>[] = [
 
 const STATUS_TONE_CLASS: Record<string, string> = { success: 'success', info: 'info', warn: 'warn' };
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
+
 export async function generateMetadata({
   params,
 }: {
@@ -51,9 +56,33 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'landing' });
+  const title = `${t('hero.titleLine1')} ${t('hero.titleLine2')}`;
+  const description = t('hero.subtitle');
+
   return {
-    title: `${t('hero.titleLine1')} ${t('hero.titleLine2')}`,
-    description: t('hero.subtitle'),
+    metadataBase: new URL(SITE_URL),
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}`,
+      languages: {
+        ...Object.fromEntries(LOCALES.map((loc) => [loc, `/${loc}`])),
+        'x-default': '/pt',
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url: `/${locale}`,
+      siteName: 'RentFleet',
+      locale,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+    },
   };
 }
 
@@ -82,8 +111,20 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     label: `${mapPinLabels[index].plate} · ${mapPinLabels[index].time}`,
   }));
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'RentFleet',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    description: t('hero.subtitle'),
+    url: `${SITE_URL}/${locale}`,
+    availableLanguage: LOCALES,
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <AuthRedirect />
 
       <div
@@ -221,7 +262,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </div>
           </div>
 
-          <div className="anim-rise relative mx-auto mt-14 max-w-5xl">
+          <TiltCard className="anim-rise relative mx-auto mt-14 max-w-5xl">
             <div className="surface" style={{ padding: 10, boxShadow: '0 40px 120px -34px var(--accent-glow), var(--shadow-lg)', overflow: 'hidden' }}>
               <div className="flex items-center gap-2" style={{ padding: '6px 8px 12px' }}>
                 <span className="dot" style={{ background: '#ff5f57' }} />
@@ -244,7 +285,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   <div className="grid grid-cols-3 gap-2.5">
                     <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-sm)', padding: 12 }}>
                       <div className="mono" style={{ fontSize: 26, letterSpacing: '-0.03em', color: 'var(--success)' }}>
-                        {t('mockup.stat1Value')}
+                        <CountUp value={Number(t('mockup.stat1Value'))} />
                       </div>
                       <div className="dim" style={{ fontSize: 11 }}>
                         {t('mockup.stat1Label')}
@@ -252,7 +293,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     </div>
                     <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-sm)', padding: 12 }}>
                       <div className="mono" style={{ fontSize: 26, letterSpacing: '-0.03em', color: 'var(--info)' }}>
-                        {t('mockup.stat2Value')}
+                        <CountUp value={Number(t('mockup.stat2Value'))} />
                       </div>
                       <div className="dim" style={{ fontSize: 11 }}>
                         {t('mockup.stat2Label')}
@@ -260,7 +301,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     </div>
                     <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-sm)', padding: 12 }}>
                       <div className="mono" style={{ fontSize: 26, letterSpacing: '-0.03em', color: 'var(--accent)' }}>
-                        {t('mockup.stat3Value')}
+                        <CountUp value={Number(t('mockup.stat3Value'))} />
                       </div>
                       <div className="dim" style={{ fontSize: 11 }}>
                         {t('mockup.stat3Label')}
@@ -285,27 +326,36 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 <FleetMapPanel pins={SMALL_PINS} caption={t('mockup.mapCaption')} />
               </div>
             </div>
-          </div>
+          </TiltCard>
         </section>
 
         <section className="mx-auto max-w-6xl px-4 pt-10 sm:px-7">
-          <div className="grid h-auto gap-3 sm:h-[300px] sm:grid-cols-[1.6fr_1fr_1fr]">
-            <div className="relative flex min-h-[160px] items-center justify-center overflow-hidden" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)', background: 'linear-gradient(160deg, var(--surface-2), var(--bg-2))' }}>
-              <span className="dim p-5 text-center text-sm">{t('gallery.slot1')}</span>
-              <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: 20, background: 'linear-gradient(transparent, rgba(8,9,11,.75))', pointerEvents: 'none' }}>
+          <div className="grid h-auto gap-3 sm:h-75 sm:grid-cols-[1.6fr_1fr_1fr]">
+            <Reveal className="relative flex min-h-40 items-end overflow-hidden" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)' }}>
+              <Image src="/gallery/carrospatio.jpeg" alt={t('gallery.caption')} fill sizes="(min-width: 640px) 45vw, 100vw" style={{ objectFit: 'cover' }} />
+              <div style={{ position: 'relative', width: '100%', padding: 20, background: 'linear-gradient(transparent, rgba(8,9,11,.85) 55%)' }}>
                 <span style={{ fontSize: 15, fontWeight: 500 }}>{t('gallery.caption')}</span>
               </div>
-            </div>
-            <div className="relative flex min-h-[140px] items-center justify-center overflow-hidden" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)', background: 'var(--surface-2)' }}>
-              <span className="dim p-5 text-center text-sm">{t('gallery.slot2')}</span>
-            </div>
+            </Reveal>
+            <Reveal delay={80} className="relative flex min-h-35 items-end overflow-hidden" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)' }}>
+              <Image src="/gallery/chavenamao.jpg" alt={t('gallery.slot2')} fill sizes="(min-width: 640px) 22vw, 100vw" style={{ objectFit: 'cover' }} />
+              <div style={{ position: 'relative', width: '100%', padding: 14, background: 'linear-gradient(transparent, rgba(8,9,11,.85) 60%)' }}>
+                <span style={{ fontSize: 13, fontWeight: 500 }}>{t('gallery.slot2')}</span>
+              </div>
+            </Reveal>
             <div className="grid gap-3 sm:grid-rows-2">
-              <div className="relative flex min-h-[140px] items-center justify-center overflow-hidden" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)', background: 'var(--surface-2)' }}>
-                <span className="dim p-5 text-center text-sm">{t('gallery.slot3')}</span>
-              </div>
-              <div className="relative flex min-h-[140px] items-center justify-center overflow-hidden" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)', background: 'var(--surface-2)' }}>
-                <span className="dim p-5 text-center text-sm">{t('gallery.slot4')}</span>
-              </div>
+              <Reveal delay={140} className="relative flex min-h-35 items-end overflow-hidden" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)' }}>
+                <Image src="/gallery/painelcarro.webp" alt={t('gallery.slot3')} fill sizes="(min-width: 640px) 22vw, 100vw" style={{ objectFit: 'cover' }} />
+                <div style={{ position: 'relative', width: '100%', padding: 14, background: 'linear-gradient(transparent, rgba(8,9,11,.85) 60%)' }}>
+                  <span style={{ fontSize: 13, fontWeight: 500 }}>{t('gallery.slot3')}</span>
+                </div>
+              </Reveal>
+              <Reveal delay={200} className="relative flex min-h-35 items-end overflow-hidden" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)' }}>
+                <Image src="/gallery/carronaestrada.avif" alt={t('gallery.slot4')} fill sizes="(min-width: 640px) 22vw, 100vw" style={{ objectFit: 'cover' }} />
+                <div style={{ position: 'relative', width: '100%', padding: 14, background: 'linear-gradient(transparent, rgba(8,9,11,.85) 60%)' }}>
+                  <span style={{ fontSize: 13, fontWeight: 500 }}>{t('gallery.slot4')}</span>
+                </div>
+              </Reveal>
             </div>
           </div>
         </section>

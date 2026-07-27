@@ -25,6 +25,9 @@ function TenantDetail({ id }: { id: string }) {
   const [ciclo, setCiclo] = useState<BillingCycle>('mensal');
   const [pais, setPais] = useState<Country>('BR');
   const [moeda, setMoeda] = useState<Currency>('BRL');
+  const [enderecoFiscal, setEnderecoFiscal] = useState('');
+  const [telefone, setTelefone] = useState('');
+  const [email, setEmail] = useState('');
   const [status, setStatus] = useState<TenantStatus>('ativo');
 
   const [savingForm, setSavingForm] = useState(false);
@@ -47,6 +50,9 @@ function TenantDetail({ id }: { id: string }) {
         setCiclo(found.billing.ciclo);
         setPais(found.pais);
         setMoeda(found.moeda);
+        setEnderecoFiscal(found.enderecoFiscal ?? '');
+        setTelefone(found.telefone ?? '');
+        setEmail(found.email ?? '');
         setStatus(found.status);
       })
       .catch(() => setLoadError(true));
@@ -59,7 +65,16 @@ function TenantDetail({ id }: { id: string }) {
     setFormError(null);
     setSavingForm(true);
     try {
-      const payload: UpdateTenantPayload = { nome, documento, ciclo, pais, moeda };
+      const payload: UpdateTenantPayload = {
+        nome,
+        documento,
+        ciclo,
+        pais,
+        moeda,
+        enderecoFiscal: enderecoFiscal || undefined,
+        telefone: telefone || undefined,
+        email: email || undefined,
+      };
       const updated = await apiClient<Tenant>(`/tenants/${id}`, {
         method: 'PATCH',
         body: JSON.stringify(payload),
@@ -187,6 +202,39 @@ function TenantDetail({ id }: { id: string }) {
             </select>
           </label>
         </div>
+
+        <fieldset className="flex flex-col gap-4 rounded border border-black/10 p-4 dark:border-white/15">
+          <legend className="px-1 text-sm font-medium">{t('form.fiscalSectionTitle')}</legend>
+
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-medium">{t('form.enderecoFiscal')}</span>
+            <input
+              value={enderecoFiscal}
+              onChange={(e) => setEnderecoFiscal(e.target.value)}
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            />
+          </label>
+
+          <div className="grid grid-cols-2 gap-4">
+            <label className="flex flex-col gap-1">
+              <span className="text-sm font-medium">{t('form.telefone')}</span>
+              <input
+                value={telefone}
+                onChange={(e) => setTelefone(e.target.value)}
+                className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+              />
+            </label>
+            <label className="flex flex-col gap-1">
+              <span className="text-sm font-medium">{t('form.emailLocadora')}</span>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+              />
+            </label>
+          </div>
+        </fieldset>
 
         <button
           type="submit"

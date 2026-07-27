@@ -55,12 +55,35 @@ export function CheckIcon() {
   );
 }
 
+/**
+ * Marca do RentFleet: silhueta de carro + pino de localização (o diferencial do produto é saber
+ * onde cada carro está, não só cadastrar frota — o pino existe pra deixar isso óbvio no ícone).
+ * Mesmo path usado no header/footer (`currentColor`, tamanho variável) e em `public/icon.svg`
+ * (versão standalone com fundo próprio, pro favicon/PWA).
+ */
 export function LogoMarkIcon({ size = 15 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden>
-      <path d="M5 17h14M6 17l1.5-5.5A2 2 0 0 1 9.4 10h5.2a2 2 0 0 1 1.9 1.5L18 17" />
-      <circle cx="7.5" cy="17.5" r="1.6" />
-      <circle cx="16.5" cy="17.5" r="1.6" />
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M3.5 16.2v-3l1.3-3.3a1.8 1.8 0 0 1 1.7-1.1h6.3c.7 0 1.4.4 1.7 1.1l1.3 3.3v3"
+        stroke="currentColor"
+        strokeWidth="2.1"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M3.5 16.2h11.8v1.3a.9.9 0 0 1-.9.9h-.7a.9.9 0 0 1-.9-.9v-.6H6v.6a.9.9 0 0 1-.9.9h-.7a.9.9 0 0 1-.9-.9z"
+        stroke="currentColor"
+        strokeWidth="2.1"
+        strokeLinejoin="round"
+      />
+      <circle cx="6.4" cy="13.4" r="0.9" fill="currentColor" />
+      <circle cx="12.6" cy="13.4" r="0.9" fill="currentColor" />
+      <path
+        d="M18.2 2.6a2.9 2.9 0 0 0-2.9 2.9c0 2.2 2.9 5 2.9 5s2.9-2.8 2.9-5a2.9 2.9 0 0 0-2.9-2.9zm0 4.3a1.4 1.4 0 1 1 0-2.8 1.4 1.4 0 0 1 0 2.8z"
+        fill="currentColor"
+        fillRule="evenodd"
+      />
     </svg>
   );
 }

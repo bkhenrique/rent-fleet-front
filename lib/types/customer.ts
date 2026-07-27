@@ -1,9 +1,17 @@
+export interface CustomerCnh {
+  numero: string | null;
+  categoria: string | null;
+  validade: string | null;
+}
+
 export interface Customer {
   id: string;
   tenantId: string;
   nome: string;
   documento: string;
-  cnh: string | null;
+  cnh: CustomerCnh;
+  endereco: string | null;
+  dataNascimento: string | null;
   telefone: string | null;
   email: string | null;
   fotosDocumentoUrls: string[];
@@ -14,7 +22,9 @@ export interface Customer {
 export interface CreateCustomerPayload {
   nome: string;
   documento: string;
-  cnh?: string;
+  cnh?: { numero?: string; categoria?: string; validade?: string };
+  endereco?: string;
+  dataNascimento?: string;
   telefone?: string;
   email?: string;
 }

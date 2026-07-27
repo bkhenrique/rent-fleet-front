@@ -18,7 +18,11 @@ function CustomerDetail({ id }: { id: string }) {
 
   const [nome, setNome] = useState('');
   const [documento, setDocumento] = useState('');
-  const [cnh, setCnh] = useState('');
+  const [endereco, setEndereco] = useState('');
+  const [dataNascimento, setDataNascimento] = useState('');
+  const [cnhNumero, setCnhNumero] = useState('');
+  const [cnhCategoria, setCnhCategoria] = useState('');
+  const [cnhValidade, setCnhValidade] = useState('');
   const [telefone, setTelefone] = useState('');
   const [email, setEmail] = useState('');
 
@@ -31,7 +35,11 @@ function CustomerDetail({ id }: { id: string }) {
         setCustomer(found);
         setNome(found.nome);
         setDocumento(found.documento);
-        setCnh(found.cnh ?? '');
+        setEndereco(found.endereco ?? '');
+        setDataNascimento(found.dataNascimento?.slice(0, 10) ?? '');
+        setCnhNumero(found.cnh.numero ?? '');
+        setCnhCategoria(found.cnh.categoria ?? '');
+        setCnhValidade(found.cnh.validade?.slice(0, 10) ?? '');
         setTelefone(found.telefone ?? '');
         setEmail(found.email ?? '');
       })
@@ -48,7 +56,13 @@ function CustomerDetail({ id }: { id: string }) {
     const payload: UpdateCustomerPayload = {
       nome,
       documento,
-      cnh: cnh || undefined,
+      endereco: endereco || undefined,
+      dataNascimento: dataNascimento || undefined,
+      cnh: {
+        numero: cnhNumero || undefined,
+        categoria: cnhCategoria || undefined,
+        validade: cnhValidade || undefined,
+      },
       telefone: telefone || undefined,
       email: email || undefined,
     };
@@ -105,13 +119,54 @@ function CustomerDetail({ id }: { id: string }) {
           />
         </label>
         <label className="flex flex-col gap-1">
-          <span className="text-sm font-medium">{t('form.cnh')}</span>
+          <span className="text-sm font-medium">{t('form.endereco')}</span>
           <input
-            value={cnh}
-            onChange={(e) => setCnh(e.target.value)}
+            value={endereco}
+            onChange={(e) => setEndereco(e.target.value)}
             className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           />
         </label>
+        <label className="flex flex-col gap-1">
+          <span className="text-sm font-medium">{t('form.dataNascimento')}</span>
+          <input
+            type="date"
+            value={dataNascimento}
+            onChange={(e) => setDataNascimento(e.target.value)}
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+          />
+        </label>
+
+        <fieldset className="flex flex-col gap-4 rounded border border-black/10 p-4 dark:border-white/15">
+          <legend className="px-1 text-sm font-medium">{t('form.cnhSectionTitle')}</legend>
+          <div className="grid grid-cols-3 gap-3">
+            <label className="flex flex-col gap-1">
+              <span className="text-xs font-medium">{t('form.cnhNumero')}</span>
+              <input
+                value={cnhNumero}
+                onChange={(e) => setCnhNumero(e.target.value)}
+                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+              />
+            </label>
+            <label className="flex flex-col gap-1">
+              <span className="text-xs font-medium">{t('form.cnhCategoria')}</span>
+              <input
+                value={cnhCategoria}
+                onChange={(e) => setCnhCategoria(e.target.value)}
+                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+              />
+            </label>
+            <label className="flex flex-col gap-1">
+              <span className="text-xs font-medium">{t('form.cnhValidade')}</span>
+              <input
+                type="date"
+                value={cnhValidade}
+                onChange={(e) => setCnhValidade(e.target.value)}
+                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+              />
+            </label>
+          </div>
+        </fieldset>
+
         <label className="flex flex-col gap-1">
           <span className="text-sm font-medium">{t('form.telefone')}</span>
           <input

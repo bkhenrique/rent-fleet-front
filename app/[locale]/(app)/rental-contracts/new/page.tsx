@@ -9,7 +9,7 @@ import { useApiClient } from '@/lib/use-api-client';
 import { ApiError } from '@/lib/api-client';
 import type { Vehicle } from '@/lib/types/vehicle';
 import type { Customer } from '@/lib/types/customer';
-import type { CreateRentalContractPayload, RentalContract } from '@/lib/types/rental-contract';
+import type { CondutorAdicional, CreateRentalContractPayload, RentalContract } from '@/lib/types/rental-contract';
 
 function NewRentalContractForm() {
   const t = useTranslations('rentalContracts');
@@ -23,6 +23,11 @@ function NewRentalContractForm() {
   const [dataInicio, setDataInicio] = useState('');
   const [dataFim, setDataFim] = useState('');
   const [valor, setValor] = useState('');
+  const [localRetirada, setLocalRetirada] = useState('');
+  const [localDevolucao, setLocalDevolucao] = useState('');
+  const [franquiaKm, setFranquiaKm] = useState('');
+  const [caucao, setCaucao] = useState('');
+  const [condutores, setCondutores] = useState<CondutorAdicional[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -37,6 +42,18 @@ function NewRentalContractForm() {
     );
   }, [apiClient]);
 
+  function addCondutor() {
+    setCondutores((prev) => [...prev, { nome: '', documento: '', cnh: '' }]);
+  }
+
+  function updateCondutor(index: number, field: keyof CondutorAdicional, value: string) {
+    setCondutores((prev) => prev.map((condutor, i) => (i === index ? { ...condutor, [field]: value } : condutor)));
+  }
+
+  function removeCondutor(index: number) {
+    setCondutores((prev) => prev.filter((_, i) => i !== index));
+  }
+
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
     setError(null);
@@ -48,6 +65,11 @@ function NewRentalContractForm() {
       dataInicio,
       dataFim,
       valor: Number(valor),
+      localRetirada: localRetirada || undefined,
+      localDevolucao: localDevolucao || undefined,
+      franquiaKm: franquiaKm ? Number(franquiaKm) : undefined,
+      caucao: caucao ? Number(caucao) : undefined,
+      condutoresAdicionais: condutores.filter((c) => c.nome && c.documento),
     };
 
     try {
@@ -103,27 +125,48 @@ function NewRentalContractForm() {
           </select>
         </label>
 
-        <label className="flex flex-col gap-1">
-          <span className="text-sm font-medium">{t('form.dataInicio')}</span>
-          <input
-            type="date"
-            required
-            value={dataInicio}
-            onChange={(e) => setDataInicio(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
-          />
-        </label>
+        <div className="grid grid-cols-2 gap-4">
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-medium">{t('form.dataInicio')}</span>
+            <input
+              type="date"
+              required
+              value={dataInicio}
+              onChange={(e) => setDataInicio(e.target.value)}
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            />
+          </label>
 
-        <label className="flex flex-col gap-1">
-          <span className="text-sm font-medium">{t('form.dataFim')}</span>
-          <input
-            type="date"
-            required
-            value={dataFim}
-            onChange={(e) => setDataFim(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
-          />
-        </label>
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-medium">{t('form.dataFim')}</span>
+            <input
+              type="date"
+              required
+              value={dataFim}
+              onChange={(e) => setDataFim(e.target.value)}
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            />
+          </label>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-medium">{t('form.localRetirada')}</span>
+            <input
+              value={localRetirada}
+              onChange={(e) => setLocalRetirada(e.target.value)}
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            />
+          </label>
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-medium">{t('form.localDevolucao')}</span>
+            <input
+              value={localDevolucao}
+              onChange={(e) => setLocalDevolucao(e.target.value)}
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            />
+          </label>
+        </div>
 
         <label className="flex flex-col gap-1">
           <span className="text-sm font-medium">{t('form.valor')}</span>
@@ -137,6 +180,79 @@ function NewRentalContractForm() {
             className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           />
         </label>
+
+        <div className="grid grid-cols-2 gap-4">
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-medium">{t('form.franquiaKm')}</span>
+            <input
+              type="number"
+              min={0}
+              placeholder={t('form.franquiaKmPlaceholder')}
+              value={franquiaKm}
+              onChange={(e) => setFranquiaKm(e.target.value)}
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            />
+          </label>
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-medium">{t('form.caucao')}</span>
+            <input
+              type="number"
+              min={0}
+              step="0.01"
+              value={caucao}
+              onChange={(e) => setCaucao(e.target.value)}
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            />
+          </label>
+        </div>
+
+        <fieldset className="flex flex-col gap-3 rounded border border-black/10 p-4 dark:border-white/15">
+          <legend className="px-1 text-sm font-medium">{t('form.condutoresSectionTitle')}</legend>
+
+          {condutores.map((condutor, index) => (
+            <div key={index} className="flex flex-wrap items-end gap-2">
+              <label className="flex flex-col gap-1">
+                <span className="text-xs font-medium">{t('form.condutorNome')}</span>
+                <input
+                  value={condutor.nome}
+                  onChange={(e) => updateCondutor(index, 'nome', e.target.value)}
+                  className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                />
+              </label>
+              <label className="flex flex-col gap-1">
+                <span className="text-xs font-medium">{t('form.condutorDocumento')}</span>
+                <input
+                  value={condutor.documento}
+                  onChange={(e) => updateCondutor(index, 'documento', e.target.value)}
+                  className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                />
+              </label>
+              <label className="flex flex-col gap-1">
+                <span className="text-xs font-medium">{t('form.condutorCnh')}</span>
+                <input
+                  value={condutor.cnh ?? ''}
+                  onChange={(e) => updateCondutor(index, 'cnh', e.target.value)}
+                  className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                />
+              </label>
+              <button
+                type="button"
+                onClick={() => removeCondutor(index)}
+                className="rounded border border-black/15 px-2 py-1.5 text-xs font-medium dark:border-white/25"
+              >
+                {t('form.condutorRemover')}
+              </button>
+            </div>
+          ))}
+
+          <button
+            type="button"
+            onClick={addCondutor}
+            className="self-start rounded border border-black/15 px-3 py-1.5 text-sm font-medium dark:border-white/25"
+          >
+            {t('form.condutorAdicionar')}
+          </button>
+        </fieldset>
 
         {error && (
           <p role="alert" className="text-sm text-red-600 dark:text-red-400">

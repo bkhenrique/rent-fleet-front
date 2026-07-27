@@ -297,7 +297,11 @@
       "saving": "Salvando...",
       "cancel": "Cancelar",
       "genericError": "Não foi possível salvar. Tente novamente.",
-      "conflictError": "Já existe uma locadora ou usuário com esses dados."
+      "conflictError": "Já existe uma locadora ou usuário com esses dados.",
+      "fiscalSectionTitle": "Dados fiscais",
+      "enderecoFiscal": "Endereço fiscal",
+      "telefone": "Telefone",
+      "emailLocadora": "E-mail"
     },
     "detail": {
       "markAsPaid": "Marcar como pago",
@@ -443,7 +447,13 @@
       "saving": "Salvando...",
       "cancel": "Cancelar",
       "genericError": "Não foi possível salvar. Tente novamente.",
-      "conflictError": "Já existe um cliente com este documento."
+      "conflictError": "Já existe um cliente com este documento.",
+      "endereco": "Endereço",
+      "dataNascimento": "Data de nascimento",
+      "cnhSectionTitle": "CNH",
+      "cnhNumero": "Número",
+      "cnhCategoria": "Categoria",
+      "cnhValidade": "Validade"
     },
     "documents": {
       "title": "Documentos",
@@ -480,7 +490,18 @@
       "cancel": "Cancelar",
       "genericError": "Não foi possível salvar. Tente novamente.",
       "noVehicles": "Nenhum veículo disponível para aluguel no momento.",
-      "noCustomers": "Cadastre um cliente antes de criar um contrato."
+      "noCustomers": "Cadastre um cliente antes de criar um contrato.",
+      "localRetirada": "Local de retirada",
+      "localDevolucao": "Local de devolução",
+      "franquiaKm": "Franquia de km",
+      "franquiaKmPlaceholder": "Ilimitada",
+      "caucao": "Caução",
+      "condutoresSectionTitle": "Condutores autorizados adicionais",
+      "condutorNome": "Nome",
+      "condutorDocumento": "Documento",
+      "condutorCnh": "CNH",
+      "condutorRemover": "Remover",
+      "condutorAdicionar": "Adicionar condutor"
     },
     "detail": {
       "title": "Detalhes do contrato",
@@ -494,7 +515,24 @@
       "saving": "Salvando...",
       "returnVehicle": "Devolver veículo",
       "returning": "Devolvendo...",
-      "genericError": "Não foi possível concluir a operação."
+      "genericError": "Não foi possível concluir a operação.",
+      "localRetirada": "Local de retirada",
+      "localDevolucao": "Local de devolução",
+      "franquiaKm": "Franquia de km",
+      "ilimitada": "Ilimitada",
+      "caucao": "Caução",
+      "naoExigida": "Não exigida",
+      "condutoresTitle": "Condutores autorizados adicionais",
+      "quilometragem": "Quilometragem",
+      "combustivel": "Combustível",
+      "naoInformado": "Não informado",
+      "fuelLevel": {
+        "cheio": "Cheio",
+        "tres_quartos": "3/4",
+        "metade": "1/2",
+        "um_quarto": "1/4",
+        "reserva": "Reserva"
+      }
     },
     "attachments": {
       "empty": "Nenhuma foto ainda.",

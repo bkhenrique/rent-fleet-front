@@ -297,7 +297,11 @@
       "saving": "Saving...",
       "cancel": "Cancel",
       "genericError": "Couldn't save. Please try again.",
-      "conflictError": "A rental company or user with this data already exists."
+      "conflictError": "A rental company or user with this data already exists.",
+      "fiscalSectionTitle": "Fiscal details",
+      "enderecoFiscal": "Fiscal address",
+      "telefone": "Phone",
+      "emailLocadora": "Email"
     },
     "detail": {
       "markAsPaid": "Mark as paid",
@@ -443,7 +447,13 @@
       "saving": "Saving...",
       "cancel": "Cancel",
       "genericError": "Couldn't save. Please try again.",
-      "conflictError": "A customer with this document already exists."
+      "conflictError": "A customer with this document already exists.",
+      "endereco": "Address",
+      "dataNascimento": "Date of birth",
+      "cnhSectionTitle": "Driver's license",
+      "cnhNumero": "Number",
+      "cnhCategoria": "Category",
+      "cnhValidade": "Expiry"
     },
     "documents": {
       "title": "Documents",
@@ -480,7 +490,18 @@
       "cancel": "Cancel",
       "genericError": "Couldn't save. Please try again.",
       "noVehicles": "No vehicles available for rent right now.",
-      "noCustomers": "Register a customer before creating a contract."
+      "noCustomers": "Register a customer before creating a contract.",
+      "localRetirada": "Pickup location",
+      "localDevolucao": "Return location",
+      "franquiaKm": "Mileage allowance",
+      "franquiaKmPlaceholder": "Unlimited",
+      "caucao": "Security deposit",
+      "condutoresSectionTitle": "Additional authorized drivers",
+      "condutorNome": "Name",
+      "condutorDocumento": "Document",
+      "condutorCnh": "Driver's license",
+      "condutorRemover": "Remove",
+      "condutorAdicionar": "Add driver"
     },
     "detail": {
       "title": "Contract details",
@@ -494,7 +515,24 @@
       "saving": "Saving...",
       "returnVehicle": "Return vehicle",
       "returning": "Returning...",
-      "genericError": "Couldn't complete the operation."
+      "genericError": "Couldn't complete the operation.",
+      "localRetirada": "Pickup location",
+      "localDevolucao": "Return location",
+      "franquiaKm": "Mileage allowance",
+      "ilimitada": "Unlimited",
+      "caucao": "Security deposit",
+      "naoExigida": "Not required",
+      "condutoresTitle": "Additional authorized drivers",
+      "quilometragem": "Mileage",
+      "combustivel": "Fuel level",
+      "naoInformado": "Not specified",
+      "fuelLevel": {
+        "cheio": "Full",
+        "tres_quartos": "3/4",
+        "metade": "1/2",
+        "um_quarto": "1/4",
+        "reserva": "Reserve"
+      }
     },
     "attachments": {
       "empty": "No photos yet.",
