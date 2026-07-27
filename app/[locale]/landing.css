@@ -1,0 +1,298 @@
+/*
+ * Tema próprio da landing pública ("asfalto" — dark fixo, não segue prefers-color-scheme, igual ao
+ * mockup em RentFleet Landing.dc.html). Tudo escopado em `.rf-landing` pra nunca vazar pro resto do
+ * app (dashboard/admin/login usam o tema claro/escuro simples de `globals.css` via SiteHeader).
+ */
+
+.rf-landing {
+  --bg: #08090b;
+  --bg-2: #0c0e11;
+  --surface: #12151a;
+  --surface-2: #171b21;
+  --surface-3: #1f242b;
+  --border: #232a32;
+  --border-strong: #333c46;
+  --hairline: #1a1f25;
+  --text: #f2f3f5;
+  --text-dim: #939ba6;
+  --text-faint: #616a75;
+  --accent: #ffb020;
+  --accent-strong: #ffc24d;
+  --accent-soft: rgba(255, 176, 32, 0.12);
+  --accent-glow: rgba(255, 176, 32, 0.28);
+  --accent-fg: #10120f;
+  --info: #22d3ee;
+  --success: #34d399;
+  --warning: #fbbf24;
+  --danger: #f87171;
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 14px;
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.5);
+
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.rf-landing a {
+  color: var(--accent-strong);
+  text-decoration: none;
+}
+.rf-landing a:hover {
+  color: var(--accent);
+}
+
+.rf-landing .mono {
+  font-family: var(--font-jetbrains-mono), ui-monospace, 'SF Mono', monospace;
+  font-feature-settings: 'tnum' on;
+}
+.rf-landing .serif {
+  font-family: var(--font-instrument-serif), Georgia, serif;
+}
+
+.rf-landing .dim {
+  color: var(--text-dim);
+}
+.rf-landing .faint {
+  color: var(--text-faint);
+}
+.rf-landing .eyebrow {
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.rf-landing .grid-bg {
+  background-image:
+    linear-gradient(var(--hairline) 1px, transparent 1px),
+    linear-gradient(90deg, var(--hairline) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.rf-landing .surface {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.rf-landing .card-hover {
+  transition:
+    transform 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+.rf-landing .card-hover:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-lg);
+}
+
+.rf-landing .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 140ms ease;
+  white-space: nowrap;
+  user-select: none;
+  letter-spacing: -0.005em;
+}
+.rf-landing .btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.rf-landing .btn-primary {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 1px var(--accent),
+    0 8px 24px var(--accent-glow);
+}
+.rf-landing .btn-primary:hover {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+  transform: translateY(-1px);
+}
+.rf-landing .btn-outline {
+  background: var(--surface);
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+.rf-landing .btn-outline:hover {
+  background: var(--surface-2);
+  border-color: var(--text-faint);
+}
+.rf-landing .btn-ghost {
+  color: var(--text-dim);
+}
+.rf-landing .btn-ghost:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+.rf-landing .btn-lg {
+  padding: 11px 20px;
+  font-size: 14px;
+  gap: 8px;
+}
+.rf-landing .btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.rf-landing .input {
+  width: 100%;
+  padding: 8px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 13px;
+  transition:
+    border-color 140ms,
+    box-shadow 140ms;
+}
+.rf-landing .input::placeholder {
+  color: var(--text-faint);
+}
+.rf-landing .input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.rf-landing .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.rf-landing .badge.success {
+  background: color-mix(in srgb, var(--success) 12%, transparent);
+  border-color: color-mix(in srgb, var(--success) 25%, transparent);
+  color: var(--success);
+}
+.rf-landing .badge.warn {
+  background: color-mix(in srgb, var(--warning) 12%, transparent);
+  border-color: color-mix(in srgb, var(--warning) 25%, transparent);
+  color: var(--warning);
+}
+.rf-landing .badge.info {
+  background: color-mix(in srgb, var(--info) 12%, transparent);
+  border-color: color-mix(in srgb, var(--info) 25%, transparent);
+  color: var(--info);
+}
+
+.rf-landing .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--text-faint);
+  display: inline-block;
+  flex-shrink: 0;
+}
+.rf-landing .dot.success {
+  background: var(--success);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--success) 18%, transparent);
+}
+.rf-landing .dot.info {
+  background: var(--info);
+}
+
+@keyframes rf-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  70% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes rf-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+@keyframes rf-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes rf-lane {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 120px 0;
+  }
+}
+@keyframes rf-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rf-landing .anim-rise {
+  animation: rf-rise 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.rf-landing .anim-float {
+  animation: rf-float 9s ease-in-out infinite;
+}
+.rf-landing .anim-ping {
+  animation: rf-ping 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+.rf-landing .anim-lane {
+  animation: rf-lane 6s linear infinite;
+}
+.rf-landing .reveal {
+  opacity: 0;
+}
+.rf-landing .reveal-visible {
+  animation: rf-reveal 700ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rf-landing,
+  .rf-landing * {
+    animation: none !important;
+    transition: none !important;
+  }
+  .rf-landing .reveal {
+    opacity: 1;
+  }
+}

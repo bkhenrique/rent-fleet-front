@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -18,7 +28,9 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    /* Não usa preto puro — #0a0a0a deixava as bordas em white/10 quase invisíveis (ver bloco 17
+       do MELHORIAS.md). #121417 dá um pouco mais de profundidade pra bordas/cards se destacarem. */
+    --background: #121417;
     --foreground: #ededed;
     --accent: #818cf8;
     --accent-foreground: #0a0a0a;
@@ -50,78 +62,11 @@ body {
   animation: reveal-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes drift {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(-2%, 3%) scale(1.05);
-  }
-}
-
-.animate-drift {
-  animation: drift 14s ease-in-out infinite;
-}
-
-@keyframes pulse-ring {
-  0% {
-    transform: scale(0.9);
-    opacity: 0.8;
-  }
-  70% {
-    transform: scale(1.8);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1.8);
-    opacity: 0;
-  }
-}
-
-.animate-pulse-ring {
-  animation: pulse-ring 2.2s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
-}
-
-@keyframes dash-move {
-  to {
-    stroke-dashoffset: -24;
-  }
-}
-
-.animate-dash {
-  stroke-dasharray: 6 6;
-  animation: dash-move 1.2s linear infinite;
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.animate-float {
-  animation: float 5s ease-in-out infinite;
-}
-
-.bg-dot-grid {
-  background-image: radial-gradient(circle, currentColor 1.5px, transparent 1.5px);
-  background-size: 22px 22px;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
   }
-  .reveal-visible,
-  .animate-drift,
-  .animate-pulse-ring,
-  .animate-dash,
-  .animate-float {
+  .reveal-visible {
     animation: none;
   }
 }

@@ -3,62 +3,183 @@
     "name": "RentFleet"
   },
   "landing": {
+    "nav": {
+      "custo": "El costo de improvisar",
+      "mapa": "Mapa en vivo",
+      "recursos": "Funciones"
+    },
+    "header": {
+      "ctaPrimary": "Ver el panel"
+    },
     "hero": {
-      "badge": "Pensado para empresas de alquiler de coches",
-      "title": "Tu flota de alquiler, por fin bajo control",
-      "subtitle": "Vehículos, contratos y ubicación en tiempo real, todo en un mismo lugar — pensado para empresas de alquiler de cualquier tamaño.",
-      "scrollCta": "Ver cómo funciona",
-      "mapLive": "En vivo"
+      "badge": "Software para empresas de alquiler de vehículos",
+      "titleLine1": "Toda la flota en tu mano.",
+      "titleLine2": "Cada coche rindiendo.",
+      "subtitle": "Vehículos, contratos y ubicación en tiempo real en un solo panel. Sabes dónde está cada coche, quién lo tiene y qué vence mañana — antes de que se convierta en una pérdida.",
+      "ctaPrimary": "Quiero verlo con mi flota",
+      "ctaSecondary": "Ver cómo funciona",
+      "meta1": "Sin instalación",
+      "meta2": "PT · EN · ES",
+      "meta3": "Funciona en el móvil del patio"
     },
-    "showcase": {
-      "title": "Mira toda tu flota en el mapa, en tiempo real",
-      "subtitle": "Cada coche muestra su posición más reciente — ya sea un GPS dedicado, un móvil olvidado en la guantera o una lectura manual de un AirTag. Nunca simulamos tiempo real cuando en realidad es solo la última posición conocida."
+    "mockup": {
+      "windowLabel": "rentfleet.app / panel",
+      "fleetNow": "Flota ahora",
+      "live": "en vivo",
+      "stat1Value": "12",
+      "stat1Label": "Listos para alquilar",
+      "stat2Value": "8",
+      "stat2Label": "En la calle, rindiendo",
+      "stat3Value": "2",
+      "stat3Label": "Parados en el taller",
+      "rows": [
+        {
+          "plate": "AB-241-CD",
+          "model": "Renault Clio 1.0",
+          "status": "Libre hoy",
+          "tone": "success"
+        },
+        {
+          "plate": "EF-733-GH",
+          "model": "VW T-Cross",
+          "status": "Vuelve 12/08 · 14h",
+          "tone": "info"
+        },
+        {
+          "plate": "IJ-118-KL",
+          "model": "Peugeot 208",
+          "status": "ITV vence en 9 días",
+          "tone": "warn"
+        },
+        {
+          "plate": "MN-902-OP",
+          "model": "Fiat Pulse",
+          "status": "Taller · 3 días",
+          "tone": "warn"
+        }
+      ],
+      "mapCaption": "Última posición · GPS, móvil o AirTag"
     },
-    "problem": {
-      "title": "El problema de gestionar la flota en una hoja de cálculo",
-      "items": [
-        "Documentación (seguro, ITV, matriculación) que vence sin avisar",
-        "Coches alquilados sin un control real de devoluciones o retrasos",
-        "Falta de visibilidad en tiempo real de dónde está cada vehículo"
+    "gallery": {
+      "caption": "Tu patio, tal como lo ve el cliente",
+      "slot1": "Foto de tu patio / flota alineada",
+      "slot2": "Entrega de llaves",
+      "slot3": "Interior / salpicadero",
+      "slot4": "Coche en la carretera"
+    },
+    "cost": {
+      "eyebrow": "El costo de improvisar",
+      "title": "La hoja de cálculo no avisa. La pérdida, sí.",
+      "body": "Cada pestaña de más es un riesgo de más. RentFleet cambia la improvisación por un panel que avisa antes de que pierdas dinero.",
+      "pains": [
+        {
+          "n": "01",
+          "title": "Un documento vence a oscuras",
+          "body": "El seguro, la ITV y la matriculación caducan y nadie se entera — multa, coche parado, cliente a medias.",
+          "fix": "Alerta automática semanas antes"
+        },
+        {
+          "n": "02",
+          "title": "Devolución sin control",
+          "body": "El plazo se pasa y no queda registro del retraso para cobrarlo.",
+          "fix": "Plazo, retraso y cobro dentro del contrato"
+        },
+        {
+          "n": "03",
+          "title": "Nadie sabe dónde está el coche",
+          "body": "Cero visibilidad de la posición real de cada vehículo de la flota.",
+          "fix": "Mapa en vivo con la hora de la lectura"
+        }
+      ]
+    },
+    "map": {
+      "badge": "En vivo",
+      "title": "Abre el mapa y sabe dónde está cada coche",
+      "body": "Cada vehículo muestra su posición más reciente — GPS dedicado, móvil en la guantera o lectura manual de AirTag. Y mostramos la hora exacta de esa lectura: nunca simulamos tiempo real cuando en realidad es solo la última posición conocida.",
+      "trackers": [
+        {
+          "tag": "GPS",
+          "label": "Rastreador dedicado instalado en el vehículo"
+        },
+        {
+          "tag": "MÓVIL",
+          "label": "Aparato dejado en la guantera del coche"
+        },
+        {
+          "tag": "AIRTAG",
+          "label": "Lectura manual, con fecha y hora del registro"
+        }
+      ],
+      "pins": [
+        {
+          "plate": "AB-241-CD",
+          "time": "2 min"
+        },
+        {
+          "plate": "EF-733-GH",
+          "time": "ahora"
+        },
+        {
+          "plate": "IJ-118-KL",
+          "time": "8 min"
+        },
+        {
+          "plate": "MN-902-OP",
+          "time": "1 h"
+        },
+        {
+          "plate": "QR-455-ST",
+          "time": "4 min"
+        }
       ]
     },
     "features": {
-      "title": "Lo que RentFleet resuelve por ti",
+      "eyebrow": "Funciones",
+      "title": "Cuatro cosas que dejas de hacer a mano",
       "vehicles": {
         "title": "Ficha técnica completa",
-        "description": "Documentos, mantenimiento y alertas automáticas de vencimiento."
+        "body": "Documentos, mantenimiento y alertas de vencimiento por coche — todo en un solo lugar."
       },
       "tracking": {
-        "title": "Seguimiento en tiempo real",
-        "description": "Mapa de la flota compatible con cualquier rastreador — GPS dedicado, móvil o AirTag."
+        "title": "Mapa de la flota en vivo",
+        "body": "Cualquier rastreador sirve: GPS, móvil o AirTag — con la hora de la última lectura."
       },
       "contracts": {
-        "title": "Contratos con PDF automático",
-        "description": "Genera el contrato de alquiler automáticamente y adjunta la firma después."
+        "title": "Contrato en PDF al instante",
+        "body": "Genera el contrato de alquiler automáticamente y adjunta la firma después."
       },
       "dashboard": {
         "title": "Panel de la empresa de alquiler",
-        "description": "Vehículos disponibles, alquilados y en mantenimiento, todo en un solo panel."
+        "body": "Libres, alquilados y en mantenimiento en una pantalla — decides en segundos quién sale hoy."
       }
     },
-    "differentials": {
-      "title": "Pensado para crecer junto a tu empresa",
+    "scale": {
+      "title": "Crece contigo — de 5 a 500 coches",
       "items": [
-        "Portugués, inglés y español desde el primer día",
-        "Instalable como app (PWA), con lo básico funcionando incluso sin conexión",
-        "Cada empresa de alquiler ve solo su propia flota — aislamiento total entre cuentas"
+        {
+          "tag": "Tres idiomas",
+          "body": "Portugués, inglés y español desde el primer día."
+        },
+        {
+          "tag": "Se instala como app",
+          "body": "PWA en el móvil del patio, con lo básico funcionando incluso sin conexión."
+        },
+        {
+          "tag": "Datos aislados",
+          "body": "Cada empresa de alquiler ve solo su propia flota — separación total entre cuentas."
+        }
       ]
     },
-    "ctaFinal": {
-      "title": "¿Listo para organizar tu flota?",
-      "subtitle": "Déjanos tu correo y te mostramos cómo funciona.",
-      "emailPlaceholder": "tu@correo.com",
-      "submit": "Quiero saber más",
+    "contact": {
+      "title": "Tu flota organizada esta misma semana",
+      "subtitle": "Déjanos tu correo: te preparamos una demo con tus propios coches.",
+      "emailPlaceholder": "tu@tuempresadealquiler.com",
+      "submit": "Agendar demo",
       "submitting": "Enviando...",
-      "success": "¡Listo! Alguien de nuestro equipo se pondrá en contacto pronto.",
+      "success": "Recibido ✓",
       "error": "No se pudo enviar. Inténtalo de nuevo.",
-      "existingCustomer": "¿Ya eres cliente de RentFleet?",
-      "cta": "Iniciar sesión"
+      "note": "Sin tarjeta, sin contrato.",
+      "existingCustomer": "¿Ya eres cliente?"
     },
     "footer": {
       "rights": "Todos los derechos reservados."
@@ -276,6 +397,13 @@
       "origem": {
         "tempo_real": "tiempo real",
         "manual": "manual"
+      },
+      "copy": "Copiar",
+      "copied": "¡Copiado!",
+      "help": {
+        "traccar": "Rastreador GPS dedicado (compatible con Traccar). Requiere el IMEI del dispositivo — al registrarlo, se inscribe automáticamente en el servidor Traccar.",
+        "owntracks_app": "Para usar el móvil del conductor/empleado como rastreador: instala la app OwnTracks (Android o iOS), abre su configuración de conexión y pega la URL de webhook que aparece abajo después de crearlo.",
+        "airtag_manual": "Para un AirTag (Apple) o Find My Device (Android): estos dispositivos no tienen API pública, así que no hay integración automática. Consulta la ubicación en la app oficial del fabricante (Find My / Find My Device) y actualízala aquí manualmente cuando lo necesites."
       }
     }
   },

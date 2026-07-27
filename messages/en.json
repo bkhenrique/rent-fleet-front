@@ -3,62 +3,183 @@
     "name": "RentFleet"
   },
   "landing": {
+    "nav": {
+      "custo": "The cost of winging it",
+      "mapa": "Live map",
+      "recursos": "Features"
+    },
+    "header": {
+      "ctaPrimary": "See the dashboard"
+    },
     "hero": {
-      "badge": "Built for car rental companies",
-      "title": "Your rental fleet, finally under control",
-      "subtitle": "Vehicles, contracts and real-time location, all in one place — built for rental companies of any size.",
-      "scrollCta": "See how it works",
-      "mapLive": "Live"
+      "badge": "Software for car rental companies",
+      "titleLine1": "Your whole fleet, in hand.",
+      "titleLine2": "Every car earning.",
+      "subtitle": "Vehicles, contracts and real-time location in one dashboard. You know where every car is, who has it, and what's expiring tomorrow — before it turns into a loss.",
+      "ctaPrimary": "Show me my fleet",
+      "ctaSecondary": "See how it works",
+      "meta1": "No install needed",
+      "meta2": "PT · EN · ES",
+      "meta3": "Works on the lot attendant's phone"
     },
-    "showcase": {
-      "title": "See your entire fleet on the map, live",
-      "subtitle": "Every car shows its most recent position — whether that's a dedicated GPS, a phone left in the glovebox, or a manually logged AirTag reading. Never pretending something is live when it's really just the last known position."
+    "mockup": {
+      "windowLabel": "rentfleet.app / dashboard",
+      "fleetNow": "Fleet right now",
+      "live": "live",
+      "stat1Value": "12",
+      "stat1Label": "Ready to rent",
+      "stat2Value": "8",
+      "stat2Label": "Out earning",
+      "stat3Value": "2",
+      "stat3Label": "In the shop",
+      "rows": [
+        {
+          "plate": "AB-241-CD",
+          "model": "Renault Clio 1.0",
+          "status": "Free today",
+          "tone": "success"
+        },
+        {
+          "plate": "EF-733-GH",
+          "model": "VW T-Cross",
+          "status": "Back 08/12 · 2pm",
+          "tone": "info"
+        },
+        {
+          "plate": "IJ-118-KL",
+          "model": "Peugeot 208",
+          "status": "Inspection due in 9 days",
+          "tone": "warn"
+        },
+        {
+          "plate": "MN-902-OP",
+          "model": "Fiat Pulse",
+          "status": "In the shop · 3 days",
+          "tone": "warn"
+        }
+      ],
+      "mapCaption": "Last position · GPS, phone or AirTag"
     },
-    "problem": {
-      "title": "Running a fleet on spreadsheets is a problem",
-      "items": [
-        "Insurance, inspection and registration documents expiring without warning",
-        "Rented cars with no real control over returns or delays",
-        "No real-time visibility into where each vehicle actually is"
+    "gallery": {
+      "caption": "Your lot, the way the customer sees it",
+      "slot1": "Photo of your lot / fleet lined up",
+      "slot2": "Handing over the keys",
+      "slot3": "Interior / dashboard",
+      "slot4": "Car on the road"
+    },
+    "cost": {
+      "eyebrow": "The cost of winging it",
+      "title": "A spreadsheet won't warn you. The loss will.",
+      "body": "Every extra tab is another risk. RentFleet trades the guesswork for a dashboard that speaks up before you lose money.",
+      "pains": [
+        {
+          "n": "01",
+          "title": "A document expires in the dark",
+          "body": "Insurance, inspection and registration lapse and nobody's warned — a fine, an idle car, a customer stuck.",
+          "fix": "Automatic alerts weeks ahead"
+        },
+        {
+          "n": "02",
+          "title": "Returns with no control",
+          "body": "The deadline blows past with no record of the delay to charge for.",
+          "fix": "Deadline, delay and billing built into the contract"
+        },
+        {
+          "n": "03",
+          "title": "Nobody knows where the car is",
+          "body": "Zero visibility into where each vehicle in the fleet is.",
+          "fix": "Live map with the time of the last reading"
+        }
+      ]
+    },
+    "map": {
+      "badge": "Live",
+      "title": "Open the map and know where every car is",
+      "body": "Every vehicle shows its most recent position — dedicated GPS, a phone in the glovebox, or a manually logged AirTag reading. And we show the exact time of that reading: never pretending it's live when it's only the last known position.",
+      "trackers": [
+        {
+          "tag": "GPS",
+          "label": "Dedicated tracker installed in the vehicle"
+        },
+        {
+          "tag": "PHONE",
+          "label": "Device left in the car's glovebox"
+        },
+        {
+          "tag": "AIRTAG",
+          "label": "Manual reading, logged with date and time"
+        }
+      ],
+      "pins": [
+        {
+          "plate": "AB-241-CD",
+          "time": "2 min"
+        },
+        {
+          "plate": "EF-733-GH",
+          "time": "now"
+        },
+        {
+          "plate": "IJ-118-KL",
+          "time": "8 min"
+        },
+        {
+          "plate": "MN-902-OP",
+          "time": "1 h"
+        },
+        {
+          "plate": "QR-455-ST",
+          "time": "4 min"
+        }
       ]
     },
     "features": {
-      "title": "What RentFleet takes off your plate",
+      "eyebrow": "Features",
+      "title": "Four things you stop doing by hand",
       "vehicles": {
         "title": "Complete vehicle records",
-        "description": "Documents, maintenance history and automatic expiration alerts."
+        "body": "Documents, maintenance and expiration alerts per car — all in one place."
       },
       "tracking": {
-        "title": "Real-time tracking",
-        "description": "A live fleet map that works with any tracker — dedicated GPS, a phone or an AirTag."
+        "title": "Live fleet map",
+        "body": "Any tracker works: GPS, phone or AirTag — with the time of the last reading."
       },
       "contracts": {
-        "title": "Contracts with automatic PDFs",
-        "description": "Generate the rental agreement automatically and attach the signature afterward."
+        "title": "Contract as a PDF, instantly",
+        "body": "Generate the rental agreement automatically and attach the signature afterward."
       },
       "dashboard": {
         "title": "Rental company dashboard",
-        "description": "Available, rented and in-maintenance vehicles, all in a single overview."
+        "body": "Free, rented and in maintenance on one screen — decide in seconds who goes out today."
       }
     },
-    "differentials": {
-      "title": "Built to grow alongside your rental company",
+    "scale": {
+      "title": "Grows with you — from 5 to 500 cars",
       "items": [
-        "Portuguese, English and Spanish, ready from day one",
-        "Installable as an app (PWA), with the basics working even offline",
-        "Each rental company only sees its own fleet — complete isolation between accounts"
+        {
+          "tag": "Three languages",
+          "body": "Portuguese, English and Spanish, ready from day one."
+        },
+        {
+          "tag": "Installs like an app",
+          "body": "PWA on the lot attendant's phone, with the basics working even offline."
+        },
+        {
+          "tag": "Isolated data",
+          "body": "Each rental company only sees its own fleet — complete separation between accounts."
+        }
       ]
     },
-    "ctaFinal": {
-      "title": "Ready to get your fleet organized?",
-      "subtitle": "Leave your email and we'll show you how it works.",
-      "emailPlaceholder": "you@email.com",
-      "submit": "Tell me more",
+    "contact": {
+      "title": "Your fleet organized by the end of this week",
+      "subtitle": "Leave your email — we'll set up a demo with your own cars.",
+      "emailPlaceholder": "you@yourrentalcompany.com",
+      "submit": "Book a demo",
       "submitting": "Sending...",
-      "success": "Got it! Someone from our team will reach out soon.",
+      "success": "Got it ✓",
       "error": "Couldn't send it. Please try again.",
-      "existingCustomer": "Already a RentFleet customer?",
-      "cta": "Sign in"
+      "note": "No card, no contract.",
+      "existingCustomer": "Already a customer?"
     },
     "footer": {
       "rights": "All rights reserved."
@@ -276,6 +397,13 @@
       "origem": {
         "tempo_real": "real-time",
         "manual": "manual"
+      },
+      "copy": "Copy",
+      "copied": "Copied!",
+      "help": {
+        "traccar": "Dedicated GPS tracker (Traccar-compatible). Requires the device IMEI — once registered, the device is automatically enrolled on the Traccar server.",
+        "owntracks_app": "To use the driver's/staff's phone as a tracker: install the OwnTracks app (Android or iOS), open its connection settings and paste the webhook URL shown below after creating it.",
+        "airtag_manual": "For an Apple AirTag or Android Find My Device: these devices have no public API, so there's no automatic integration. Check the location in the manufacturer's official app (Find My / Find My Device) and update it here manually whenever needed."
       }
     }
   },

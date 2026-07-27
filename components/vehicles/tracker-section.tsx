@@ -27,6 +27,7 @@ export function TrackerSection({ vehicleId }: TrackerSectionProps) {
 
   const [secret, setSecret] = useState<string | null>(null);
   const [revealing, setRevealing] = useState(false);
+  const [webhookUrlCopied, setWebhookUrlCopied] = useState(false);
 
   const [lat, setLat] = useState('');
   const [lng, setLng] = useState('');
@@ -96,47 +97,56 @@ export function TrackerSection({ vehicleId }: TrackerSectionProps) {
 
   const webhookUrl = tracker && secret ? `${API_URL}/trackers/${tracker._id}/position?secret=${secret}` : null;
 
+  async function handleCopyWebhookUrl(value: string) {
+    await navigator.clipboard.writeText(value);
+    setWebhookUrlCopied(true);
+    setTimeout(() => setWebhookUrlCopied(false), 2000);
+  }
+
   return (
     <div className="rounded border border-black/10 p-4 dark:border-white/15">
       <h2 className="mb-3 text-sm font-semibold">{t('tracker.title')}</h2>
 
       {!tracker && (
-        <form onSubmit={handleCreate} className="flex flex-wrap items-end gap-3">
-          <label className="flex flex-col gap-1">
-            <span className="text-xs font-medium">{t('tracker.tipo')}</span>
-            <select
-              value={tipo}
-              onChange={(e) => setTipo(e.target.value as TrackerType)}
-              className="rounded border border-black/15 px-2 py-1 text-sm dark:border-white/25"
-            >
-              {TRACKER_TYPE_OPTIONS.map((option) => (
-                <option key={option} value={option}>
-                  {t(`tracker.type.${option}`)}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          {tipo === 'traccar' && (
+        <div className="flex flex-col gap-3">
+          <form onSubmit={handleCreate} className="flex flex-wrap items-end gap-3">
             <label className="flex flex-col gap-1">
-              <span className="text-xs font-medium">{t('tracker.uniqueId')}</span>
-              <input
-                required
-                value={uniqueId}
-                onChange={(e) => setUniqueId(e.target.value)}
+              <span className="text-xs font-medium">{t('tracker.tipo')}</span>
+              <select
+                value={tipo}
+                onChange={(e) => setTipo(e.target.value as TrackerType)}
                 className="rounded border border-black/15 px-2 py-1 text-sm dark:border-white/25"
-              />
+              >
+                {TRACKER_TYPE_OPTIONS.map((option) => (
+                  <option key={option} value={option}>
+                    {t(`tracker.type.${option}`)}
+                  </option>
+                ))}
+              </select>
             </label>
-          )}
 
-          <button
-            type="submit"
-            disabled={creating}
-            className="rounded bg-foreground px-3 py-1.5 text-sm font-medium text-background disabled:opacity-60"
-          >
-            {creating ? t('form.saving') : t('tracker.create')}
-          </button>
-        </form>
+            {tipo === 'traccar' && (
+              <label className="flex flex-col gap-1">
+                <span className="text-xs font-medium">{t('tracker.uniqueId')}</span>
+                <input
+                  required
+                  value={uniqueId}
+                  onChange={(e) => setUniqueId(e.target.value)}
+                  className="rounded border border-black/15 px-2 py-1 text-sm dark:border-white/25"
+                />
+              </label>
+            )}
+
+            <button
+              type="submit"
+              disabled={creating}
+              className="rounded bg-foreground px-3 py-1.5 text-sm font-medium text-background disabled:opacity-60"
+            >
+              {creating ? t('form.saving') : t('tracker.create')}
+            </button>
+          </form>
+          <p className="max-w-md text-xs text-foreground/60">{t(`tracker.help.${tipo}`)}</p>
+        </div>
       )}
       {createError && <p className="mt-2 text-sm text-red-600 dark:text-red-400">{createError}</p>}
 
@@ -158,16 +168,28 @@ export function TrackerSection({ vehicleId }: TrackerSectionProps) {
 
           {tracker.tipo !== 'airtag_manual' && (
             <div>
-              <button
-                type="button"
-                onClick={handleReveal}
-                disabled={revealing}
-                className="rounded border border-black/15 px-3 py-1.5 text-sm font-medium disabled:opacity-60 dark:border-white/25"
-              >
-                {revealing ? t('form.saving') : t('tracker.revealSecret')}
-              </button>
+              <p className="mb-2 max-w-md text-xs text-foreground/60">{t(`tracker.help.${tracker.tipo}`)}</p>
+              {!webhookUrl && (
+                <button
+                  type="button"
+                  onClick={handleReveal}
+                  disabled={revealing}
+                  className="rounded border border-black/15 px-3 py-1.5 text-sm font-medium disabled:opacity-60 dark:border-white/25"
+                >
+                  {revealing ? t('form.saving') : t('tracker.revealSecret')}
+                </button>
+              )}
               {webhookUrl && (
-                <p className="mt-2 break-all rounded bg-foreground/5 p-2 text-xs">{webhookUrl}</p>
+                <div className="flex items-start gap-2">
+                  <p className="break-all rounded bg-foreground/5 p-2 text-xs">{webhookUrl}</p>
+                  <button
+                    type="button"
+                    onClick={() => handleCopyWebhookUrl(webhookUrl)}
+                    className="shrink-0 rounded border border-black/15 px-2 py-1 text-xs font-medium dark:border-white/25"
+                  >
+                    {webhookUrlCopied ? t('tracker.copied') : t('tracker.copy')}
+                  </button>
+                </div>
               )}
             </div>
           )}

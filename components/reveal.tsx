@@ -1,16 +1,18 @@
 'use client';
 
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 
 /** Aplica fade-in-up quando o elemento entra na viewport (ver `.reveal`/`.reveal-visible` em globals.css). */
 export function Reveal({
   children,
   delay = 0,
   className = '',
+  style,
 }: {
   children: ReactNode;
   delay?: number;
   className?: string;
+  style?: CSSProperties;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -37,7 +39,7 @@ export function Reveal({
     <div
       ref={ref}
       className={`reveal ${visible ? 'reveal-visible' : ''} ${className}`}
-      style={{ animationDelay: visible ? `${delay}ms` : undefined }}
+      style={{ ...style, animationDelay: visible ? `${delay}ms` : undefined }}
     >
       {children}
     </div>
