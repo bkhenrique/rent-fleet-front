@@ -238,6 +238,7 @@
       "live": "En vivo",
       "offline": "Desconectado",
       "empty": "Ningún vehículo tiene una posición registrada todavía.",
+      "viewDetails": "Ver detalles",
       "origem": {
         "tempo_real": "Rastreador en tiempo real",
         "manual": "Posición manual"
@@ -250,6 +251,9 @@
       "atrasado": "Atrasado",
       "venceEm": "Vence en {dias, plural, =1 {1 día} other {# días}}",
       "devolucao": "devolución el",
+      "pendencias": "{count, plural, =1 {1 pendiente} other {# pendientes}}",
+      "detalhes": "Ver detalles",
+      "verContrato": "Ver contrato",
       "item": {
         "seguro": "Seguro",
         "itv": "ITV",
@@ -269,6 +273,7 @@
       "documento": "Documento",
       "status": "Estado",
       "ciclo": "Ciclo",
+      "valor": "Importe",
       "ativoAte": "Activo hasta",
       "veiculos": "Vehículos"
     },
@@ -293,6 +298,8 @@
       "ciclo": "Ciclo de cobro",
       "pais": "País",
       "moeda": "Moneda",
+      "valor": "Importe",
+      "valorHint": "Importe cobrado en ese ciclo, en la moneda seleccionada (opcional).",
       "adminSectionTitle": "Usuario administrador de la empresa",
       "adminName": "Nombre",
       "adminEmail": "Correo electrónico",
@@ -314,11 +321,13 @@
       "markPaidSuccess": "Pago registrado.",
       "changeStatusTitle": "Forzar estado manualmente",
       "lastPayment": "Último pago",
-      "never": "Nunca"
+      "never": "Nunca",
+      "valorNaoDefinido": "Importe no definido"
     },
     "overview": {
       "total": "Total de empresas",
-      "totalVeiculos": "Total de vehículos"
+      "totalVeiculos": "Total de vehículos",
+      "mrr": "MRR estimado (por moneda)"
     }
   },
   "vehicles": {
@@ -329,6 +338,13 @@
     "loadError": "No se pudieron cargar los vehículos.",
     "empty": "Todavía no hay vehículos registrados.",
     "lastUpdated": "Última actualización: {date}",
+    "tabs": {
+      "dados": "Datos",
+      "documentos": "Documentos",
+      "rastreador": "Rastreador",
+      "manutencao": "Mantenimiento",
+      "fotos": "Fotos"
+    },
     "table": {
       "foto": "Foto",
       "placa": "Matrícula",
@@ -385,9 +401,12 @@
     "photos": {
       "title": "Fotos",
       "empty": "Todavía no hay fotos.",
+      "addPhoto": "Tomar foto o vídeo",
       "uploading": "Subiendo...",
       "uploadError": "No se pudo subir la foto.",
-      "unsupportedType": "Formato no compatible. Usa JPEG, PNG o WebP."
+      "unsupportedType": "Formato no compatible. Usa JPEG, PNG, WebP, MP4 o WebM.",
+      "fileTooLarge": "Archivo demasiado grande. Fotos hasta 15MB, vídeos hasta 80MB.",
+      "videoTooLong": "Vídeo demasiado largo. Grábalo en hasta 45 segundos (da tiempo a rodear el coche)."
     },
     "tracker": {
       "title": "Rastreador",
@@ -459,17 +478,28 @@
       "conflictError": "Ya existe un cliente con este documento.",
       "endereco": "Dirección",
       "dataNascimento": "Fecha de nacimiento",
+      "tipoDocumento": "Tipo de documento",
       "cnhSectionTitle": "Carné de conducir",
       "cnhNumero": "Número",
       "cnhCategoria": "Categoría",
       "cnhValidade": "Vencimiento"
     },
+    "tipoDocumentoOptions": {
+      "cnh_br": "CNH (Brasil)",
+      "dni_nie_es": "DNI/NIE + carné de conducir (España)",
+      "passport": "Pasaporte",
+      "driver_license_us": "Driver's license (EE. UU.)",
+      "other": "Otro"
+    },
     "documents": {
       "title": "Documentos",
       "empty": "Todavía no hay documentos.",
+      "addDocument": "Tomar foto del documento",
       "uploading": "Subiendo...",
       "uploadError": "No se pudo subir el documento.",
-      "unsupportedType": "Formato no compatible. Usa JPEG, PNG o WebP."
+      "unsupportedType": "Formato no compatible. Usa JPEG, PNG, WebP, MP4 o WebM.",
+      "fileTooLarge": "Archivo demasiado grande. Fotos hasta 15MB, vídeos hasta 80MB.",
+      "videoTooLong": "Vídeo demasiado largo. Grábalo en hasta 45 segundos."
     }
   },
   "rentalContracts": {
@@ -556,9 +586,12 @@
     },
     "attachments": {
       "empty": "Todavía no hay fotos.",
+      "addPhoto": "Tomar foto o vídeo",
       "uploading": "Subiendo...",
       "uploadError": "No se pudo subir la foto.",
-      "unsupportedType": "Formato no compatible. Usa JPEG, PNG o WebP."
+      "unsupportedType": "Formato no compatible. Usa JPEG, PNG, WebP, MP4 o WebM.",
+      "fileTooLarge": "Archivo demasiado grande. Fotos hasta 15MB, vídeos hasta 80MB.",
+      "videoTooLong": "Vídeo demasiado largo. Grábalo en hasta 45 segundos (da tiempo a rodear el coche)."
     }
   },
   "account": {

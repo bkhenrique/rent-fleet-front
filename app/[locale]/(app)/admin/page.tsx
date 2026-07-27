@@ -6,7 +6,8 @@ import { Link } from '@/i18n/navigation';
 import { RequireRole } from '@/components/require-role';
 import { SUPER_ADMIN_ONLY } from '@/lib/roles';
 import { useApiClient } from '@/lib/use-api-client';
-import type { Tenant, TenantStatus } from '@/lib/types/tenant';
+import { formatCurrency } from '@/lib/currency';
+import type { Currency, Tenant, TenantStatus } from '@/lib/types/tenant';
 
 const STATUS_COLORS: Record<TenantStatus, string> = {
   ativo: 'text-green-700 dark:text-green-400',
@@ -38,6 +39,14 @@ function AdminTenantsList() {
     totalVeiculos: tenants?.reduce((sum, tenant) => sum + tenant.totalVeiculos, 0) ?? 0,
   };
 
+  const mrrByCurrency = (tenants ?? []).reduce<Partial<Record<Currency, number>>>((acc, tenant) => {
+    if (tenant.status !== 'ativo' || tenant.billing.valor === null) return acc;
+    const mensal = tenant.billing.ciclo === 'anual' ? tenant.billing.valor / 12 : tenant.billing.valor;
+    acc[tenant.moeda] = (acc[tenant.moeda] ?? 0) + mensal;
+    return acc;
+  }, {});
+  const mrrEntries = Object.entries(mrrByCurrency) as [Currency, number][];
+
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">
       <div className="mb-6 flex items-center justify-between">
@@ -47,7 +56,7 @@ function AdminTenantsList() {
         </Link>
       </div>
 
-      <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+      <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-7">
         {(['total', 'ativo', 'inadimplente', 'suspenso', 'cortesia', 'totalVeiculos'] as const).map((key) => (
           <div key={key} className="rounded border border-black/10 px-4 py-3 dark:border-white/15">
             <p className="text-2xl font-semibold">{counts[key]}</p>
@@ -56,6 +65,17 @@ function AdminTenantsList() {
             </p>
           </div>
         ))}
+
+        <div className="rounded border border-black/10 px-4 py-3 dark:border-white/15">
+          {mrrEntries.length > 0 ? (
+            <p className="text-lg font-semibold">
+              {mrrEntries.map(([currency, total]) => formatCurrency(total, currency)).join(' · ')}
+            </p>
+          ) : (
+            <p className="text-lg font-semibold">—</p>
+          )}
+          <p className="text-xs text-foreground/60">{t('overview.mrr')}</p>
+        </div>
       </div>
 
       {error && <p className="text-sm text-red-600 dark:text-red-400">{t('loadError')}</p>}
@@ -69,6 +89,7 @@ function AdminTenantsList() {
               <th className="py-2 pr-4 font-medium">{t('table.documento')}</th>
               <th className="py-2 pr-4 font-medium">{t('table.status')}</th>
               <th className="py-2 pr-4 font-medium">{t('table.ciclo')}</th>
+              <th className="py-2 pr-4 font-medium">{t('table.valor')}</th>
               <th className="py-2 pr-4 font-medium">{t('table.ativoAte')}</th>
               <th className="py-2 pr-4 font-medium">{t('table.veiculos')}</th>
             </tr>
@@ -86,6 +107,9 @@ function AdminTenantsList() {
                   {t(`status.${tenant.status}`)}
                 </td>
                 <td className="py-2 pr-4">{t(`ciclo.${tenant.billing.ciclo}`)}</td>
+                <td className="py-2 pr-4">
+                  {tenant.billing.valor === null ? '—' : formatCurrency(tenant.billing.valor, tenant.moeda)}
+                </td>
                 <td className="py-2 pr-4">{new Date(tenant.billing.ativoAte).toLocaleDateString(locale)}</td>
                 <td className="py-2 pr-4">{tenant.totalVeiculos}</td>
               </tr>

@@ -7,6 +7,7 @@ import { RequireRole } from '@/components/require-role';
 import { SUPER_ADMIN_ONLY } from '@/lib/roles';
 import { useApiClient } from '@/lib/use-api-client';
 import { ApiError } from '@/lib/api-client';
+import { formatCurrency } from '@/lib/currency';
 import type { BillingCycle, Country, CreateTenantPayload, Currency, Tenant } from '@/lib/types/tenant';
 
 const COUNTRIES: Country[] = ['BR', 'ES', 'US'];
@@ -23,6 +24,7 @@ function NewTenantForm() {
   const [ciclo, setCiclo] = useState<BillingCycle>('mensal');
   const [pais, setPais] = useState<Country>('BR');
   const [moeda, setMoeda] = useState<Currency>('BRL');
+  const [valor, setValor] = useState('');
   const [enderecoFiscal, setEnderecoFiscal] = useState('');
   const [telefone, setTelefone] = useState('');
   const [email, setEmail] = useState('');
@@ -47,6 +49,7 @@ function NewTenantForm() {
       ciclo,
       pais,
       moeda,
+      valor: valor ? Number(valor) : undefined,
       enderecoFiscal: enderecoFiscal || undefined,
       telefone: telefone || undefined,
       email: email || undefined,
@@ -102,6 +105,22 @@ function NewTenantForm() {
             <option value="mensal">{t('ciclo.mensal')}</option>
             <option value="anual">{t('ciclo.anual')}</option>
           </select>
+        </label>
+
+        <label className="flex flex-col gap-1">
+          <span className="text-sm font-medium">{t('form.valor')}</span>
+          <input
+            type="number"
+            min="0"
+            step="0.01"
+            value={valor}
+            onChange={(e) => setValor(e.target.value)}
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+          />
+          <span className="text-xs text-foreground/60">
+            {t('form.valorHint')}
+            {valor && !Number.isNaN(Number(valor)) ? ` (${formatCurrency(Number(valor), moeda)})` : ''}
+          </span>
         </label>
 
         <div className="grid grid-cols-2 gap-4">

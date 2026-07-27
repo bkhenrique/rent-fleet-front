@@ -1,3 +1,5 @@
+export type DocumentType = 'cnh_br' | 'dni_nie_es' | 'passport' | 'driver_license_us' | 'other';
+
 export interface CustomerCnh {
   numero: string | null;
   categoria: string | null;
@@ -9,6 +11,7 @@ export interface Customer {
   tenantId: string;
   nome: string;
   documento: string;
+  tipoDocumento: DocumentType;
   cnh: CustomerCnh;
   endereco: string | null;
   dataNascimento: string | null;
@@ -22,6 +25,7 @@ export interface Customer {
 export interface CreateCustomerPayload {
   nome: string;
   documento: string;
+  tipoDocumento?: DocumentType;
   cnh?: { numero?: string; categoria?: string; validade?: string };
   endereco?: string;
   dataNascimento?: string;

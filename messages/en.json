@@ -238,6 +238,7 @@
       "live": "Live",
       "offline": "Offline",
       "empty": "No vehicle has a registered position yet.",
+      "viewDetails": "View details",
       "origem": {
         "tempo_real": "Real-time tracker",
         "manual": "Manual position"
@@ -250,6 +251,9 @@
       "atrasado": "Late",
       "venceEm": "Due in {dias, plural, =1 {1 day} other {# days}}",
       "devolucao": "return on",
+      "pendencias": "{count, plural, =1 {1 issue} other {# issues}}",
+      "detalhes": "View details",
+      "verContrato": "View contract",
       "item": {
         "seguro": "Insurance",
         "itv": "Inspection",
@@ -269,6 +273,7 @@
       "documento": "Document",
       "status": "Status",
       "ciclo": "Cycle",
+      "valor": "Amount",
       "ativoAte": "Active until",
       "veiculos": "Vehicles"
     },
@@ -293,6 +298,8 @@
       "ciclo": "Billing cycle",
       "pais": "Country",
       "moeda": "Currency",
+      "valor": "Amount",
+      "valorHint": "Amount charged in this cycle, in the selected currency (optional).",
       "adminSectionTitle": "Rental company admin user",
       "adminName": "Name",
       "adminEmail": "Email",
@@ -314,11 +321,13 @@
       "markPaidSuccess": "Payment recorded.",
       "changeStatusTitle": "Force status manually",
       "lastPayment": "Last payment",
-      "never": "Never"
+      "never": "Never",
+      "valorNaoDefinido": "Amount not set"
     },
     "overview": {
       "total": "Total rental companies",
-      "totalVeiculos": "Total vehicles"
+      "totalVeiculos": "Total vehicles",
+      "mrr": "Estimated MRR (per currency)"
     }
   },
   "vehicles": {
@@ -329,6 +338,13 @@
     "loadError": "Couldn't load the vehicles.",
     "empty": "No vehicles registered yet.",
     "lastUpdated": "Last updated: {date}",
+    "tabs": {
+      "dados": "Details",
+      "documentos": "Documents",
+      "rastreador": "Tracker",
+      "manutencao": "Maintenance",
+      "fotos": "Photos"
+    },
     "table": {
       "foto": "Photo",
       "placa": "Plate",
@@ -385,9 +401,12 @@
     "photos": {
       "title": "Photos",
       "empty": "No photos yet.",
+      "addPhoto": "Take photo or video",
       "uploading": "Uploading...",
       "uploadError": "Couldn't upload the photo.",
-      "unsupportedType": "Unsupported format. Use JPEG, PNG or WebP."
+      "unsupportedType": "Unsupported format. Use JPEG, PNG, WebP, MP4 or WebM.",
+      "fileTooLarge": "File too large. Photos up to 15MB, videos up to 80MB.",
+      "videoTooLong": "Video too long. Keep it under 45 seconds (enough time to walk around the car)."
     },
     "tracker": {
       "title": "Tracker",
@@ -459,17 +478,28 @@
       "conflictError": "A customer with this document already exists.",
       "endereco": "Address",
       "dataNascimento": "Date of birth",
+      "tipoDocumento": "Document type",
       "cnhSectionTitle": "Driver's license",
       "cnhNumero": "Number",
       "cnhCategoria": "Category",
       "cnhValidade": "Expiry"
     },
+    "tipoDocumentoOptions": {
+      "cnh_br": "CNH (Brazil)",
+      "dni_nie_es": "DNI/NIE + driving license (Spain)",
+      "passport": "Passport",
+      "driver_license_us": "Driver's license (USA)",
+      "other": "Other"
+    },
     "documents": {
       "title": "Documents",
       "empty": "No documents yet.",
+      "addDocument": "Take photo of document",
       "uploading": "Uploading...",
       "uploadError": "Couldn't upload the document.",
-      "unsupportedType": "Unsupported format. Use JPEG, PNG or WebP."
+      "unsupportedType": "Unsupported format. Use JPEG, PNG, WebP, MP4 or WebM.",
+      "fileTooLarge": "File too large. Photos up to 15MB, videos up to 80MB.",
+      "videoTooLong": "Video too long. Keep it under 45 seconds."
     }
   },
   "rentalContracts": {
@@ -556,9 +586,12 @@
     },
     "attachments": {
       "empty": "No photos yet.",
+      "addPhoto": "Take photo or video",
       "uploading": "Uploading...",
       "uploadError": "Couldn't upload the photo.",
-      "unsupportedType": "Unsupported format. Use JPEG, PNG or WebP."
+      "unsupportedType": "Unsupported format. Use JPEG, PNG, WebP, MP4 or WebM.",
+      "fileTooLarge": "File too large. Photos up to 15MB, videos up to 80MB.",
+      "videoTooLong": "Video too long. Keep it under 45 seconds (enough time to walk around the car)."
     }
   },
   "account": {

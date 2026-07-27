@@ -25,7 +25,7 @@ function CustomersList() {
     <div className="mx-auto max-w-4xl px-4 py-10">
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-xl font-semibold">{t('title')}</h1>
-        <Link href="/customers/new" className="rounded bg-foreground px-4 py-2 text-sm font-medium text-background">
+        <Link href="/customers/new" className="rounded bg-accent px-4 py-2 text-sm font-medium text-accent-foreground">
           {t('newCustomer')}
         </Link>
       </div>

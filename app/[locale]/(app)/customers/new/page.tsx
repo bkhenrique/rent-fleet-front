@@ -7,7 +7,12 @@ import { RequireRole } from '@/components/require-role';
 import { TENANT_ROLES } from '@/lib/roles';
 import { useApiClient } from '@/lib/use-api-client';
 import { ApiError } from '@/lib/api-client';
-import type { Customer, CreateCustomerPayload } from '@/lib/types/customer';
+import type { Customer, CreateCustomerPayload, DocumentType } from '@/lib/types/customer';
+
+const DOCUMENT_TYPE_OPTIONS: DocumentType[] = ['cnh_br', 'dni_nie_es', 'passport', 'driver_license_us', 'other'];
+
+/** Categoria (A/B/AB etc.) só faz sentido pra documentos que incluem carteira/carné de habilitação. */
+const DOCUMENT_TYPES_WITH_CATEGORIA: DocumentType[] = ['cnh_br', 'dni_nie_es', 'driver_license_us'];
 
 function NewCustomerForm() {
   const t = useTranslations('customers');
@@ -16,6 +21,7 @@ function NewCustomerForm() {
 
   const [nome, setNome] = useState('');
   const [documento, setDocumento] = useState('');
+  const [tipoDocumento, setTipoDocumento] = useState<DocumentType>('cnh_br');
   const [endereco, setEndereco] = useState('');
   const [dataNascimento, setDataNascimento] = useState('');
   const [cnhNumero, setCnhNumero] = useState('');
@@ -26,6 +32,8 @@ function NewCustomerForm() {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const showCategoria = DOCUMENT_TYPES_WITH_CATEGORIA.includes(tipoDocumento);
+
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
     setError(null);
@@ -34,11 +42,12 @@ function NewCustomerForm() {
     const payload: CreateCustomerPayload = {
       nome,
       documento,
+      tipoDocumento,
       endereco: endereco || undefined,
       dataNascimento: dataNascimento || undefined,
       cnh: {
         numero: cnhNumero || undefined,
-        categoria: cnhCategoria || undefined,
+        categoria: showCategoria ? cnhCategoria || undefined : undefined,
         validade: cnhValidade || undefined,
       },
       telefone: telefone || undefined,
@@ -99,9 +108,24 @@ function NewCustomerForm() {
           />
         </label>
 
+        <label className="flex flex-col gap-1">
+          <span className="text-sm font-medium">{t('form.tipoDocumento')}</span>
+          <select
+            value={tipoDocumento}
+            onChange={(e) => setTipoDocumento(e.target.value as DocumentType)}
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+          >
+            {DOCUMENT_TYPE_OPTIONS.map((option) => (
+              <option key={option} value={option}>
+                {t(`tipoDocumentoOptions.${option}`)}
+              </option>
+            ))}
+          </select>
+        </label>
+
         <fieldset className="flex flex-col gap-4 rounded border border-black/10 p-4 dark:border-white/15">
           <legend className="px-1 text-sm font-medium">{t('form.cnhSectionTitle')}</legend>
-          <div className="grid grid-cols-3 gap-3">
+          <div className={`grid gap-3 ${showCategoria ? 'grid-cols-3' : 'grid-cols-2'}`}>
             <label className="flex flex-col gap-1">
               <span className="text-xs font-medium">{t('form.cnhNumero')}</span>
               <input
@@ -110,14 +134,16 @@ function NewCustomerForm() {
                 className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
               />
             </label>
-            <label className="flex flex-col gap-1">
-              <span className="text-xs font-medium">{t('form.cnhCategoria')}</span>
-              <input
-                value={cnhCategoria}
-                onChange={(e) => setCnhCategoria(e.target.value)}
-                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
-              />
-            </label>
+            {showCategoria && (
+              <label className="flex flex-col gap-1">
+                <span className="text-xs font-medium">{t('form.cnhCategoria')}</span>
+                <input
+                  value={cnhCategoria}
+                  onChange={(e) => setCnhCategoria(e.target.value)}
+                  className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                />
+              </label>
+            )}
             <label className="flex flex-col gap-1">
               <span className="text-xs font-medium">{t('form.cnhValidade')}</span>
               <input

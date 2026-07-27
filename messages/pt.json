@@ -238,6 +238,7 @@
       "live": "Ao vivo",
       "offline": "Desconectado",
       "empty": "Nenhum veículo com posição registrada ainda.",
+      "viewDetails": "Ver detalhes",
       "origem": {
         "tempo_real": "Rastreador em tempo real",
         "manual": "Posição manual"
@@ -250,6 +251,9 @@
       "atrasado": "Atrasado",
       "venceEm": "Vence em {dias, plural, =1 {1 dia} other {# dias}}",
       "devolucao": "devolução em",
+      "pendencias": "{count, plural, =1 {1 pendência} other {# pendências}}",
+      "detalhes": "Ver detalhes",
+      "verContrato": "Ver contrato",
       "item": {
         "seguro": "Seguro",
         "itv": "ITV",
@@ -269,6 +273,7 @@
       "documento": "Documento",
       "status": "Status",
       "ciclo": "Ciclo",
+      "valor": "Valor",
       "ativoAte": "Ativo até",
       "veiculos": "Veículos"
     },
@@ -293,6 +298,8 @@
       "ciclo": "Ciclo de cobrança",
       "pais": "País",
       "moeda": "Moeda",
+      "valor": "Valor",
+      "valorHint": "Valor cobrado nesse ciclo, na moeda selecionada (opcional).",
       "adminSectionTitle": "Usuário administrador da locadora",
       "adminName": "Nome",
       "adminEmail": "E-mail",
@@ -314,11 +321,13 @@
       "markPaidSuccess": "Pagamento registrado.",
       "changeStatusTitle": "Forçar status manualmente",
       "lastPayment": "Último pagamento",
-      "never": "Nunca"
+      "never": "Nunca",
+      "valorNaoDefinido": "Valor não definido"
     },
     "overview": {
       "total": "Total de locadoras",
-      "totalVeiculos": "Total de veículos"
+      "totalVeiculos": "Total de veículos",
+      "mrr": "MRR estimado (por moeda)"
     }
   },
   "vehicles": {
@@ -329,6 +338,13 @@
     "loadError": "Não foi possível carregar os veículos.",
     "empty": "Nenhum veículo cadastrado ainda.",
     "lastUpdated": "Última atualização: {date}",
+    "tabs": {
+      "dados": "Dados",
+      "documentos": "Documentos",
+      "rastreador": "Rastreador",
+      "manutencao": "Manutenção",
+      "fotos": "Fotos"
+    },
     "table": {
       "foto": "Foto",
       "placa": "Placa",
@@ -385,9 +401,12 @@
     "photos": {
       "title": "Fotos",
       "empty": "Nenhuma foto ainda.",
+      "addPhoto": "Tirar foto ou vídeo",
       "uploading": "Enviando...",
       "uploadError": "Não foi possível enviar a foto.",
-      "unsupportedType": "Formato não suportado. Use JPEG, PNG ou WebP."
+      "unsupportedType": "Formato não suportado. Use JPEG, PNG, WebP, MP4 ou WebM.",
+      "fileTooLarge": "Arquivo muito grande. Fotos até 15MB, vídeos até 80MB.",
+      "videoTooLong": "Vídeo muito longo. Grave até 45 segundos (dá pra girar ao redor do carro nesse tempo)."
     },
     "tracker": {
       "title": "Rastreador",
@@ -459,17 +478,28 @@
       "conflictError": "Já existe um cliente com este documento.",
       "endereco": "Endereço",
       "dataNascimento": "Data de nascimento",
+      "tipoDocumento": "Tipo de documento",
       "cnhSectionTitle": "CNH",
       "cnhNumero": "Número",
       "cnhCategoria": "Categoria",
       "cnhValidade": "Validade"
     },
+    "tipoDocumentoOptions": {
+      "cnh_br": "CNH (Brasil)",
+      "dni_nie_es": "DNI/NIE + carné de conducir (Espanha)",
+      "passport": "Passaporte",
+      "driver_license_us": "Driver's license (EUA)",
+      "other": "Outro"
+    },
     "documents": {
       "title": "Documentos",
       "empty": "Nenhum documento ainda.",
+      "addDocument": "Tirar foto do documento",
       "uploading": "Enviando...",
       "uploadError": "Não foi possível enviar o documento.",
-      "unsupportedType": "Formato não suportado. Use JPEG, PNG ou WebP."
+      "unsupportedType": "Formato não suportado. Use JPEG, PNG, WebP, MP4 ou WebM.",
+      "fileTooLarge": "Arquivo muito grande. Fotos até 15MB, vídeos até 80MB.",
+      "videoTooLong": "Vídeo muito longo. Grave até 45 segundos."
     }
   },
   "rentalContracts": {
@@ -556,9 +586,12 @@
     },
     "attachments": {
       "empty": "Nenhuma foto ainda.",
+      "addPhoto": "Tirar foto ou vídeo",
       "uploading": "Enviando...",
       "uploadError": "Não foi possível enviar a foto.",
-      "unsupportedType": "Formato não suportado. Use JPEG, PNG ou WebP."
+      "unsupportedType": "Formato não suportado. Use JPEG, PNG, WebP, MP4 ou WebM.",
+      "fileTooLarge": "Arquivo muito grande. Fotos até 15MB, vídeos até 80MB.",
+      "videoTooLong": "Vídeo muito longo. Grave até 45 segundos (dá pra girar ao redor do carro nesse tempo)."
     }
   },
   "account": {

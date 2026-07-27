@@ -3,12 +3,13 @@
 import 'leaflet/dist/leaflet.css';
 import { CircleMarker, MapContainer, Popup, TileLayer } from 'react-leaflet';
 import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 import type { TrackerPositionSummary } from '@/lib/types/tracker';
 import { DEFAULT_MAP_CENTER } from '@/lib/map-defaults';
 
 interface FleetMapProps {
   positions: TrackerPositionSummary[];
-  vehiclesById: Record<string, { placa: string; marca: string; modelo: string }>;
+  vehiclesById: Record<string, { _id: string; placa: string; marca: string; modelo: string }>;
   connected: boolean;
   /** Centro exibido antes de qualquer posição real existir — default Brasil se omitido. */
   fallbackCenter?: [number, number];
@@ -54,11 +55,21 @@ export function FleetMap({ positions, vehiclesById, connected, fallbackCenter = 
               pathOptions={{ color: ORIGIN_COLOR[position.ultimaPosicao.origem], fillOpacity: 0.8 }}
             >
               <Popup>
-                <span className="font-medium">{vehicle ? vehicle.placa : position.vehicleId}</span>
+                <span className="font-medium">
+                  {vehicle ? `${vehicle.placa} — ${vehicle.marca} ${vehicle.modelo}` : position.vehicleId}
+                </span>
                 <br />
                 {t(`origem.${position.ultimaPosicao.origem}`)}
                 <br />
                 {new Date(position.ultimaPosicao.timestamp).toLocaleString()}
+                {vehicle && (
+                  <>
+                    <br />
+                    <Link href={`/vehicles/${vehicle._id}`} className="underline">
+                      {t('viewDetails')}
+                    </Link>
+                  </>
+                )}
               </Popup>
             </CircleMarker>
           );

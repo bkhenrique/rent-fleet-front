@@ -12,6 +12,7 @@ export interface Tenant {
     ciclo: BillingCycle;
     ativoAte: string;
     ultimoPagamentoEm: string | null;
+    valor: number | null;
   };
   idiomaPadrao: 'pt' | 'en' | 'es';
   pais: Country;
@@ -30,6 +31,7 @@ export interface CreateTenantPayload {
   ciclo: BillingCycle;
   pais: Country;
   moeda?: Currency;
+  valor?: number;
   enderecoFiscal?: string;
   telefone?: string;
   email?: string;
@@ -45,6 +47,7 @@ export interface UpdateTenantPayload {
   ciclo?: BillingCycle;
   pais?: Country;
   moeda?: Currency;
+  valor?: number;
   enderecoFiscal?: string;
   telefone?: string;
   email?: string;

@@ -152,7 +152,7 @@ export function TrackerSection({ vehicleId }: TrackerSectionProps) {
             <button
               type="submit"
               disabled={creating}
-              className="rounded bg-foreground px-3 py-1.5 text-sm font-medium text-background disabled:opacity-60"
+              className="rounded bg-accent px-3 py-1.5 text-sm font-medium text-accent-foreground disabled:opacity-60"
             >
               {creating ? t('form.saving') : t('tracker.create')}
             </button>
@@ -222,7 +222,7 @@ export function TrackerSection({ vehicleId }: TrackerSectionProps) {
               <button
                 type="submit"
                 disabled={savingPosition || !pickedPosition}
-                className="self-start rounded bg-foreground px-3 py-1.5 text-sm font-medium text-background disabled:opacity-60"
+                className="self-start rounded bg-accent px-3 py-1.5 text-sm font-medium text-accent-foreground disabled:opacity-60"
               >
                 {savingPosition ? t('form.saving') : t('tracker.updatePosition')}
               </button>

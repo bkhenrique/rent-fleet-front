@@ -27,7 +27,7 @@ export function LocaleSwitcher() {
           aria-current={loc === locale}
           className={`rounded px-2 py-1 text-sm font-medium transition-colors ${
             loc === locale
-              ? 'bg-foreground text-background'
+              ? 'bg-accent text-accent-foreground'
               : 'text-foreground/70 hover:bg-foreground/10'
           }`}
         >

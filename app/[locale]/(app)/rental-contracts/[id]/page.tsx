@@ -226,7 +226,7 @@ function RentalContractDetail({ id }: { id: string }) {
           <button
             type="submit"
             disabled={savingVistoriaEntrega}
-            className="rounded bg-foreground px-3 py-1.5 text-sm font-medium text-background disabled:opacity-60"
+            className="rounded bg-accent px-3 py-1.5 text-sm font-medium text-accent-foreground disabled:opacity-60"
           >
             {savingVistoriaEntrega ? t('detail.saving') : t('detail.save')}
           </button>
@@ -290,7 +290,7 @@ function RentalContractDetail({ id }: { id: string }) {
             <button
               type="submit"
               disabled={returning}
-              className="rounded bg-foreground px-3 py-1.5 text-sm font-medium text-background disabled:opacity-60"
+              className="rounded bg-accent px-3 py-1.5 text-sm font-medium text-accent-foreground disabled:opacity-60"
             >
               {returning ? t('detail.returning') : t('detail.returnVehicle')}
             </button>

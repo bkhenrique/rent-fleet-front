@@ -1,16 +1,10 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useApiClient } from '@/lib/use-api-client';
-
-const SUPPORTED_CONTENT_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
-
-interface UploadUrlResult {
-  uploadUrl: string;
-  fileUrl: string;
-  key: string;
-}
+import { CameraInput } from '@/components/ui/camera-input';
+import { validateUploadFile, isVideoUrl, type UploadUrlResult } from '@/lib/types/storage';
 
 interface PhotosSectionProps {
   vehicleId: string;
@@ -21,18 +15,14 @@ interface PhotosSectionProps {
 export function PhotosSection({ vehicleId, fotos, onPhotoAdded }: PhotosSectionProps) {
   const t = useTranslations('vehicles');
   const apiClient = useApiClient();
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  async function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
-    event.target.value = '';
-    if (!file) return;
-
-    if (!SUPPORTED_CONTENT_TYPES.includes(file.type)) {
-      setError(t('photos.unsupportedType'));
+  async function handleFileSelected(file: File) {
+    const validationError = await validateUploadFile(file);
+    if (validationError) {
+      setError(t(`photos.${validationError}`));
       return;
     }
 
@@ -73,21 +63,18 @@ export function PhotosSection({ vehicleId, fotos, onPhotoAdded }: PhotosSectionP
 
       {fotos.length > 0 && (
         <div className="mb-3 grid grid-cols-3 gap-2 sm:grid-cols-4">
-          {fotos.map((url) => (
-            // eslint-disable-next-line @next/next/no-img-element -- fotos vêm de URLs externas do MinIO, sem otimização do Next
-            <img key={url} src={url} alt="" className="aspect-square rounded object-cover" />
-          ))}
+          {fotos.map((url) =>
+            isVideoUrl(url) ? (
+              <video key={url} src={url} controls muted className="aspect-square rounded object-cover" />
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element -- fotos vêm de URLs externas do MinIO, sem otimização do Next
+              <img key={url} src={url} alt="" className="aspect-square rounded object-cover" />
+            ),
+          )}
         </div>
       )}
 
-      <input
-        ref={fileInputRef}
-        type="file"
-        accept={SUPPORTED_CONTENT_TYPES.join(',')}
-        onChange={handleFileChange}
-        disabled={uploading}
-        className="text-sm"
-      />
+      <CameraInput label={t('photos.addPhoto')} onFileSelected={handleFileSelected} disabled={uploading} />
       {uploading && <p className="mt-2 text-sm text-foreground/60">{t('photos.uploading')}</p>}
       {error && <p className="mt-2 text-sm text-red-600 dark:text-red-400">{error}</p>}
     </div>

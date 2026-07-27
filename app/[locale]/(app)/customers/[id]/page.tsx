@@ -7,7 +7,12 @@ import { RequireRole } from '@/components/require-role';
 import { TENANT_ROLES } from '@/lib/roles';
 import { useApiClient } from '@/lib/use-api-client';
 import { DocumentsSection } from '@/components/customers/documents-section';
-import type { Customer, UpdateCustomerPayload } from '@/lib/types/customer';
+import type { Customer, UpdateCustomerPayload, DocumentType } from '@/lib/types/customer';
+
+const DOCUMENT_TYPE_OPTIONS: DocumentType[] = ['cnh_br', 'dni_nie_es', 'passport', 'driver_license_us', 'other'];
+
+/** Categoria (A/B/AB etc.) só faz sentido pra documentos que incluem carteira/carné de habilitação. */
+const DOCUMENT_TYPES_WITH_CATEGORIA: DocumentType[] = ['cnh_br', 'dni_nie_es', 'driver_license_us'];
 
 function CustomerDetail({ id }: { id: string }) {
   const t = useTranslations('customers');
@@ -18,6 +23,7 @@ function CustomerDetail({ id }: { id: string }) {
 
   const [nome, setNome] = useState('');
   const [documento, setDocumento] = useState('');
+  const [tipoDocumento, setTipoDocumento] = useState<DocumentType>('cnh_br');
   const [endereco, setEndereco] = useState('');
   const [dataNascimento, setDataNascimento] = useState('');
   const [cnhNumero, setCnhNumero] = useState('');
@@ -29,12 +35,15 @@ function CustomerDetail({ id }: { id: string }) {
   const [saving, setSaving] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
 
+  const showCategoria = DOCUMENT_TYPES_WITH_CATEGORIA.includes(tipoDocumento);
+
   function loadCustomer() {
     apiClient<Customer>(`/customers/${id}`)
       .then((found) => {
         setCustomer(found);
         setNome(found.nome);
         setDocumento(found.documento);
+        setTipoDocumento(found.tipoDocumento);
         setEndereco(found.endereco ?? '');
         setDataNascimento(found.dataNascimento?.slice(0, 10) ?? '');
         setCnhNumero(found.cnh.numero ?? '');
@@ -56,11 +65,12 @@ function CustomerDetail({ id }: { id: string }) {
     const payload: UpdateCustomerPayload = {
       nome,
       documento,
+      tipoDocumento,
       endereco: endereco || undefined,
       dataNascimento: dataNascimento || undefined,
       cnh: {
         numero: cnhNumero || undefined,
-        categoria: cnhCategoria || undefined,
+        categoria: showCategoria ? cnhCategoria || undefined : undefined,
         validade: cnhValidade || undefined,
       },
       telefone: telefone || undefined,
@@ -139,9 +149,24 @@ function CustomerDetail({ id }: { id: string }) {
           />
         </label>
 
+        <label className="flex flex-col gap-1">
+          <span className="text-sm font-medium">{t('form.tipoDocumento')}</span>
+          <select
+            value={tipoDocumento}
+            onChange={(e) => setTipoDocumento(e.target.value as DocumentType)}
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+          >
+            {DOCUMENT_TYPE_OPTIONS.map((option) => (
+              <option key={option} value={option}>
+                {t(`tipoDocumentoOptions.${option}`)}
+              </option>
+            ))}
+          </select>
+        </label>
+
         <fieldset className="flex flex-col gap-4 rounded border border-black/10 p-4 dark:border-white/15">
           <legend className="px-1 text-sm font-medium">{t('form.cnhSectionTitle')}</legend>
-          <div className="grid grid-cols-3 gap-3">
+          <div className={`grid gap-3 ${showCategoria ? 'grid-cols-3' : 'grid-cols-2'}`}>
             <label className="flex flex-col gap-1">
               <span className="text-xs font-medium">{t('form.cnhNumero')}</span>
               <input
@@ -150,14 +175,16 @@ function CustomerDetail({ id }: { id: string }) {
                 className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
               />
             </label>
-            <label className="flex flex-col gap-1">
-              <span className="text-xs font-medium">{t('form.cnhCategoria')}</span>
-              <input
-                value={cnhCategoria}
-                onChange={(e) => setCnhCategoria(e.target.value)}
-                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
-              />
-            </label>
+            {showCategoria && (
+              <label className="flex flex-col gap-1">
+                <span className="text-xs font-medium">{t('form.cnhCategoria')}</span>
+                <input
+                  value={cnhCategoria}
+                  onChange={(e) => setCnhCategoria(e.target.value)}
+                  className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                />
+              </label>
+            )}
             <label className="flex flex-col gap-1">
               <span className="text-xs font-medium">{t('form.cnhValidade')}</span>
               <input
@@ -193,7 +220,7 @@ function CustomerDetail({ id }: { id: string }) {
         <button
           type="submit"
           disabled={saving}
-          className="self-start rounded bg-foreground px-4 py-2 text-sm font-medium text-background disabled:opacity-60"
+          className="self-start rounded bg-accent px-4 py-2 text-sm font-medium text-accent-foreground disabled:opacity-60"
         >
           {saving ? t('form.saving') : t('form.save')}
         </button>

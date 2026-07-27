@@ -1,9 +1,10 @@
 'use client';
 
-import { use, useEffect, useMemo, useState, type FormEvent } from 'react';
+import { Suspense, use, useEffect, useMemo, useState, type FormEvent } from 'react';
 import dynamic from 'next/dynamic';
+import { useSearchParams } from 'next/navigation';
 import { useTranslations, useLocale } from 'next-intl';
-import { Link } from '@/i18n/navigation';
+import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import { RequireRole } from '@/components/require-role';
 import { TENANT_ROLES } from '@/lib/roles';
 import { useApiClient } from '@/lib/use-api-client';
@@ -23,6 +24,13 @@ const STATUS_OPTIONS: VehicleStatus[] = ['disponivel', 'alugado', 'manutencao', 
 const TRANSMISSION_OPTIONS: TransmissionType[] = ['manual', 'automatico'];
 const FUEL_OPTIONS: FuelType[] = ['gasolina', 'diesel', 'eletrico', 'hibrido', 'flex'];
 const DOC_WARNING_DAYS = 30;
+
+const TABS = ['dados', 'documentos', 'rastreador', 'manutencao', 'fotos'] as const;
+type Tab = (typeof TABS)[number];
+
+function isTab(value: string | null): value is Tab {
+  return value !== null && (TABS as readonly string[]).includes(value);
+}
 
 function daysRemaining(dateStr: string | null): number | null {
   if (!dateStr) return null;
@@ -44,6 +52,15 @@ function VehicleDetail({ id }: { id: string }) {
   const apiClient = useApiClient();
   const { positions, connected } = useFleetSocket();
   const tenantSettings = useTenantSettings();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const tab: Tab = isTab(searchParams.get('tab')) ? (searchParams.get('tab') as Tab) : 'dados';
+
+  function handleTabChange(next: Tab) {
+    router.replace(`${pathname}?tab=${next}`);
+  }
 
   const [vehicle, setVehicle] = useState<Vehicle | null>(null);
   const [loadError, setLoadError] = useState(false);
@@ -90,6 +107,8 @@ function VehicleDetail({ id }: { id: string }) {
       .catch(() => setLoadError(true));
   }, [apiClient, id]);
 
+  // Um único form/submit cobre "Dados" e "Documentos" (as duas abas que editam o mesmo registro de
+  // veículo) — igual ao comportamento anterior à divisão em abas, só a exibição virou visual.
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
     setFormError(null);
@@ -160,194 +179,222 @@ function VehicleDetail({ id }: { id: string }) {
         </Link>
       </div>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <div className="grid grid-cols-2 gap-4">
-          <label className="flex flex-col gap-1">
-            <span className="text-sm font-medium">{t('form.placa')}</span>
-            <input
-              required
-              value={placa}
-              onChange={(e) => setPlaca(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
-            />
-          </label>
-          <label className="flex flex-col gap-1">
-            <span className="text-sm font-medium">{t('form.ano')}</span>
-            <input
-              type="number"
-              required
-              value={ano}
-              onChange={(e) => setAno(Number(e.target.value))}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
-            />
-          </label>
-          <label className="flex flex-col gap-1">
-            <span className="text-sm font-medium">{t('form.marca')}</span>
-            <input
-              required
-              value={marca}
-              onChange={(e) => setMarca(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
-            />
-          </label>
-          <label className="flex flex-col gap-1">
-            <span className="text-sm font-medium">{t('form.modelo')}</span>
-            <input
-              required
-              value={modelo}
-              onChange={(e) => setModelo(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
-            />
-          </label>
-          <label className="flex flex-col gap-1">
-            <span className="text-sm font-medium">{t('form.cor')}</span>
-            <input
-              value={cor}
-              onChange={(e) => setCor(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
-            />
-          </label>
-          <label className="flex flex-col gap-1">
-            <span className="text-sm font-medium">{t('form.chassi')}</span>
-            <input
-              value={chassi}
-              onChange={(e) => setChassi(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
-            />
-          </label>
-          <label className="flex flex-col gap-1">
-            <span className="text-sm font-medium">{t('form.cambio')}</span>
-            <select
-              value={cambio}
-              onChange={(e) => setCambio(e.target.value as TransmissionType | '')}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
-            >
-              <option value="">{t('form.naoInformado')}</option>
-              {TRANSMISSION_OPTIONS.map((option) => (
-                <option key={option} value={option}>
-                  {t(`cambioOptions.${option}`)}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="flex flex-col gap-1">
-            <span className="text-sm font-medium">{t('form.combustivel')}</span>
-            <select
-              value={combustivel}
-              onChange={(e) => setCombustivel(e.target.value as FuelType | '')}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
-            >
-              <option value="">{t('form.naoInformado')}</option>
-              {FUEL_OPTIONS.map((option) => (
-                <option key={option} value={option}>
-                  {t(`combustivelOptions.${option}`)}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="flex flex-col gap-1">
-            <span className="text-sm font-medium">{t('form.status')}</span>
-            <select
-              value={status}
-              onChange={(e) => setStatus(e.target.value as VehicleStatus)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
-            >
-              {STATUS_OPTIONS.map((option) => (
-                <option key={option} value={option}>
-                  {t(`status.${option}`)}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
+      <div className="flex flex-wrap gap-2">
+        {TABS.map((option) => (
+          <button
+            key={option}
+            type="button"
+            onClick={() => handleTabChange(option)}
+            className={`rounded px-3 py-1 text-sm font-medium ${
+              tab === option ? 'bg-accent text-accent-foreground' : 'text-foreground/70 hover:bg-foreground/10'
+            }`}
+          >
+            {t(`tabs.${option}`)}
+          </button>
+        ))}
+      </div>
 
-        <fieldset className="flex flex-col gap-4 rounded border border-black/10 p-4 dark:border-white/15">
-          <legend className="px-1 text-sm font-medium">{t('form.documentosSectionTitle')}</legend>
+      {(tab === 'dados' || tab === 'documentos') && (
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          {tab === 'dados' && (
+            <div className="grid grid-cols-2 gap-4">
+              <label className="flex flex-col gap-1">
+                <span className="text-sm font-medium">{t('form.placa')}</span>
+                <input
+                  required
+                  value={placa}
+                  onChange={(e) => setPlaca(e.target.value)}
+                  className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+                />
+              </label>
+              <label className="flex flex-col gap-1">
+                <span className="text-sm font-medium">{t('form.ano')}</span>
+                <input
+                  type="number"
+                  required
+                  value={ano}
+                  onChange={(e) => setAno(Number(e.target.value))}
+                  className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+                />
+              </label>
+              <label className="flex flex-col gap-1">
+                <span className="text-sm font-medium">{t('form.marca')}</span>
+                <input
+                  required
+                  value={marca}
+                  onChange={(e) => setMarca(e.target.value)}
+                  className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+                />
+              </label>
+              <label className="flex flex-col gap-1">
+                <span className="text-sm font-medium">{t('form.modelo')}</span>
+                <input
+                  required
+                  value={modelo}
+                  onChange={(e) => setModelo(e.target.value)}
+                  className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+                />
+              </label>
+              <label className="flex flex-col gap-1">
+                <span className="text-sm font-medium">{t('form.cor')}</span>
+                <input
+                  value={cor}
+                  onChange={(e) => setCor(e.target.value)}
+                  className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+                />
+              </label>
+              <label className="flex flex-col gap-1">
+                <span className="text-sm font-medium">{t('form.chassi')}</span>
+                <input
+                  value={chassi}
+                  onChange={(e) => setChassi(e.target.value)}
+                  className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+                />
+              </label>
+              <label className="flex flex-col gap-1">
+                <span className="text-sm font-medium">{t('form.cambio')}</span>
+                <select
+                  value={cambio}
+                  onChange={(e) => setCambio(e.target.value as TransmissionType | '')}
+                  className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+                >
+                  <option value="">{t('form.naoInformado')}</option>
+                  {TRANSMISSION_OPTIONS.map((option) => (
+                    <option key={option} value={option}>
+                      {t(`cambioOptions.${option}`)}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="flex flex-col gap-1">
+                <span className="text-sm font-medium">{t('form.combustivel')}</span>
+                <select
+                  value={combustivel}
+                  onChange={(e) => setCombustivel(e.target.value as FuelType | '')}
+                  className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+                >
+                  <option value="">{t('form.naoInformado')}</option>
+                  {FUEL_OPTIONS.map((option) => (
+                    <option key={option} value={option}>
+                      {t(`combustivelOptions.${option}`)}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="flex flex-col gap-1">
+                <span className="text-sm font-medium">{t('form.status')}</span>
+                <select
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value as VehicleStatus)}
+                  className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+                >
+                  {STATUS_OPTIONS.map((option) => (
+                    <option key={option} value={option}>
+                      {t(`status.${option}`)}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+          )}
 
-          <div className="grid grid-cols-3 gap-3">
-            <label className="flex flex-col gap-1">
-              <span className={`text-xs font-medium ${docClassName(vehicle.documentos.seguro.validade)}`}>
-                {t('form.seguroValidade')}
-              </span>
-              <input
-                type="date"
-                value={seguroValidade}
-                onChange={(e) => setSeguroValidade(e.target.value)}
-                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
-              />
-            </label>
-            <label className="flex flex-col gap-1">
-              <span className="text-xs font-medium">{t('form.seguroApolice')}</span>
-              <input
-                value={seguroApolice}
-                onChange={(e) => setSeguroApolice(e.target.value)}
-                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
-              />
-            </label>
-            <label className="flex flex-col gap-1">
-              <span className="text-xs font-medium">{t('form.seguroSeguradora')}</span>
-              <input
-                value={seguroSeguradora}
-                onChange={(e) => setSeguroSeguradora(e.target.value)}
-                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
-              />
-            </label>
-          </div>
+          {tab === 'documentos' && (
+            <fieldset className="flex flex-col gap-4 rounded border border-black/10 p-4 dark:border-white/15">
+              <legend className="px-1 text-sm font-medium">{t('form.documentosSectionTitle')}</legend>
 
-          <div className="grid grid-cols-2 gap-3">
-            <label className="flex flex-col gap-1">
-              <span className={`text-xs font-medium ${docClassName(vehicle.documentos.itv.validade)}`}>
-                {t('form.itvValidade')}
-              </span>
-              <input
-                type="date"
-                value={itvValidade}
-                onChange={(e) => setItvValidade(e.target.value)}
-                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
-              />
-            </label>
-            <label className="flex flex-col gap-1">
-              <span className={`text-xs font-medium ${docClassName(vehicle.documentos.licenciamento.validade)}`}>
-                {t('form.licenciamentoValidade')}
-              </span>
-              <input
-                type="date"
-                value={licenciamentoValidade}
-                onChange={(e) => setLicenciamentoValidade(e.target.value)}
-                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
-              />
-            </label>
-          </div>
-        </fieldset>
+              <div className="grid grid-cols-3 gap-3">
+                <label className="flex flex-col gap-1">
+                  <span className={`text-xs font-medium ${docClassName(vehicle.documentos.seguro.validade)}`}>
+                    {t('form.seguroValidade')}
+                  </span>
+                  <input
+                    type="date"
+                    value={seguroValidade}
+                    onChange={(e) => setSeguroValidade(e.target.value)}
+                    className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                  />
+                </label>
+                <label className="flex flex-col gap-1">
+                  <span className="text-xs font-medium">{t('form.seguroApolice')}</span>
+                  <input
+                    value={seguroApolice}
+                    onChange={(e) => setSeguroApolice(e.target.value)}
+                    className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                  />
+                </label>
+                <label className="flex flex-col gap-1">
+                  <span className="text-xs font-medium">{t('form.seguroSeguradora')}</span>
+                  <input
+                    value={seguroSeguradora}
+                    onChange={(e) => setSeguroSeguradora(e.target.value)}
+                    className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                  />
+                </label>
+              </div>
 
-        {formError && <p className="text-sm text-red-600 dark:text-red-400">{formError}</p>}
+              <div className="grid grid-cols-2 gap-3">
+                <label className="flex flex-col gap-1">
+                  <span className={`text-xs font-medium ${docClassName(vehicle.documentos.itv.validade)}`}>
+                    {t('form.itvValidade')}
+                  </span>
+                  <input
+                    type="date"
+                    value={itvValidade}
+                    onChange={(e) => setItvValidade(e.target.value)}
+                    className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                  />
+                </label>
+                <label className="flex flex-col gap-1">
+                  <span className={`text-xs font-medium ${docClassName(vehicle.documentos.licenciamento.validade)}`}>
+                    {t('form.licenciamentoValidade')}
+                  </span>
+                  <input
+                    type="date"
+                    value={licenciamentoValidade}
+                    onChange={(e) => setLicenciamentoValidade(e.target.value)}
+                    className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                  />
+                </label>
+              </div>
+            </fieldset>
+          )}
 
-        <button
-          type="submit"
-          disabled={saving}
-          className="self-start rounded bg-foreground px-4 py-2 text-sm font-medium text-background disabled:opacity-60"
-        >
-          {saving ? t('form.saving') : t('form.save')}
-        </button>
-      </form>
+          {formError && <p className="text-sm text-red-600 dark:text-red-400">{formError}</p>}
 
-      <FleetMap
-        key={tenantSettings?.pais ?? 'loading'}
-        positions={vehiclePositions}
-        vehiclesById={vehiclesById}
-        connected={connected}
-        fallbackCenter={tenantSettings ? MAP_CENTER_BY_COUNTRY[tenantSettings.pais] : undefined}
-      />
+          <button
+            type="submit"
+            disabled={saving}
+            className="self-start rounded bg-accent px-4 py-2 text-sm font-medium text-accent-foreground disabled:opacity-60"
+          >
+            {saving ? t('form.saving') : t('form.save')}
+          </button>
+        </form>
+      )}
 
-      <TrackerSection vehicleId={vehicle._id} />
+      {tab === 'rastreador' && (
+        <>
+          <FleetMap
+            key={tenantSettings?.pais ?? 'loading'}
+            positions={vehiclePositions}
+            vehiclesById={vehiclesById}
+            connected={connected}
+            fallbackCenter={tenantSettings ? MAP_CENTER_BY_COUNTRY[tenantSettings.pais] : undefined}
+          />
+          <TrackerSection vehicleId={vehicle._id} />
+        </>
+      )}
 
-      <MaintenanceSection vehicleId={vehicle._id} manutencao={vehicle.manutencao} onUpdated={applyVehicle} />
+      {tab === 'manutencao' && (
+        <MaintenanceSection vehicleId={vehicle._id} manutencao={vehicle.manutencao} onUpdated={applyVehicle} />
+      )}
 
-      <PhotosSection
-        vehicleId={vehicle._id}
-        fotos={vehicle.fotos}
-        onPhotoAdded={(url) => setVehicle((prev) => (prev ? { ...prev, fotos: [...prev.fotos, url] } : prev))}
-      />
+      {tab === 'fotos' && (
+        <PhotosSection
+          vehicleId={vehicle._id}
+          fotos={vehicle.fotos}
+          onPhotoAdded={(url) => setVehicle((prev) => (prev ? { ...prev, fotos: [...prev.fotos, url] } : prev))}
+        />
+      )}
 
       <p className="text-xs text-foreground/40">
         {t('lastUpdated', { date: new Date(vehicle.updatedAt).toLocaleString(locale) })}
@@ -360,7 +407,9 @@ export default function VehicleDetailPage({ params }: { params: Promise<{ id: st
   const { id } = use(params);
   return (
     <RequireRole roles={TENANT_ROLES}>
-      <VehicleDetail id={id} />
+      <Suspense fallback={null}>
+        <VehicleDetail id={id} />
+      </Suspense>
     </RequireRole>
   );
 }

@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import { useAuthStore } from '@/stores/auth-store';
 import { useTenantSettings } from '@/lib/use-tenant-settings';
 import { LocaleSwitcher } from '@/components/locale-switcher';
+import { LogoMarkIcon } from '@/components/landing-icons';
 
 const TENANT_NAV_LINKS = [
   { href: '/dashboard', key: 'painel' },
@@ -31,6 +32,7 @@ export function SiteHeader() {
   const { user, hasHydrated, logout } = useAuthStore();
   const tenantSettings = useTenantSettings();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [lastPathname, setLastPathname] = useState(pathname);
 
   const isBlocked = pathname === '/blocked';
   const navLinks =
@@ -40,10 +42,13 @@ export function SiteHeader() {
         ? [...TENANT_NAV_LINKS, ...TENANT_ADMIN_NAV_LINKS]
         : TENANT_NAV_LINKS;
 
-  // Fecha o menu mobile sempre que a rota muda (ex: usuário clicou num link).
-  useEffect(() => {
+  // Fecha o menu mobile sempre que a rota muda (ex: usuário clicou num link) — ajustado durante o
+  // render (padrão recomendado pelo React pra "resetar estado quando uma prop muda"), não num
+  // `useEffect`, pra evitar o cascading render que o lint (`react-hooks/set-state-in-effect`) aponta.
+  if (pathname !== lastPathname) {
+    setLastPathname(pathname);
     setMenuOpen(false);
-  }, [pathname]);
+  }
 
   function handleLogout() {
     setMenuOpen(false);
@@ -57,7 +62,12 @@ export function SiteHeader() {
     <header className="relative border-b border-black/10 dark:border-white/15">
       <div className="flex items-center justify-between px-4 py-3">
         <div className="flex items-center gap-6">
-          <span className="font-semibold">RentFleet</span>
+          <span className="flex items-center gap-2 font-semibold">
+            <span className="flex h-6 w-6 items-center justify-center rounded bg-linear-to-br from-accent to-accent-strong text-accent-foreground">
+              <LogoMarkIcon size={16} />
+            </span>
+            RentFleet
+          </span>
           {showAuthedNav && (
             <nav className="hidden items-center gap-4 md:flex">
               {navLinks.map((link) => (

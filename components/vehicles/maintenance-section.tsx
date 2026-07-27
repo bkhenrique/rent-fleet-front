@@ -143,7 +143,7 @@ export function MaintenanceSection({ vehicleId, manutencao, onUpdated }: Mainten
         <button
           type="submit"
           disabled={isSubmitting}
-          className="rounded bg-foreground px-3 py-1.5 text-sm font-medium text-background disabled:opacity-60"
+          className="rounded bg-accent px-3 py-1.5 text-sm font-medium text-accent-foreground disabled:opacity-60"
         >
           {isSubmitting ? t('form.saving') : t('maintenance.add')}
         </button>

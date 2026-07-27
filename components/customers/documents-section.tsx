@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useApiClient } from '@/lib/use-api-client';
-import { SUPPORTED_UPLOAD_CONTENT_TYPES, type UploadUrlResult } from '@/lib/types/storage';
+import { CameraInput } from '@/components/ui/camera-input';
+import { validateUploadFile, isVideoUrl, type UploadUrlResult } from '@/lib/types/storage';
 
 interface DocumentsSectionProps {
   customerId: string;
@@ -18,13 +19,10 @@ export function DocumentsSection({ customerId, fotosDocumentoUrls, onDocumentAdd
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  async function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
-    event.target.value = '';
-    if (!file) return;
-
-    if (!SUPPORTED_UPLOAD_CONTENT_TYPES.includes(file.type as never)) {
-      setError(t('documents.unsupportedType'));
+  async function handleFileSelected(file: File) {
+    const validationError = await validateUploadFile(file);
+    if (validationError) {
+      setError(t(`documents.${validationError}`));
       return;
     }
 
@@ -57,20 +55,18 @@ export function DocumentsSection({ customerId, fotosDocumentoUrls, onDocumentAdd
 
       {fotosDocumentoUrls.length > 0 && (
         <div className="mb-3 grid grid-cols-3 gap-2 sm:grid-cols-4">
-          {fotosDocumentoUrls.map((url) => (
-            // eslint-disable-next-line @next/next/no-img-element -- URL assinada externa do MinIO
-            <img key={url} src={url} alt="" className="aspect-square rounded object-cover" />
-          ))}
+          {fotosDocumentoUrls.map((url) =>
+            isVideoUrl(url) ? (
+              <video key={url} src={url} controls muted className="aspect-square rounded object-cover" />
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element -- URL assinada externa do MinIO
+              <img key={url} src={url} alt="" className="aspect-square rounded object-cover" />
+            ),
+          )}
         </div>
       )}
 
-      <input
-        type="file"
-        accept={SUPPORTED_UPLOAD_CONTENT_TYPES.join(',')}
-        onChange={handleFileChange}
-        disabled={uploading}
-        className="text-sm"
-      />
+      <CameraInput label={t('documents.addDocument')} onFileSelected={handleFileSelected} disabled={uploading} />
       {uploading && <p className="mt-2 text-sm text-foreground/60">{t('documents.uploading')}</p>}
       {error && <p className="mt-2 text-sm text-red-600 dark:text-red-400">{error}</p>}
     </div>

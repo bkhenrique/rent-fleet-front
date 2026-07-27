@@ -6,6 +6,7 @@ import { Link } from '@/i18n/navigation';
 import { RequireRole } from '@/components/require-role';
 import { SUPER_ADMIN_ONLY } from '@/lib/roles';
 import { useApiClient } from '@/lib/use-api-client';
+import { formatCurrency } from '@/lib/currency';
 import type { BillingCycle, Country, Currency, Tenant, TenantStatus, UpdateTenantPayload } from '@/lib/types/tenant';
 
 const STATUS_OPTIONS: TenantStatus[] = ['ativo', 'inadimplente', 'suspenso', 'cortesia'];
@@ -25,6 +26,7 @@ function TenantDetail({ id }: { id: string }) {
   const [ciclo, setCiclo] = useState<BillingCycle>('mensal');
   const [pais, setPais] = useState<Country>('BR');
   const [moeda, setMoeda] = useState<Currency>('BRL');
+  const [valor, setValor] = useState('');
   const [enderecoFiscal, setEnderecoFiscal] = useState('');
   const [telefone, setTelefone] = useState('');
   const [email, setEmail] = useState('');
@@ -50,6 +52,7 @@ function TenantDetail({ id }: { id: string }) {
         setCiclo(found.billing.ciclo);
         setPais(found.pais);
         setMoeda(found.moeda);
+        setValor(found.billing.valor === null ? '' : String(found.billing.valor));
         setEnderecoFiscal(found.enderecoFiscal ?? '');
         setTelefone(found.telefone ?? '');
         setEmail(found.email ?? '');
@@ -71,6 +74,7 @@ function TenantDetail({ id }: { id: string }) {
         ciclo,
         pais,
         moeda,
+        valor: valor ? Number(valor) : undefined,
         enderecoFiscal: enderecoFiscal || undefined,
         telefone: telefone || undefined,
         email: email || undefined,
@@ -171,6 +175,22 @@ function TenantDetail({ id }: { id: string }) {
           </select>
         </label>
 
+        <label className="flex flex-col gap-1">
+          <span className="text-sm font-medium">{t('form.valor')}</span>
+          <input
+            type="number"
+            min="0"
+            step="0.01"
+            value={valor}
+            onChange={(e) => setValor(e.target.value)}
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+          />
+          <span className="text-xs text-foreground/60">
+            {t('form.valorHint')}
+            {valor && !Number.isNaN(Number(valor)) ? ` (${formatCurrency(Number(valor), moeda)})` : ''}
+          </span>
+        </label>
+
         <div className="grid grid-cols-2 gap-4">
           <label className="flex flex-col gap-1">
             <span className="text-sm font-medium">{t('form.pais')}</span>
@@ -239,13 +259,21 @@ function TenantDetail({ id }: { id: string }) {
         <button
           type="submit"
           disabled={savingForm}
-          className="self-start rounded bg-foreground px-4 py-2 text-sm font-medium text-background disabled:opacity-60"
+          className="self-start rounded bg-accent px-4 py-2 text-sm font-medium text-accent-foreground disabled:opacity-60"
         >
           {savingForm ? t('form.saving') : t('form.save')}
         </button>
       </form>
 
       <dl className="mt-6 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-sm">
+        <dt className="font-medium">{t('table.valor')}</dt>
+        <dd>
+          {tenant.billing.valor === null ? (
+            <span className="text-amber-700 dark:text-amber-400">{t('detail.valorNaoDefinido')}</span>
+          ) : (
+            formatCurrency(tenant.billing.valor, tenant.moeda)
+          )}
+        </dd>
         <dt className="font-medium">{t('table.ativoAte')}</dt>
         <dd>{new Date(tenant.billing.ativoAte).toLocaleDateString(locale)}</dd>
         <dt className="font-medium">{t('detail.lastPayment')}</dt>
