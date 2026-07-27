@@ -330,31 +330,19 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </section>
 
         <section className="mx-auto max-w-6xl px-4 pt-10 sm:px-7">
-          <div className="grid h-auto gap-3 sm:h-75 sm:grid-cols-[1.6fr_1fr_1fr]">
-            <Reveal className="relative flex min-h-40 items-end overflow-hidden" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)' }}>
+          <div className="grid gap-3 sm:h-75 sm:grid-cols-[1.6fr_1fr_1fr]">
+            <Reveal className="relative h-48 overflow-hidden sm:h-auto" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)' }}>
               <Image src="/gallery/carrospatio.jpeg" alt={t('gallery.caption')} fill sizes="(min-width: 640px) 45vw, 100vw" style={{ objectFit: 'cover' }} />
-              <div style={{ position: 'relative', width: '100%', padding: 20, background: 'linear-gradient(transparent, rgba(8,9,11,.85) 55%)' }}>
-                <span style={{ fontSize: 15, fontWeight: 500 }}>{t('gallery.caption')}</span>
-              </div>
             </Reveal>
-            <Reveal delay={80} className="relative flex min-h-35 items-end overflow-hidden" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)' }}>
-              <Image src="/gallery/chavenamao.jpg" alt={t('gallery.slot2')} fill sizes="(min-width: 640px) 22vw, 100vw" style={{ objectFit: 'cover' }} />
-              <div style={{ position: 'relative', width: '100%', padding: 14, background: 'linear-gradient(transparent, rgba(8,9,11,.85) 60%)' }}>
-                <span style={{ fontSize: 14, fontWeight: 500 }}>{t('gallery.slot2')}</span>
-              </div>
+            <Reveal delay={80} className="relative h-40 overflow-hidden sm:h-auto" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)' }}>
+              <Image src="/gallery/chavenamao.jpg" alt={t('gallery.slot2')} fill sizes="(min-width: 640px) 22vw, 50vw" style={{ objectFit: 'cover' }} />
             </Reveal>
-            <div className="grid gap-3 sm:grid-rows-2">
-              <Reveal delay={140} className="relative flex min-h-35 items-end overflow-hidden" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)' }}>
-                <Image src="/gallery/painelcarro.webp" alt={t('gallery.slot3')} fill sizes="(min-width: 640px) 22vw, 100vw" style={{ objectFit: 'cover' }} />
-                <div style={{ position: 'relative', width: '100%', padding: 14, background: 'linear-gradient(transparent, rgba(8,9,11,.85) 60%)' }}>
-                  <span style={{ fontSize: 14, fontWeight: 500 }}>{t('gallery.slot3')}</span>
-                </div>
+            <div className="grid grid-rows-2 gap-3">
+              <Reveal delay={140} className="relative h-40 overflow-hidden sm:h-auto" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)' }}>
+                <Image src="/gallery/painelcarro.webp" alt={t('gallery.slot3')} fill sizes="(min-width: 640px) 22vw, 50vw" style={{ objectFit: 'cover' }} />
               </Reveal>
-              <Reveal delay={200} className="relative flex min-h-35 items-end overflow-hidden" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)' }}>
-                <Image src="/gallery/carronaestrada.avif" alt={t('gallery.slot4')} fill sizes="(min-width: 640px) 22vw, 100vw" style={{ objectFit: 'cover' }} />
-                <div style={{ position: 'relative', width: '100%', padding: 14, background: 'linear-gradient(transparent, rgba(8,9,11,.85) 60%)' }}>
-                  <span style={{ fontSize: 14, fontWeight: 500 }}>{t('gallery.slot4')}</span>
-                </div>
+              <Reveal delay={200} className="relative h-40 overflow-hidden sm:h-auto" style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)' }}>
+                <Image src="/gallery/carronaestrada.avif" alt={t('gallery.slot4')} fill sizes="(min-width: 640px) 22vw, 50vw" style={{ objectFit: 'cover' }} />
               </Reveal>
             </div>
           </div>
