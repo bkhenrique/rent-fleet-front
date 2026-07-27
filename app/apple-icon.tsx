@@ -1,4 +1,5 @@
 import { ImageResponse } from 'next/og';
+import { BRAND_MARK_PATHS } from '@/lib/brand-mark';
 
 export const size = { width: 180, height: 180 };
 export const contentType = 'image/png';
@@ -18,28 +19,18 @@ export default function AppleIcon() {
         }}
       >
         <svg width="120" height="120" viewBox="0 0 24 24" fill="none">
-          <path
-            d="M3.5 16.2v-3l1.3-3.3a1.8 1.8 0 0 1 1.7-1.1h6.3c.7 0 1.4.4 1.7 1.1l1.3 3.3v3"
-            stroke="#10120f"
-            strokeWidth="2.1"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            fill="none"
-          />
-          <path
-            d="M3.5 16.2h11.8v1.3a.9.9 0 0 1-.9.9h-.7a.9.9 0 0 1-.9-.9v-.6H6v.6a.9.9 0 0 1-.9.9h-.7a.9.9 0 0 1-.9-.9z"
-            stroke="#10120f"
-            strokeWidth="2.1"
-            strokeLinejoin="round"
-            fill="none"
-          />
-          <circle cx="6.4" cy="13.4" r="0.9" fill="#10120f" />
-          <circle cx="12.6" cy="13.4" r="0.9" fill="#10120f" />
-          <path
-            d="M18.2 2.6a2.9 2.9 0 0 0-2.9 2.9c0 2.2 2.9 5 2.9 5s2.9-2.8 2.9-5a2.9 2.9 0 0 0-2.9-2.9zm0 4.3a1.4 1.4 0 1 1 0-2.8 1.4 1.4 0 0 1 0 2.8z"
-            fill="#10120f"
-            fillRule="evenodd"
-          />
+          {BRAND_MARK_PATHS.map((path) => (
+            <path
+              key={path.key}
+              d={path.d}
+              fill={path.fill ?? 'none'}
+              stroke={path.stroke}
+              strokeWidth={path.strokeWidth}
+              strokeLinecap={path.strokeLinecap}
+              strokeLinejoin={path.strokeLinejoin}
+              fillRule={path.fillRule}
+            />
+          ))}
         </svg>
       </div>
     ),
