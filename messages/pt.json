@@ -51,7 +51,13 @@
     },
     "ctaFinal": {
       "title": "Pronto pra organizar sua frota?",
-      "subtitle": "Já é cliente RentFleet? Acesse o painel da sua locadora.",
+      "subtitle": "Deixe seu e-mail e a gente te mostra como funciona.",
+      "emailPlaceholder": "seu@email.com",
+      "submit": "Quero saber mais",
+      "submitting": "Enviando...",
+      "success": "Recebemos seu contato! Em breve alguém da nossa equipe fala com você.",
+      "error": "Não foi possível enviar. Tente novamente.",
+      "existingCustomer": "Já é cliente RentFleet?",
       "cta": "Entrar"
     },
     "footer": {

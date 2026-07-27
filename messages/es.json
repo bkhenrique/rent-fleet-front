@@ -51,7 +51,13 @@
     },
     "ctaFinal": {
       "title": "¿Listo para organizar tu flota?",
-      "subtitle": "¿Ya eres cliente de RentFleet? Accede al panel de tu empresa.",
+      "subtitle": "Déjanos tu correo y te mostramos cómo funciona.",
+      "emailPlaceholder": "tu@correo.com",
+      "submit": "Quiero saber más",
+      "submitting": "Enviando...",
+      "success": "¡Listo! Alguien de nuestro equipo se pondrá en contacto pronto.",
+      "error": "No se pudo enviar. Inténtalo de nuevo.",
+      "existingCustomer": "¿Ya eres cliente de RentFleet?",
       "cta": "Iniciar sesión"
     },
     "footer": {

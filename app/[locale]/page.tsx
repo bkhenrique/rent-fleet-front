@@ -4,13 +4,18 @@ import { Link } from '@/i18n/navigation';
 import type { AppLocale } from '@/i18n/routing';
 import { AuthRedirect } from '@/components/auth-redirect';
 import { Reveal } from '@/components/reveal';
+import { LeadForm } from '@/components/lead-form';
 import {
+  ClockAlertIcon,
   ContractIcon,
   DashboardIcon,
   DeviceIcon,
+  DocumentAlertIcon,
   FleetMapIllustration,
+  FrustrationIllustration,
   GlobeIcon,
   HeroIllustration,
+  MapOffIcon,
   ShieldIcon,
   TrackingIcon,
   VehicleIcon,
@@ -28,6 +33,8 @@ const DIFFERENTIALS = [
   { key: 'pwa', Icon: DeviceIcon },
   { key: 'isolation', Icon: ShieldIcon },
 ] as const;
+
+const PROBLEM_ICONS = [DocumentAlertIcon, ClockAlertIcon, MapOffIcon] as const;
 
 export async function generateMetadata({
   params,
@@ -95,22 +102,30 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </section>
 
         <section className="border-t border-black/10 px-4 py-20 dark:border-white/10">
-          <Reveal className="mx-auto max-w-3xl">
-            <h2 className="text-center text-2xl font-semibold sm:text-3xl">{t('problem.title')}</h2>
-            <ul className="mt-10 flex flex-col gap-3">
-              {problemItems.map((item) => (
-                <li
-                  key={item}
-                  className="flex gap-3 rounded-lg bg-black/3 p-4 transition-colors dark:bg-white/5"
-                >
-                  <span aria-hidden className="text-red-600 dark:text-red-400">
-                    ✕
-                  </span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
+          <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 lg:grid-cols-2">
+            <Reveal className="order-2 lg:order-1">
+              <FrustrationIllustration />
+            </Reveal>
+            <Reveal delay={100} className="order-1 lg:order-2">
+              <h2 className="text-2xl font-semibold sm:text-3xl">{t('problem.title')}</h2>
+              <ul className="mt-8 flex flex-col gap-3">
+                {problemItems.map((item, index) => {
+                  const Icon = PROBLEM_ICONS[index];
+                  return (
+                    <li
+                      key={item}
+                      className="flex items-center gap-3 rounded-lg bg-black/3 p-4 transition-colors dark:bg-white/5"
+                    >
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-red-500/10 text-red-600 dark:text-red-400">
+                        <Icon />
+                      </span>
+                      <span>{item}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </Reveal>
+          </div>
         </section>
 
         <section className="border-t border-black/10 px-4 py-20 dark:border-white/10">
@@ -171,18 +186,18 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             aria-hidden
             className="animate-drift absolute bottom-0 left-1/2 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-accent/10 blur-3xl"
           />
-          <Reveal className="mx-auto max-w-xl">
+          <Reveal className="mx-auto flex max-w-xl flex-col items-center">
             <h2 className="text-2xl font-semibold sm:text-3xl">{t('ctaFinal.title')}</h2>
             <p className="mt-3 text-foreground/70">{t('ctaFinal.subtitle')}</p>
-            <Link
-              href="/login"
-              className="group mt-8 inline-flex items-center gap-2 rounded-full border border-foreground/20 px-6 py-2.5 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
-            >
-              {t('ctaFinal.cta')}
-              <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
-                →
-              </span>
-            </Link>
+            <div className="mt-8 flex justify-center">
+              <LeadForm />
+            </div>
+            <p className="mt-10 text-sm text-foreground/60">
+              {t('ctaFinal.existingCustomer')}{' '}
+              <Link href="/login" className="font-medium text-foreground/80 underline-offset-4 hover:text-accent hover:underline">
+                {t('ctaFinal.cta')}
+              </Link>
+            </p>
           </Reveal>
         </section>
 

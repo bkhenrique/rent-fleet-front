@@ -51,7 +51,13 @@
     },
     "ctaFinal": {
       "title": "Ready to get your fleet organized?",
-      "subtitle": "Already a RentFleet customer? Access your rental company's dashboard.",
+      "subtitle": "Leave your email and we'll show you how it works.",
+      "emailPlaceholder": "you@email.com",
+      "submit": "Tell me more",
+      "submitting": "Sending...",
+      "success": "Got it! Someone from our team will reach out soon.",
+      "error": "Couldn't send it. Please try again.",
+      "existingCustomer": "Already a RentFleet customer?",
       "cta": "Sign in"
     },
     "footer": {
