@@ -84,13 +84,21 @@
   },
   "nav": {
     "language": "Idioma",
-    "login": "Entrar"
+    "login": "Entrar",
+    "logout": "Sair",
+    "painel": "Painel",
+    "veiculos": "Veículos",
+    "clientes": "Clientes",
+    "contratos": "Contratos",
+    "locadoras": "Locadoras",
+    "role": {
+      "super_admin": "Super Admin",
+      "tenant_admin": "Administrador",
+      "tenant_staff": "Equipe"
+    }
   },
   "dashboard": {
     "title": "Painel da locadora",
-    "vehiclesLink": "Veículos",
-    "customersLink": "Clientes",
-    "contractsLink": "Contratos",
     "loadError": "Não foi possível carregar os dados do painel.",
     "overview": {
       "total": "Veículos",
@@ -177,6 +185,9 @@
       "changeStatusTitle": "Forçar status manualmente",
       "lastPayment": "Último pagamento",
       "never": "Nunca"
+    },
+    "overview": {
+      "total": "Total de locadoras"
     }
   },
   "vehicles": {

@@ -66,7 +66,7 @@ export function PhotosSection({ vehicleId, fotos, onPhotoAdded }: PhotosSectionP
   }
 
   return (
-    <div className="rounded border border-black/10 p-4 dark:border-white/10">
+    <div className="rounded border border-black/10 p-4 dark:border-white/15">
       <h2 className="mb-3 text-sm font-semibold">{t('photos.title')}</h2>
 
       {fotos.length === 0 && <p className="mb-3 text-sm text-foreground/60">{t('photos.empty')}</p>}

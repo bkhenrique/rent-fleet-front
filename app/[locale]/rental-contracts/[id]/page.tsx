@@ -118,13 +118,13 @@ function RentalContractDetail({ id }: { id: string }) {
           href={contract.contratoPdfUrl}
           target="_blank"
           rel="noreferrer"
-          className="self-start rounded border border-black/15 px-4 py-2 text-sm font-medium dark:border-white/20"
+          className="self-start rounded border border-black/15 px-4 py-2 text-sm font-medium dark:border-white/25"
         >
           {t('detail.openPdf')}
         </a>
       )}
 
-      <div className="rounded border border-black/10 p-4 dark:border-white/10">
+      <div className="rounded border border-black/10 p-4 dark:border-white/15">
         <h2 className="mb-3 text-sm font-semibold">{t('detail.assinaturaTitle')}</h2>
         <AttachmentUpload
           contractId={contract.id}
@@ -134,7 +134,7 @@ function RentalContractDetail({ id }: { id: string }) {
         />
       </div>
 
-      <div className="rounded border border-black/10 p-4 dark:border-white/10">
+      <div className="rounded border border-black/10 p-4 dark:border-white/15">
         <h2 className="mb-3 text-sm font-semibold">{t('detail.vistoriaEntregaTitle')}</h2>
         <AttachmentUpload
           contractId={contract.id}
@@ -148,7 +148,7 @@ function RentalContractDetail({ id }: { id: string }) {
             <input
               value={vistoriaEntregaObs}
               onChange={(e) => setVistoriaEntregaObs(e.target.value)}
-              className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/20"
+              className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
             />
           </label>
           <button
@@ -161,7 +161,7 @@ function RentalContractDetail({ id }: { id: string }) {
         </form>
       </div>
 
-      <div className="rounded border border-black/10 p-4 dark:border-white/10">
+      <div className="rounded border border-black/10 p-4 dark:border-white/15">
         <h2 className="mb-3 text-sm font-semibold">{t('detail.vistoriaDevolucaoTitle')}</h2>
         <AttachmentUpload
           contractId={contract.id}
@@ -180,7 +180,7 @@ function RentalContractDetail({ id }: { id: string }) {
               <input
                 value={devolucaoObs}
                 onChange={(e) => setDevolucaoObs(e.target.value)}
-                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/20"
+                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
               />
             </label>
             <button

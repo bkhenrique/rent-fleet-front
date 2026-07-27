@@ -17,7 +17,7 @@ export function AlertsList({ vehicleAlerts, contractAlerts, vehiclesById, custom
   const hasAlerts = vehicleAlerts.length > 0 || contractAlerts.length > 0;
 
   return (
-    <div className="rounded border border-black/10 p-4 dark:border-white/10">
+    <div className="rounded border border-black/10 p-4 dark:border-white/15">
       <h2 className="mb-3 text-sm font-semibold">{t('title')}</h2>
 
       {!hasAlerts && <p className="text-sm text-foreground/60">{t('empty')}</p>}

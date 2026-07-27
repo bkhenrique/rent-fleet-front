@@ -50,7 +50,7 @@ export function DocumentsSection({ customerId, fotosDocumentoUrls, onDocumentAdd
   }
 
   return (
-    <div className="rounded border border-black/10 p-4 dark:border-white/10">
+    <div className="rounded border border-black/10 p-4 dark:border-white/15">
       <h2 className="mb-3 text-sm font-semibold">{t('documents.title')}</h2>
 
       {fotosDocumentoUrls.length === 0 && <p className="mb-3 text-sm text-foreground/60">{t('documents.empty')}</p>}

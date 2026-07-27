@@ -59,7 +59,7 @@ export default function LoginPage() {
             autoComplete="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           />
         </label>
 
@@ -71,7 +71,7 @@ export default function LoginPage() {
             autoComplete="current-password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           />
         </label>
 

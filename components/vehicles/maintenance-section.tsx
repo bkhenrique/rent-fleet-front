@@ -59,7 +59,7 @@ export function MaintenanceSection({ vehicleId, manutencao, onUpdated }: Mainten
   }
 
   return (
-    <div className="rounded border border-black/10 p-4 dark:border-white/10">
+    <div className="rounded border border-black/10 p-4 dark:border-white/15">
       <h2 className="mb-3 text-sm font-semibold">{t('maintenance.title')}</h2>
 
       {manutencao.length === 0 && <p className="text-sm text-foreground/60">{t('maintenance.empty')}</p>}
@@ -67,7 +67,7 @@ export function MaintenanceSection({ vehicleId, manutencao, onUpdated }: Mainten
       {manutencao.length > 0 && (
         <table className="mb-4 w-full border-collapse text-left text-sm">
           <thead>
-            <tr className="border-b border-black/10 dark:border-white/10">
+            <tr className="border-b border-black/10 dark:border-white/15">
               <th className="py-1 pr-3 font-medium">{t('maintenance.tipo')}</th>
               <th className="py-1 pr-3 font-medium">{t('maintenance.data')}</th>
               <th className="py-1 pr-3 font-medium">{t('maintenance.km')}</th>
@@ -101,7 +101,7 @@ export function MaintenanceSection({ vehicleId, manutencao, onUpdated }: Mainten
             required
             value={tipo}
             onChange={(e) => setTipo(e.target.value)}
-            className="rounded border border-black/15 px-2 py-1 text-sm dark:border-white/20"
+            className="rounded border border-black/15 px-2 py-1 text-sm dark:border-white/25"
           />
         </label>
         <label className="flex flex-col gap-1">
@@ -111,7 +111,7 @@ export function MaintenanceSection({ vehicleId, manutencao, onUpdated }: Mainten
             required
             value={data}
             onChange={(e) => setData(e.target.value)}
-            className="rounded border border-black/15 px-2 py-1 text-sm dark:border-white/20"
+            className="rounded border border-black/15 px-2 py-1 text-sm dark:border-white/25"
           />
         </label>
         <label className="flex flex-col gap-1">
@@ -120,7 +120,7 @@ export function MaintenanceSection({ vehicleId, manutencao, onUpdated }: Mainten
             type="number"
             value={km}
             onChange={(e) => setKm(e.target.value)}
-            className="w-24 rounded border border-black/15 px-2 py-1 text-sm dark:border-white/20"
+            className="w-24 rounded border border-black/15 px-2 py-1 text-sm dark:border-white/25"
           />
         </label>
         <label className="flex flex-col gap-1">
@@ -129,7 +129,7 @@ export function MaintenanceSection({ vehicleId, manutencao, onUpdated }: Mainten
             type="number"
             value={custo}
             onChange={(e) => setCusto(e.target.value)}
-            className="w-24 rounded border border-black/15 px-2 py-1 text-sm dark:border-white/20"
+            className="w-24 rounded border border-black/15 px-2 py-1 text-sm dark:border-white/25"
           />
         </label>
         <label className="flex flex-col gap-1">
@@ -137,7 +137,7 @@ export function MaintenanceSection({ vehicleId, manutencao, onUpdated }: Mainten
           <input
             value={oficina}
             onChange={(e) => setOficina(e.target.value)}
-            className="rounded border border-black/15 px-2 py-1 text-sm dark:border-white/20"
+            className="rounded border border-black/15 px-2 py-1 text-sm dark:border-white/25"
           />
         </label>
         <button

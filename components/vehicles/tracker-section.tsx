@@ -97,7 +97,7 @@ export function TrackerSection({ vehicleId }: TrackerSectionProps) {
   const webhookUrl = tracker && secret ? `${API_URL}/trackers/${tracker._id}/position?secret=${secret}` : null;
 
   return (
-    <div className="rounded border border-black/10 p-4 dark:border-white/10">
+    <div className="rounded border border-black/10 p-4 dark:border-white/15">
       <h2 className="mb-3 text-sm font-semibold">{t('tracker.title')}</h2>
 
       {!tracker && (
@@ -107,7 +107,7 @@ export function TrackerSection({ vehicleId }: TrackerSectionProps) {
             <select
               value={tipo}
               onChange={(e) => setTipo(e.target.value as TrackerType)}
-              className="rounded border border-black/15 px-2 py-1 text-sm dark:border-white/20"
+              className="rounded border border-black/15 px-2 py-1 text-sm dark:border-white/25"
             >
               {TRACKER_TYPE_OPTIONS.map((option) => (
                 <option key={option} value={option}>
@@ -124,7 +124,7 @@ export function TrackerSection({ vehicleId }: TrackerSectionProps) {
                 required
                 value={uniqueId}
                 onChange={(e) => setUniqueId(e.target.value)}
-                className="rounded border border-black/15 px-2 py-1 text-sm dark:border-white/20"
+                className="rounded border border-black/15 px-2 py-1 text-sm dark:border-white/25"
               />
             </label>
           )}
@@ -162,7 +162,7 @@ export function TrackerSection({ vehicleId }: TrackerSectionProps) {
                 type="button"
                 onClick={handleReveal}
                 disabled={revealing}
-                className="rounded border border-black/15 px-3 py-1.5 text-sm font-medium disabled:opacity-60 dark:border-white/20"
+                className="rounded border border-black/15 px-3 py-1.5 text-sm font-medium disabled:opacity-60 dark:border-white/25"
               >
                 {revealing ? t('form.saving') : t('tracker.revealSecret')}
               </button>
@@ -182,7 +182,7 @@ export function TrackerSection({ vehicleId }: TrackerSectionProps) {
                   required
                   value={lat}
                   onChange={(e) => setLat(e.target.value)}
-                  className="w-32 rounded border border-black/15 px-2 py-1 text-sm dark:border-white/20"
+                  className="w-32 rounded border border-black/15 px-2 py-1 text-sm dark:border-white/25"
                 />
               </label>
               <label className="flex flex-col gap-1">
@@ -193,7 +193,7 @@ export function TrackerSection({ vehicleId }: TrackerSectionProps) {
                   required
                   value={lng}
                   onChange={(e) => setLng(e.target.value)}
-                  className="w-32 rounded border border-black/15 px-2 py-1 text-sm dark:border-white/20"
+                  className="w-32 rounded border border-black/15 px-2 py-1 text-sm dark:border-white/25"
                 />
               </label>
               <button

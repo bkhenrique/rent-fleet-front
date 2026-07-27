@@ -32,7 +32,7 @@ export function FleetMap({ positions, vehiclesById, connected, fallbackCenter = 
     : fallbackCenter;
 
   return (
-    <div className="rounded border border-black/10 dark:border-white/10">
+    <div className="rounded border border-black/10 dark:border-white/15">
       <div className="flex items-center justify-between px-4 py-2 text-sm">
         <h2 className="font-semibold">{t('title')}</h2>
         <span className={connected ? 'text-green-700 dark:text-green-400' : 'text-foreground/50'}>

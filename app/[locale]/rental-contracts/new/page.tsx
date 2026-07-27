@@ -77,7 +77,7 @@ function NewRentalContractForm() {
             required
             value={vehicleId}
             onChange={(e) => setVehicleId(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           >
             {vehicles.map((vehicle) => (
               <option key={vehicle._id} value={vehicle._id}>
@@ -93,7 +93,7 @@ function NewRentalContractForm() {
             required
             value={customerId}
             onChange={(e) => setCustomerId(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           >
             {customers.map((customer) => (
               <option key={customer.id} value={customer.id}>
@@ -110,7 +110,7 @@ function NewRentalContractForm() {
             required
             value={dataInicio}
             onChange={(e) => setDataInicio(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           />
         </label>
 
@@ -121,7 +121,7 @@ function NewRentalContractForm() {
             required
             value={dataFim}
             onChange={(e) => setDataFim(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           />
         </label>
 
@@ -134,7 +134,7 @@ function NewRentalContractForm() {
             required
             value={valor}
             onChange={(e) => setValor(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           />
         </label>
 

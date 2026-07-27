@@ -31,7 +31,7 @@ export function OverviewCards({ vehicles, vehicleAlertCount, contractAlertCount 
       {cards.map((card) => (
         <div
           key={card.key}
-          className="rounded border border-black/10 px-4 py-3 dark:border-white/10"
+          className="rounded border border-black/10 px-4 py-3 dark:border-white/15"
         >
           <p className="text-2xl font-semibold">{card.value}</p>
           <p className="text-xs text-foreground/60">{t(card.key)}</p>

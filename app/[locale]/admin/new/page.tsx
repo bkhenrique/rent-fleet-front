@@ -73,7 +73,7 @@ function NewTenantForm() {
             required
             value={nome}
             onChange={(e) => setNome(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           />
         </label>
 
@@ -83,7 +83,7 @@ function NewTenantForm() {
             required
             value={documento}
             onChange={(e) => setDocumento(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           />
         </label>
 
@@ -92,7 +92,7 @@ function NewTenantForm() {
           <select
             value={ciclo}
             onChange={(e) => setCiclo(e.target.value as BillingCycle)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           >
             <option value="mensal">{t('ciclo.mensal')}</option>
             <option value="anual">{t('ciclo.anual')}</option>
@@ -105,7 +105,7 @@ function NewTenantForm() {
             <select
               value={pais}
               onChange={(e) => handlePaisChange(e.target.value as Country)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
             >
               {COUNTRIES.map((option) => (
                 <option key={option} value={option}>
@@ -120,7 +120,7 @@ function NewTenantForm() {
             <select
               value={moeda}
               onChange={(e) => setMoeda(e.target.value as Currency)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
             >
               {CURRENCIES.map((option) => (
                 <option key={option} value={option}>
@@ -131,7 +131,7 @@ function NewTenantForm() {
           </label>
         </div>
 
-        <fieldset className="flex flex-col gap-4 rounded border border-black/10 p-4 dark:border-white/10">
+        <fieldset className="flex flex-col gap-4 rounded border border-black/10 p-4 dark:border-white/15">
           <legend className="px-1 text-sm font-medium">{t('form.adminSectionTitle')}</legend>
 
           <label className="flex flex-col gap-1">
@@ -140,7 +140,7 @@ function NewTenantForm() {
               required
               value={adminName}
               onChange={(e) => setAdminName(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
             />
           </label>
 
@@ -151,7 +151,7 @@ function NewTenantForm() {
               required
               value={adminEmail}
               onChange={(e) => setAdminEmail(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
             />
           </label>
 
@@ -163,7 +163,7 @@ function NewTenantForm() {
               minLength={6}
               value={adminPassword}
               onChange={(e) => setAdminPassword(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
             />
           </label>
         </fieldset>

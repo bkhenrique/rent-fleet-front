@@ -65,7 +65,7 @@ function NewVehicleForm() {
             required
             value={placa}
             onChange={(e) => setPlaca(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           />
         </label>
 
@@ -75,7 +75,7 @@ function NewVehicleForm() {
             required
             value={marca}
             onChange={(e) => setMarca(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           />
         </label>
 
@@ -85,7 +85,7 @@ function NewVehicleForm() {
             required
             value={modelo}
             onChange={(e) => setModelo(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           />
         </label>
 
@@ -98,7 +98,7 @@ function NewVehicleForm() {
             max={CURRENT_YEAR + 1}
             value={ano}
             onChange={(e) => setAno(Number(e.target.value))}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           />
         </label>
 
@@ -107,11 +107,11 @@ function NewVehicleForm() {
           <input
             value={cor}
             onChange={(e) => setCor(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           />
         </label>
 
-        <fieldset className="flex flex-col gap-4 rounded border border-black/10 p-4 dark:border-white/10">
+        <fieldset className="flex flex-col gap-4 rounded border border-black/10 p-4 dark:border-white/15">
           <legend className="px-1 text-sm font-medium">{t('form.documentosSectionTitle')}</legend>
 
           <label className="flex flex-col gap-1">
@@ -120,7 +120,7 @@ function NewVehicleForm() {
               type="date"
               value={seguroValidade}
               onChange={(e) => setSeguroValidade(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
             />
           </label>
 
@@ -130,7 +130,7 @@ function NewVehicleForm() {
               type="date"
               value={itvValidade}
               onChange={(e) => setItvValidade(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
             />
           </label>
 
@@ -140,7 +140,7 @@ function NewVehicleForm() {
               type="date"
               value={licenciamentoValidade}
               onChange={(e) => setLicenciamentoValidade(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
             />
           </label>
         </fieldset>

@@ -130,7 +130,7 @@ function TenantDetail({ id }: { id: string }) {
             required
             value={nome}
             onChange={(e) => setNome(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           />
         </label>
 
@@ -140,7 +140,7 @@ function TenantDetail({ id }: { id: string }) {
             required
             value={documento}
             onChange={(e) => setDocumento(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           />
         </label>
 
@@ -149,7 +149,7 @@ function TenantDetail({ id }: { id: string }) {
           <select
             value={ciclo}
             onChange={(e) => setCiclo(e.target.value as BillingCycle)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           >
             <option value="mensal">{t('ciclo.mensal')}</option>
             <option value="anual">{t('ciclo.anual')}</option>
@@ -162,7 +162,7 @@ function TenantDetail({ id }: { id: string }) {
             <select
               value={pais}
               onChange={(e) => setPais(e.target.value as Country)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
             >
               {COUNTRIES.map((option) => (
                 <option key={option} value={option}>
@@ -177,7 +177,7 @@ function TenantDetail({ id }: { id: string }) {
             <select
               value={moeda}
               onChange={(e) => setMoeda(e.target.value as Currency)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
             >
               {CURRENCIES.map((option) => (
                 <option key={option} value={option}>
@@ -212,18 +212,18 @@ function TenantDetail({ id }: { id: string }) {
         type="button"
         onClick={handleMarkAsPaid}
         disabled={markingPaid}
-        className="mt-4 self-start rounded border border-black/15 px-4 py-2 text-sm font-medium disabled:opacity-60 dark:border-white/20"
+        className="mt-4 self-start rounded border border-black/15 px-4 py-2 text-sm font-medium disabled:opacity-60 dark:border-white/25"
       >
         {markingPaid ? t('detail.markingAsPaid') : t('detail.markAsPaid')}
       </button>
       {markPaidMessage && <p className="mt-2 text-sm text-green-700 dark:text-green-400">{markPaidMessage}</p>}
 
-      <fieldset className="mt-6 flex flex-col gap-3 rounded border border-black/10 p-4 dark:border-white/10">
+      <fieldset className="mt-6 flex flex-col gap-3 rounded border border-black/10 p-4 dark:border-white/15">
         <legend className="px-1 text-sm font-medium">{t('detail.changeStatusTitle')}</legend>
         <select
           value={status}
           onChange={(e) => setStatus(e.target.value as TenantStatus)}
-          className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+          className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
         >
           {STATUS_OPTIONS.map((option) => (
             <option key={option} value={option}>
@@ -235,7 +235,7 @@ function TenantDetail({ id }: { id: string }) {
           type="button"
           onClick={handleSaveStatus}
           disabled={savingStatus}
-          className="self-start rounded border border-black/15 px-4 py-2 text-sm font-medium disabled:opacity-60 dark:border-white/20"
+          className="self-start rounded border border-black/15 px-4 py-2 text-sm font-medium disabled:opacity-60 dark:border-white/25"
         >
           {savingStatus ? t('form.saving') : t('form.save')}
         </button>

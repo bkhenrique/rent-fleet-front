@@ -163,7 +163,7 @@ function VehicleDetail({ id }: { id: string }) {
               required
               value={placa}
               onChange={(e) => setPlaca(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
             />
           </label>
           <label className="flex flex-col gap-1">
@@ -173,7 +173,7 @@ function VehicleDetail({ id }: { id: string }) {
               required
               value={ano}
               onChange={(e) => setAno(Number(e.target.value))}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
             />
           </label>
           <label className="flex flex-col gap-1">
@@ -182,7 +182,7 @@ function VehicleDetail({ id }: { id: string }) {
               required
               value={marca}
               onChange={(e) => setMarca(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
             />
           </label>
           <label className="flex flex-col gap-1">
@@ -191,7 +191,7 @@ function VehicleDetail({ id }: { id: string }) {
               required
               value={modelo}
               onChange={(e) => setModelo(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
             />
           </label>
           <label className="flex flex-col gap-1">
@@ -199,7 +199,7 @@ function VehicleDetail({ id }: { id: string }) {
             <input
               value={cor}
               onChange={(e) => setCor(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
             />
           </label>
           <label className="flex flex-col gap-1">
@@ -207,7 +207,7 @@ function VehicleDetail({ id }: { id: string }) {
             <input
               value={chassi}
               onChange={(e) => setChassi(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
             />
           </label>
           <label className="flex flex-col gap-1">
@@ -215,7 +215,7 @@ function VehicleDetail({ id }: { id: string }) {
             <input
               value={cambio}
               onChange={(e) => setCambio(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
             />
           </label>
           <label className="flex flex-col gap-1">
@@ -223,7 +223,7 @@ function VehicleDetail({ id }: { id: string }) {
             <input
               value={combustivel}
               onChange={(e) => setCombustivel(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
             />
           </label>
           <label className="flex flex-col gap-1">
@@ -231,7 +231,7 @@ function VehicleDetail({ id }: { id: string }) {
             <select
               value={status}
               onChange={(e) => setStatus(e.target.value as VehicleStatus)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
             >
               {STATUS_OPTIONS.map((option) => (
                 <option key={option} value={option}>
@@ -242,7 +242,7 @@ function VehicleDetail({ id }: { id: string }) {
           </label>
         </div>
 
-        <fieldset className="flex flex-col gap-4 rounded border border-black/10 p-4 dark:border-white/10">
+        <fieldset className="flex flex-col gap-4 rounded border border-black/10 p-4 dark:border-white/15">
           <legend className="px-1 text-sm font-medium">{t('form.documentosSectionTitle')}</legend>
 
           <div className="grid grid-cols-3 gap-3">
@@ -254,7 +254,7 @@ function VehicleDetail({ id }: { id: string }) {
                 type="date"
                 value={seguroValidade}
                 onChange={(e) => setSeguroValidade(e.target.value)}
-                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/20"
+                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
               />
             </label>
             <label className="flex flex-col gap-1">
@@ -262,7 +262,7 @@ function VehicleDetail({ id }: { id: string }) {
               <input
                 value={seguroApolice}
                 onChange={(e) => setSeguroApolice(e.target.value)}
-                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/20"
+                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
               />
             </label>
             <label className="flex flex-col gap-1">
@@ -270,7 +270,7 @@ function VehicleDetail({ id }: { id: string }) {
               <input
                 value={seguroSeguradora}
                 onChange={(e) => setSeguroSeguradora(e.target.value)}
-                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/20"
+                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
               />
             </label>
           </div>
@@ -284,7 +284,7 @@ function VehicleDetail({ id }: { id: string }) {
                 type="date"
                 value={itvValidade}
                 onChange={(e) => setItvValidade(e.target.value)}
-                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/20"
+                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
               />
             </label>
             <label className="flex flex-col gap-1">
@@ -295,7 +295,7 @@ function VehicleDetail({ id }: { id: string }) {
                 type="date"
                 value={licenciamentoValidade}
                 onChange={(e) => setLicenciamentoValidade(e.target.value)}
-                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/20"
+                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
               />
             </label>
           </div>

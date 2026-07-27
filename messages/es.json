@@ -84,13 +84,21 @@
   },
   "nav": {
     "language": "Idioma",
-    "login": "Iniciar sesión"
+    "login": "Iniciar sesión",
+    "logout": "Cerrar sesión",
+    "painel": "Panel",
+    "veiculos": "Vehículos",
+    "clientes": "Clientes",
+    "contratos": "Contratos",
+    "locadoras": "Empresas de alquiler",
+    "role": {
+      "super_admin": "Super Admin",
+      "tenant_admin": "Administrador",
+      "tenant_staff": "Equipo"
+    }
   },
   "dashboard": {
     "title": "Panel de la empresa de alquiler",
-    "vehiclesLink": "Vehículos",
-    "customersLink": "Clientes",
-    "contractsLink": "Contratos",
     "loadError": "No se pudieron cargar los datos del panel.",
     "overview": {
       "total": "Vehículos",
@@ -177,6 +185,9 @@
       "changeStatusTitle": "Forzar estado manualmente",
       "lastPayment": "Último pago",
       "never": "Nunca"
+    },
+    "overview": {
+      "total": "Total de empresas"
     }
   },
   "vehicles": {

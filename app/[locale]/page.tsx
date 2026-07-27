@@ -101,7 +101,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
         </section>
 
-        <section className="border-t border-black/10 px-4 py-20 dark:border-white/10">
+        <section className="border-t border-black/10 px-4 py-20 dark:border-white/15">
           <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 lg:grid-cols-2">
             <Reveal className="order-2 lg:order-1">
               <FrustrationIllustration />
@@ -128,7 +128,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
         </section>
 
-        <section className="border-t border-black/10 px-4 py-20 dark:border-white/10">
+        <section className="border-t border-black/10 px-4 py-20 dark:border-white/15">
           <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 lg:grid-cols-2">
             <Reveal>
               <FleetMapIllustration liveLabel={t('hero.mapLive')} />
@@ -140,7 +140,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
         </section>
 
-        <section id="features" className="border-t border-black/10 px-4 py-20 dark:border-white/10">
+        <section id="features" className="border-t border-black/10 px-4 py-20 dark:border-white/15">
           <div className="mx-auto max-w-5xl">
             <Reveal>
               <h2 className="text-center text-2xl font-semibold sm:text-3xl">{t('features.title')}</h2>
@@ -148,7 +148,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {FEATURES.map(({ key, Icon, color }, index) => (
                 <Reveal key={key} delay={index * 80}>
-                  <div className="group flex h-full flex-col gap-3 rounded-xl border border-black/10 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-lg hover:shadow-accent/10 dark:border-white/10">
+                  <div className="group flex h-full flex-col gap-3 rounded-xl border border-black/10 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-lg hover:shadow-accent/10 dark:border-white/15">
                     <span className={`flex h-11 w-11 items-center justify-center rounded-lg ${color}`}>
                       <Icon />
                     </span>
@@ -161,7 +161,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
         </section>
 
-        <section className="border-t border-black/10 px-4 py-20 dark:border-white/10">
+        <section className="border-t border-black/10 px-4 py-20 dark:border-white/15">
           <div className="mx-auto max-w-5xl">
             <Reveal>
               <h2 className="text-center text-2xl font-semibold sm:text-3xl">{t('differentials.title')}</h2>
@@ -169,7 +169,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <div className="mt-12 grid gap-5 sm:grid-cols-3">
               {DIFFERENTIALS.map(({ key, Icon }, index) => (
                 <Reveal key={key} delay={index * 80}>
-                  <div className="flex h-full flex-col items-center gap-3 rounded-xl border border-black/10 p-6 text-center dark:border-white/10">
+                  <div className="flex h-full flex-col items-center gap-3 rounded-xl border border-black/10 p-6 text-center dark:border-white/15">
                     <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-green-500/10 text-green-600 dark:text-green-400">
                       <Icon />
                     </span>
@@ -181,7 +181,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
         </section>
 
-        <section className="relative border-t border-black/10 px-4 py-24 text-center dark:border-white/10">
+        <section className="relative border-t border-black/10 px-4 py-24 text-center dark:border-white/15">
           <div
             aria-hidden
             className="animate-drift absolute bottom-0 left-1/2 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-accent/10 blur-3xl"
@@ -201,7 +201,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </Reveal>
         </section>
 
-        <footer className="border-t border-black/10 px-4 py-8 text-center text-sm text-foreground/60 dark:border-white/10">
+        <footer className="border-t border-black/10 px-4 py-8 text-center text-sm text-foreground/60 dark:border-white/15">
           RentFleet © {new Date().getFullYear()} — {t('footer.rights')}
         </footer>
       </div>

@@ -29,6 +29,14 @@ function AdminTenantsList() {
       .catch(() => setError(true));
   }, [apiClient]);
 
+  const counts = {
+    total: tenants?.length ?? 0,
+    ativo: tenants?.filter((tenant) => tenant.status === 'ativo').length ?? 0,
+    inadimplente: tenants?.filter((tenant) => tenant.status === 'inadimplente').length ?? 0,
+    suspenso: tenants?.filter((tenant) => tenant.status === 'suspenso').length ?? 0,
+    cortesia: tenants?.filter((tenant) => tenant.status === 'cortesia').length ?? 0,
+  };
+
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">
       <div className="mb-6 flex items-center justify-between">
@@ -38,13 +46,22 @@ function AdminTenantsList() {
         </Link>
       </div>
 
+      <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-5">
+        {(['total', 'ativo', 'inadimplente', 'suspenso', 'cortesia'] as const).map((key) => (
+          <div key={key} className="rounded border border-black/10 px-4 py-3 dark:border-white/15">
+            <p className="text-2xl font-semibold">{counts[key]}</p>
+            <p className="text-xs text-foreground/60">{key === 'total' ? t('overview.total') : t(`status.${key}`)}</p>
+          </div>
+        ))}
+      </div>
+
       {error && <p className="text-sm text-red-600 dark:text-red-400">{t('loadError')}</p>}
       {tenants && tenants.length === 0 && <p className="text-sm text-foreground/60">{t('empty')}</p>}
 
       {tenants && tenants.length > 0 && (
         <table className="w-full border-collapse text-left text-sm">
           <thead>
-            <tr className="border-b border-black/10 dark:border-white/10">
+            <tr className="border-b border-black/10 dark:border-white/15">
               <th className="py-2 pr-4 font-medium">{t('table.nome')}</th>
               <th className="py-2 pr-4 font-medium">{t('table.documento')}</th>
               <th className="py-2 pr-4 font-medium">{t('table.status')}</th>

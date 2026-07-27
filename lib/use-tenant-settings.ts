@@ -6,6 +6,7 @@ import { useApiClient } from './use-api-client';
 import type { Country, Currency, Tenant } from './types/tenant';
 
 export interface TenantSettings {
+  nome: string;
   pais: Country;
   moeda: Currency;
 }
@@ -26,7 +27,7 @@ export function useTenantSettings(): TenantSettings | null {
     inflight ??= apiClient<Tenant>('/tenants/me');
     inflight
       .then((tenant) => {
-        cache = { pais: tenant.pais, moeda: tenant.moeda };
+        cache = { nome: tenant.nome, pais: tenant.pais, moeda: tenant.moeda };
         setSettings(cache);
       })
       .catch(() => {

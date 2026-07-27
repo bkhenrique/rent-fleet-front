@@ -305,8 +305,8 @@ export function FleetMapIllustration({ liveLabel }: { liveLabel: string }) {
         className="animate-drift absolute -inset-6 -z-10 rounded-[2rem] bg-accent/20 blur-3xl"
       />
 
-      <div className="relative overflow-hidden rounded-2xl border border-black/10 bg-background/80 shadow-2xl shadow-black/20 backdrop-blur dark:border-white/10">
-        <div className="flex items-center justify-between border-b border-black/10 px-4 py-3 dark:border-white/10">
+      <div className="relative overflow-hidden rounded-2xl border border-black/10 bg-background/80 shadow-2xl shadow-black/20 backdrop-blur dark:border-white/15">
+        <div className="flex items-center justify-between border-b border-black/10 px-4 py-3 dark:border-white/15">
           <div className="flex gap-1.5">
             <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
             <span className="h-2.5 w-2.5 rounded-full bg-amber-400/70" />

@@ -84,13 +84,21 @@
   },
   "nav": {
     "language": "Language",
-    "login": "Sign in"
+    "login": "Sign in",
+    "logout": "Sign out",
+    "painel": "Dashboard",
+    "veiculos": "Vehicles",
+    "clientes": "Customers",
+    "contratos": "Contracts",
+    "locadoras": "Rental companies",
+    "role": {
+      "super_admin": "Super Admin",
+      "tenant_admin": "Admin",
+      "tenant_staff": "Staff"
+    }
   },
   "dashboard": {
     "title": "Rental company dashboard",
-    "vehiclesLink": "Vehicles",
-    "customersLink": "Customers",
-    "contractsLink": "Contracts",
     "loadError": "Couldn't load the dashboard data.",
     "overview": {
       "total": "Vehicles",
@@ -177,6 +185,9 @@
       "changeStatusTitle": "Force status manually",
       "lastPayment": "Last payment",
       "never": "Never"
+    },
+    "overview": {
+      "total": "Total rental companies"
     }
   },
   "vehicles": {

@@ -39,7 +39,7 @@ export function LeadForm() {
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           placeholder={t('emailPlaceholder')}
-          className="w-full flex-1 rounded-full border border-black/15 bg-background px-4 py-2.5 text-sm outline-none focus:border-accent dark:border-white/20"
+          className="w-full flex-1 rounded-full border border-black/15 bg-background px-4 py-2.5 text-sm outline-none focus:border-accent dark:border-white/25"
         />
         <button
           type="submit"

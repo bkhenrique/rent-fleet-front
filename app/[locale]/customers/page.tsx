@@ -36,7 +36,7 @@ function CustomersList() {
       {customers && customers.length > 0 && (
         <table className="w-full border-collapse text-left text-sm">
           <thead>
-            <tr className="border-b border-black/10 dark:border-white/10">
+            <tr className="border-b border-black/10 dark:border-white/15">
               <th className="py-2 pr-4 font-medium">{t('table.nome')}</th>
               <th className="py-2 pr-4 font-medium">{t('table.documento')}</th>
               <th className="py-2 pr-4 font-medium">{t('table.telefone')}</th>

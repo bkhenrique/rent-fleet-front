@@ -92,7 +92,7 @@ function CustomerDetail({ id }: { id: string }) {
             required
             value={nome}
             onChange={(e) => setNome(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           />
         </label>
         <label className="flex flex-col gap-1">
@@ -101,7 +101,7 @@ function CustomerDetail({ id }: { id: string }) {
             required
             value={documento}
             onChange={(e) => setDocumento(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           />
         </label>
         <label className="flex flex-col gap-1">
@@ -109,7 +109,7 @@ function CustomerDetail({ id }: { id: string }) {
           <input
             value={cnh}
             onChange={(e) => setCnh(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           />
         </label>
         <label className="flex flex-col gap-1">
@@ -117,7 +117,7 @@ function CustomerDetail({ id }: { id: string }) {
           <input
             value={telefone}
             onChange={(e) => setTelefone(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           />
         </label>
         <label className="flex flex-col gap-1">
@@ -126,7 +126,7 @@ function CustomerDetail({ id }: { id: string }) {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           />
         </label>
 

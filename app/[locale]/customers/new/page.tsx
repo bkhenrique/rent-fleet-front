@@ -56,7 +56,7 @@ function NewCustomerForm() {
             required
             value={nome}
             onChange={(e) => setNome(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           />
         </label>
 
@@ -66,7 +66,7 @@ function NewCustomerForm() {
             required
             value={documento}
             onChange={(e) => setDocumento(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           />
         </label>
 
@@ -75,7 +75,7 @@ function NewCustomerForm() {
           <input
             value={cnh}
             onChange={(e) => setCnh(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           />
         </label>
 
@@ -84,7 +84,7 @@ function NewCustomerForm() {
           <input
             value={telefone}
             onChange={(e) => setTelefone(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           />
         </label>
 
@@ -94,7 +94,7 @@ function NewCustomerForm() {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/20"
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           />
         </label>
 
