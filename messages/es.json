@@ -4,10 +4,11 @@
   },
   "landing": {
     "hero": {
+      "badge": "Pensado para empresas de alquiler de coches",
       "title": "Tu flota de alquiler, por fin bajo control",
       "subtitle": "Vehículos, contratos y ubicación en tiempo real, todo en un mismo lugar — pensado para empresas de alquiler de cualquier tamaño.",
-      "cta": "Soy una empresa de alquiler",
-      "ctaSecondary": "Saber más"
+      "scrollCta": "Ver cómo funciona",
+      "mapLive": "En vivo"
     },
     "problem": {
       "title": "El problema de gestionar la flota en una hoja de cálculo",
@@ -46,7 +47,8 @@
     },
     "ctaFinal": {
       "title": "¿Listo para organizar tu flota?",
-      "cta": "Soy una empresa de alquiler"
+      "subtitle": "¿Ya eres cliente de RentFleet? Accede al panel de tu empresa.",
+      "cta": "Iniciar sesión"
     },
     "footer": {
       "rights": "Todos los derechos reservados."
@@ -71,7 +73,8 @@
     "loadError": "No se pudieron cargar los datos de la empresa."
   },
   "nav": {
-    "language": "Idioma"
+    "language": "Idioma",
+    "login": "Iniciar sesión"
   },
   "dashboard": {
     "title": "Panel de la empresa de alquiler",

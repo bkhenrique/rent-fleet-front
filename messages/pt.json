@@ -4,10 +4,11 @@
   },
   "landing": {
     "hero": {
+      "badge": "Feito para locadoras de carro",
       "title": "Sua frota de aluguel, sob controle",
       "subtitle": "Veículos, contratos e localização em tempo real — em um só lugar, feito pra locadoras de qualquer tamanho.",
-      "cta": "Sou Locadora",
-      "ctaSecondary": "Saiba mais"
+      "scrollCta": "Ver como funciona",
+      "mapLive": "Ao vivo"
     },
     "problem": {
       "title": "O problema de gerenciar frota em planilha",
@@ -46,7 +47,8 @@
     },
     "ctaFinal": {
       "title": "Pronto pra organizar sua frota?",
-      "cta": "Sou Locadora"
+      "subtitle": "Já é cliente RentFleet? Acesse o painel da sua locadora.",
+      "cta": "Entrar"
     },
     "footer": {
       "rights": "Todos os direitos reservados."
@@ -71,7 +73,8 @@
     "loadError": "Não foi possível carregar os dados da locadora."
   },
   "nav": {
-    "language": "Idioma"
+    "language": "Idioma",
+    "login": "Entrar"
   },
   "dashboard": {
     "title": "Painel da locadora",

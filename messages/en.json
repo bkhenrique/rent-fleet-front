@@ -4,10 +4,11 @@
   },
   "landing": {
     "hero": {
+      "badge": "Built for car rental companies",
       "title": "Your rental fleet, finally under control",
       "subtitle": "Vehicles, contracts and real-time location, all in one place — built for rental companies of any size.",
-      "cta": "I'm a Rental Company",
-      "ctaSecondary": "Learn more"
+      "scrollCta": "See how it works",
+      "mapLive": "Live"
     },
     "problem": {
       "title": "Running a fleet on spreadsheets is a problem",
@@ -46,7 +47,8 @@
     },
     "ctaFinal": {
       "title": "Ready to get your fleet organized?",
-      "cta": "I'm a Rental Company"
+      "subtitle": "Already a RentFleet customer? Access your rental company's dashboard.",
+      "cta": "Sign in"
     },
     "footer": {
       "rights": "All rights reserved."
@@ -71,7 +73,8 @@
     "loadError": "Couldn't load the rental company's data."
   },
   "nav": {
-    "language": "Language"
+    "language": "Language",
+    "login": "Sign in"
   },
   "dashboard": {
     "title": "Rental company dashboard",
