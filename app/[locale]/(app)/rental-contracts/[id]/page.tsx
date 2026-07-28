@@ -19,6 +19,7 @@ const ASSINATURA_COLORS: Record<string, string> = {
   aguardando_cliente: 'text-amber-700 dark:text-amber-400',
   aguardando_locadora: 'text-amber-700 dark:text-amber-400',
   assinado: 'text-green-700 dark:text-green-400',
+  assinado_manual: 'text-green-700 dark:text-green-400',
 };
 
 function RentalContractDetail({ id }: { id: string }) {
@@ -40,21 +41,6 @@ function RentalContractDetail({ id }: { id: string }) {
   const [devolucaoCombustivel, setDevolucaoCombustivel] = useState<FuelLevel | ''>('');
   const [returning, setReturning] = useState(false);
   const [actionError, setActionError] = useState<string | null>(null);
-
-  const [regeneratingPdf, setRegeneratingPdf] = useState(false);
-
-  async function handleRegeneratePdf() {
-    setRegeneratingPdf(true);
-    setActionError(null);
-    try {
-      const updated = await apiClient<RentalContract>(`/rental-contracts/${id}/gerar-pdf`, { method: 'POST' });
-      setContract(updated);
-    } catch {
-      setActionError(t('detail.regeneratePdfError'));
-    } finally {
-      setRegeneratingPdf(false);
-    }
-  }
 
   function loadContract() {
     apiClient<RentalContract>(`/rental-contracts/${id}`)
@@ -180,31 +166,21 @@ function RentalContractDetail({ id }: { id: string }) {
         </div>
       )}
 
-      <div className="flex flex-wrap items-center gap-3">
-        {contract.contratoPdfUrl && (
-          <a
-            href={contract.contratoPdfUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="self-start rounded border border-black/15 px-4 py-2 text-sm font-medium dark:border-white/25"
-          >
-            {t('detail.openPdf')}
-          </a>
-        )}
-        <button
-          type="button"
-          onClick={handleRegeneratePdf}
-          disabled={regeneratingPdf}
-          className="self-start rounded border border-black/15 px-4 py-2 text-sm font-medium disabled:opacity-60 dark:border-white/25"
+      {contract.contratoPdfUrl && (
+        <a
+          href={contract.contratoPdfUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="self-start rounded border border-black/15 px-4 py-2 text-sm font-medium dark:border-white/25"
         >
-          {regeneratingPdf ? t('detail.regeneratingPdf') : t('detail.regeneratePdf')}
-        </button>
-      </div>
-      {actionError && <p className="text-sm text-red-600 dark:text-red-400">{actionError}</p>}
+          {t('detail.openPdf')}
+        </a>
+      )}
 
       <DigitalSignatureSection
         contractId={contract.id}
         assinaturaDigital={contract.assinaturaDigital}
+        contratoAssinadoFotoUrls={contract.contratoAssinadoFotoUrls}
         onUpdated={loadContract}
       />
 

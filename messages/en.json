@@ -581,9 +581,6 @@
       "title": "Contract details",
       "dataDevolucaoReal": "Actual return",
       "openPdf": "Open contract PDF",
-      "regeneratePdf": "Refresh PDF",
-      "regeneratingPdf": "Refreshing...",
-      "regeneratePdfError": "Couldn't refresh the PDF. Please try again.",
       "assinaturaTitle": "Signed contract photo",
       "vistoriaEntregaTitle": "Handover inspection",
       "vistoriaDevolucaoTitle": "Return inspection",
@@ -616,8 +613,11 @@
           "nao_iniciado": "Not started",
           "aguardando_cliente": "Awaiting customer",
           "aguardando_locadora": "Awaiting company",
-          "assinado": "Signed"
+          "assinado": "Signed",
+          "assinado_manual": "Signed (by hand)"
         },
+        "manualHint": "This contract was signed by hand — the attached photo counts as the signature, no need for the digital flow.",
+        "manualFoto": "Signed contract photo",
         "generateLink": "Generate signing link",
         "regenerateLink": "Generate new link",
         "generating": "Generating...",

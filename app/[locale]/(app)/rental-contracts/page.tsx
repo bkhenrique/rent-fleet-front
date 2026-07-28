@@ -22,6 +22,7 @@ const ASSINATURA_COLORS: Record<string, string> = {
   aguardando_cliente: 'text-amber-700 dark:text-amber-400',
   aguardando_locadora: 'text-amber-700 dark:text-amber-400',
   assinado: 'text-green-700 dark:text-green-400',
+  assinado_manual: 'text-green-700 dark:text-green-400',
 };
 
 function RentalContractsList() {

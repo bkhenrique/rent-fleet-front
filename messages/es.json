@@ -581,9 +581,6 @@
       "title": "Detalles del contrato",
       "dataDevolucaoReal": "Devolución real",
       "openPdf": "Abrir PDF del contrato",
-      "regeneratePdf": "Actualizar PDF",
-      "regeneratingPdf": "Actualizando...",
-      "regeneratePdfError": "No se pudo actualizar el PDF. Inténtalo de nuevo.",
       "assinaturaTitle": "Foto del contrato firmado",
       "vistoriaEntregaTitle": "Inspección de entrega",
       "vistoriaDevolucaoTitle": "Inspección de devolución",
@@ -616,8 +613,11 @@
           "nao_iniciado": "No iniciado",
           "aguardando_cliente": "Esperando al cliente",
           "aguardando_locadora": "Esperando a la empresa",
-          "assinado": "Firmado"
+          "assinado": "Firmado",
+          "assinado_manual": "Firmado (a mano)"
         },
+        "manualHint": "Este contrato se firmó a mano — la foto adjunta abajo cuenta como firma, no hace falta el flujo digital.",
+        "manualFoto": "Foto del contrato firmado",
         "generateLink": "Generar enlace de firma",
         "regenerateLink": "Generar nuevo enlace",
         "generating": "Generando...",

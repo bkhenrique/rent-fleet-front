@@ -6,7 +6,12 @@ export type AttachmentPurpose = 'assinatura' | 'vistoria_entrega' | 'vistoria_de
 
 export type FuelLevel = 'cheio' | 'tres_quartos' | 'metade' | 'um_quarto' | 'reserva';
 
-export type DigitalSignatureStatus = 'nao_iniciado' | 'aguardando_cliente' | 'aguardando_locadora' | 'assinado';
+export type DigitalSignatureStatus =
+  | 'nao_iniciado'
+  | 'aguardando_cliente'
+  | 'aguardando_locadora'
+  | 'assinado'
+  | 'assinado_manual';
 
 export interface DigitalSignatureClienteInfo {
   assinadoEm: string;

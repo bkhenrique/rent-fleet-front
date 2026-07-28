@@ -10,6 +10,9 @@ import type { UploadUrlResult } from '@/lib/types/storage';
 interface DigitalSignatureSectionProps {
   contractId: string;
   assinaturaDigital: AssinaturaDigital;
+  /** Fotos do contrato assinado à mão (upload manual) — mostradas aqui quando `status` é
+   * `assinado_manual`, pra não precisar procurar na seção separada de "Foto do contrato assinado". */
+  contratoAssinadoFotoUrls: string[];
   onUpdated: () => void;
 }
 
@@ -19,7 +22,12 @@ interface SessionLink {
   expiraEm: string;
 }
 
-export function DigitalSignatureSection({ contractId, assinaturaDigital, onUpdated }: DigitalSignatureSectionProps) {
+export function DigitalSignatureSection({
+  contractId,
+  assinaturaDigital,
+  contratoAssinadoFotoUrls,
+  onUpdated,
+}: DigitalSignatureSectionProps) {
   const t = useTranslations('rentalContracts.detail.assinaturaDigital');
   const locale = useLocale();
   const apiClient = useApiClient();
@@ -194,6 +202,20 @@ export function DigitalSignatureSection({ contractId, assinaturaDigital, onUpdat
                 alt={t('locadoraEvidenceTitle')}
                 className="h-28 w-52 rounded bg-white object-contain"
               />
+            </div>
+          )}
+        </div>
+      )}
+
+      {status === 'assinado_manual' && (
+        <div className="flex flex-col gap-2">
+          <p className="text-sm text-foreground/70">{t('manualHint')}</p>
+          {contratoAssinadoFotoUrls.length > 0 && (
+            <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
+              {contratoAssinadoFotoUrls.map((url) => (
+                // eslint-disable-next-line @next/next/no-img-element -- URL assinada externa do MinIO
+                <img key={url} src={url} alt={t('manualFoto')} className="aspect-square rounded object-cover" />
+              ))}
             </div>
           )}
         </div>
