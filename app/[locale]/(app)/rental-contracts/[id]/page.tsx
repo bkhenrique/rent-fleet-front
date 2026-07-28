@@ -14,6 +14,13 @@ import type { FuelLevel, RentalContract } from '@/lib/types/rental-contract';
 
 const FUEL_LEVEL_OPTIONS: FuelLevel[] = ['cheio', 'tres_quartos', 'metade', 'um_quarto', 'reserva'];
 
+const ASSINATURA_COLORS: Record<string, string> = {
+  nao_iniciado: 'text-foreground/50',
+  aguardando_cliente: 'text-amber-700 dark:text-amber-400',
+  aguardando_locadora: 'text-amber-700 dark:text-amber-400',
+  assinado: 'text-green-700 dark:text-green-400',
+};
+
 function RentalContractDetail({ id }: { id: string }) {
   const t = useTranslations('rentalContracts');
   const locale = useLocale();
@@ -135,6 +142,10 @@ function RentalContractDetail({ id }: { id: string }) {
         <dd>{tenantSettings ? formatCurrency(contract.valor, tenantSettings.moeda) : contract.valor}</dd>
         <dt className="font-medium">{t('table.status')}</dt>
         <dd>{t(`status.${contract.status}`)}</dd>
+        <dt className="font-medium">{t('table.assinatura')}</dt>
+        <dd className={ASSINATURA_COLORS[contract.assinaturaDigital.status]}>
+          {t(`detail.assinaturaDigital.statusLabel.${contract.assinaturaDigital.status}`)}
+        </dd>
         {contract.dataDevolucaoReal && (
           <>
             <dt className="font-medium">{t('detail.dataDevolucaoReal')}</dt>

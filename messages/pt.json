@@ -537,7 +537,8 @@
       "veiculo": "Veículo",
       "cliente": "Cliente",
       "valor": "Valor",
-      "status": "Status"
+      "status": "Status",
+      "assinatura": "Assinatura"
     },
     "statusFilter": {
       "todos": "Todos",

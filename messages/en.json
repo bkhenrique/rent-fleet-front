@@ -537,7 +537,8 @@
       "veiculo": "Vehicle",
       "cliente": "Customer",
       "valor": "Amount",
-      "status": "Status"
+      "status": "Status",
+      "assinatura": "Signature"
     },
     "statusFilter": {
       "todos": "All",

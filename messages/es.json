@@ -537,7 +537,8 @@
       "veiculo": "Vehículo",
       "cliente": "Cliente",
       "valor": "Importe",
-      "status": "Estado"
+      "status": "Estado",
+      "assinatura": "Firma"
     },
     "statusFilter": {
       "todos": "Todos",

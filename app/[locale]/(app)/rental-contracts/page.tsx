@@ -17,6 +17,13 @@ function daysRemaining(dateStr: string): number {
   return Math.ceil((new Date(dateStr).getTime() - Date.now()) / (1000 * 60 * 60 * 24));
 }
 
+const ASSINATURA_COLORS: Record<string, string> = {
+  nao_iniciado: 'text-foreground/50',
+  aguardando_cliente: 'text-amber-700 dark:text-amber-400',
+  aguardando_locadora: 'text-amber-700 dark:text-amber-400',
+  assinado: 'text-green-700 dark:text-green-400',
+};
+
 function RentalContractsList() {
   const t = useTranslations('rentalContracts');
   const locale = useLocale();
@@ -106,6 +113,7 @@ function RentalContractsList() {
               <th className="py-2 pr-4 font-medium">{t('table.cliente')}</th>
               <th className="py-2 pr-4 font-medium">{t('table.valor')}</th>
               <th className="py-2 pr-4 font-medium">{t('table.status')}</th>
+              <th className="py-2 pr-4 font-medium">{t('table.assinatura')}</th>
             </tr>
           </thead>
           <tbody>
@@ -148,6 +156,9 @@ function RentalContractsList() {
                     {tenantSettings ? formatCurrency(contract.valor, tenantSettings.moeda) : contract.valor}
                   </td>
                   <td className="py-2 pr-4">{t(`status.${contract.status}`)}</td>
+                  <td className={`py-2 pr-4 font-medium ${ASSINATURA_COLORS[contract.assinaturaDigital.status]}`}>
+                    {t(`detail.assinaturaDigital.statusLabel.${contract.assinaturaDigital.status}`)}
+                  </td>
                 </tr>
               );
             })}
