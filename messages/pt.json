@@ -172,8 +172,15 @@
     },
     "contact": {
       "title": "Sua frota organizada ainda esta semana",
-      "subtitle": "Deixe seu e-mail: a gente monta uma demonstração com os seus carros.",
+      "subtitle": "Deixe seus dados: a gente monta uma demonstração com os seus carros.",
+      "namePlaceholder": "Seu nome",
       "emailPlaceholder": "voce@sualocadora.com",
+      "phoneLabel": "Telefone",
+      "fleetSizePlaceholder": "Quantos carros tem a frota?",
+      "messagePlaceholder": "Alguma dúvida? Escreva aqui (opcional)",
+      "countryBR": "Brasil (+55)",
+      "countryES": "España (+34)",
+      "countryUS": "United States (+1)",
       "submit": "Agendar demonstração",
       "submitting": "Enviando...",
       "success": "Recebido ✓",
@@ -598,6 +605,35 @@
         "metade": "1/2",
         "um_quarto": "1/4",
         "reserva": "Reserva"
+      },
+      "assinaturaDigital": {
+        "sectionTitle": "Assinatura digital",
+        "statusLabel": {
+          "nao_iniciado": "Não iniciado",
+          "aguardando_cliente": "Aguardando cliente",
+          "aguardando_locadora": "Aguardando locadora",
+          "assinado": "Assinado"
+        },
+        "generateLink": "Gerar link de assinatura",
+        "regenerateLink": "Gerar novo link",
+        "generating": "Gerando...",
+        "generateError": "Não foi possível gerar o link.",
+        "linkLabel": "Link de assinatura",
+        "copy": "Copiar",
+        "copied": "Copiado!",
+        "expiresAt": "Expira às {time}",
+        "linkActiveNoToken": "Link ativo, expira às {time}. Gere um novo link se precisar reenviar.",
+        "notStartedHint": "Gere um link para o cliente assinar o contrato remotamente.",
+        "waitingClient": "Aguardando o cliente concluir a assinatura.",
+        "clienteEvidenceTitle": "Evidências enviadas pelo cliente",
+        "documentoFoto": "Documento",
+        "selfieFoto": "Selfie",
+        "assinaturaCliente": "Assinatura do cliente",
+        "signedAt": "Assinado em {date}",
+        "locadoraSignTitle": "Assinatura da locadora",
+        "locadoraSignButton": "Confirmar assinatura da locadora",
+        "signError": "Não foi possível confirmar a assinatura.",
+        "locadoraEvidenceTitle": "Assinatura da locadora"
       }
     },
     "attachments": {
@@ -608,6 +644,84 @@
       "unsupportedType": "Formato não suportado. Use JPEG, PNG, WebP, MP4 ou WebM.",
       "fileTooLarge": "Arquivo muito grande. Fotos até 15MB, vídeos até 80MB.",
       "videoTooLong": "Vídeo muito longo. Grave até 45 segundos (dá pra girar ao redor do carro nesse tempo)."
+    }
+  },
+  "signaturePad": {
+    "hint": "Desenhe sua assinatura acima usando o dedo ou o mouse.",
+    "clear": "Limpar",
+    "confirming": "Enviando..."
+  },
+  "publicContract": {
+    "sign": {
+      "title": "Assinatura do contrato de aluguel",
+      "subtitle": "Confira os dados abaixo e conclua sua assinatura em poucos passos.",
+      "loading": "Carregando...",
+      "notFound": {
+        "title": "Link não encontrado",
+        "message": "Este link não existe ou é inválido."
+      },
+      "expired": {
+        "title": "Link expirado",
+        "message": "Este link expirou. Peça um novo link à locadora."
+      },
+      "alreadySigned": {
+        "title": "Contrato já assinado",
+        "message": "Você já assinou este contrato. Obrigado!"
+      },
+      "success": {
+        "title": "Assinado com sucesso!",
+        "message": "Recebemos sua assinatura. A locadora irá concluir o processo em breve."
+      },
+      "summary": {
+        "cliente": "Cliente",
+        "veiculo": "Veículo",
+        "periodo": "Período",
+        "valor": "Valor"
+      },
+      "privacyNotice": "Suas fotos e assinatura serão usadas exclusivamente para formalizar este contrato de aluguel.",
+      "step1": {
+        "title": "1. Documento",
+        "hint": "Tire uma foto legível do seu documento de identidade.",
+        "capture": "Tirar foto do documento",
+        "retake": "Tirar outra foto"
+      },
+      "step2": {
+        "title": "2. Selfie",
+        "hint": "Tire uma selfie segurando o documento de identidade.",
+        "capture": "Tirar selfie",
+        "retake": "Tirar outra selfie"
+      },
+      "step3": {
+        "title": "3. Assinatura",
+        "hint": "Desenhe sua assinatura no campo abaixo.",
+        "confirm": "Confirmar assinatura",
+        "redo": "Refazer assinatura"
+      },
+      "uploading": "Enviando...",
+      "submit": "Enviar assinatura",
+      "submitting": "Enviando...",
+      "errors": {
+        "unsupportedType": "Formato não suportado. Use JPEG, PNG ou WebP.",
+        "fileTooLarge": "Arquivo muito grande. Máximo de 15MB.",
+        "uploadError": "Não foi possível enviar o arquivo. Tente novamente.",
+        "submitError": "Não foi possível enviar a assinatura. Tente novamente."
+      }
+    },
+    "view": {
+      "title": "Contrato assinado",
+      "subtitle": "Confira o resumo abaixo e baixe o contrato assinado em PDF.",
+      "loading": "Carregando...",
+      "notFound": {
+        "title": "Link não encontrado",
+        "message": "Link não encontrado ou inválido."
+      },
+      "summary": {
+        "cliente": "Cliente",
+        "veiculo": "Veículo",
+        "periodo": "Período",
+        "valor": "Valor"
+      },
+      "download": "Baixar contrato assinado"
     }
   },
   "account": {

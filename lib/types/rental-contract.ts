@@ -1,8 +1,73 @@
+import type { Currency } from './tenant';
+
 export type RentalContractStatus = 'ativo' | 'finalizado';
 
 export type AttachmentPurpose = 'assinatura' | 'vistoria_entrega' | 'vistoria_devolucao';
 
 export type FuelLevel = 'cheio' | 'tres_quartos' | 'metade' | 'um_quarto' | 'reserva';
+
+export type DigitalSignatureStatus = 'nao_iniciado' | 'aguardando_cliente' | 'aguardando_locadora' | 'assinado';
+
+export interface DigitalSignatureClienteInfo {
+  assinadoEm: string;
+  documentoFotoUrl: string;
+  selfieFotoUrl: string;
+  assinaturaImagemUrl: string;
+}
+
+export interface DigitalSignatureLocadoraInfo {
+  assinadoEm: string;
+  assinaturaImagemUrl: string;
+}
+
+export interface AssinaturaDigital {
+  status: DigitalSignatureStatus;
+  /** `true` quando existe um link de assinatura gerado, ainda não expirado e não usado pelo cliente. */
+  linkAtivo: boolean;
+  linkExpiraEm: string | null;
+  cliente: DigitalSignatureClienteInfo | null;
+  locadora: DigitalSignatureLocadoraInfo | null;
+}
+
+export interface GerarLinkAssinaturaResult {
+  token: string;
+  expiraEm: string;
+}
+
+/** Resumo mostrado na tela pública de assinatura (`GET /public/contratos/assinar/:token`, status `pendente`). */
+export interface PublicSignatureSummary {
+  veiculo: { placa: string; marca: string; modelo: string };
+  dataInicio: string;
+  dataFim: string;
+  valor: number;
+  moeda: Currency;
+  clienteNome: string;
+}
+
+export type PublicSignatureView =
+  | { status: 'ja_assinado' }
+  | { status: 'expirado' }
+  | { status: 'pendente'; resumo: PublicSignatureSummary };
+
+export type PublicUploadPurpose = 'documento' | 'selfie' | 'assinatura';
+
+export interface PublicSignPayload {
+  documentoKey: string;
+  selfieKey: string;
+  assinaturaKey: string;
+}
+
+/** Resumo mostrado na tela pública de visualização do contrato final (`GET /public/contratos/visualizar/:token`). */
+export interface PublicContractView {
+  veiculo: { placa: string; marca: string; modelo: string };
+  clienteNome: string;
+  dataInicio: string;
+  dataFim: string;
+  valor: number;
+  moeda: Currency;
+  /** URL assinada de vida curta (15min), gerada na hora — nunca cachear, buscar de novo a cada load. */
+  pdfUrl: string;
+}
 
 export interface VistoriaInfo {
   fotosUrls: string[];
@@ -39,6 +104,7 @@ export interface RentalContract {
   vistoriaDevolucao: VistoriaInfo;
   veiculo: { placa: string; marca: string; modelo: string } | null;
   clienteNome: string | null;
+  assinaturaDigital: AssinaturaDigital;
   createdAt: string;
   updatedAt: string;
 }

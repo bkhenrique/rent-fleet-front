@@ -9,6 +9,7 @@ import { useApiClient } from '@/lib/use-api-client';
 import { useTenantSettings } from '@/lib/use-tenant-settings';
 import { formatCurrency } from '@/lib/currency';
 import { AttachmentUpload } from '@/components/rental-contracts/attachment-upload';
+import { DigitalSignatureSection } from '@/components/rental-contracts/digital-signature-section';
 import type { FuelLevel, RentalContract } from '@/lib/types/rental-contract';
 
 const FUEL_LEVEL_OPTIONS: FuelLevel[] = ['cheio', 'tres_quartos', 'metade', 'um_quarto', 'reserva'];
@@ -163,6 +164,12 @@ function RentalContractDetail({ id }: { id: string }) {
           {t('detail.openPdf')}
         </a>
       )}
+
+      <DigitalSignatureSection
+        contractId={contract.id}
+        assinaturaDigital={contract.assinaturaDigital}
+        onUpdated={loadContract}
+      />
 
       <div className="rounded border border-black/10 p-4 dark:border-white/15">
         <h2 className="mb-3 text-sm font-semibold">{t('detail.assinaturaTitle')}</h2>

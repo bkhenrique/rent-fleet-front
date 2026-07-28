@@ -172,8 +172,15 @@
     },
     "contact": {
       "title": "Tu flota organizada esta misma semana",
-      "subtitle": "Déjanos tu correo: te preparamos una demo con tus propios coches.",
+      "subtitle": "Déjanos tus datos: te preparamos una demo con tus propios coches.",
+      "namePlaceholder": "Tu nombre",
       "emailPlaceholder": "tu@tuempresadealquiler.com",
+      "phoneLabel": "Teléfono",
+      "fleetSizePlaceholder": "¿Cuántos coches tiene la flota?",
+      "messagePlaceholder": "¿Alguna duda? Escríbela aquí (opcional)",
+      "countryBR": "Brasil (+55)",
+      "countryES": "España (+34)",
+      "countryUS": "Estados Unidos (+1)",
       "submit": "Agendar demo",
       "submitting": "Enviando...",
       "success": "Recibido ✓",
@@ -598,6 +605,35 @@
         "metade": "1/2",
         "um_quarto": "1/4",
         "reserva": "Reserva"
+      },
+      "assinaturaDigital": {
+        "sectionTitle": "Firma digital",
+        "statusLabel": {
+          "nao_iniciado": "No iniciado",
+          "aguardando_cliente": "Esperando al cliente",
+          "aguardando_locadora": "Esperando a la empresa",
+          "assinado": "Firmado"
+        },
+        "generateLink": "Generar enlace de firma",
+        "regenerateLink": "Generar nuevo enlace",
+        "generating": "Generando...",
+        "generateError": "No se pudo generar el enlace.",
+        "linkLabel": "Enlace de firma",
+        "copy": "Copiar",
+        "copied": "¡Copiado!",
+        "expiresAt": "Expira a las {time}",
+        "linkActiveNoToken": "Enlace activo, expira a las {time}. Genera un enlace nuevo si necesitas reenviarlo.",
+        "notStartedHint": "Genera un enlace para que el cliente firme el contrato de forma remota.",
+        "waitingClient": "Esperando a que el cliente complete la firma.",
+        "clienteEvidenceTitle": "Evidencias enviadas por el cliente",
+        "documentoFoto": "Documento",
+        "selfieFoto": "Selfie",
+        "assinaturaCliente": "Firma del cliente",
+        "signedAt": "Firmado el {date}",
+        "locadoraSignTitle": "Firma de la empresa",
+        "locadoraSignButton": "Confirmar firma de la empresa",
+        "signError": "No se pudo confirmar la firma.",
+        "locadoraEvidenceTitle": "Firma de la empresa"
       }
     },
     "attachments": {
@@ -608,6 +644,84 @@
       "unsupportedType": "Formato no compatible. Usa JPEG, PNG, WebP, MP4 o WebM.",
       "fileTooLarge": "Archivo demasiado grande. Fotos hasta 15MB, vídeos hasta 80MB.",
       "videoTooLong": "Vídeo demasiado largo. Grábalo en hasta 45 segundos (da tiempo a rodear el coche)."
+    }
+  },
+  "signaturePad": {
+    "hint": "Dibuja tu firma arriba usando el dedo o el ratón.",
+    "clear": "Borrar",
+    "confirming": "Enviando..."
+  },
+  "publicContract": {
+    "sign": {
+      "title": "Firma del contrato de alquiler",
+      "subtitle": "Revisa los datos a continuación y completa tu firma en pocos pasos.",
+      "loading": "Cargando...",
+      "notFound": {
+        "title": "Enlace no encontrado",
+        "message": "Este enlace no existe o no es válido."
+      },
+      "expired": {
+        "title": "Enlace caducado",
+        "message": "Este enlace ha caducado. Pide un nuevo enlace a la empresa de alquiler."
+      },
+      "alreadySigned": {
+        "title": "Contrato ya firmado",
+        "message": "Ya has firmado este contrato. ¡Gracias!"
+      },
+      "success": {
+        "title": "¡Firmado con éxito!",
+        "message": "Recibimos tu firma. La empresa de alquiler completará el proceso en breve."
+      },
+      "summary": {
+        "cliente": "Cliente",
+        "veiculo": "Vehículo",
+        "periodo": "Periodo",
+        "valor": "Importe"
+      },
+      "privacyNotice": "Tus fotos y firma se usarán exclusivamente para formalizar este contrato de alquiler.",
+      "step1": {
+        "title": "1. Documento",
+        "hint": "Haz una foto legible de tu documento de identidad.",
+        "capture": "Hacer foto del documento",
+        "retake": "Hacer otra foto"
+      },
+      "step2": {
+        "title": "2. Selfie",
+        "hint": "Hazte un selfie sujetando tu documento de identidad.",
+        "capture": "Hacer selfie",
+        "retake": "Hacer otro selfie"
+      },
+      "step3": {
+        "title": "3. Firma",
+        "hint": "Dibuja tu firma en el campo de abajo.",
+        "confirm": "Confirmar firma",
+        "redo": "Rehacer firma"
+      },
+      "uploading": "Subiendo...",
+      "submit": "Enviar firma",
+      "submitting": "Enviando...",
+      "errors": {
+        "unsupportedType": "Formato no compatible. Usa JPEG, PNG o WebP.",
+        "fileTooLarge": "Archivo demasiado grande. Máximo 15MB.",
+        "uploadError": "No se pudo subir el archivo. Inténtalo de nuevo.",
+        "submitError": "No se pudo enviar la firma. Inténtalo de nuevo."
+      }
+    },
+    "view": {
+      "title": "Contrato firmado",
+      "subtitle": "Revisa el resumen a continuación y descarga el contrato firmado en PDF.",
+      "loading": "Cargando...",
+      "notFound": {
+        "title": "Enlace no encontrado",
+        "message": "Enlace no encontrado o no válido."
+      },
+      "summary": {
+        "cliente": "Cliente",
+        "veiculo": "Vehículo",
+        "periodo": "Periodo",
+        "valor": "Importe"
+      },
+      "download": "Descargar contrato firmado"
     }
   },
   "account": {

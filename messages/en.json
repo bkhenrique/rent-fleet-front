@@ -172,8 +172,15 @@
     },
     "contact": {
       "title": "Your fleet organized by the end of this week",
-      "subtitle": "Leave your email — we'll set up a demo with your own cars.",
+      "subtitle": "Leave your details — we'll set up a demo with your own cars.",
+      "namePlaceholder": "Your name",
       "emailPlaceholder": "you@yourrentalcompany.com",
+      "phoneLabel": "Phone",
+      "fleetSizePlaceholder": "How many cars in your fleet?",
+      "messagePlaceholder": "Any question? Write it here (optional)",
+      "countryBR": "Brazil (+55)",
+      "countryES": "Spain (+34)",
+      "countryUS": "United States (+1)",
       "submit": "Book a demo",
       "submitting": "Sending...",
       "success": "Got it ✓",
@@ -598,6 +605,35 @@
         "metade": "1/2",
         "um_quarto": "1/4",
         "reserva": "Reserve"
+      },
+      "assinaturaDigital": {
+        "sectionTitle": "Digital signature",
+        "statusLabel": {
+          "nao_iniciado": "Not started",
+          "aguardando_cliente": "Awaiting customer",
+          "aguardando_locadora": "Awaiting company",
+          "assinado": "Signed"
+        },
+        "generateLink": "Generate signing link",
+        "regenerateLink": "Generate new link",
+        "generating": "Generating...",
+        "generateError": "Could not generate the link.",
+        "linkLabel": "Signing link",
+        "copy": "Copy",
+        "copied": "Copied!",
+        "expiresAt": "Expires at {time}",
+        "linkActiveNoToken": "Link active, expires at {time}. Generate a new link if you need to resend it.",
+        "notStartedHint": "Generate a link so the customer can sign the contract remotely.",
+        "waitingClient": "Waiting for the customer to complete the signature.",
+        "clienteEvidenceTitle": "Evidence submitted by the customer",
+        "documentoFoto": "Document",
+        "selfieFoto": "Selfie",
+        "assinaturaCliente": "Customer's signature",
+        "signedAt": "Signed on {date}",
+        "locadoraSignTitle": "Company signature",
+        "locadoraSignButton": "Confirm company signature",
+        "signError": "Could not confirm the signature.",
+        "locadoraEvidenceTitle": "Company signature"
       }
     },
     "attachments": {
@@ -608,6 +644,84 @@
       "unsupportedType": "Unsupported format. Use JPEG, PNG, WebP, MP4 or WebM.",
       "fileTooLarge": "File too large. Photos up to 15MB, videos up to 80MB.",
       "videoTooLong": "Video too long. Keep it under 45 seconds (enough time to walk around the car)."
+    }
+  },
+  "signaturePad": {
+    "hint": "Draw your signature above using your finger or mouse.",
+    "clear": "Clear",
+    "confirming": "Sending..."
+  },
+  "publicContract": {
+    "sign": {
+      "title": "Sign the rental contract",
+      "subtitle": "Check the details below and complete your signature in a few steps.",
+      "loading": "Loading...",
+      "notFound": {
+        "title": "Link not found",
+        "message": "This link doesn't exist or is invalid."
+      },
+      "expired": {
+        "title": "Link expired",
+        "message": "This link has expired. Ask the rental company for a new link."
+      },
+      "alreadySigned": {
+        "title": "Contract already signed",
+        "message": "You've already signed this contract. Thank you!"
+      },
+      "success": {
+        "title": "Signed successfully!",
+        "message": "We received your signature. The rental company will complete the process shortly."
+      },
+      "summary": {
+        "cliente": "Customer",
+        "veiculo": "Vehicle",
+        "periodo": "Period",
+        "valor": "Amount"
+      },
+      "privacyNotice": "Your photos and signature will be used exclusively to formalize this rental contract.",
+      "step1": {
+        "title": "1. Document",
+        "hint": "Take a clear photo of your ID document.",
+        "capture": "Take document photo",
+        "retake": "Take another photo"
+      },
+      "step2": {
+        "title": "2. Selfie",
+        "hint": "Take a selfie holding your ID document.",
+        "capture": "Take selfie",
+        "retake": "Take another selfie"
+      },
+      "step3": {
+        "title": "3. Signature",
+        "hint": "Draw your signature in the field below.",
+        "confirm": "Confirm signature",
+        "redo": "Redo signature"
+      },
+      "uploading": "Uploading...",
+      "submit": "Submit signature",
+      "submitting": "Submitting...",
+      "errors": {
+        "unsupportedType": "Unsupported format. Use JPEG, PNG or WebP.",
+        "fileTooLarge": "File too large. Maximum of 15MB.",
+        "uploadError": "Couldn't upload the file. Please try again.",
+        "submitError": "Couldn't submit the signature. Please try again."
+      }
+    },
+    "view": {
+      "title": "Signed contract",
+      "subtitle": "Check the summary below and download the signed PDF contract.",
+      "loading": "Loading...",
+      "notFound": {
+        "title": "Link not found",
+        "message": "Link not found or invalid."
+      },
+      "summary": {
+        "cliente": "Customer",
+        "veiculo": "Vehicle",
+        "periodo": "Period",
+        "valor": "Amount"
+      },
+      "download": "Download signed contract"
     }
   },
   "account": {
