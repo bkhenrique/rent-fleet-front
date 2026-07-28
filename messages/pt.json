@@ -319,15 +319,26 @@
       "markAsPaid": "Marcar como pago",
       "markingAsPaid": "Marcando...",
       "markPaidSuccess": "Pagamento registrado.",
+      "confirmMarkAsPaid": "Confirmar pagamento",
+      "markPaidValor": "Valor recebido",
+      "markPaidValorHint": "Deixe em branco para marcar como pago sem informar valor.",
       "changeStatusTitle": "Forçar status manualmente",
       "lastPayment": "Último pagamento",
       "never": "Nunca",
-      "valorNaoDefinido": "Valor não definido"
+      "valorNaoDefinido": "Valor não definido",
+      "paymentsHistoryTitle": "Histórico de pagamentos",
+      "paymentsHistoryEmpty": "Nenhum pagamento registrado ainda.",
+      "paymentsHistoryDate": "Data"
     },
     "overview": {
       "total": "Total de locadoras",
       "totalVeiculos": "Total de veículos",
-      "mrr": "MRR estimado (por moeda)"
+      "mrr": "MRR estimado (por moeda)",
+      "receivedInMonth": "Recebido em {month}",
+      "monthlyReportTitle": "Relatório mensal de pagamentos recebidos",
+      "monthlyReportEmpty": "Nenhum pagamento registrado ainda.",
+      "monthlyReportMonth": "Mês",
+      "monthlyReportTotal": "Total recebido"
     }
   },
   "vehicles": {

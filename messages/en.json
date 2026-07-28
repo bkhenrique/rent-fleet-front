@@ -319,15 +319,26 @@
       "markAsPaid": "Mark as paid",
       "markingAsPaid": "Marking...",
       "markPaidSuccess": "Payment recorded.",
+      "confirmMarkAsPaid": "Confirm payment",
+      "markPaidValor": "Amount received",
+      "markPaidValorHint": "Leave blank to mark as paid without recording an amount.",
       "changeStatusTitle": "Force status manually",
       "lastPayment": "Last payment",
       "never": "Never",
-      "valorNaoDefinido": "Amount not set"
+      "valorNaoDefinido": "Amount not set",
+      "paymentsHistoryTitle": "Payment history",
+      "paymentsHistoryEmpty": "No payments recorded yet.",
+      "paymentsHistoryDate": "Date"
     },
     "overview": {
       "total": "Total rental companies",
       "totalVeiculos": "Total vehicles",
-      "mrr": "Estimated MRR (per currency)"
+      "mrr": "Estimated MRR (per currency)",
+      "receivedInMonth": "Received in {month}",
+      "monthlyReportTitle": "Monthly payments received report",
+      "monthlyReportEmpty": "No payments recorded yet.",
+      "monthlyReportMonth": "Month",
+      "monthlyReportTotal": "Total received"
     }
   },
   "vehicles": {

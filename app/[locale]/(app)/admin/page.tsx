@@ -7,7 +7,7 @@ import { RequireRole } from '@/components/require-role';
 import { SUPER_ADMIN_ONLY } from '@/lib/roles';
 import { useApiClient } from '@/lib/use-api-client';
 import { formatCurrency } from '@/lib/currency';
-import type { Currency, Tenant, TenantStatus } from '@/lib/types/tenant';
+import type { Currency, PaymentsReportEntry, Tenant, TenantStatus } from '@/lib/types/tenant';
 
 const STATUS_COLORS: Record<TenantStatus, string> = {
   ativo: 'text-green-700 dark:text-green-400',
@@ -24,10 +24,26 @@ function AdminTenantsList() {
   const [tenants, setTenants] = useState<Tenant[] | null>(null);
   const [error, setError] = useState(false);
 
+  const [currentMonthEntry, setCurrentMonthEntry] = useState<PaymentsReportEntry | null | undefined>(undefined);
+  const [monthlyReport, setMonthlyReport] = useState<PaymentsReportEntry[] | null>(null);
+  const [reportError, setReportError] = useState(false);
+
   useEffect(() => {
     apiClient<Tenant[]>('/tenants')
       .then(setTenants)
       .catch(() => setError(true));
+  }, [apiClient]);
+
+  useEffect(() => {
+    apiClient<PaymentsReportEntry[]>('/tenants/payments-report?meses=1')
+      .then((entries) => setCurrentMonthEntry(entries[0] ?? null))
+      .catch(() => setCurrentMonthEntry(null));
+  }, [apiClient]);
+
+  useEffect(() => {
+    apiClient<PaymentsReportEntry[]>('/tenants/payments-report?meses=12')
+      .then(setMonthlyReport)
+      .catch(() => setReportError(true));
   }, [apiClient]);
 
   const counts = {
@@ -46,6 +62,21 @@ function AdminTenantsList() {
     return acc;
   }, {});
   const mrrEntries = Object.entries(mrrByCurrency) as [Currency, number][];
+
+  /** Junta valores por moeda no mesmo padrão visual usado pelo card de MRR (" · " entre moedas). */
+  function formatByCurrency(porMoeda: Record<string, number>): string {
+    const entries = Object.entries(porMoeda) as [Currency, number][];
+    if (entries.length === 0) return '—';
+    return entries.map(([currency, total]) => formatCurrency(total, currency)).join(' · ');
+  }
+
+  function formatMonthLabel(mes: string): string {
+    const [ano, mesNumero] = mes.split('-').map(Number);
+    const date = new Date(ano, mesNumero - 1, 1);
+    return new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' }).format(date);
+  }
+
+  const currentMonthLabel = new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' }).format(new Date());
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">
@@ -76,6 +107,39 @@ function AdminTenantsList() {
           )}
           <p className="text-xs text-foreground/60">{t('overview.mrr')}</p>
         </div>
+
+        <div className="rounded border border-black/10 px-4 py-3 dark:border-white/15">
+          <p className="text-lg font-semibold">
+            {currentMonthEntry === undefined ? '—' : formatByCurrency(currentMonthEntry?.porMoeda ?? {})}
+          </p>
+          <p className="text-xs text-foreground/60">{t('overview.receivedInMonth', { month: currentMonthLabel })}</p>
+        </div>
+      </div>
+
+      <div className="mb-6">
+        <h2 className="mb-3 text-sm font-semibold">{t('overview.monthlyReportTitle')}</h2>
+        {reportError && <p className="text-sm text-red-600 dark:text-red-400">{t('loadError')}</p>}
+        {monthlyReport && monthlyReport.length === 0 && (
+          <p className="text-sm text-foreground/60">{t('overview.monthlyReportEmpty')}</p>
+        )}
+        {monthlyReport && monthlyReport.length > 0 && (
+          <table className="w-full border-collapse text-left text-sm">
+            <thead>
+              <tr className="border-b border-black/10 dark:border-white/15">
+                <th className="py-2 pr-4 font-medium">{t('overview.monthlyReportMonth')}</th>
+                <th className="py-2 pr-4 font-medium">{t('overview.monthlyReportTotal')}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {monthlyReport.map((entry) => (
+                <tr key={entry.mes} className="border-b border-black/5 dark:border-white/5">
+                  <td className="py-2 pr-4 capitalize">{formatMonthLabel(entry.mes)}</td>
+                  <td className="py-2 pr-4">{formatByCurrency(entry.porMoeda)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
 
       {error && <p className="text-sm text-red-600 dark:text-red-400">{t('loadError')}</p>}

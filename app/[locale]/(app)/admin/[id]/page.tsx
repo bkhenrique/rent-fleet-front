@@ -7,7 +7,15 @@ import { RequireRole } from '@/components/require-role';
 import { SUPER_ADMIN_ONLY } from '@/lib/roles';
 import { useApiClient } from '@/lib/use-api-client';
 import { formatCurrency } from '@/lib/currency';
-import type { BillingCycle, Country, Currency, Tenant, TenantStatus, UpdateTenantPayload } from '@/lib/types/tenant';
+import type {
+  BillingCycle,
+  Country,
+  Currency,
+  Tenant,
+  TenantPayment,
+  TenantStatus,
+  UpdateTenantPayload,
+} from '@/lib/types/tenant';
 
 const STATUS_OPTIONS: TenantStatus[] = ['ativo', 'inadimplente', 'suspenso', 'cortesia'];
 const COUNTRIES: Country[] = ['BR', 'ES', 'US'];
@@ -38,6 +46,12 @@ function TenantDetail({ id }: { id: string }) {
   const [formError, setFormError] = useState<string | null>(null);
   const [markPaidMessage, setMarkPaidMessage] = useState<string | null>(null);
 
+  const [showMarkPaidConfirm, setShowMarkPaidConfirm] = useState(false);
+  const [markPaidValor, setMarkPaidValor] = useState('');
+
+  const [payments, setPayments] = useState<TenantPayment[] | null>(null);
+  const [paymentsError, setPaymentsError] = useState(false);
+
   function loadTenant() {
     apiClient<Tenant[]>('/tenants')
       .then((tenants) => {
@@ -61,7 +75,17 @@ function TenantDetail({ id }: { id: string }) {
       .catch(() => setLoadError(true));
   }
 
+  function loadPayments() {
+    apiClient<TenantPayment[]>(`/tenants/${id}/payments`)
+      .then((data) => {
+        setPayments(data);
+        setPaymentsError(false);
+      })
+      .catch(() => setPaymentsError(true));
+  }
+
   useEffect(loadTenant, [id]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(loadPayments, [id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function handleSaveForm(event: FormEvent) {
     event.preventDefault();
@@ -107,14 +131,30 @@ function TenantDetail({ id }: { id: string }) {
     }
   }
 
-  async function handleMarkAsPaid() {
+  function handleOpenMarkPaidConfirm() {
+    setMarkPaidMessage(null);
+    setMarkPaidValor(tenant?.billing.valor === null || tenant?.billing.valor === undefined ? '' : String(tenant.billing.valor));
+    setShowMarkPaidConfirm(true);
+  }
+
+  function handleCancelMarkPaidConfirm() {
+    setShowMarkPaidConfirm(false);
+  }
+
+  async function handleConfirmMarkAsPaid() {
     setMarkingPaid(true);
     setMarkPaidMessage(null);
     try {
-      const updated = await apiClient<Tenant>(`/tenants/${id}/mark-paid`, { method: 'POST' });
+      const body = markPaidValor === '' ? {} : { valor: Number(markPaidValor) };
+      const updated = await apiClient<Tenant>(`/tenants/${id}/mark-paid`, {
+        method: 'POST',
+        body: JSON.stringify(body),
+      });
       setTenant(updated);
       setStatus(updated.status);
       setMarkPaidMessage(t('detail.markPaidSuccess'));
+      setShowMarkPaidConfirm(false);
+      loadPayments();
     } catch {
       setFormError(t('form.genericError'));
     } finally {
@@ -284,15 +324,81 @@ function TenantDetail({ id }: { id: string }) {
         </dd>
       </dl>
 
-      <button
-        type="button"
-        onClick={handleMarkAsPaid}
-        disabled={markingPaid}
-        className="mt-4 self-start rounded border border-black/15 px-4 py-2 text-sm font-medium disabled:opacity-60 dark:border-white/25"
-      >
-        {markingPaid ? t('detail.markingAsPaid') : t('detail.markAsPaid')}
-      </button>
+      {!showMarkPaidConfirm && (
+        <button
+          type="button"
+          onClick={handleOpenMarkPaidConfirm}
+          className="mt-4 self-start rounded border border-black/15 px-4 py-2 text-sm font-medium disabled:opacity-60 dark:border-white/25"
+        >
+          {t('detail.markAsPaid')}
+        </button>
+      )}
+
+      {showMarkPaidConfirm && (
+        <div className="mt-4 flex flex-col gap-3 rounded border border-black/10 p-4 dark:border-white/15">
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-medium">{t('detail.markPaidValor')}</span>
+            <input
+              type="number"
+              min="0"
+              step="0.01"
+              value={markPaidValor}
+              onChange={(e) => setMarkPaidValor(e.target.value)}
+              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            />
+            <span className="text-xs text-foreground/60">{t('detail.markPaidValorHint')}</span>
+          </label>
+          <div className="flex gap-3">
+            <button
+              type="button"
+              onClick={handleConfirmMarkAsPaid}
+              disabled={markingPaid}
+              className="self-start rounded bg-accent px-4 py-2 text-sm font-medium text-accent-foreground disabled:opacity-60"
+            >
+              {markingPaid ? t('detail.markingAsPaid') : t('detail.confirmMarkAsPaid')}
+            </button>
+            <button
+              type="button"
+              onClick={handleCancelMarkPaidConfirm}
+              disabled={markingPaid}
+              className="self-start rounded border border-black/15 px-4 py-2 text-sm font-medium disabled:opacity-60 dark:border-white/25"
+            >
+              {t('form.cancel')}
+            </button>
+          </div>
+        </div>
+      )}
       {markPaidMessage && <p className="mt-2 text-sm text-green-700 dark:text-green-400">{markPaidMessage}</p>}
+
+      <div className="mt-8">
+        <h2 className="mb-3 text-sm font-semibold">{t('detail.paymentsHistoryTitle')}</h2>
+        {paymentsError && <p className="text-sm text-red-600 dark:text-red-400">{t('loadError')}</p>}
+        {payments && payments.length === 0 && (
+          <p className="text-sm text-foreground/60">{t('detail.paymentsHistoryEmpty')}</p>
+        )}
+        {payments && payments.length > 0 && (
+          <table className="w-full border-collapse text-left text-sm">
+            <thead>
+              <tr className="border-b border-black/10 dark:border-white/15">
+                <th className="py-2 pr-4 font-medium">{t('detail.paymentsHistoryDate')}</th>
+                <th className="py-2 pr-4 font-medium">{t('table.valor')}</th>
+                <th className="py-2 pr-4 font-medium">{t('form.ciclo')}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {payments.map((payment) => (
+                <tr key={payment._id} className="border-b border-black/5 dark:border-white/5">
+                  <td className="py-2 pr-4">{new Date(payment.createdAt).toLocaleDateString(locale)}</td>
+                  <td className="py-2 pr-4">
+                    {payment.valor === null ? '—' : formatCurrency(payment.valor, payment.moeda)}
+                  </td>
+                  <td className="py-2 pr-4">{t(`ciclo.${payment.cicloNoMomento}`)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
 
       <fieldset className="mt-6 flex flex-col gap-3 rounded border border-black/10 p-4 dark:border-white/15">
         <legend className="px-1 text-sm font-medium">{t('detail.changeStatusTitle')}</legend>

@@ -319,15 +319,26 @@
       "markAsPaid": "Marcar como pagado",
       "markingAsPaid": "Marcando...",
       "markPaidSuccess": "Pago registrado.",
+      "confirmMarkAsPaid": "Confirmar pago",
+      "markPaidValor": "Importe recibido",
+      "markPaidValorHint": "Déjalo en blanco para marcar como pagado sin indicar un importe.",
       "changeStatusTitle": "Forzar estado manualmente",
       "lastPayment": "Último pago",
       "never": "Nunca",
-      "valorNaoDefinido": "Importe no definido"
+      "valorNaoDefinido": "Importe no definido",
+      "paymentsHistoryTitle": "Historial de pagos",
+      "paymentsHistoryEmpty": "Todavía no hay pagos registrados.",
+      "paymentsHistoryDate": "Fecha"
     },
     "overview": {
       "total": "Total de empresas",
       "totalVeiculos": "Total de vehículos",
-      "mrr": "MRR estimado (por moneda)"
+      "mrr": "MRR estimado (por moneda)",
+      "receivedInMonth": "Recibido en {month}",
+      "monthlyReportTitle": "Informe mensual de pagos recibidos",
+      "monthlyReportEmpty": "Todavía no hay pagos registrados.",
+      "monthlyReportMonth": "Mes",
+      "monthlyReportTotal": "Total recibido"
     }
   },
   "vehicles": {
