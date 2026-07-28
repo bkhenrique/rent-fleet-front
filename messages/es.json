@@ -292,12 +292,18 @@
       "ES": "España",
       "US": "EE. UU."
     },
+    "idioma": {
+      "pt": "Portugués",
+      "en": "Inglés",
+      "es": "Español"
+    },
     "form": {
       "nome": "Nombre",
       "documento": "Documento",
       "ciclo": "Ciclo de cobro",
       "pais": "País",
       "moeda": "Moneda",
+      "idiomaPadrao": "Idioma predeterminado del contrato",
       "valor": "Importe",
       "valorHint": "Importe cobrado en ese ciclo, en la moneda seleccionada (opcional).",
       "adminSectionTitle": "Usuario administrador de la empresa",
@@ -490,7 +496,6 @@
       "endereco": "Dirección",
       "dataNascimento": "Fecha de nacimiento",
       "tipoDocumento": "Tipo de documento",
-      "cnhSectionTitle": "Carné de conducir",
       "cnhNumero": "Número",
       "cnhCategoria": "Categoría",
       "cnhValidade": "Vencimiento"

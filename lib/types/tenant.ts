@@ -31,6 +31,7 @@ export interface CreateTenantPayload {
   ciclo: BillingCycle;
   pais: Country;
   moeda?: Currency;
+  idiomaPadrao?: 'pt' | 'en' | 'es';
   valor?: number;
   enderecoFiscal?: string;
   telefone?: string;
@@ -47,6 +48,7 @@ export interface UpdateTenantPayload {
   ciclo?: BillingCycle;
   pais?: Country;
   moeda?: Currency;
+  idiomaPadrao?: 'pt' | 'en' | 'es';
   valor?: number;
   enderecoFiscal?: string;
   telefone?: string;

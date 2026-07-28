@@ -292,12 +292,18 @@
       "ES": "Spain",
       "US": "USA"
     },
+    "idioma": {
+      "pt": "Portuguese",
+      "en": "English",
+      "es": "Spanish"
+    },
     "form": {
       "nome": "Name",
       "documento": "Document",
       "ciclo": "Billing cycle",
       "pais": "Country",
       "moeda": "Currency",
+      "idiomaPadrao": "Default contract language",
       "valor": "Amount",
       "valorHint": "Amount charged in this cycle, in the selected currency (optional).",
       "adminSectionTitle": "Rental company admin user",
@@ -490,7 +496,6 @@
       "endereco": "Address",
       "dataNascimento": "Date of birth",
       "tipoDocumento": "Document type",
-      "cnhSectionTitle": "Driver's license",
       "cnhNumero": "Number",
       "cnhCategoria": "Category",
       "cnhValidade": "Expiry"

@@ -292,12 +292,18 @@
       "ES": "Espanha",
       "US": "EUA"
     },
+    "idioma": {
+      "pt": "Português",
+      "en": "Inglês",
+      "es": "Espanhol"
+    },
     "form": {
       "nome": "Nome",
       "documento": "Documento",
       "ciclo": "Ciclo de cobrança",
       "pais": "País",
       "moeda": "Moeda",
+      "idiomaPadrao": "Idioma padrão do contrato",
       "valor": "Valor",
       "valorHint": "Valor cobrado nesse ciclo, na moeda selecionada (opcional).",
       "adminSectionTitle": "Usuário administrador da locadora",
@@ -490,7 +496,6 @@
       "endereco": "Endereço",
       "dataNascimento": "Data de nascimento",
       "tipoDocumento": "Tipo de documento",
-      "cnhSectionTitle": "CNH",
       "cnhNumero": "Número",
       "cnhCategoria": "Categoria",
       "cnhValidade": "Validade"

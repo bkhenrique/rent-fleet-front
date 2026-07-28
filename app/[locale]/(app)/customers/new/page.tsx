@@ -124,7 +124,7 @@ function NewCustomerForm() {
         </label>
 
         <fieldset className="flex flex-col gap-4 rounded border border-black/10 p-4 dark:border-white/15">
-          <legend className="px-1 text-sm font-medium">{t('form.cnhSectionTitle')}</legend>
+          <legend className="px-1 text-sm font-medium">{t(`tipoDocumentoOptions.${tipoDocumento}`)}</legend>
           <div className={`grid gap-3 ${showCategoria ? 'grid-cols-3' : 'grid-cols-2'}`}>
             <label className="flex flex-col gap-1">
               <span className="text-xs font-medium">{t('form.cnhNumero')}</span>

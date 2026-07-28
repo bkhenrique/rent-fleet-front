@@ -10,9 +10,13 @@ import { ApiError } from '@/lib/api-client';
 import { formatCurrency } from '@/lib/currency';
 import type { BillingCycle, Country, CreateTenantPayload, Currency, Tenant } from '@/lib/types/tenant';
 
+type TenantLocale = 'pt' | 'en' | 'es';
+
 const COUNTRIES: Country[] = ['BR', 'ES', 'US'];
 const CURRENCIES: Currency[] = ['BRL', 'EUR', 'USD'];
+const TENANT_LOCALES: TenantLocale[] = ['pt', 'en', 'es'];
 const DEFAULT_CURRENCY_BY_COUNTRY: Record<Country, Currency> = { BR: 'BRL', ES: 'EUR', US: 'USD' };
+const DEFAULT_LOCALE_BY_COUNTRY: Record<Country, TenantLocale> = { BR: 'pt', ES: 'es', US: 'en' };
 
 function NewTenantForm() {
   const t = useTranslations('admin');
@@ -24,6 +28,7 @@ function NewTenantForm() {
   const [ciclo, setCiclo] = useState<BillingCycle>('mensal');
   const [pais, setPais] = useState<Country>('BR');
   const [moeda, setMoeda] = useState<Currency>('BRL');
+  const [idiomaPadrao, setIdiomaPadrao] = useState<TenantLocale>('pt');
   const [valor, setValor] = useState('');
   const [enderecoFiscal, setEnderecoFiscal] = useState('');
   const [telefone, setTelefone] = useState('');
@@ -36,6 +41,7 @@ function NewTenantForm() {
   function handlePaisChange(value: Country) {
     setPais(value);
     setMoeda(DEFAULT_CURRENCY_BY_COUNTRY[value]);
+    setIdiomaPadrao(DEFAULT_LOCALE_BY_COUNTRY[value]);
   }
 
   async function handleSubmit(event: FormEvent) {
@@ -49,6 +55,7 @@ function NewTenantForm() {
       ciclo,
       pais,
       moeda,
+      idiomaPadrao,
       valor: valor ? Number(valor) : undefined,
       enderecoFiscal: enderecoFiscal || undefined,
       telefone: telefone || undefined,
@@ -154,6 +161,21 @@ function NewTenantForm() {
             </select>
           </label>
         </div>
+
+        <label className="flex flex-col gap-1">
+          <span className="text-sm font-medium">{t('form.idiomaPadrao')}</span>
+          <select
+            value={idiomaPadrao}
+            onChange={(e) => setIdiomaPadrao(e.target.value as TenantLocale)}
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+          >
+            {TENANT_LOCALES.map((option) => (
+              <option key={option} value={option}>
+                {t(`idioma.${option}`)}
+              </option>
+            ))}
+          </select>
+        </label>
 
         <fieldset className="flex flex-col gap-4 rounded border border-black/10 p-4 dark:border-white/15">
           <legend className="px-1 text-sm font-medium">{t('form.fiscalSectionTitle')}</legend>
