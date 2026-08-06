@@ -13,6 +13,7 @@ const TENANT_NAV_LINKS = [
   { href: '/vehicles', key: 'veiculos' },
   { href: '/customers', key: 'clientes' },
   { href: '/rental-contracts', key: 'contratos' },
+  { href: '/finance', key: 'financeiro' },
 ] as const;
 
 const TENANT_ADMIN_NAV_LINKS = [{ href: '/team', key: 'equipe' }] as const;
@@ -104,6 +105,14 @@ export function SiteHeader() {
                 {user.name} · {t(`role.${user.role}`)}
                 {tenantSettings ? ` · ${tenantSettings.nome}` : ''}
               </span>
+              {user.role === 'tenant_admin' && (
+                <Link
+                  href="/account/profile"
+                  className={`rounded-xs text-foreground-dim transition-colors hover:text-foreground ${FOCUS_RING}`}
+                >
+                  {t('profile')}
+                </Link>
+              )}
               <Link
                 href="/account/password"
                 className={`rounded-xs text-foreground-dim transition-colors hover:text-foreground ${FOCUS_RING}`}
@@ -177,6 +186,14 @@ export function SiteHeader() {
                 {user.name} · {t(`role.${user.role}`)}
                 {tenantSettings ? ` · ${tenantSettings.nome}` : ''}
               </span>
+              {user.role === 'tenant_admin' && (
+                <Link
+                  href="/account/profile"
+                  className={`rounded-md px-2 py-2 text-left text-sm text-foreground-dim hover:bg-surface ${FOCUS_RING}`}
+                >
+                  {t('profile')}
+                </Link>
+              )}
               <Link
                 href="/account/password"
                 className={`rounded-md px-2 py-2 text-left text-sm text-foreground-dim hover:bg-surface ${FOCUS_RING}`}

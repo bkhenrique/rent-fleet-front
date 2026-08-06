@@ -2,6 +2,11 @@
   "app": {
     "name": "RentFleet"
   },
+  "contact": {
+    "call": "Call",
+    "whatsapp": "WhatsApp",
+    "email": "Send email"
+  },
   "landing": {
     "nav": {
       "custo": "The cost of winging it",
@@ -218,8 +223,10 @@
     "veiculos": "Vehicles",
     "clientes": "Customers",
     "contratos": "Contracts",
+    "financeiro": "Finance",
     "locadoras": "Rental companies",
     "equipe": "Team",
+    "profile": "Profile",
     "changePassword": "Change password",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
@@ -492,7 +499,9 @@
       "copied": "Copied!",
       "close": "Close",
       "saveError": "Couldn't save. Please try again."
-    }
+    },
+    "exportPdf": "Export PDF",
+    "exportError": "Couldn't generate the report."
   },
   "customers": {
     "title": "Customers",
@@ -542,7 +551,9 @@
       "unsupportedType": "Unsupported format. Use JPEG, PNG, WebP, MP4 or WebM.",
       "fileTooLarge": "File too large. Photos up to 15MB, videos up to 80MB.",
       "videoTooLong": "Video too long. Keep it under 45 seconds."
-    }
+    },
+    "exportPdf": "Export PDF",
+    "exportError": "Couldn't generate the report."
   },
   "rentalContracts": {
     "title": "Contracts",
@@ -757,6 +768,20 @@
       "success": "Password changed successfully.",
       "wrongCurrentPassword": "Incorrect current password.",
       "genericError": "Couldn't change the password. Please try again."
+    },
+    "profile": {
+      "title": "Rental company profile",
+      "nome": "Name",
+      "documento": "Tax ID",
+      "documentoNotice": "Tax ID can only be changed by support.",
+      "enderecoFiscal": "Address",
+      "telefone": "Phone",
+      "email": "Email",
+      "save": "Save",
+      "saving": "Saving...",
+      "success": "Details updated successfully.",
+      "loadError": "Couldn't load the rental company's details.",
+      "genericError": "Couldn't save. Please try again."
     }
   },
   "team": {
@@ -798,5 +823,53 @@
       "cor": "Color",
       "priceSuffix": "/day"
     }
+  },
+  "finance": {
+    "title": "Finance",
+    "newExpense": "New expense",
+    "receita": "Revenue",
+    "despesa": "Expenses",
+    "saldo": "Balance",
+    "byMonth": "Revenue vs. expenses by month",
+    "byCategory": "By category",
+    "loadError": "Couldn't load the financial data.",
+    "empty": "No expenses logged yet.",
+    "deleteConfirm": "Delete this expense?",
+    "filters": {
+      "dataInicio": "From",
+      "dataFim": "To"
+    },
+    "categoria": {
+      "manutencao": "Maintenance",
+      "seguro": "Insurance",
+      "administrativo": "Administrative",
+      "outro": "Other"
+    },
+    "form": {
+      "newTitle": "New expense",
+      "editTitle": "Edit expense",
+      "categoria": "Category",
+      "valor": "Amount",
+      "data": "Date",
+      "descricao": "Description",
+      "vehicleId": "Vehicle",
+      "noVehicle": "No specific vehicle",
+      "save": "Save",
+      "saving": "Saving...",
+      "cancel": "Cancel",
+      "genericError": "Couldn't save. Please try again."
+    },
+    "table": {
+      "data": "Date",
+      "categoria": "Category",
+      "veiculo": "Vehicle",
+      "descricao": "Description",
+      "valor": "Amount",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "exportFaturamento": "Export revenue (PDF)",
+    "exportDespesas": "Export expenses (PDF)",
+    "exportError": "Couldn't generate the report."
   }
 }

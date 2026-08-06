@@ -71,6 +71,17 @@ export interface UpdateTenantPayload {
   email?: string;
 }
 
+/** Body de `PATCH /tenants/me/profile` (bloco 44 do MELHORIAS5.md) — subconjunto self-service de
+ * `UpdateTenantPayload`, sem `documento`/`status`/`billing`/`pais`/`moeda` (exclusivos do Super
+ * Admin, ver `UpdateTenantProfileDto` no backend). */
+export interface UpdateTenantProfilePayload {
+  nome?: string;
+  enderecoFiscal?: string;
+  telefone?: string;
+  email?: string;
+  idiomaPadrao?: 'pt' | 'en' | 'es';
+}
+
 /** Registro de um pagamento efetivamente marcado (POST /tenants/:id/mark-paid). */
 export interface TenantPayment {
   _id: string;

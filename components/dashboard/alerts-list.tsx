@@ -1,6 +1,7 @@
 import { useTranslations, useLocale } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { VehicleThumbnail } from '@/components/vehicles/vehicle-thumbnail';
+import { ContactActions } from '@/components/contact-actions';
 import type { VehicleAlert, VehicleWithAlerts } from '@/lib/types/vehicle';
 import type { RentalContractWithAlert } from '@/lib/types/rental-contract';
 import type { Customer } from '@/lib/types/customer';
@@ -143,6 +144,7 @@ export function AlertsList({ vehicleAlerts, contractAlerts, vehiclesById, custom
                         <span className={urgencyClassName(alert.atrasado)}>
                           {alert.atrasado ? t('atrasado') : t('venceEm', { dias: alert.diasRestantes })}
                         </span>
+                        {customer && <ContactActions telefone={customer.telefone} email={customer.email} />}
                       </div>
                     </li>
                   );

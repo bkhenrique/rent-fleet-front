@@ -7,6 +7,7 @@ import { Link } from '@/i18n/navigation';
 import { RequireRole } from '@/components/require-role';
 import { TENANT_ROLES } from '@/lib/roles';
 import { useApiClient } from '@/lib/use-api-client';
+import { useDownloadReport } from '@/lib/use-download-report';
 import { useAuthStore } from '@/stores/auth-store';
 import { VehicleThumbnail } from '@/components/vehicles/vehicle-thumbnail';
 import { SharePortfolioModal } from '@/components/vehicles/share-portfolio-modal';
@@ -19,7 +20,9 @@ const FOCUS_RING = 'focus-visible:outline-2 focus-visible:outline-offset-2 focus
 function VehiclesList() {
   const t = useTranslations('vehicles');
   const apiClient = useApiClient();
+  const downloadReport = useDownloadReport();
   const isTenantAdmin = useAuthStore((state) => state.user?.role === 'tenant_admin');
+  const [reportError, setReportError] = useState(false);
 
   const searchParams = useSearchParams();
   const statusParam = searchParams.get('status');
@@ -40,11 +43,27 @@ function VehiclesList() {
       .catch(() => setError(true));
   }, [apiClient, status]);
 
+  async function handleExportPdf() {
+    setReportError(false);
+    try {
+      await downloadReport('/reports/frota', 'frota.pdf');
+    } catch {
+      setReportError(true);
+    }
+  }
+
   return (
     <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6">
       <div className="mb-8 flex items-center justify-between gap-3">
         <h1 className="font-serif text-3xl tracking-tight">{t('title')}</h1>
         <div className="flex gap-2">
+          <button
+            type="button"
+            onClick={handleExportPdf}
+            className={`rounded-md border border-border px-4 py-2 text-sm font-medium transition-colors hover:bg-surface-2 ${FOCUS_RING}`}
+          >
+            {t('exportPdf')}
+          </button>
           {isTenantAdmin && (
             <button
               type="button"
@@ -80,6 +99,7 @@ function VehiclesList() {
         ))}
       </div>
 
+      {reportError && <p className="text-sm text-danger">{t('exportError')}</p>}
       {error && <p className="text-sm text-danger">{t('loadError')}</p>}
       {vehicles && vehicles.length === 0 && <p className="text-sm text-foreground-dim">{t('empty')}</p>}
 

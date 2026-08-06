@@ -7,6 +7,7 @@ import { RequireRole } from '@/components/require-role';
 import { TENANT_ROLES } from '@/lib/roles';
 import { useApiClient } from '@/lib/use-api-client';
 import { DocumentsSection } from '@/components/customers/documents-section';
+import { ContactActions } from '@/components/contact-actions';
 import type { Customer, UpdateCustomerPayload, DocumentType } from '@/lib/types/customer';
 
 const DOCUMENT_TYPE_OPTIONS: DocumentType[] = ['cnh_br', 'dni_nie_es', 'passport', 'driver_license_us', 'other'];
@@ -106,7 +107,10 @@ function CustomerDetail({ id }: { id: string }) {
         <Link href="/customers" className="text-sm underline">
           {t('backToList')}
         </Link>
-        <h1 className="mt-2 text-xl font-semibold">{customer.nome}</h1>
+        <div className="mt-2 flex items-center justify-between gap-3">
+          <h1 className="font-serif text-2xl tracking-tight">{customer.nome}</h1>
+          <ContactActions telefone={customer.telefone} email={customer.email} size="md" />
+        </div>
         <Link href={`/rental-contracts?customerId=${customer.id}`} className="text-sm underline">
           {t('viewRentalHistory')}
         </Link>

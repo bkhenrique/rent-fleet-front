@@ -2,6 +2,11 @@
   "app": {
     "name": "RentFleet"
   },
+  "contact": {
+    "call": "Llamar",
+    "whatsapp": "WhatsApp",
+    "email": "Enviar correo"
+  },
   "landing": {
     "nav": {
       "custo": "El costo de improvisar",
@@ -218,8 +223,10 @@
     "veiculos": "Vehículos",
     "clientes": "Clientes",
     "contratos": "Contratos",
+    "financeiro": "Finanzas",
     "locadoras": "Empresas de alquiler",
     "equipe": "Equipo",
+    "profile": "Perfil",
     "changePassword": "Cambiar contraseña",
     "openMenu": "Abrir menú",
     "closeMenu": "Cerrar menú",
@@ -492,7 +499,9 @@
       "copied": "¡Copiado!",
       "close": "Cerrar",
       "saveError": "No se pudo guardar. Inténtalo de nuevo."
-    }
+    },
+    "exportPdf": "Exportar PDF",
+    "exportError": "No se pudo generar el informe."
   },
   "customers": {
     "title": "Clientes",
@@ -542,7 +551,9 @@
       "unsupportedType": "Formato no compatible. Usa JPEG, PNG, WebP, MP4 o WebM.",
       "fileTooLarge": "Archivo demasiado grande. Fotos hasta 15MB, vídeos hasta 80MB.",
       "videoTooLong": "Vídeo demasiado largo. Grábalo en hasta 45 segundos."
-    }
+    },
+    "exportPdf": "Exportar PDF",
+    "exportError": "No se pudo generar el informe."
   },
   "rentalContracts": {
     "title": "Contratos",
@@ -757,6 +768,20 @@
       "success": "Contraseña cambiada con éxito.",
       "wrongCurrentPassword": "Contraseña actual incorrecta.",
       "genericError": "No se pudo cambiar la contraseña. Inténtalo de nuevo."
+    },
+    "profile": {
+      "title": "Perfil de la empresa de alquiler",
+      "nome": "Nombre",
+      "documento": "Documento fiscal",
+      "documentoNotice": "El documento fiscal solo puede cambiarlo el soporte.",
+      "enderecoFiscal": "Dirección",
+      "telefone": "Teléfono",
+      "email": "Correo electrónico",
+      "save": "Guardar",
+      "saving": "Guardando...",
+      "success": "Datos actualizados con éxito.",
+      "loadError": "No se pudieron cargar los datos de la empresa.",
+      "genericError": "No se pudo guardar. Inténtalo de nuevo."
     }
   },
   "team": {
@@ -798,5 +823,53 @@
       "cor": "Color",
       "priceSuffix": "/día"
     }
+  },
+  "finance": {
+    "title": "Finanzas",
+    "newExpense": "Nuevo gasto",
+    "receita": "Ingresos",
+    "despesa": "Gastos",
+    "saldo": "Saldo",
+    "byMonth": "Ingresos vs. gastos por mes",
+    "byCategory": "Por categoría",
+    "loadError": "No se pudieron cargar los datos financieros.",
+    "empty": "Todavía no hay gastos registrados.",
+    "deleteConfirm": "¿Eliminar este gasto?",
+    "filters": {
+      "dataInicio": "Desde",
+      "dataFim": "Hasta"
+    },
+    "categoria": {
+      "manutencao": "Mantenimiento",
+      "seguro": "Seguro",
+      "administrativo": "Administrativo",
+      "outro": "Otro"
+    },
+    "form": {
+      "newTitle": "Nuevo gasto",
+      "editTitle": "Editar gasto",
+      "categoria": "Categoría",
+      "valor": "Importe",
+      "data": "Fecha",
+      "descricao": "Descripción",
+      "vehicleId": "Vehículo",
+      "noVehicle": "Ningún vehículo específico",
+      "save": "Guardar",
+      "saving": "Guardando...",
+      "cancel": "Cancelar",
+      "genericError": "No se pudo guardar. Inténtalo de nuevo."
+    },
+    "table": {
+      "data": "Fecha",
+      "categoria": "Categoría",
+      "veiculo": "Vehículo",
+      "descricao": "Descripción",
+      "valor": "Importe",
+      "edit": "Editar",
+      "delete": "Eliminar"
+    },
+    "exportFaturamento": "Exportar facturación (PDF)",
+    "exportDespesas": "Exportar gastos (PDF)",
+    "exportError": "No se pudo generar el informe."
   }
 }
