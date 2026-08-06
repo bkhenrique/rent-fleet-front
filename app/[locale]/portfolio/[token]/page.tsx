@@ -27,14 +27,14 @@ function PortfolioPublicoPage({ token }: { token: string }) {
   }, [token]);
 
   if (step === 'loading') {
-    return <p className="px-4 py-10 text-center text-sm text-foreground/60">{t('loading')}</p>;
+    return <p className="px-4 py-10 text-center text-sm text-foreground-dim">{t('loading')}</p>;
   }
 
   if (step === 'notFound' || !view) {
     return (
       <div className="mx-auto max-w-md px-4 py-16 text-center">
         <h1 className="text-lg font-semibold">{t('notFound.title')}</h1>
-        <p className="mt-2 text-sm text-foreground/70">{t('notFound.message')}</p>
+        <p className="mt-2 text-sm text-foreground-dim">{t('notFound.message')}</p>
       </div>
     );
   }
@@ -44,21 +44,21 @@ function PortfolioPublicoPage({ token }: { token: string }) {
       <div>
         <h1 className="text-xl font-semibold">{view.locadora.nome}</h1>
         {(view.locadora.telefone || view.locadora.email) && (
-          <p className="mt-1 flex flex-wrap gap-x-4 text-sm text-foreground/70">
+          <p className="mt-1 flex flex-wrap gap-x-4 text-sm text-foreground-dim">
             {view.locadora.telefone && <span>{view.locadora.telefone}</span>}
             {view.locadora.email && <span>{view.locadora.email}</span>}
           </p>
         )}
       </div>
 
-      {view.veiculos.length === 0 && <p className="text-sm text-foreground/60">{t('empty')}</p>}
+      {view.veiculos.length === 0 && <p className="text-sm text-foreground-dim">{t('empty')}</p>}
 
       {view.veiculos.length > 0 && (
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {view.veiculos.map((veiculo) => (
             <div
               key={veiculo.id}
-              className="flex flex-col gap-2 rounded-lg border border-black/10 p-3 dark:border-white/15"
+              className="flex flex-col gap-2 rounded-lg border border-border p-3"
             >
               <VehicleThumbnail
                 fotos={veiculo.fotos}
@@ -70,7 +70,7 @@ function PortfolioPublicoPage({ token }: { token: string }) {
                 <p className="text-sm font-semibold">
                   {veiculo.marca} {veiculo.modelo}
                 </p>
-                <p className="text-xs text-foreground/60">
+                <p className="text-xs text-foreground-dim">
                   {t('vehicle.ano')}: {veiculo.ano}
                   {veiculo.cor ? ` · ${t('vehicle.cor')}: ${veiculo.cor}` : ''}
                 </p>
@@ -85,7 +85,7 @@ function PortfolioPublicoPage({ token }: { token: string }) {
               {veiculo.valorDiariaReferencia != null && veiculo.moeda && (
                 <p className="text-sm font-semibold">
                   {formatCurrency(veiculo.valorDiariaReferencia, veiculo.moeda)}
-                  <span className="text-xs font-normal text-foreground/60"> {t('vehicle.priceSuffix')}</span>
+                  <span className="text-xs font-normal text-foreground-dim"> {t('vehicle.priceSuffix')}</span>
                 </p>
               )}
             </div>

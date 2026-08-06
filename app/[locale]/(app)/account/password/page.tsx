@@ -42,23 +42,26 @@ function ChangePasswordForm() {
     }
   }
 
-  return (
-    <div className="mx-auto max-w-md px-4 py-10">
-      <h1 className="mb-6 text-xl font-semibold">{t('title')}</h1>
+  const focusRing = 'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent';
+  const inputClass = `rounded-md border border-border bg-background px-3 py-2 text-sm outline-none transition-colors focus:border-accent ${focusRing}`;
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <label className="flex flex-col gap-1">
+  return (
+    <div className="mx-auto max-w-md px-4 py-10 sm:px-6">
+      <h1 className="mb-8 font-serif text-3xl tracking-tight">{t('title')}</h1>
+
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-lg border border-border bg-surface p-5">
+        <label className="flex flex-col gap-1.5">
           <span className="text-sm font-medium">{t('current')}</span>
           <input
             type="password"
             required
             value={senhaAtual}
             onChange={(e) => setSenhaAtual(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className={inputClass}
           />
         </label>
 
-        <label className="flex flex-col gap-1">
+        <label className="flex flex-col gap-1.5">
           <span className="text-sm font-medium">{t('new')}</span>
           <input
             type="password"
@@ -66,21 +69,21 @@ function ChangePasswordForm() {
             minLength={6}
             value={novaSenha}
             onChange={(e) => setNovaSenha(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className={inputClass}
           />
         </label>
 
         {error && (
-          <p role="alert" className="text-sm text-red-600 dark:text-red-400">
+          <p role="alert" className="text-sm text-danger">
             {error}
           </p>
         )}
-        {success && <p className="text-sm text-green-700 dark:text-green-400">{t('success')}</p>}
+        {success && <p className="text-sm text-success">{t('success')}</p>}
 
         <button
           type="submit"
           disabled={isSubmitting}
-          className="self-start rounded bg-accent px-4 py-2 text-sm font-medium text-accent-foreground disabled:opacity-60"
+          className={`self-start rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90 disabled:opacity-60 ${focusRing}`}
         >
           {isSubmitting ? t('saving') : t('save')}
         </button>

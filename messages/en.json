@@ -231,6 +231,7 @@
   },
   "dashboard": {
     "title": "Rental company dashboard",
+    "loading": "Loading dashboard…",
     "loadError": "Couldn't load the dashboard data.",
     "overview": {
       "total": "Vehicles",

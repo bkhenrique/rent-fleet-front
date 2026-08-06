@@ -7,8 +7,8 @@ import type { VehicleStatus } from './types/vehicle';
  * valores possíveis de `VehicleStatus` pra evitar um `Record` parcial.
  */
 export const STATUS_COLORS: Record<VehicleStatus, string> = {
-  disponivel: 'text-green-700 dark:text-green-400',
-  alugado: 'text-blue-700 dark:text-blue-400',
-  manutencao: 'text-amber-700 dark:text-amber-400',
+  disponivel: 'text-success',
+  alugado: 'text-info',
+  manutencao: 'text-warning',
   inativo: 'text-foreground/50',
 };

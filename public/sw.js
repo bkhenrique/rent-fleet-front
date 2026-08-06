@@ -1,7 +1,7 @@
 // Service worker mínimo: cache-first só pra assets estáticos, sempre rede pra navegação/HTML e
 // pra API (dados de frota/contratos não podem servir cache velho). Suficiente pra passar no
 // critério de instalabilidade do PWA sem fingir suporte offline completo que não existe ainda.
-const CACHE_NAME = 'rentfleet-shell-v1';
+const CACHE_NAME = 'rentfleet-shell-v2';
 
 self.addEventListener('install', () => {
   self.skipWaiting();

@@ -231,6 +231,7 @@
   },
   "dashboard": {
     "title": "Painel da locadora",
+    "loading": "Carregando painel…",
     "loadError": "Não foi possível carregar os dados do painel.",
     "overview": {
       "total": "Veículos",

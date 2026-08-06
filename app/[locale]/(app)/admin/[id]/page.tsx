@@ -171,7 +171,7 @@ function TenantDetail({ id }: { id: string }) {
   if (loadError) {
     return (
       <div className="mx-auto max-w-md px-4 py-10">
-        <p className="text-sm text-red-600 dark:text-red-400">{t('loadError')}</p>
+        <p className="text-sm text-danger">{t('loadError')}</p>
         <Link href="/admin" className="mt-4 inline-block text-sm underline">
           {t('backToList')}
         </Link>
@@ -195,7 +195,7 @@ function TenantDetail({ id }: { id: string }) {
             required
             value={nome}
             onChange={(e) => setNome(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           />
         </label>
 
@@ -205,7 +205,7 @@ function TenantDetail({ id }: { id: string }) {
             required
             value={documento}
             onChange={(e) => setDocumento(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           />
         </label>
 
@@ -214,7 +214,7 @@ function TenantDetail({ id }: { id: string }) {
           <select
             value={ciclo}
             onChange={(e) => setCiclo(e.target.value as BillingCycle)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           >
             <option value="mensal">{t('ciclo.mensal')}</option>
             <option value="anual">{t('ciclo.anual')}</option>
@@ -229,9 +229,9 @@ function TenantDetail({ id }: { id: string }) {
             step="0.01"
             value={valor}
             onChange={(e) => setValor(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           />
-          <span className="text-xs text-foreground/60">
+          <span className="text-xs text-foreground-dim">
             {t('form.valorHint')}
             {valor && !Number.isNaN(Number(valor)) ? ` (${formatCurrency(Number(valor), moeda)})` : ''}
           </span>
@@ -243,7 +243,7 @@ function TenantDetail({ id }: { id: string }) {
             <select
               value={pais}
               onChange={(e) => setPais(e.target.value as Country)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+              className="rounded border border-border px-3 py-2"
             >
               {COUNTRIES.map((option) => (
                 <option key={option} value={option}>
@@ -258,7 +258,7 @@ function TenantDetail({ id }: { id: string }) {
             <select
               value={moeda}
               onChange={(e) => setMoeda(e.target.value as Currency)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+              className="rounded border border-border px-3 py-2"
             >
               {CURRENCIES.map((option) => (
                 <option key={option} value={option}>
@@ -274,7 +274,7 @@ function TenantDetail({ id }: { id: string }) {
           <select
             value={idiomaPadrao}
             onChange={(e) => setIdiomaPadrao(e.target.value as TenantLocale)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           >
             {TENANT_LOCALES.map((option) => (
               <option key={option} value={option}>
@@ -284,7 +284,7 @@ function TenantDetail({ id }: { id: string }) {
           </select>
         </label>
 
-        <fieldset className="flex flex-col gap-4 rounded border border-black/10 p-4 dark:border-white/15">
+        <fieldset className="flex flex-col gap-4 rounded border border-border p-4">
           <legend className="px-1 text-sm font-medium">{t('form.fiscalSectionTitle')}</legend>
 
           <label className="flex flex-col gap-1">
@@ -292,7 +292,7 @@ function TenantDetail({ id }: { id: string }) {
             <input
               value={enderecoFiscal}
               onChange={(e) => setEnderecoFiscal(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+              className="rounded border border-border px-3 py-2"
             />
           </label>
 
@@ -302,7 +302,7 @@ function TenantDetail({ id }: { id: string }) {
               <input
                 value={telefone}
                 onChange={(e) => setTelefone(e.target.value)}
-                className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+                className="rounded border border-border px-3 py-2"
               />
             </label>
             <label className="flex flex-col gap-1">
@@ -311,7 +311,7 @@ function TenantDetail({ id }: { id: string }) {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+                className="rounded border border-border px-3 py-2"
               />
             </label>
           </div>
@@ -330,7 +330,7 @@ function TenantDetail({ id }: { id: string }) {
         <dt className="font-medium">{t('table.valor')}</dt>
         <dd>
           {tenant.billing.valor === null ? (
-            <span className="text-amber-700 dark:text-amber-400">{t('detail.valorNaoDefinido')}</span>
+            <span className="text-warning">{t('detail.valorNaoDefinido')}</span>
           ) : (
             formatCurrency(tenant.billing.valor, tenant.moeda)
           )}
@@ -349,14 +349,14 @@ function TenantDetail({ id }: { id: string }) {
         <button
           type="button"
           onClick={handleOpenMarkPaidConfirm}
-          className="mt-4 self-start rounded border border-black/15 px-4 py-2 text-sm font-medium disabled:opacity-60 dark:border-white/25"
+          className="mt-4 self-start rounded border border-border px-4 py-2 text-sm font-medium disabled:opacity-60"
         >
           {t('detail.markAsPaid')}
         </button>
       )}
 
       {showMarkPaidConfirm && (
-        <div className="mt-4 flex flex-col gap-3 rounded border border-black/10 p-4 dark:border-white/15">
+        <div className="mt-4 flex flex-col gap-3 rounded border border-border p-4">
           <label className="flex flex-col gap-1">
             <span className="text-sm font-medium">{t('detail.markPaidValor')}</span>
             <input
@@ -365,9 +365,9 @@ function TenantDetail({ id }: { id: string }) {
               step="0.01"
               value={markPaidValor}
               onChange={(e) => setMarkPaidValor(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+              className="rounded border border-border px-3 py-2"
             />
-            <span className="text-xs text-foreground/60">{t('detail.markPaidValorHint')}</span>
+            <span className="text-xs text-foreground-dim">{t('detail.markPaidValorHint')}</span>
           </label>
           <div className="flex gap-3">
             <button
@@ -382,25 +382,25 @@ function TenantDetail({ id }: { id: string }) {
               type="button"
               onClick={handleCancelMarkPaidConfirm}
               disabled={markingPaid}
-              className="self-start rounded border border-black/15 px-4 py-2 text-sm font-medium disabled:opacity-60 dark:border-white/25"
+              className="self-start rounded border border-border px-4 py-2 text-sm font-medium disabled:opacity-60"
             >
               {t('form.cancel')}
             </button>
           </div>
         </div>
       )}
-      {markPaidMessage && <p className="mt-2 text-sm text-green-700 dark:text-green-400">{markPaidMessage}</p>}
+      {markPaidMessage && <p className="mt-2 text-sm text-success">{markPaidMessage}</p>}
 
       <div className="mt-8">
         <h2 className="mb-3 text-sm font-semibold">{t('detail.paymentsHistoryTitle')}</h2>
-        {paymentsError && <p className="text-sm text-red-600 dark:text-red-400">{t('loadError')}</p>}
+        {paymentsError && <p className="text-sm text-danger">{t('loadError')}</p>}
         {payments && payments.length === 0 && (
-          <p className="text-sm text-foreground/60">{t('detail.paymentsHistoryEmpty')}</p>
+          <p className="text-sm text-foreground-dim">{t('detail.paymentsHistoryEmpty')}</p>
         )}
         {payments && payments.length > 0 && (
           <table className="w-full border-collapse text-left text-sm">
             <thead>
-              <tr className="border-b border-black/10 dark:border-white/15">
+              <tr className="border-b border-border">
                 <th className="py-2 pr-4 font-medium">{t('detail.paymentsHistoryDate')}</th>
                 <th className="py-2 pr-4 font-medium">{t('table.valor')}</th>
                 <th className="py-2 pr-4 font-medium">{t('form.ciclo')}</th>
@@ -408,7 +408,7 @@ function TenantDetail({ id }: { id: string }) {
             </thead>
             <tbody>
               {payments.map((payment) => (
-                <tr key={payment._id} className="border-b border-black/5 dark:border-white/5">
+                <tr key={payment._id} className="border-b border-border">
                   <td className="py-2 pr-4">{new Date(payment.createdAt).toLocaleDateString(locale)}</td>
                   <td className="py-2 pr-4">
                     {payment.valor === null ? '—' : formatCurrency(payment.valor, payment.moeda)}
@@ -421,12 +421,12 @@ function TenantDetail({ id }: { id: string }) {
         )}
       </div>
 
-      <fieldset className="mt-6 flex flex-col gap-3 rounded border border-black/10 p-4 dark:border-white/15">
+      <fieldset className="mt-6 flex flex-col gap-3 rounded border border-border p-4">
         <legend className="px-1 text-sm font-medium">{t('detail.changeStatusTitle')}</legend>
         <select
           value={status}
           onChange={(e) => setStatus(e.target.value as TenantStatus)}
-          className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+          className="rounded border border-border px-3 py-2"
         >
           {STATUS_OPTIONS.map((option) => (
             <option key={option} value={option}>
@@ -438,14 +438,14 @@ function TenantDetail({ id }: { id: string }) {
           type="button"
           onClick={handleSaveStatus}
           disabled={savingStatus}
-          className="self-start rounded border border-black/15 px-4 py-2 text-sm font-medium disabled:opacity-60 dark:border-white/25"
+          className="self-start rounded border border-border px-4 py-2 text-sm font-medium disabled:opacity-60"
         >
           {savingStatus ? t('form.saving') : t('form.save')}
         </button>
       </fieldset>
 
       {formError && (
-        <p role="alert" className="mt-4 text-sm text-red-600 dark:text-red-400">
+        <p role="alert" className="mt-4 text-sm text-danger">
           {formError}
         </p>
       )}

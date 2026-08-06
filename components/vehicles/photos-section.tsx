@@ -56,10 +56,10 @@ export function PhotosSection({ vehicleId, fotos, onPhotoAdded }: PhotosSectionP
   }
 
   return (
-    <div className="rounded border border-black/10 p-4 dark:border-white/15">
+    <div className="rounded border border-border p-4">
       <h2 className="mb-3 text-sm font-semibold">{t('photos.title')}</h2>
 
-      {fotos.length === 0 && <p className="mb-3 text-sm text-foreground/60">{t('photos.empty')}</p>}
+      {fotos.length === 0 && <p className="mb-3 text-sm text-foreground-dim">{t('photos.empty')}</p>}
 
       {fotos.length > 0 && (
         <div className="mb-3 grid grid-cols-3 gap-2 sm:grid-cols-4">
@@ -75,8 +75,8 @@ export function PhotosSection({ vehicleId, fotos, onPhotoAdded }: PhotosSectionP
       )}
 
       <CameraInput label={t('photos.addPhoto')} onFileSelected={handleFileSelected} disabled={uploading} />
-      {uploading && <p className="mt-2 text-sm text-foreground/60">{t('photos.uploading')}</p>}
-      {error && <p className="mt-2 text-sm text-red-600 dark:text-red-400">{error}</p>}
+      {uploading && <p className="mt-2 text-sm text-foreground-dim">{t('photos.uploading')}</p>}
+      {error && <p className="mt-2 text-sm text-danger">{error}</p>}
     </div>
   );
 }

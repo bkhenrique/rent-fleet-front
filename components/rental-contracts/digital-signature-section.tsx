@@ -99,7 +99,7 @@ export function DigitalSignatureSection({
   const signatureUrl = sessionLink ? `${typeof window !== 'undefined' ? window.location.origin : ''}/${locale}/contrato/assinar/${sessionLink.token}` : '';
 
   return (
-    <div className="rounded border border-black/10 p-4 dark:border-white/15">
+    <div className="rounded border border-border p-4">
       <div className="mb-3 flex items-center justify-between gap-2">
         <h2 className="text-sm font-semibold">{t('sectionTitle')}</h2>
         <span className="rounded-full bg-foreground/10 px-2.5 py-0.5 text-xs font-medium">
@@ -118,25 +118,25 @@ export function DigitalSignatureSection({
                     readOnly
                     value={signatureUrl}
                     onFocus={(e) => e.currentTarget.select()}
-                    className="min-w-0 flex-1 rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                    className="min-w-0 flex-1 rounded border border-border px-2 py-1.5 text-sm"
                   />
                   <button
                     type="button"
                     onClick={handleCopy}
-                    className="rounded border border-black/15 px-3 py-1.5 text-sm font-medium dark:border-white/25"
+                    className="rounded border border-border px-3 py-1.5 text-sm font-medium"
                   >
                     {copied ? t('copied') : t('copy')}
                   </button>
                 </div>
               </label>
-              <p className="text-sm text-foreground/60">{t('expiresAt', { time: formatTime(sessionLink.expiraEm) })}</p>
+              <p className="text-sm text-foreground-dim">{t('expiresAt', { time: formatTime(sessionLink.expiraEm) })}</p>
             </div>
           ) : status === 'aguardando_cliente' && linkAtivo && linkExpiraEm ? (
-            <p className="text-sm text-foreground/70">
+            <p className="text-sm text-foreground-dim">
               {t('linkActiveNoToken', { time: formatTime(linkExpiraEm) })}
             </p>
           ) : (
-            <p className="text-sm text-foreground/60">{t('notStartedHint')}</p>
+            <p className="text-sm text-foreground-dim">{t('notStartedHint')}</p>
           )}
 
           <button
@@ -149,28 +149,28 @@ export function DigitalSignatureSection({
           </button>
 
           {status === 'aguardando_cliente' && (
-            <p className="text-sm font-medium text-foreground/70">{t('waitingClient')}</p>
+            <p className="text-sm font-medium text-foreground-dim">{t('waitingClient')}</p>
           )}
 
-          {generateError && <p className="text-sm text-red-600 dark:text-red-400">{generateError}</p>}
+          {generateError && <p className="text-sm text-danger">{generateError}</p>}
         </div>
       )}
 
       {(status === 'aguardando_locadora' || status === 'assinado') && cliente && (
         <div className="flex flex-col gap-3">
           <div>
-            <h3 className="mb-1 text-xs font-semibold text-foreground/70">{t('clienteEvidenceTitle')}</h3>
-            <p className="mb-2 text-sm text-foreground/60">{t('signedAt', { date: formatDateTime(cliente.assinadoEm) })}</p>
+            <h3 className="mb-1 text-xs font-semibold text-foreground-dim">{t('clienteEvidenceTitle')}</h3>
+            <p className="mb-2 text-sm text-foreground-dim">{t('signedAt', { date: formatDateTime(cliente.assinadoEm) })}</p>
             <div className="grid grid-cols-3 gap-2 sm:grid-cols-3">
               <div className="flex flex-col gap-1">
                 {/* eslint-disable-next-line @next/next/no-img-element -- URL assinada externa do MinIO */}
                 <img src={cliente.documentoFotoUrl} alt={t('documentoFoto')} className="aspect-square rounded object-cover" />
-                <span className="text-center text-xs text-foreground/60">{t('documentoFoto')}</span>
+                <span className="text-center text-xs text-foreground-dim">{t('documentoFoto')}</span>
               </div>
               <div className="flex flex-col gap-1">
                 {/* eslint-disable-next-line @next/next/no-img-element -- URL assinada externa do MinIO */}
                 <img src={cliente.selfieFotoUrl} alt={t('selfieFoto')} className="aspect-square rounded object-cover" />
-                <span className="text-center text-xs text-foreground/60">{t('selfieFoto')}</span>
+                <span className="text-center text-xs text-foreground-dim">{t('selfieFoto')}</span>
               </div>
               <div className="flex flex-col gap-1">
                 {/* eslint-disable-next-line @next/next/no-img-element -- URL assinada externa do MinIO */}
@@ -179,23 +179,23 @@ export function DigitalSignatureSection({
                   alt={t('assinaturaCliente')}
                   className="aspect-square rounded bg-white object-contain"
                 />
-                <span className="text-center text-xs text-foreground/60">{t('assinaturaCliente')}</span>
+                <span className="text-center text-xs text-foreground-dim">{t('assinaturaCliente')}</span>
               </div>
             </div>
           </div>
 
           {status === 'aguardando_locadora' && (
             <div>
-              <h3 className="mb-2 text-xs font-semibold text-foreground/70">{t('locadoraSignTitle')}</h3>
+              <h3 className="mb-2 text-xs font-semibold text-foreground-dim">{t('locadoraSignTitle')}</h3>
               <SignaturePad onConfirm={handleSignLocadora} confirmLabel={t('locadoraSignButton')} confirming={signingLocadora} />
-              {signError && <p className="mt-2 text-sm text-red-600 dark:text-red-400">{signError}</p>}
+              {signError && <p className="mt-2 text-sm text-danger">{signError}</p>}
             </div>
           )}
 
           {status === 'assinado' && locadora && (
             <div>
-              <h3 className="mb-1 text-xs font-semibold text-foreground/70">{t('locadoraEvidenceTitle')}</h3>
-              <p className="mb-2 text-sm text-foreground/60">{t('signedAt', { date: formatDateTime(locadora.assinadoEm) })}</p>
+              <h3 className="mb-1 text-xs font-semibold text-foreground-dim">{t('locadoraEvidenceTitle')}</h3>
+              <p className="mb-2 text-sm text-foreground-dim">{t('signedAt', { date: formatDateTime(locadora.assinadoEm) })}</p>
               {/* eslint-disable-next-line @next/next/no-img-element -- URL assinada externa do MinIO */}
               <img
                 src={locadora.assinaturaImagemUrl}
@@ -209,7 +209,7 @@ export function DigitalSignatureSection({
 
       {status === 'assinado_manual' && (
         <div className="flex flex-col gap-2">
-          <p className="text-sm text-foreground/70">{t('manualHint')}</p>
+          <p className="text-sm text-foreground-dim">{t('manualHint')}</p>
           {contratoAssinadoFotoUrls.length > 0 && (
             <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
               {contratoAssinadoFotoUrls.map((url) => (

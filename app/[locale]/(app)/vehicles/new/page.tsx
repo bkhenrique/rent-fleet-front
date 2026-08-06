@@ -67,7 +67,7 @@ function NewVehicleForm() {
             required
             value={placa}
             onChange={(e) => setPlaca(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           />
         </label>
 
@@ -77,7 +77,7 @@ function NewVehicleForm() {
             required
             value={marca}
             onChange={(e) => setMarca(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           />
         </label>
 
@@ -87,7 +87,7 @@ function NewVehicleForm() {
             required
             value={modelo}
             onChange={(e) => setModelo(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           />
         </label>
 
@@ -100,7 +100,7 @@ function NewVehicleForm() {
             max={CURRENT_YEAR + 1}
             value={ano}
             onChange={(e) => setAno(Number(e.target.value))}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           />
         </label>
 
@@ -109,7 +109,7 @@ function NewVehicleForm() {
           <input
             value={cor}
             onChange={(e) => setCor(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           />
         </label>
 
@@ -121,12 +121,12 @@ function NewVehicleForm() {
             step="0.01"
             value={valorDiariaReferencia}
             onChange={(e) => setValorDiariaReferencia(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           />
-          <span className="text-xs text-foreground/60">{t('form.valorDiariaReferenciaHint')}</span>
+          <span className="text-xs text-foreground-dim">{t('form.valorDiariaReferenciaHint')}</span>
         </label>
 
-        <fieldset className="flex flex-col gap-4 rounded border border-black/10 p-4 dark:border-white/15">
+        <fieldset className="flex flex-col gap-4 rounded border border-border p-4">
           <legend className="px-1 text-sm font-medium">{t('form.documentosSectionTitle')}</legend>
 
           <label className="flex flex-col gap-1">
@@ -135,7 +135,7 @@ function NewVehicleForm() {
               type="date"
               value={seguroValidade}
               onChange={(e) => setSeguroValidade(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+              className="rounded border border-border px-3 py-2"
             />
           </label>
 
@@ -145,7 +145,7 @@ function NewVehicleForm() {
               type="date"
               value={itvValidade}
               onChange={(e) => setItvValidade(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+              className="rounded border border-border px-3 py-2"
             />
           </label>
 
@@ -155,13 +155,13 @@ function NewVehicleForm() {
               type="date"
               value={licenciamentoValidade}
               onChange={(e) => setLicenciamentoValidade(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+              className="rounded border border-border px-3 py-2"
             />
           </label>
         </fieldset>
 
         {error && (
-          <p role="alert" className="text-sm text-red-600 dark:text-red-400">
+          <p role="alert" className="text-sm text-danger">
             {error}
           </p>
         )}

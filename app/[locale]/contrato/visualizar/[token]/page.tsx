@@ -25,14 +25,14 @@ function PublicViewPage({ token }: { token: string }) {
   }, [token]);
 
   if (step === 'loading') {
-    return <p className="px-4 py-10 text-center text-sm text-foreground/60">{t('loading')}</p>;
+    return <p className="px-4 py-10 text-center text-sm text-foreground-dim">{t('loading')}</p>;
   }
 
   if (step === 'notFound' || !view) {
     return (
       <div className="mx-auto max-w-md px-4 py-16 text-center">
         <h1 className="text-lg font-semibold">{t('notFound.title')}</h1>
-        <p className="mt-2 text-sm text-foreground/70">{t('notFound.message')}</p>
+        <p className="mt-2 text-sm text-foreground-dim">{t('notFound.message')}</p>
       </div>
     );
   }
@@ -41,10 +41,10 @@ function PublicViewPage({ token }: { token: string }) {
     <div className="mx-auto flex max-w-md flex-col gap-6 px-4 py-8">
       <div>
         <h1 className="text-lg font-semibold">{t('title')}</h1>
-        <p className="mt-1 text-sm text-foreground/70">{t('subtitle')}</p>
+        <p className="mt-1 text-sm text-foreground-dim">{t('subtitle')}</p>
       </div>
 
-      <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5 rounded border border-black/10 p-4 text-sm dark:border-white/15">
+      <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5 rounded border border-border p-4 text-sm">
         <dt className="font-medium">{t('summary.cliente')}</dt>
         <dd>{view.clienteNome}</dd>
         <dt className="font-medium">{t('summary.veiculo')}</dt>

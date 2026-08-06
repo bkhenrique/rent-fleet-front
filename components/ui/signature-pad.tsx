@@ -98,15 +98,15 @@ export function SignaturePad({ onConfirm, confirmLabel, confirming = false }: Si
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerUp}
-        className="w-full touch-none rounded border border-black/15 bg-white dark:border-white/25"
+        className="w-full touch-none rounded border border-border bg-white"
         style={{ aspectRatio: '600 / 220' }}
       />
-      <p className="text-xs text-foreground/60">{t('hint')}</p>
+      <p className="text-xs text-foreground-dim">{t('hint')}</p>
       <div className="flex flex-wrap gap-2">
         <button
           type="button"
           onClick={handleClear}
-          className="rounded border border-black/15 px-3 py-1.5 text-sm font-medium dark:border-white/25"
+          className="rounded border border-border px-3 py-1.5 text-sm font-medium"
         >
           {t('clear')}
         </button>

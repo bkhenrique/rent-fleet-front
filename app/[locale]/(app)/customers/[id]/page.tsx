@@ -90,7 +90,7 @@ function CustomerDetail({ id }: { id: string }) {
   if (loadError) {
     return (
       <div className="mx-auto max-w-md px-4 py-10">
-        <p className="text-sm text-red-600 dark:text-red-400">{t('loadError')}</p>
+        <p className="text-sm text-danger">{t('loadError')}</p>
         <Link href="/customers" className="mt-4 inline-block text-sm underline">
           {t('backToList')}
         </Link>
@@ -119,7 +119,7 @@ function CustomerDetail({ id }: { id: string }) {
             required
             value={nome}
             onChange={(e) => setNome(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           />
         </label>
         <label className="flex flex-col gap-1">
@@ -128,7 +128,7 @@ function CustomerDetail({ id }: { id: string }) {
             required
             value={documento}
             onChange={(e) => setDocumento(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           />
         </label>
         <label className="flex flex-col gap-1">
@@ -136,7 +136,7 @@ function CustomerDetail({ id }: { id: string }) {
           <input
             value={endereco}
             onChange={(e) => setEndereco(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           />
         </label>
         <label className="flex flex-col gap-1">
@@ -145,7 +145,7 @@ function CustomerDetail({ id }: { id: string }) {
             type="date"
             value={dataNascimento}
             onChange={(e) => setDataNascimento(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           />
         </label>
 
@@ -154,7 +154,7 @@ function CustomerDetail({ id }: { id: string }) {
           <select
             value={tipoDocumento}
             onChange={(e) => setTipoDocumento(e.target.value as DocumentType)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           >
             {DOCUMENT_TYPE_OPTIONS.map((option) => (
               <option key={option} value={option}>
@@ -164,7 +164,7 @@ function CustomerDetail({ id }: { id: string }) {
           </select>
         </label>
 
-        <fieldset className="flex flex-col gap-4 rounded border border-black/10 p-4 dark:border-white/15">
+        <fieldset className="flex flex-col gap-4 rounded border border-border p-4">
           <legend className="px-1 text-sm font-medium">{t(`tipoDocumentoOptions.${tipoDocumento}`)}</legend>
           <div className={`grid gap-3 ${showCategoria ? 'grid-cols-3' : 'grid-cols-2'}`}>
             <label className="flex flex-col gap-1">
@@ -172,7 +172,7 @@ function CustomerDetail({ id }: { id: string }) {
               <input
                 value={cnhNumero}
                 onChange={(e) => setCnhNumero(e.target.value)}
-                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                className="rounded border border-border px-2 py-1.5 text-sm"
               />
             </label>
             {showCategoria && (
@@ -181,7 +181,7 @@ function CustomerDetail({ id }: { id: string }) {
                 <input
                   value={cnhCategoria}
                   onChange={(e) => setCnhCategoria(e.target.value)}
-                  className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                  className="rounded border border-border px-2 py-1.5 text-sm"
                 />
               </label>
             )}
@@ -191,7 +191,7 @@ function CustomerDetail({ id }: { id: string }) {
                 type="date"
                 value={cnhValidade}
                 onChange={(e) => setCnhValidade(e.target.value)}
-                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                className="rounded border border-border px-2 py-1.5 text-sm"
               />
             </label>
           </div>
@@ -202,7 +202,7 @@ function CustomerDetail({ id }: { id: string }) {
           <input
             value={telefone}
             onChange={(e) => setTelefone(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           />
         </label>
         <label className="flex flex-col gap-1">
@@ -211,11 +211,11 @@ function CustomerDetail({ id }: { id: string }) {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           />
         </label>
 
-        {formError && <p className="text-sm text-red-600 dark:text-red-400">{formError}</p>}
+        {formError && <p className="text-sm text-danger">{formError}</p>}
 
         <button
           type="submit"

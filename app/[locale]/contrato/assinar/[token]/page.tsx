@@ -114,14 +114,14 @@ function PublicSignPage({ token }: { token: string }) {
   }
 
   if (step === 'loading') {
-    return <p className="px-4 py-10 text-center text-sm text-foreground/60">{t('loading')}</p>;
+    return <p className="px-4 py-10 text-center text-sm text-foreground-dim">{t('loading')}</p>;
   }
 
   if (step === 'notFound') {
     return (
       <div className="mx-auto max-w-md px-4 py-16 text-center">
         <h1 className="text-lg font-semibold">{t('notFound.title')}</h1>
-        <p className="mt-2 text-sm text-foreground/70">{t('notFound.message')}</p>
+        <p className="mt-2 text-sm text-foreground-dim">{t('notFound.message')}</p>
       </div>
     );
   }
@@ -132,7 +132,7 @@ function PublicSignPage({ token }: { token: string }) {
     return (
       <div className="mx-auto max-w-md px-4 py-16 text-center">
         <h1 className="text-lg font-semibold">{t('expired.title')}</h1>
-        <p className="mt-2 text-sm text-foreground/70">{t('expired.message')}</p>
+        <p className="mt-2 text-sm text-foreground-dim">{t('expired.message')}</p>
       </div>
     );
   }
@@ -141,7 +141,7 @@ function PublicSignPage({ token }: { token: string }) {
     return (
       <div className="mx-auto max-w-md px-4 py-16 text-center">
         <h1 className="text-lg font-semibold">{t('alreadySigned.title')}</h1>
-        <p className="mt-2 text-sm text-foreground/70">{t('alreadySigned.message')}</p>
+        <p className="mt-2 text-sm text-foreground-dim">{t('alreadySigned.message')}</p>
       </div>
     );
   }
@@ -150,7 +150,7 @@ function PublicSignPage({ token }: { token: string }) {
     return (
       <div className="mx-auto max-w-md px-4 py-16 text-center">
         <h1 className="text-lg font-semibold text-accent-strong">{t('success.title')}</h1>
-        <p className="mt-2 text-sm text-foreground/70">{t('success.message')}</p>
+        <p className="mt-2 text-sm text-foreground-dim">{t('success.message')}</p>
       </div>
     );
   }
@@ -162,10 +162,10 @@ function PublicSignPage({ token }: { token: string }) {
     <div className="mx-auto flex max-w-md flex-col gap-6 px-4 py-8">
       <div>
         <h1 className="text-lg font-semibold">{t('title')}</h1>
-        <p className="mt-1 text-sm text-foreground/70">{t('subtitle')}</p>
+        <p className="mt-1 text-sm text-foreground-dim">{t('subtitle')}</p>
       </div>
 
-      <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5 rounded border border-black/10 p-4 text-sm dark:border-white/15">
+      <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5 rounded border border-border p-4 text-sm">
         <dt className="font-medium">{t('summary.cliente')}</dt>
         <dd>{resumo.clienteNome}</dd>
         <dt className="font-medium">{t('summary.veiculo')}</dt>
@@ -180,13 +180,13 @@ function PublicSignPage({ token }: { token: string }) {
         <dd>{formatCurrency(resumo.valor, resumo.moeda)}</dd>
       </dl>
 
-      <p className="rounded border border-black/10 bg-foreground/5 p-3 text-xs text-foreground/70 dark:border-white/15">
+      <p className="rounded border border-border bg-foreground/5 p-3 text-xs text-foreground-dim">
         {t('privacyNotice')}
       </p>
 
-      <section className="flex flex-col gap-2 rounded border border-black/10 p-4 dark:border-white/15">
+      <section className="flex flex-col gap-2 rounded border border-border p-4">
         <h2 className="text-sm font-semibold">{t('step1.title')}</h2>
-        <p className="text-xs text-foreground/60">{t('step1.hint')}</p>
+        <p className="text-xs text-foreground-dim">{t('step1.hint')}</p>
         {documento && (
           // eslint-disable-next-line @next/next/no-img-element -- preview local via object URL
           <img src={documento.previewUrl} alt="" className="h-32 w-full rounded object-cover" />
@@ -197,13 +197,13 @@ function PublicSignPage({ token }: { token: string }) {
           onFileSelected={(file) => handleCapture('documento', file)}
           disabled={uploadingPurpose === 'documento'}
         />
-        {uploadingPurpose === 'documento' && <p className="text-xs text-foreground/60">{t('uploading')}</p>}
-        {fieldError.documento && <p className="text-xs text-red-600 dark:text-red-400">{fieldError.documento}</p>}
+        {uploadingPurpose === 'documento' && <p className="text-xs text-foreground-dim">{t('uploading')}</p>}
+        {fieldError.documento && <p className="text-xs text-danger">{fieldError.documento}</p>}
       </section>
 
-      <section className="flex flex-col gap-2 rounded border border-black/10 p-4 dark:border-white/15">
+      <section className="flex flex-col gap-2 rounded border border-border p-4">
         <h2 className="text-sm font-semibold">{t('step2.title')}</h2>
-        <p className="text-xs text-foreground/60">{t('step2.hint')}</p>
+        <p className="text-xs text-foreground-dim">{t('step2.hint')}</p>
         {selfie && (
           // eslint-disable-next-line @next/next/no-img-element -- preview local via object URL
           <img src={selfie.previewUrl} alt="" className="h-32 w-full rounded object-cover" />
@@ -214,13 +214,13 @@ function PublicSignPage({ token }: { token: string }) {
           onFileSelected={(file) => handleCapture('selfie', file)}
           disabled={uploadingPurpose === 'selfie'}
         />
-        {uploadingPurpose === 'selfie' && <p className="text-xs text-foreground/60">{t('uploading')}</p>}
-        {fieldError.selfie && <p className="text-xs text-red-600 dark:text-red-400">{fieldError.selfie}</p>}
+        {uploadingPurpose === 'selfie' && <p className="text-xs text-foreground-dim">{t('uploading')}</p>}
+        {fieldError.selfie && <p className="text-xs text-danger">{fieldError.selfie}</p>}
       </section>
 
-      <section className="flex flex-col gap-2 rounded border border-black/10 p-4 dark:border-white/15">
+      <section className="flex flex-col gap-2 rounded border border-border p-4">
         <h2 className="text-sm font-semibold">{t('step3.title')}</h2>
-        <p className="text-xs text-foreground/60">{t('step3.hint')}</p>
+        <p className="text-xs text-foreground-dim">{t('step3.hint')}</p>
         {assinatura ? (
           <div className="flex flex-col gap-2">
             {/* eslint-disable-next-line @next/next/no-img-element -- preview local via object URL */}
@@ -228,7 +228,7 @@ function PublicSignPage({ token }: { token: string }) {
             <button
               type="button"
               onClick={() => setAssinatura(null)}
-              className="self-start rounded border border-black/15 px-3 py-1.5 text-sm font-medium dark:border-white/25"
+              className="self-start rounded border border-border px-3 py-1.5 text-sm font-medium"
             >
               {t('step3.redo')}
             </button>
@@ -236,7 +236,7 @@ function PublicSignPage({ token }: { token: string }) {
         ) : (
           <SignaturePad onConfirm={handleSignatureConfirm} confirmLabel={t('step3.confirm')} confirming={uploadingPurpose === 'assinatura'} />
         )}
-        {fieldError.assinatura && <p className="text-xs text-red-600 dark:text-red-400">{fieldError.assinatura}</p>}
+        {fieldError.assinatura && <p className="text-xs text-danger">{fieldError.assinatura}</p>}
       </section>
 
       <button
@@ -247,7 +247,7 @@ function PublicSignPage({ token }: { token: string }) {
       >
         {submitting ? t('submitting') : t('submit')}
       </button>
-      {submitError && <p className="text-sm text-red-600 dark:text-red-400">{submitError}</p>}
+      {submitError && <p className="text-sm text-danger">{submitError}</p>}
     </div>
   );
 }

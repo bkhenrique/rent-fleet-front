@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function PortfolioPublicoLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <header className="border-b border-black/10 dark:border-white/15">
+      <header className="border-b border-border">
         <div className="mx-auto flex max-w-4xl items-center justify-between px-4 py-3">
           <span className="flex items-center gap-2 font-semibold">
             <span className="flex h-6 w-6 items-center justify-center rounded bg-linear-to-br from-accent to-accent-strong text-accent-foreground">

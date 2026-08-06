@@ -8,6 +8,9 @@ import { useApiClient } from '@/lib/use-api-client';
 import { ApiError } from '@/lib/api-client';
 import type { CreateUserPayload, User } from '@/lib/types/user';
 
+const FOCUS_RING = 'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent';
+const INPUT_CLASS = `rounded-md border border-border bg-background px-3 py-2 text-sm outline-none transition-colors focus:border-accent ${FOCUS_RING}`;
+
 function TeamList() {
   const t = useTranslations('team');
   const apiClient = useApiClient();
@@ -67,89 +70,83 @@ function TeamList() {
   }
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-10">
-      <h1 className="mb-6 text-xl font-semibold">{t('title')}</h1>
+    <div className="mx-auto max-w-2xl px-4 py-10 sm:px-6">
+      <h1 className="mb-8 font-serif text-3xl tracking-tight">{t('title')}</h1>
 
-      <form
-        onSubmit={handleSubmit}
-        className="mb-8 flex flex-col gap-4 rounded border border-black/10 p-4 dark:border-white/15"
-      >
+      <form onSubmit={handleSubmit} className="mb-8 flex flex-col gap-4 rounded-lg border border-border bg-surface p-5">
         <h2 className="text-sm font-semibold">{t('form.title')}</h2>
 
         <div className="grid grid-cols-2 gap-4">
-          <label className="flex flex-col gap-1">
+          <label className="flex flex-col gap-1.5">
             <span className="text-sm font-medium">{t('form.name')}</span>
-            <input
-              required
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
-            />
+            <input required value={name} onChange={(e) => setName(e.target.value)} className={INPUT_CLASS} />
           </label>
-          <label className="flex flex-col gap-1">
+          <label className="flex flex-col gap-1.5">
             <span className="text-sm font-medium">{t('form.email')}</span>
             <input
               type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+              className={INPUT_CLASS}
             />
           </label>
         </div>
 
-        <p className="text-xs text-foreground/60">{t('form.passwordNotice')}</p>
+        <p className="text-xs text-foreground-dim">{t('form.passwordNotice')}</p>
 
         {formError && (
-          <p role="alert" className="text-sm text-red-600 dark:text-red-400">
+          <p role="alert" className="text-sm text-danger">
             {formError}
           </p>
         )}
-        {successMessage && <p className="text-sm text-green-700 dark:text-green-400">{successMessage}</p>}
+        {successMessage && <p className="text-sm text-success">{successMessage}</p>}
 
         <button
           type="submit"
           disabled={isSubmitting}
-          className="self-start rounded bg-accent px-4 py-2 text-sm font-medium text-accent-foreground disabled:opacity-60"
+          className={`self-start rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90 disabled:opacity-60 ${FOCUS_RING}`}
         >
           {isSubmitting ? t('form.saving') : t('form.create')}
         </button>
       </form>
 
-      {loadError && <p className="text-sm text-red-600 dark:text-red-400">{t('loadError')}</p>}
-      {users && users.length === 0 && <p className="text-sm text-foreground/60">{t('empty')}</p>}
+      {loadError && <p className="text-sm text-danger">{t('loadError')}</p>}
+      {users && users.length === 0 && <p className="text-sm text-foreground-dim">{t('empty')}</p>}
 
       {users && users.length > 0 && (
-        <table className="w-full border-collapse text-left text-sm">
-          <thead>
-            <tr className="border-b border-black/10 dark:border-white/15">
-              <th className="py-2 pr-4 font-medium">{t('table.nome')}</th>
-              <th className="py-2 pr-4 font-medium">{t('table.email')}</th>
-              <th className="py-2 pr-4 font-medium">{t('table.status')}</th>
-              <th className="py-2 pr-4 font-medium" />
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user) => (
-              <tr key={user.id} className="border-b border-black/5 dark:border-white/5">
-                <td className="py-2 pr-4">{user.name}</td>
-                <td className="py-2 pr-4">{user.email}</td>
-                <td
-                  className={`py-2 pr-4 font-medium ${
-                    user.ativo ? 'text-green-700 dark:text-green-400' : 'text-foreground/50'
-                  }`}
-                >
-                  {user.ativo ? t('status.ativo') : t('status.inativo')}
-                </td>
-                <td className="py-2 pr-4">
-                  <button type="button" onClick={() => toggleStatus(user)} className="text-sm underline">
-                    {user.ativo ? t('deactivate') : t('activate')}
-                  </button>
-                </td>
+        <div className="overflow-hidden rounded-lg border border-border bg-surface">
+          <table className="w-full border-collapse text-left text-sm">
+            <thead>
+              <tr className="border-b border-border">
+                <th className="py-3 pr-4 pl-4 font-medium text-foreground-dim">{t('table.nome')}</th>
+                <th className="py-3 pr-4 font-medium text-foreground-dim">{t('table.email')}</th>
+                <th className="py-3 pr-4 font-medium text-foreground-dim">{t('table.status')}</th>
+                <th className="py-3 pr-4 font-medium" />
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {users.map((user) => (
+                <tr key={user.id} className="border-b border-border last:border-b-0 hover:bg-surface-2">
+                  <td className="py-2.5 pr-4 pl-4">{user.name}</td>
+                  <td className="py-2.5 pr-4 font-mono text-foreground-dim">{user.email}</td>
+                  <td className={`py-2.5 pr-4 font-medium ${user.ativo ? 'text-success' : 'text-foreground-faint'}`}>
+                    {user.ativo ? t('status.ativo') : t('status.inativo')}
+                  </td>
+                  <td className="py-2.5 pr-4">
+                    <button
+                      type="button"
+                      onClick={() => toggleStatus(user)}
+                      className={`rounded-xs text-sm underline ${FOCUS_RING}`}
+                    >
+                      {user.ativo ? t('deactivate') : t('activate')}
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

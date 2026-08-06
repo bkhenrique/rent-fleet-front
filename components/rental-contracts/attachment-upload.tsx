@@ -53,7 +53,7 @@ export function AttachmentUpload({ contractId, purpose, fotosUrls, onUploaded }:
 
   return (
     <div>
-      {fotosUrls.length === 0 && <p className="mb-2 text-sm text-foreground/60">{t('attachments.empty')}</p>}
+      {fotosUrls.length === 0 && <p className="mb-2 text-sm text-foreground-dim">{t('attachments.empty')}</p>}
       {fotosUrls.length > 0 && (
         <div className="mb-2 grid grid-cols-3 gap-2 sm:grid-cols-4">
           {fotosUrls.map((url) =>
@@ -67,8 +67,8 @@ export function AttachmentUpload({ contractId, purpose, fotosUrls, onUploaded }:
         </div>
       )}
       <CameraInput label={t('attachments.addPhoto')} onFileSelected={handleFileSelected} disabled={uploading} />
-      {uploading && <p className="mt-1 text-sm text-foreground/60">{t('attachments.uploading')}</p>}
-      {error && <p className="mt-1 text-sm text-red-600 dark:text-red-400">{error}</p>}
+      {uploading && <p className="mt-1 text-sm text-foreground-dim">{t('attachments.uploading')}</p>}
+      {error && <p className="mt-1 text-sm text-danger">{error}</p>}
     </div>
   );
 }

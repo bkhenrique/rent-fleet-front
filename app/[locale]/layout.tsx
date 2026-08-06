@@ -2,13 +2,25 @@ import type { Metadata } from 'next';
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Inter, Instrument_Serif, JetBrains_Mono } from 'next/font/google';
 import { routing, type AppLocale } from '@/i18n/routing';
 import { ServiceWorkerRegister } from '@/components/service-worker-register';
 import '../globals.css';
 
-const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] });
-const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin'] });
+/**
+ * Trio tipográfico da marca (antes carregado só dentro de `app/[locale]/page.tsx`, a landing) —
+ * subiu pro layout raiz porque o rebrand estende a mesma identidade "asfalto" pro app autenticado
+ * inteiro, não só a landing (ver PRODUCT.md, seção Brand Commitments). Substitui Geist/Geist Mono,
+ * que nunca eram realmente usados (o `body` de `globals.css` sempre sobrescreveu com Arial).
+ */
+const inter = Inter({ variable: '--font-inter', subsets: ['latin'], weight: ['400', '500', '600', '700'] });
+const instrumentSerif = Instrument_Serif({
+  variable: '--font-instrument-serif',
+  subsets: ['latin'],
+  weight: '400',
+  style: ['italic', 'normal'],
+});
+const jetbrainsMono = JetBrains_Mono({ variable: '--font-jetbrains-mono', subsets: ['latin'], weight: ['400', '500'] });
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -47,7 +59,10 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html
+      lang={locale}
+      className={`${inter.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} h-full antialiased`}
+    >
       <body className="min-h-full flex flex-col">
         <NextIntlClientProvider messages={messages}>
           <ServiceWorkerRegister />

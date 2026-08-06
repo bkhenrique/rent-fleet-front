@@ -59,15 +59,15 @@ export function MaintenanceSection({ vehicleId, manutencao, onUpdated }: Mainten
   }
 
   return (
-    <div className="rounded border border-black/10 p-4 dark:border-white/15">
+    <div className="rounded border border-border p-4">
       <h2 className="mb-3 text-sm font-semibold">{t('maintenance.title')}</h2>
 
-      {manutencao.length === 0 && <p className="text-sm text-foreground/60">{t('maintenance.empty')}</p>}
+      {manutencao.length === 0 && <p className="text-sm text-foreground-dim">{t('maintenance.empty')}</p>}
 
       {manutencao.length > 0 && (
         <table className="mb-4 w-full border-collapse text-left text-sm">
           <thead>
-            <tr className="border-b border-black/10 dark:border-white/15">
+            <tr className="border-b border-border">
               <th className="py-1 pr-3 font-medium">{t('maintenance.tipo')}</th>
               <th className="py-1 pr-3 font-medium">{t('maintenance.data')}</th>
               <th className="py-1 pr-3 font-medium">{t('maintenance.km')}</th>
@@ -80,7 +80,7 @@ export function MaintenanceSection({ vehicleId, manutencao, onUpdated }: Mainten
               .slice()
               .reverse()
               .map((entry, index) => (
-                <tr key={index} className="border-b border-black/5 dark:border-white/5">
+                <tr key={index} className="border-b border-border">
                   <td className="py-1 pr-3">{entry.tipo}</td>
                   <td className="py-1 pr-3">{new Date(entry.data).toLocaleDateString(locale)}</td>
                   <td className="py-1 pr-3">{entry.km ?? '—'}</td>
@@ -101,7 +101,7 @@ export function MaintenanceSection({ vehicleId, manutencao, onUpdated }: Mainten
             required
             value={tipo}
             onChange={(e) => setTipo(e.target.value)}
-            className="rounded border border-black/15 px-2 py-1 text-sm dark:border-white/25"
+            className="rounded border border-border px-2 py-1 text-sm"
           />
         </label>
         <label className="flex flex-col gap-1">
@@ -111,7 +111,7 @@ export function MaintenanceSection({ vehicleId, manutencao, onUpdated }: Mainten
             required
             value={data}
             onChange={(e) => setData(e.target.value)}
-            className="rounded border border-black/15 px-2 py-1 text-sm dark:border-white/25"
+            className="rounded border border-border px-2 py-1 text-sm"
           />
         </label>
         <label className="flex flex-col gap-1">
@@ -120,7 +120,7 @@ export function MaintenanceSection({ vehicleId, manutencao, onUpdated }: Mainten
             type="number"
             value={km}
             onChange={(e) => setKm(e.target.value)}
-            className="w-24 rounded border border-black/15 px-2 py-1 text-sm dark:border-white/25"
+            className="w-24 rounded border border-border px-2 py-1 text-sm"
           />
         </label>
         <label className="flex flex-col gap-1">
@@ -129,7 +129,7 @@ export function MaintenanceSection({ vehicleId, manutencao, onUpdated }: Mainten
             type="number"
             value={custo}
             onChange={(e) => setCusto(e.target.value)}
-            className="w-24 rounded border border-black/15 px-2 py-1 text-sm dark:border-white/25"
+            className="w-24 rounded border border-border px-2 py-1 text-sm"
           />
         </label>
         <label className="flex flex-col gap-1">
@@ -137,7 +137,7 @@ export function MaintenanceSection({ vehicleId, manutencao, onUpdated }: Mainten
           <input
             value={oficina}
             onChange={(e) => setOficina(e.target.value)}
-            className="rounded border border-black/15 px-2 py-1 text-sm dark:border-white/25"
+            className="rounded border border-border px-2 py-1 text-sm"
           />
         </label>
         <button
@@ -148,7 +148,7 @@ export function MaintenanceSection({ vehicleId, manutencao, onUpdated }: Mainten
           {isSubmitting ? t('form.saving') : t('maintenance.add')}
         </button>
       </form>
-      {error && <p className="mt-2 text-sm text-red-600 dark:text-red-400">{error}</p>}
+      {error && <p className="mt-2 text-sm text-danger">{error}</p>}
     </div>
   );
 }

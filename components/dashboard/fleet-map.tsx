@@ -15,9 +15,12 @@ interface FleetMapProps {
   fallbackCenter?: [number, number];
 }
 
+/** Mesmos tons de `--success`/`--warning` (`app/globals.css`) — hex fixo porque o Leaflet aplica a
+ * cor como atributo SVG, que não resolve `var(--token)` de forma confiável entre navegadores. Mantém
+ * os dois em sincronia manualmente se os tokens mudarem. */
 const ORIGIN_COLOR: Record<'tempo_real' | 'manual', string> = {
-  tempo_real: '#16a34a',
-  manual: '#f59e0b',
+  tempo_real: '#15803d',
+  manual: '#b45309',
 };
 
 export function FleetMap({ positions, vehiclesById, connected, fallbackCenter = DEFAULT_MAP_CENTER }: FleetMapProps) {
@@ -33,12 +36,34 @@ export function FleetMap({ positions, vehiclesById, connected, fallbackCenter = 
     : fallbackCenter;
 
   return (
-    <div className="rounded border border-black/10 dark:border-white/15">
-      <div className="flex items-center justify-between px-4 py-2 text-sm">
-        <h2 className="font-semibold">{t('title')}</h2>
-        <span className={connected ? 'text-green-700 dark:text-green-400' : 'text-foreground/50'}>
-          {connected ? t('live') : t('offline')}
-        </span>
+    <div className="overflow-hidden rounded-lg border border-border bg-surface">
+      <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-b border-border px-5 py-3.5">
+        <h2 className="text-sm font-semibold">{t('title')}</h2>
+        <div className="flex items-center gap-4">
+          {withPosition.length > 0 && (
+            <div className="flex items-center gap-3 text-xs text-foreground-dim">
+              <span className="flex items-center gap-1.5">
+                <span aria-hidden className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: ORIGIN_COLOR.tempo_real }} />
+                {t('origem.tempo_real')}
+              </span>
+              <span className="flex items-center gap-1.5">
+                <span aria-hidden className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: ORIGIN_COLOR.manual }} />
+                {t('origem.manual')}
+              </span>
+            </div>
+          )}
+          <span
+            className={`flex items-center gap-1.5 font-mono text-[11px] tracking-wide uppercase ${connected ? 'text-success' : 'text-foreground-faint'}`}
+          >
+            {connected && (
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-75" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-success" />
+              </span>
+            )}
+            {connected ? t('live') : t('offline')}
+          </span>
+        </div>
       </div>
       <MapContainer center={center} zoom={withPosition.length > 0 ? 12 : 4} style={{ height: '420px', width: '100%' }}>
         <TileLayer
@@ -65,7 +90,10 @@ export function FleetMap({ positions, vehiclesById, connected, fallbackCenter = 
                 {vehicle && (
                   <>
                     <br />
-                    <Link href={`/vehicles/${vehicle._id}`} className="underline">
+                    <Link
+                      href={`/vehicles/${vehicle._id}`}
+                      className="rounded-xs underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                    >
                       {t('viewDetails')}
                     </Link>
                   </>
@@ -75,7 +103,7 @@ export function FleetMap({ positions, vehiclesById, connected, fallbackCenter = 
           );
         })}
       </MapContainer>
-      {withPosition.length === 0 && <p className="px-4 py-2 text-sm text-foreground/60">{t('empty')}</p>}
+      {withPosition.length === 0 && <p className="px-5 py-3 text-sm text-foreground-dim">{t('empty')}</p>}
     </div>
   );
 }

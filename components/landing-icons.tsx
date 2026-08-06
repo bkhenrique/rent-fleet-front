@@ -49,9 +49,19 @@ export function DashboardIcon() {
   return <Icon paths={['M4 5h7v6H4zM13 5h7v10h-7zM4 13h7v6H4z']} />;
 }
 
-export function CheckIcon() {
+export function CheckIcon({ size = 13, className }: { size?: number; className?: string } = {}) {
   return (
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" aria-hidden>
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.6"
+      strokeLinecap="round"
+      className={className}
+      aria-hidden
+    >
       <path d="M4 12.5l5 5L20 6.5" />
     </svg>
   );

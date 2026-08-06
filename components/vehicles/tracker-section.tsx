@@ -116,7 +116,7 @@ export function TrackerSection({ vehicleId }: TrackerSectionProps) {
   }
 
   return (
-    <div className="rounded border border-black/10 p-4 dark:border-white/15">
+    <div className="rounded border border-border p-4">
       <h2 className="mb-3 text-sm font-semibold">{t('tracker.title')}</h2>
 
       {!tracker && (
@@ -127,7 +127,7 @@ export function TrackerSection({ vehicleId }: TrackerSectionProps) {
               <select
                 value={tipo}
                 onChange={(e) => setTipo(e.target.value as TrackerType)}
-                className="rounded border border-black/15 px-2 py-1 text-sm dark:border-white/25"
+                className="rounded border border-border px-2 py-1 text-sm"
               >
                 {TRACKER_TYPE_OPTIONS.map((option) => (
                   <option key={option} value={option}>
@@ -144,7 +144,7 @@ export function TrackerSection({ vehicleId }: TrackerSectionProps) {
                   required
                   value={uniqueId}
                   onChange={(e) => setUniqueId(e.target.value)}
-                  className="rounded border border-black/15 px-2 py-1 text-sm dark:border-white/25"
+                  className="rounded border border-border px-2 py-1 text-sm"
                 />
               </label>
             )}
@@ -157,10 +157,10 @@ export function TrackerSection({ vehicleId }: TrackerSectionProps) {
               {creating ? t('form.saving') : t('tracker.create')}
             </button>
           </form>
-          <p className="max-w-md text-xs text-foreground/60">{t(`tracker.help.${tipo}`)}</p>
+          <p className="max-w-md text-xs text-foreground-dim">{t(`tracker.help.${tipo}`)}</p>
         </div>
       )}
-      {createError && <p className="mt-2 text-sm text-red-600 dark:text-red-400">{createError}</p>}
+      {createError && <p className="mt-2 text-sm text-danger">{createError}</p>}
 
       {tracker && (
         <div className="flex flex-col gap-3 text-sm">
@@ -180,13 +180,13 @@ export function TrackerSection({ vehicleId }: TrackerSectionProps) {
 
           {tracker.tipo !== 'airtag_manual' && (
             <div>
-              <p className="mb-2 max-w-md text-xs text-foreground/60">{t(`tracker.help.${tracker.tipo}`)}</p>
+              <p className="mb-2 max-w-md text-xs text-foreground-dim">{t(`tracker.help.${tracker.tipo}`)}</p>
               {!webhookUrl && (
                 <button
                   type="button"
                   onClick={handleReveal}
                   disabled={revealing}
-                  className="rounded border border-black/15 px-3 py-1.5 text-sm font-medium disabled:opacity-60 dark:border-white/25"
+                  className="rounded border border-border px-3 py-1.5 text-sm font-medium disabled:opacity-60"
                 >
                   {revealing ? t('form.saving') : t('tracker.revealSecret')}
                 </button>
@@ -197,7 +197,7 @@ export function TrackerSection({ vehicleId }: TrackerSectionProps) {
                   <button
                     type="button"
                     onClick={() => handleCopyWebhookUrl(webhookUrl)}
-                    className="shrink-0 rounded border border-black/15 px-2 py-1 text-xs font-medium dark:border-white/25"
+                    className="shrink-0 rounded border border-border px-2 py-1 text-xs font-medium"
                   >
                     {webhookUrlCopied ? t('tracker.copied') : t('tracker.copy')}
                   </button>
@@ -208,14 +208,14 @@ export function TrackerSection({ vehicleId }: TrackerSectionProps) {
 
           {tracker.tipo === 'airtag_manual' && (
             <form onSubmit={handleUpdatePosition} className="flex flex-col gap-2">
-              <p className="text-xs text-foreground/60">{t('tracker.pickOnMap')}</p>
+              <p className="text-xs text-foreground-dim">{t('tracker.pickOnMap')}</p>
               <PositionPickerMap
                 initialCenter={tenantSettings ? MAP_CENTER_BY_COUNTRY[tenantSettings.pais] : MAP_CENTER_BY_COUNTRY.BR}
                 value={pickedPosition}
                 onChange={setPickedPosition}
               />
               {pickedPosition && (
-                <p className="text-xs text-foreground/60">
+                <p className="text-xs text-foreground-dim">
                   {t('tracker.lat')}: {pickedPosition[0].toFixed(6)} · {t('tracker.lng')}: {pickedPosition[1].toFixed(6)}
                 </p>
               )}
@@ -228,7 +228,7 @@ export function TrackerSection({ vehicleId }: TrackerSectionProps) {
               </button>
             </form>
           )}
-          {positionError && <p className="text-sm text-red-600 dark:text-red-400">{positionError}</p>}
+          {positionError && <p className="text-sm text-danger">{positionError}</p>}
         </div>
       )}
     </div>

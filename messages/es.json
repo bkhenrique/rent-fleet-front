@@ -231,6 +231,7 @@
   },
   "dashboard": {
     "title": "Panel de la empresa de alquiler",
+    "loading": "Cargando panel…",
     "loadError": "No se pudieron cargar los datos del panel.",
     "overview": {
       "total": "Vehículos",

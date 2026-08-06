@@ -89,8 +89,8 @@ function NewRentalContractForm() {
     <div className="mx-auto max-w-md px-4 py-10">
       <h1 className="mb-6 text-xl font-semibold">{t('newContract')}</h1>
 
-      {vehicles.length === 0 && <p className="mb-4 text-sm text-amber-700 dark:text-amber-400">{t('form.noVehicles')}</p>}
-      {customers.length === 0 && <p className="mb-4 text-sm text-amber-700 dark:text-amber-400">{t('form.noCustomers')}</p>}
+      {vehicles.length === 0 && <p className="mb-4 text-sm text-warning">{t('form.noVehicles')}</p>}
+      {customers.length === 0 && <p className="mb-4 text-sm text-warning">{t('form.noCustomers')}</p>}
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <label className="flex flex-col gap-1">
@@ -99,7 +99,7 @@ function NewRentalContractForm() {
             required
             value={vehicleId}
             onChange={(e) => setVehicleId(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           >
             {vehicles.map((vehicle) => (
               <option key={vehicle._id} value={vehicle._id}>
@@ -115,7 +115,7 @@ function NewRentalContractForm() {
             required
             value={customerId}
             onChange={(e) => setCustomerId(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           >
             {customers.map((customer) => (
               <option key={customer.id} value={customer.id}>
@@ -133,7 +133,7 @@ function NewRentalContractForm() {
               required
               value={dataInicio}
               onChange={(e) => setDataInicio(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+              className="rounded border border-border px-3 py-2"
             />
           </label>
 
@@ -144,7 +144,7 @@ function NewRentalContractForm() {
               required
               value={dataFim}
               onChange={(e) => setDataFim(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+              className="rounded border border-border px-3 py-2"
             />
           </label>
         </div>
@@ -155,7 +155,7 @@ function NewRentalContractForm() {
             <input
               value={localRetirada}
               onChange={(e) => setLocalRetirada(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+              className="rounded border border-border px-3 py-2"
             />
           </label>
           <label className="flex flex-col gap-1">
@@ -163,7 +163,7 @@ function NewRentalContractForm() {
             <input
               value={localDevolucao}
               onChange={(e) => setLocalDevolucao(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+              className="rounded border border-border px-3 py-2"
             />
           </label>
         </div>
@@ -177,7 +177,7 @@ function NewRentalContractForm() {
             required
             value={valor}
             onChange={(e) => setValor(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           />
         </label>
 
@@ -190,7 +190,7 @@ function NewRentalContractForm() {
               placeholder={t('form.franquiaKmPlaceholder')}
               value={franquiaKm}
               onChange={(e) => setFranquiaKm(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+              className="rounded border border-border px-3 py-2"
             />
           </label>
           <label className="flex flex-col gap-1">
@@ -201,12 +201,12 @@ function NewRentalContractForm() {
               step="0.01"
               value={caucao}
               onChange={(e) => setCaucao(e.target.value)}
-              className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+              className="rounded border border-border px-3 py-2"
             />
           </label>
         </div>
 
-        <fieldset className="flex flex-col gap-3 rounded border border-black/10 p-4 dark:border-white/15">
+        <fieldset className="flex flex-col gap-3 rounded border border-border p-4">
           <legend className="px-1 text-sm font-medium">{t('form.condutoresSectionTitle')}</legend>
 
           {condutores.map((condutor, index) => (
@@ -216,7 +216,7 @@ function NewRentalContractForm() {
                 <input
                   value={condutor.nome}
                   onChange={(e) => updateCondutor(index, 'nome', e.target.value)}
-                  className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                  className="rounded border border-border px-2 py-1.5 text-sm"
                 />
               </label>
               <label className="flex flex-col gap-1">
@@ -224,7 +224,7 @@ function NewRentalContractForm() {
                 <input
                   value={condutor.documento}
                   onChange={(e) => updateCondutor(index, 'documento', e.target.value)}
-                  className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                  className="rounded border border-border px-2 py-1.5 text-sm"
                 />
               </label>
               <label className="flex flex-col gap-1">
@@ -232,13 +232,13 @@ function NewRentalContractForm() {
                 <input
                   value={condutor.cnh ?? ''}
                   onChange={(e) => updateCondutor(index, 'cnh', e.target.value)}
-                  className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                  className="rounded border border-border px-2 py-1.5 text-sm"
                 />
               </label>
               <button
                 type="button"
                 onClick={() => removeCondutor(index)}
-                className="rounded border border-black/15 px-2 py-1.5 text-xs font-medium dark:border-white/25"
+                className="rounded border border-border px-2 py-1.5 text-xs font-medium"
               >
                 {t('form.condutorRemover')}
               </button>
@@ -248,14 +248,14 @@ function NewRentalContractForm() {
           <button
             type="button"
             onClick={addCondutor}
-            className="self-start rounded border border-black/15 px-3 py-1.5 text-sm font-medium dark:border-white/25"
+            className="self-start rounded border border-border px-3 py-1.5 text-sm font-medium"
           >
             {t('form.condutorAdicionar')}
           </button>
         </fieldset>
 
         {error && (
-          <p role="alert" className="text-sm text-red-600 dark:text-red-400">
+          <p role="alert" className="text-sm text-danger">
             {error}
           </p>
         )}

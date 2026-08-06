@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { RequireRole } from '@/components/require-role';
 import { TENANT_ROLES } from '@/lib/roles';
 import { useApiClient } from '@/lib/use-api-client';
@@ -11,6 +11,7 @@ import { useTenantSettings } from '@/lib/use-tenant-settings';
 import { MAP_CENTER_BY_COUNTRY } from '@/lib/map-defaults';
 import { OverviewCards } from '@/components/dashboard/overview-cards';
 import { AlertsList } from '@/components/dashboard/alerts-list';
+import { Reveal } from '@/components/reveal';
 import type { Vehicle, VehicleWithAlerts } from '@/lib/types/vehicle';
 import type { RentalContractWithAlert } from '@/lib/types/rental-contract';
 import type { Customer } from '@/lib/types/customer';
@@ -24,6 +25,7 @@ const CONTRACT_ALERT_DAYS = 5;
 
 function DashboardContent() {
   const t = useTranslations('dashboard');
+  const locale = useLocale();
   const apiClient = useApiClient();
   const { positions, connected } = useFleetSocket();
   const tenantSettings = useTenantSettings();
@@ -32,6 +34,7 @@ function DashboardContent() {
   const [vehicleAlerts, setVehicleAlerts] = useState<VehicleWithAlerts[]>([]);
   const [contractAlerts, setContractAlerts] = useState<RentalContractWithAlert[]>([]);
   const [customersById, setCustomersById] = useState<Record<string, Customer>>({});
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -44,43 +47,71 @@ function DashboardContent() {
         setVehicles(vehiclesRes);
         setVehicleAlerts(vehicleAlertsRes);
         setContractAlerts(contractAlertsRes);
+        setLoading(false);
 
         const customerIds = Array.from(new Set(contractAlertsRes.map((row) => row.contract.customerId)));
-        void Promise.all(customerIds.map((id) => apiClient<Customer>(`/customers/${id}`))).then((customers) => {
-          setCustomersById(Object.fromEntries(customers.map((customer) => [customer.id, customer])));
-        });
+        void Promise.all(customerIds.map((id) => apiClient<Customer>(`/customers/${id}`)))
+          .then((customers) => {
+            setCustomersById(Object.fromEntries(customers.map((customer) => [customer.id, customer])));
+          })
+          // Nomes de cliente são um complemento do alerta, não o dado principal — se essa busca falhar,
+          // a lista já degrada bem sozinha (mostra o customerId cru, ver alerts-list.tsx); só evita
+          // que a rejeição fique sem handler nenhum.
+          .catch(() => {});
       })
-      .catch(() => setError(true));
+      .catch(() => {
+        setError(true);
+        setLoading(false);
+      });
   }, [apiClient]);
 
   const vehiclesById = Object.fromEntries(vehicles.map((vehicle) => [vehicle._id, vehicle]));
+  const today = new Intl.DateTimeFormat(locale, { weekday: 'long', day: 'numeric', month: 'long' }).format(new Date());
 
   return (
-    <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-8">
-      <h1 className="text-xl font-semibold">{t('title')}</h1>
+    <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 pt-14 pb-12 sm:px-6">
+      <Reveal>
+        <h1 className="font-serif text-4xl tracking-tight sm:text-5xl">{t('title')}</h1>
+        <p className="mt-2 text-sm text-foreground-dim capitalize">
+          {tenantSettings ? `${tenantSettings.nome} · ` : ''}
+          {today}
+        </p>
+      </Reveal>
 
-      {error && <p className="text-sm text-red-600 dark:text-red-400">{t('loadError')}</p>}
+      {error && <p className="text-sm text-danger">{t('loadError')}</p>}
 
-      <OverviewCards
-        vehicles={vehicles}
-        vehicleAlertCount={vehicleAlerts.length}
-        contractAlertCount={contractAlerts.length}
-      />
+      {loading && !error && <p className="text-sm text-foreground-dim">{t('loading')}</p>}
 
-      <FleetMap
-        key={tenantSettings?.pais ?? 'loading'}
-        positions={positions}
-        vehiclesById={vehiclesById}
-        connected={connected}
-        fallbackCenter={tenantSettings ? MAP_CENTER_BY_COUNTRY[tenantSettings.pais] : undefined}
-      />
+      {!loading && !error && (
+        <div className="flex flex-col gap-6">
+          <Reveal delay={80}>
+            <OverviewCards
+              vehicles={vehicles}
+              vehicleAlertCount={vehicleAlerts.length}
+              contractAlertCount={contractAlerts.length}
+            />
+          </Reveal>
 
-      <AlertsList
-        vehicleAlerts={vehicleAlerts}
-        contractAlerts={contractAlerts}
-        vehiclesById={vehiclesById}
-        customersById={customersById}
-      />
+          <Reveal delay={160} className="grid items-start gap-6 lg:grid-cols-3">
+            <div className="lg:col-span-2">
+              <FleetMap
+                key={tenantSettings?.pais ?? 'loading'}
+                positions={positions}
+                vehiclesById={vehiclesById}
+                connected={connected}
+                fallbackCenter={tenantSettings ? MAP_CENTER_BY_COUNTRY[tenantSettings.pais] : undefined}
+              />
+            </div>
+
+            <AlertsList
+              vehicleAlerts={vehicleAlerts}
+              contractAlerts={contractAlerts}
+              vehiclesById={vehiclesById}
+              customersById={customersById}
+            />
+          </Reveal>
+        </div>
+      )}
     </div>
   );
 }

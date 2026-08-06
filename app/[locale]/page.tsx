@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { Inter, Instrument_Serif, JetBrains_Mono } from 'next/font/google';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { LOCALES, type AppLocale } from '@/i18n/routing';
@@ -13,15 +12,6 @@ import { CountUp } from '@/components/count-up';
 import { TiltCard } from '@/components/tilt-card';
 import { CheckIcon, ContractIcon, DashboardIcon, LogoMarkIcon, TrackingIcon, VehicleIcon } from '@/components/landing-icons';
 import './landing.css';
-
-const inter = Inter({ variable: '--font-inter', subsets: ['latin'], weight: ['400', '500', '600', '700'] });
-const instrumentSerif = Instrument_Serif({
-  variable: '--font-instrument-serif',
-  subsets: ['latin'],
-  weight: '400',
-  style: ['italic', 'normal'],
-});
-const jetbrainsMono = JetBrains_Mono({ variable: '--font-jetbrains-mono', subsets: ['latin'], weight: ['400', '500'] });
 
 const FEATURES = [
   { key: 'vehicles', Icon: VehicleIcon },
@@ -127,10 +117,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <AuthRedirect />
 
-      <div
-        className={`${inter.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} rf-landing`}
-        style={{ minHeight: '100vh', overflowX: 'hidden' }}
-      >
+      <div className="rf-landing" style={{ minHeight: '100vh', overflowX: 'hidden' }}>
         <header
           style={{
             position: 'sticky',

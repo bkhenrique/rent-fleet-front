@@ -41,8 +41,8 @@ function daysRemaining(dateStr: string | null): number | null {
 function docClassName(dateStr: string | null): string {
   const dias = daysRemaining(dateStr);
   if (dias === null) return '';
-  if (dias < 0) return 'text-red-700 dark:text-red-400 font-medium';
-  if (dias <= DOC_WARNING_DAYS) return 'text-amber-700 dark:text-amber-400 font-medium';
+  if (dias < 0) return 'text-danger font-medium';
+  if (dias <= DOC_WARNING_DAYS) return 'text-warning font-medium';
   return '';
 }
 
@@ -160,7 +160,7 @@ function VehicleDetail({ id }: { id: string }) {
   if (loadError) {
     return (
       <div className="mx-auto max-w-2xl px-4 py-10">
-        <p className="text-sm text-red-600 dark:text-red-400">{t('loadError')}</p>
+        <p className="text-sm text-danger">{t('loadError')}</p>
         <Link href="/vehicles" className="mt-4 inline-block text-sm underline">
           {t('backToList')}
         </Link>
@@ -189,7 +189,7 @@ function VehicleDetail({ id }: { id: string }) {
             type="button"
             onClick={() => handleTabChange(option)}
             className={`rounded px-3 py-1 text-sm font-medium ${
-              tab === option ? 'bg-accent text-accent-foreground' : 'text-foreground/70 hover:bg-foreground/10'
+              tab === option ? 'bg-accent text-accent-foreground' : 'text-foreground-dim hover:bg-foreground/10'
             }`}
           >
             {t(`tabs.${option}`)}
@@ -207,7 +207,7 @@ function VehicleDetail({ id }: { id: string }) {
                   required
                   value={placa}
                   onChange={(e) => setPlaca(e.target.value)}
-                  className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+                  className="rounded border border-border px-3 py-2"
                 />
               </label>
               <label className="flex flex-col gap-1">
@@ -217,7 +217,7 @@ function VehicleDetail({ id }: { id: string }) {
                   required
                   value={ano}
                   onChange={(e) => setAno(Number(e.target.value))}
-                  className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+                  className="rounded border border-border px-3 py-2"
                 />
               </label>
               <label className="flex flex-col gap-1">
@@ -226,7 +226,7 @@ function VehicleDetail({ id }: { id: string }) {
                   required
                   value={marca}
                   onChange={(e) => setMarca(e.target.value)}
-                  className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+                  className="rounded border border-border px-3 py-2"
                 />
               </label>
               <label className="flex flex-col gap-1">
@@ -235,7 +235,7 @@ function VehicleDetail({ id }: { id: string }) {
                   required
                   value={modelo}
                   onChange={(e) => setModelo(e.target.value)}
-                  className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+                  className="rounded border border-border px-3 py-2"
                 />
               </label>
               <label className="flex flex-col gap-1">
@@ -243,7 +243,7 @@ function VehicleDetail({ id }: { id: string }) {
                 <input
                   value={cor}
                   onChange={(e) => setCor(e.target.value)}
-                  className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+                  className="rounded border border-border px-3 py-2"
                 />
               </label>
               <label className="flex flex-col gap-1">
@@ -251,7 +251,7 @@ function VehicleDetail({ id }: { id: string }) {
                 <input
                   value={chassi}
                   onChange={(e) => setChassi(e.target.value)}
-                  className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+                  className="rounded border border-border px-3 py-2"
                 />
               </label>
               <label className="flex flex-col gap-1">
@@ -259,7 +259,7 @@ function VehicleDetail({ id }: { id: string }) {
                 <select
                   value={cambio}
                   onChange={(e) => setCambio(e.target.value as TransmissionType | '')}
-                  className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+                  className="rounded border border-border px-3 py-2"
                 >
                   <option value="">{t('form.naoInformado')}</option>
                   {TRANSMISSION_OPTIONS.map((option) => (
@@ -274,7 +274,7 @@ function VehicleDetail({ id }: { id: string }) {
                 <select
                   value={combustivel}
                   onChange={(e) => setCombustivel(e.target.value as FuelType | '')}
-                  className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+                  className="rounded border border-border px-3 py-2"
                 >
                   <option value="">{t('form.naoInformado')}</option>
                   {FUEL_OPTIONS.map((option) => (
@@ -289,7 +289,7 @@ function VehicleDetail({ id }: { id: string }) {
                 <select
                   value={status}
                   onChange={(e) => setStatus(e.target.value as VehicleStatus)}
-                  className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+                  className="rounded border border-border px-3 py-2"
                 >
                   {STATUS_OPTIONS.map((option) => (
                     <option key={option} value={option}>
@@ -306,15 +306,15 @@ function VehicleDetail({ id }: { id: string }) {
                   step="0.01"
                   value={valorDiariaReferencia}
                   onChange={(e) => setValorDiariaReferencia(e.target.value)}
-                  className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+                  className="rounded border border-border px-3 py-2"
                 />
-                <span className="text-xs text-foreground/60">{t('form.valorDiariaReferenciaHint')}</span>
+                <span className="text-xs text-foreground-dim">{t('form.valorDiariaReferenciaHint')}</span>
               </label>
             </div>
           )}
 
           {tab === 'documentos' && (
-            <fieldset className="flex flex-col gap-4 rounded border border-black/10 p-4 dark:border-white/15">
+            <fieldset className="flex flex-col gap-4 rounded border border-border p-4">
               <legend className="px-1 text-sm font-medium">{t('form.documentosSectionTitle')}</legend>
 
               <div className="grid grid-cols-3 gap-3">
@@ -326,7 +326,7 @@ function VehicleDetail({ id }: { id: string }) {
                     type="date"
                     value={seguroValidade}
                     onChange={(e) => setSeguroValidade(e.target.value)}
-                    className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                    className="rounded border border-border px-2 py-1.5 text-sm"
                   />
                 </label>
                 <label className="flex flex-col gap-1">
@@ -334,7 +334,7 @@ function VehicleDetail({ id }: { id: string }) {
                   <input
                     value={seguroApolice}
                     onChange={(e) => setSeguroApolice(e.target.value)}
-                    className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                    className="rounded border border-border px-2 py-1.5 text-sm"
                   />
                 </label>
                 <label className="flex flex-col gap-1">
@@ -342,7 +342,7 @@ function VehicleDetail({ id }: { id: string }) {
                   <input
                     value={seguroSeguradora}
                     onChange={(e) => setSeguroSeguradora(e.target.value)}
-                    className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                    className="rounded border border-border px-2 py-1.5 text-sm"
                   />
                 </label>
               </div>
@@ -356,7 +356,7 @@ function VehicleDetail({ id }: { id: string }) {
                     type="date"
                     value={itvValidade}
                     onChange={(e) => setItvValidade(e.target.value)}
-                    className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                    className="rounded border border-border px-2 py-1.5 text-sm"
                   />
                 </label>
                 <label className="flex flex-col gap-1">
@@ -367,14 +367,14 @@ function VehicleDetail({ id }: { id: string }) {
                     type="date"
                     value={licenciamentoValidade}
                     onChange={(e) => setLicenciamentoValidade(e.target.value)}
-                    className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                    className="rounded border border-border px-2 py-1.5 text-sm"
                   />
                 </label>
               </div>
             </fieldset>
           )}
 
-          {formError && <p className="text-sm text-red-600 dark:text-red-400">{formError}</p>}
+          {formError && <p className="text-sm text-danger">{formError}</p>}
 
           <button
             type="submit"
@@ -411,7 +411,7 @@ function VehicleDetail({ id }: { id: string }) {
         />
       )}
 
-      <p className="text-xs text-foreground/40">
+      <p className="text-xs text-foreground-faint">
         {t('lastUpdated', { date: new Date(vehicle.updatedAt).toLocaleString(locale) })}
       </p>
     </div>

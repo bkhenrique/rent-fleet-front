@@ -75,7 +75,7 @@ function NewCustomerForm() {
             required
             value={nome}
             onChange={(e) => setNome(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           />
         </label>
 
@@ -85,7 +85,7 @@ function NewCustomerForm() {
             required
             value={documento}
             onChange={(e) => setDocumento(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           />
         </label>
 
@@ -94,7 +94,7 @@ function NewCustomerForm() {
           <input
             value={endereco}
             onChange={(e) => setEndereco(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           />
         </label>
 
@@ -104,7 +104,7 @@ function NewCustomerForm() {
             type="date"
             value={dataNascimento}
             onChange={(e) => setDataNascimento(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           />
         </label>
 
@@ -113,7 +113,7 @@ function NewCustomerForm() {
           <select
             value={tipoDocumento}
             onChange={(e) => setTipoDocumento(e.target.value as DocumentType)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           >
             {DOCUMENT_TYPE_OPTIONS.map((option) => (
               <option key={option} value={option}>
@@ -123,7 +123,7 @@ function NewCustomerForm() {
           </select>
         </label>
 
-        <fieldset className="flex flex-col gap-4 rounded border border-black/10 p-4 dark:border-white/15">
+        <fieldset className="flex flex-col gap-4 rounded border border-border p-4">
           <legend className="px-1 text-sm font-medium">{t(`tipoDocumentoOptions.${tipoDocumento}`)}</legend>
           <div className={`grid gap-3 ${showCategoria ? 'grid-cols-3' : 'grid-cols-2'}`}>
             <label className="flex flex-col gap-1">
@@ -131,7 +131,7 @@ function NewCustomerForm() {
               <input
                 value={cnhNumero}
                 onChange={(e) => setCnhNumero(e.target.value)}
-                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                className="rounded border border-border px-2 py-1.5 text-sm"
               />
             </label>
             {showCategoria && (
@@ -140,7 +140,7 @@ function NewCustomerForm() {
                 <input
                   value={cnhCategoria}
                   onChange={(e) => setCnhCategoria(e.target.value)}
-                  className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                  className="rounded border border-border px-2 py-1.5 text-sm"
                 />
               </label>
             )}
@@ -150,7 +150,7 @@ function NewCustomerForm() {
                 type="date"
                 value={cnhValidade}
                 onChange={(e) => setCnhValidade(e.target.value)}
-                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                className="rounded border border-border px-2 py-1.5 text-sm"
               />
             </label>
           </div>
@@ -161,7 +161,7 @@ function NewCustomerForm() {
           <input
             value={telefone}
             onChange={(e) => setTelefone(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           />
         </label>
 
@@ -171,12 +171,12 @@ function NewCustomerForm() {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className="rounded border border-border px-3 py-2"
           />
         </label>
 
         {error && (
-          <p role="alert" className="text-sm text-red-600 dark:text-red-400">
+          <p role="alert" className="text-sm text-danger">
             {error}
           </p>
         )}

@@ -82,28 +82,32 @@ export function SharePortfolioModal({ onClose }: SharePortfolioModalProps) {
       onClick={onClose}
     >
       <div
-        className="w-full max-w-md rounded-lg bg-background p-6 shadow-lg"
+        className="w-full max-w-md rounded-lg border border-border bg-surface p-6 shadow-elevated"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mb-4 flex items-start justify-between gap-4">
           <div>
             <h2 className="text-lg font-semibold">{t('title')}</h2>
-            <p className="mt-1 text-sm text-foreground/70">{t('description')}</p>
+            <p className="mt-1 text-sm text-foreground-dim">{t('description')}</p>
           </div>
-          <button type="button" onClick={onClose} className="text-sm underline">
+          <button
+            type="button"
+            onClick={onClose}
+            className="rounded-xs text-sm underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          >
             {t('close')}
           </button>
         </div>
 
-        {!tenant && !loadError && <p className="text-sm text-foreground/60">{t('loading')}</p>}
-        {loadError && <p className="text-sm text-red-600 dark:text-red-400">{t('loadError')}</p>}
+        {!tenant && !loadError && <p className="text-sm text-foreground-dim">{t('loading')}</p>}
+        {loadError && <p className="text-sm text-danger">{t('loadError')}</p>}
 
         {tenant && !tenant.portfolio.ativo && (
           <button
             type="button"
             disabled={saving}
             onClick={handleActivate}
-            className="rounded bg-accent px-4 py-2 text-sm font-medium text-accent-foreground disabled:opacity-60"
+            className="rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:opacity-60"
           >
             {saving ? t('activating') : t('activate')}
           </button>
@@ -140,12 +144,12 @@ export function SharePortfolioModal({ onClose }: SharePortfolioModalProps) {
                   readOnly
                   value={publicUrl}
                   onFocus={(e) => e.currentTarget.select()}
-                  className="min-w-0 flex-1 rounded border border-black/15 px-3 py-2 text-sm dark:border-white/25"
+                  className="min-w-0 flex-1 rounded-md border border-border bg-background px-3 py-2 font-mono text-sm outline-none focus:border-accent"
                 />
                 <button
                   type="button"
                   onClick={() => handleCopy(publicUrl)}
-                  className="shrink-0 rounded bg-foreground px-3 py-2 text-sm font-medium text-background"
+                  className="shrink-0 rounded-md bg-foreground px-3 py-2 text-sm font-medium text-background focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                 >
                   {copied ? t('copied') : t('copy')}
                 </button>
@@ -154,7 +158,7 @@ export function SharePortfolioModal({ onClose }: SharePortfolioModalProps) {
           </div>
         )}
 
-        {saveError && <p className="mt-3 text-sm text-red-600 dark:text-red-400">{t('saveError')}</p>}
+        {saveError && <p className="mt-3 text-sm text-danger">{t('saveError')}</p>}
       </div>
     </div>
   );

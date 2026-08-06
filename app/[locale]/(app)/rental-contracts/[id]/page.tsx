@@ -10,17 +10,10 @@ import { useTenantSettings } from '@/lib/use-tenant-settings';
 import { formatCurrency } from '@/lib/currency';
 import { AttachmentUpload } from '@/components/rental-contracts/attachment-upload';
 import { DigitalSignatureSection } from '@/components/rental-contracts/digital-signature-section';
+import { ASSINATURA_COLORS, CONTRACT_STATUS_COLORS } from '@/lib/rental-contract-status';
 import type { FuelLevel, RentalContract } from '@/lib/types/rental-contract';
 
 const FUEL_LEVEL_OPTIONS: FuelLevel[] = ['cheio', 'tres_quartos', 'metade', 'um_quarto', 'reserva'];
-
-const ASSINATURA_COLORS: Record<string, string> = {
-  nao_iniciado: 'text-foreground/50',
-  aguardando_cliente: 'text-amber-700 dark:text-amber-400',
-  aguardando_locadora: 'text-amber-700 dark:text-amber-400',
-  assinado: 'text-green-700 dark:text-green-400',
-  assinado_manual: 'text-green-700 dark:text-green-400',
-};
 
 function RentalContractDetail({ id }: { id: string }) {
   const t = useTranslations('rentalContracts');
@@ -98,7 +91,7 @@ function RentalContractDetail({ id }: { id: string }) {
   if (loadError) {
     return (
       <div className="mx-auto max-w-2xl px-4 py-10">
-        <p className="text-sm text-red-600 dark:text-red-400">{t('loadError')}</p>
+        <p className="text-sm text-danger">{t('loadError')}</p>
         <Link href="/rental-contracts" className="mt-4 inline-block text-sm underline">
           {t('backToList')}
         </Link>
@@ -127,7 +120,7 @@ function RentalContractDetail({ id }: { id: string }) {
         <dt className="font-medium">{t('table.valor')}</dt>
         <dd>{tenantSettings ? formatCurrency(contract.valor, tenantSettings.moeda) : contract.valor}</dd>
         <dt className="font-medium">{t('table.status')}</dt>
-        <dd>{t(`status.${contract.status}`)}</dd>
+        <dd className={`font-medium ${CONTRACT_STATUS_COLORS[contract.status]}`}>{t(`status.${contract.status}`)}</dd>
         <dt className="font-medium">{t('table.assinatura')}</dt>
         <dd className={ASSINATURA_COLORS[contract.assinaturaDigital.status]}>
           {t(`detail.assinaturaDigital.statusLabel.${contract.assinaturaDigital.status}`)}
@@ -153,7 +146,7 @@ function RentalContractDetail({ id }: { id: string }) {
       </dl>
 
       {contract.condutoresAdicionais.length > 0 && (
-        <div className="rounded border border-black/10 p-4 dark:border-white/15">
+        <div className="rounded border border-border p-4">
           <h2 className="mb-2 text-sm font-semibold">{t('detail.condutoresTitle')}</h2>
           <ul className="flex flex-col gap-1 text-sm">
             {contract.condutoresAdicionais.map((condutor, index) => (
@@ -171,7 +164,7 @@ function RentalContractDetail({ id }: { id: string }) {
           href={contract.contratoPdfUrl}
           target="_blank"
           rel="noreferrer"
-          className="self-start rounded border border-black/15 px-4 py-2 text-sm font-medium dark:border-white/25"
+          className="self-start rounded border border-border px-4 py-2 text-sm font-medium"
         >
           {t('detail.openPdf')}
         </a>
@@ -184,7 +177,7 @@ function RentalContractDetail({ id }: { id: string }) {
         onUpdated={loadContract}
       />
 
-      <div className="rounded border border-black/10 p-4 dark:border-white/15">
+      <div className="rounded border border-border p-4">
         <h2 className="mb-3 text-sm font-semibold">{t('detail.assinaturaTitle')}</h2>
         <AttachmentUpload
           contractId={contract.id}
@@ -194,7 +187,7 @@ function RentalContractDetail({ id }: { id: string }) {
         />
       </div>
 
-      <div className="rounded border border-black/10 p-4 dark:border-white/15">
+      <div className="rounded border border-border p-4">
         <h2 className="mb-3 text-sm font-semibold">{t('detail.vistoriaEntregaTitle')}</h2>
         <AttachmentUpload
           contractId={contract.id}
@@ -203,7 +196,7 @@ function RentalContractDetail({ id }: { id: string }) {
           onUploaded={loadContract}
         />
         {(contract.vistoriaEntrega.quilometragem !== null || contract.vistoriaEntrega.combustivel !== null) && (
-          <p className="mt-2 text-sm text-foreground/70">
+          <p className="mt-2 text-sm text-foreground-dim">
             {contract.vistoriaEntrega.quilometragem !== null && `${contract.vistoriaEntrega.quilometragem} km`}
             {contract.vistoriaEntrega.combustivel !== null &&
               ` — ${t(`detail.fuelLevel.${contract.vistoriaEntrega.combustivel}`)}`}
@@ -215,7 +208,7 @@ function RentalContractDetail({ id }: { id: string }) {
             <input
               value={vistoriaEntregaObs}
               onChange={(e) => setVistoriaEntregaObs(e.target.value)}
-              className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+              className="rounded border border-border px-2 py-1.5 text-sm"
             />
           </label>
           <label className="flex flex-col gap-1">
@@ -225,7 +218,7 @@ function RentalContractDetail({ id }: { id: string }) {
               min={0}
               value={entregaKm}
               onChange={(e) => setEntregaKm(e.target.value)}
-              className="w-28 rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+              className="w-28 rounded border border-border px-2 py-1.5 text-sm"
             />
           </label>
           <label className="flex flex-col gap-1">
@@ -233,7 +226,7 @@ function RentalContractDetail({ id }: { id: string }) {
             <select
               value={entregaCombustivel}
               onChange={(e) => setEntregaCombustivel(e.target.value as FuelLevel | '')}
-              className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+              className="rounded border border-border px-2 py-1.5 text-sm"
             >
               <option value="">{t('detail.naoInformado')}</option>
               {FUEL_LEVEL_OPTIONS.map((option) => (
@@ -253,7 +246,7 @@ function RentalContractDetail({ id }: { id: string }) {
         </form>
       </div>
 
-      <div className="rounded border border-black/10 p-4 dark:border-white/15">
+      <div className="rounded border border-border p-4">
         <h2 className="mb-3 text-sm font-semibold">{t('detail.vistoriaDevolucaoTitle')}</h2>
         <AttachmentUpload
           contractId={contract.id}
@@ -262,10 +255,10 @@ function RentalContractDetail({ id }: { id: string }) {
           onUploaded={loadContract}
         />
         {contract.vistoriaDevolucao.observacoes && (
-          <p className="mt-2 text-sm text-foreground/70">{contract.vistoriaDevolucao.observacoes}</p>
+          <p className="mt-2 text-sm text-foreground-dim">{contract.vistoriaDevolucao.observacoes}</p>
         )}
         {(contract.vistoriaDevolucao.quilometragem !== null || contract.vistoriaDevolucao.combustivel !== null) && (
-          <p className="mt-1 text-sm text-foreground/70">
+          <p className="mt-1 text-sm text-foreground-dim">
             {contract.vistoriaDevolucao.quilometragem !== null && `${contract.vistoriaDevolucao.quilometragem} km`}
             {contract.vistoriaDevolucao.combustivel !== null &&
               ` — ${t(`detail.fuelLevel.${contract.vistoriaDevolucao.combustivel}`)}`}
@@ -279,7 +272,7 @@ function RentalContractDetail({ id }: { id: string }) {
               <input
                 value={devolucaoObs}
                 onChange={(e) => setDevolucaoObs(e.target.value)}
-                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                className="rounded border border-border px-2 py-1.5 text-sm"
               />
             </label>
             <label className="flex flex-col gap-1">
@@ -289,7 +282,7 @@ function RentalContractDetail({ id }: { id: string }) {
                 min={0}
                 value={devolucaoKm}
                 onChange={(e) => setDevolucaoKm(e.target.value)}
-                className="w-28 rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                className="w-28 rounded border border-border px-2 py-1.5 text-sm"
               />
             </label>
             <label className="flex flex-col gap-1">
@@ -297,7 +290,7 @@ function RentalContractDetail({ id }: { id: string }) {
               <select
                 value={devolucaoCombustivel}
                 onChange={(e) => setDevolucaoCombustivel(e.target.value as FuelLevel | '')}
-                className="rounded border border-black/15 px-2 py-1.5 text-sm dark:border-white/25"
+                className="rounded border border-border px-2 py-1.5 text-sm"
               >
                 <option value="">{t('detail.naoInformado')}</option>
                 {FUEL_LEVEL_OPTIONS.map((option) => (
@@ -318,7 +311,7 @@ function RentalContractDetail({ id }: { id: string }) {
         )}
       </div>
 
-      {actionError && <p className="text-sm text-red-600 dark:text-red-400">{actionError}</p>}
+      {actionError && <p className="text-sm text-danger">{actionError}</p>}
     </div>
   );
 }

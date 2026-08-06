@@ -6,11 +6,15 @@ import { useRouter } from '@/i18n/navigation';
 import { useApiClient } from '@/lib/use-api-client';
 import { ApiError } from '@/lib/api-client';
 import { useAuthStore, type AuthUser } from '@/stores/auth-store';
+import { LogoMarkIcon } from '@/components/landing-icons';
 
 interface LoginResponse {
   accessToken: string;
   user: AuthUser;
 }
+
+const FOCUS_RING = 'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent';
+const INPUT_CLASS = `rounded-md border border-border bg-background px-3 py-2 text-sm outline-none transition-colors focus:border-accent ${FOCUS_RING}`;
 
 export default function LoginPage() {
   const t = useTranslations('login');
@@ -47,11 +51,16 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="mx-auto flex max-w-sm flex-col gap-6 px-4 py-16">
-      <h1 className="text-xl font-semibold">{t('title')}</h1>
+    <div className="mx-auto flex min-h-[calc(100vh-57px)] max-w-sm flex-col justify-center px-4 py-16">
+      <div className="mb-8 flex flex-col items-center gap-4 text-center">
+        <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-accent text-accent-foreground">
+          <LogoMarkIcon size={22} />
+        </span>
+        <h1 className="font-serif text-3xl tracking-tight">{t('title')}</h1>
+      </div>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <label className="flex flex-col gap-1">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-lg border border-border bg-surface p-6 shadow-elevated">
+        <label className="flex flex-col gap-1.5">
           <span className="text-sm font-medium">{t('email')}</span>
           <input
             type="email"
@@ -59,11 +68,11 @@ export default function LoginPage() {
             autoComplete="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className={INPUT_CLASS}
           />
         </label>
 
-        <label className="flex flex-col gap-1">
+        <label className="flex flex-col gap-1.5">
           <span className="text-sm font-medium">{t('password')}</span>
           <input
             type="password"
@@ -71,12 +80,12 @@ export default function LoginPage() {
             autoComplete="current-password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
-            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+            className={INPUT_CLASS}
           />
         </label>
 
         {error && (
-          <p role="alert" className="text-sm text-red-600 dark:text-red-400">
+          <p role="alert" className="text-sm text-danger">
             {error}
           </p>
         )}
@@ -84,7 +93,7 @@ export default function LoginPage() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="rounded bg-foreground px-4 py-2 font-medium text-background disabled:opacity-60"
+          className={`mt-2 rounded-md bg-accent px-4 py-2.5 font-medium text-accent-foreground transition-opacity hover:opacity-90 disabled:opacity-60 ${FOCUS_RING}`}
         >
           {isSubmitting ? t('submitting') : t('submit')}
         </button>
