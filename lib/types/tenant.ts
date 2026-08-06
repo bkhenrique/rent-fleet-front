@@ -3,6 +3,14 @@ export type BillingCycle = 'mensal' | 'anual';
 export type Country = 'BR' | 'ES' | 'US';
 export type Currency = 'BRL' | 'EUR' | 'USD';
 
+/** Configuração do portfólio público da frota (link único e eterno, self-service do tenant_admin). */
+export interface TenantPortfolio {
+  ativo: boolean;
+  token: string | null;
+  mostrarValor: boolean;
+  mostrarStatus: boolean;
+}
+
 export interface Tenant {
   _id: string;
   nome: string;
@@ -21,8 +29,16 @@ export interface Tenant {
   telefone: string | null;
   email: string | null;
   totalVeiculos: number;
+  portfolio: TenantPortfolio;
   createdAt: string;
   updatedAt: string;
+}
+
+/** Body de `PATCH /tenants/me/portfolio` — o front sempre manda o estado completo dos 3 toggles. */
+export interface UpdatePortfolioSettingsPayload {
+  ativo: boolean;
+  mostrarValor: boolean;
+  mostrarStatus: boolean;
 }
 
 export interface CreateTenantPayload {

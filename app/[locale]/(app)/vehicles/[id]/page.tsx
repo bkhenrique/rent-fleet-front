@@ -74,6 +74,7 @@ function VehicleDetail({ id }: { id: string }) {
   const [cambio, setCambio] = useState<TransmissionType | ''>('');
   const [combustivel, setCombustivel] = useState<FuelType | ''>('');
   const [status, setStatus] = useState<VehicleStatus>('disponivel');
+  const [valorDiariaReferencia, setValorDiariaReferencia] = useState('');
   const [seguroValidade, setSeguroValidade] = useState('');
   const [seguroApolice, setSeguroApolice] = useState('');
   const [seguroSeguradora, setSeguroSeguradora] = useState('');
@@ -94,6 +95,7 @@ function VehicleDetail({ id }: { id: string }) {
     setCambio(found.cambio ?? '');
     setCombustivel(found.combustivel ?? '');
     setStatus(found.status);
+    setValorDiariaReferencia(found.valorDiariaReferencia != null ? String(found.valorDiariaReferencia) : '');
     setSeguroValidade(found.documentos.seguro.validade?.slice(0, 10) ?? '');
     setSeguroApolice(found.documentos.seguro.apolice ?? '');
     setSeguroSeguradora(found.documentos.seguro.seguradora ?? '');
@@ -124,6 +126,7 @@ function VehicleDetail({ id }: { id: string }) {
       cambio: cambio || undefined,
       combustivel: combustivel || undefined,
       status,
+      valorDiariaReferencia: valorDiariaReferencia ? Number(valorDiariaReferencia) : undefined,
       documentos: {
         seguro: {
           validade: seguroValidade || undefined,
@@ -294,6 +297,18 @@ function VehicleDetail({ id }: { id: string }) {
                     </option>
                   ))}
                 </select>
+              </label>
+              <label className="flex flex-col gap-1">
+                <span className="text-sm font-medium">{t('form.valorDiariaReferencia')}</span>
+                <input
+                  type="number"
+                  min={0}
+                  step="0.01"
+                  value={valorDiariaReferencia}
+                  onChange={(e) => setValorDiariaReferencia(e.target.value)}
+                  className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+                />
+                <span className="text-xs text-foreground/60">{t('form.valorDiariaReferenciaHint')}</span>
               </label>
             </div>
           )}

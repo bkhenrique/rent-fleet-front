@@ -410,7 +410,9 @@
       "saving": "Salvando...",
       "cancel": "Cancelar",
       "genericError": "Não foi possível salvar. Tente novamente.",
-      "naoInformado": "Não informado"
+      "naoInformado": "Não informado",
+      "valorDiariaReferencia": "Valor de referência (diária)",
+      "valorDiariaReferenciaHint": "Usado só se você ativar o portfólio público da frota."
     },
     "maintenance": {
       "title": "Manutenção",
@@ -473,6 +475,22 @@
       "eletrico": "Elétrico",
       "hibrido": "Híbrido",
       "flex": "Flex"
+    },
+    "sharePortfolio": "Compartilhar portfólio",
+    "portfolio": {
+      "title": "Portfólio público da frota",
+      "description": "Gere um link público (sem login) para seus clientes verem a frota disponível.",
+      "loading": "Carregando...",
+      "loadError": "Não foi possível carregar as configurações do portfólio.",
+      "activate": "Ativar portfólio público",
+      "activating": "Ativando...",
+      "mostrarValor": "Mostrar valor da diária",
+      "mostrarStatus": "Mostrar disponível/alugado",
+      "linkLabel": "Link público",
+      "copy": "Copiar link",
+      "copied": "Copiado!",
+      "close": "Fechar",
+      "saveError": "Não foi possível salvar. Tente novamente."
     }
   },
   "customers": {
@@ -765,6 +783,19 @@
       "success": "Funcionário cadastrado. A senha foi enviada por e-mail.",
       "conflictError": "Já existe um usuário com este e-mail.",
       "genericError": "Não foi possível cadastrar. Tente novamente."
+    }
+  },
+  "publicPortfolio": {
+    "loading": "Carregando...",
+    "notFound": {
+      "title": "Portfólio não encontrado",
+      "message": "Este link não está disponível."
+    },
+    "empty": "Nenhum veículo disponível no momento.",
+    "vehicle": {
+      "ano": "Ano",
+      "cor": "Cor",
+      "priceSuffix": "/dia"
     }
   }
 }

@@ -44,6 +44,8 @@ export interface Vehicle {
   proximaRevisaoEm: string | null;
   status: VehicleStatus;
   trackerId: string | null;
+  /** Valor de referência da diária (moeda é a do tenant) — só usado se o portfólio público estiver ativo. */
+  valorDiariaReferencia: number | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -62,6 +64,7 @@ export interface CreateVehiclePayload {
     itv?: { validade?: string };
     licenciamento?: { validade?: string };
   };
+  valorDiariaReferencia?: number;
 }
 
 export interface UpdateVehiclePayload extends Partial<CreateVehiclePayload> {

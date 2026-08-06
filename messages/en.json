@@ -410,7 +410,9 @@
       "saving": "Saving...",
       "cancel": "Cancel",
       "genericError": "Couldn't save. Please try again.",
-      "naoInformado": "Not specified"
+      "naoInformado": "Not specified",
+      "valorDiariaReferencia": "Reference daily rate",
+      "valorDiariaReferenciaHint": "Only used if you enable the public fleet portfolio."
     },
     "maintenance": {
       "title": "Maintenance",
@@ -473,6 +475,22 @@
       "eletrico": "Electric",
       "hibrido": "Hybrid",
       "flex": "Flex fuel"
+    },
+    "sharePortfolio": "Share portfolio",
+    "portfolio": {
+      "title": "Public fleet portfolio",
+      "description": "Generate a public link (no login) so your customers can see the available fleet.",
+      "loading": "Loading...",
+      "loadError": "Couldn't load the portfolio settings.",
+      "activate": "Activate public portfolio",
+      "activating": "Activating...",
+      "mostrarValor": "Show daily rate",
+      "mostrarStatus": "Show available/rented",
+      "linkLabel": "Public link",
+      "copy": "Copy link",
+      "copied": "Copied!",
+      "close": "Close",
+      "saveError": "Couldn't save. Please try again."
     }
   },
   "customers": {
@@ -765,6 +783,19 @@
       "success": "Staff member added. The password was sent by email.",
       "conflictError": "A user with this email already exists.",
       "genericError": "Couldn't save. Please try again."
+    }
+  },
+  "publicPortfolio": {
+    "loading": "Loading...",
+    "notFound": {
+      "title": "Portfolio not found",
+      "message": "This link is not available."
+    },
+    "empty": "No vehicles available right now.",
+    "vehicle": {
+      "ano": "Year",
+      "cor": "Color",
+      "priceSuffix": "/day"
     }
   }
 }

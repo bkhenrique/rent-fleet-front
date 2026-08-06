@@ -20,6 +20,7 @@ function NewVehicleForm() {
   const [modelo, setModelo] = useState('');
   const [ano, setAno] = useState(CURRENT_YEAR);
   const [cor, setCor] = useState('');
+  const [valorDiariaReferencia, setValorDiariaReferencia] = useState('');
   const [seguroValidade, setSeguroValidade] = useState('');
   const [itvValidade, setItvValidade] = useState('');
   const [licenciamentoValidade, setLicenciamentoValidade] = useState('');
@@ -37,6 +38,7 @@ function NewVehicleForm() {
       modelo,
       ano,
       cor: cor || undefined,
+      valorDiariaReferencia: valorDiariaReferencia ? Number(valorDiariaReferencia) : undefined,
       documentos: {
         seguro: seguroValidade ? { validade: seguroValidade } : undefined,
         itv: itvValidade ? { validade: itvValidade } : undefined,
@@ -109,6 +111,19 @@ function NewVehicleForm() {
             onChange={(e) => setCor(e.target.value)}
             className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
           />
+        </label>
+
+        <label className="flex flex-col gap-1">
+          <span className="text-sm font-medium">{t('form.valorDiariaReferencia')}</span>
+          <input
+            type="number"
+            min={0}
+            step="0.01"
+            value={valorDiariaReferencia}
+            onChange={(e) => setValorDiariaReferencia(e.target.value)}
+            className="rounded border border-black/15 px-3 py-2 dark:border-white/25"
+          />
+          <span className="text-xs text-foreground/60">{t('form.valorDiariaReferenciaHint')}</span>
         </label>
 
         <fieldset className="flex flex-col gap-4 rounded border border-black/10 p-4 dark:border-white/15">

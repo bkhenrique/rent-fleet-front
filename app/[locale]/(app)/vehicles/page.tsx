@@ -6,25 +6,23 @@ import { Link } from '@/i18n/navigation';
 import { RequireRole } from '@/components/require-role';
 import { TENANT_ROLES } from '@/lib/roles';
 import { useApiClient } from '@/lib/use-api-client';
+import { useAuthStore } from '@/stores/auth-store';
 import { VehicleThumbnail } from '@/components/vehicles/vehicle-thumbnail';
+import { SharePortfolioModal } from '@/components/vehicles/share-portfolio-modal';
+import { STATUS_COLORS } from '@/lib/vehicle-status';
 import type { Vehicle, VehicleStatus } from '@/lib/types/vehicle';
 
 const STATUS_FILTERS: Array<VehicleStatus | 'todos'> = ['todos', 'disponivel', 'alugado', 'manutencao', 'inativo'];
 
-const STATUS_COLORS: Record<VehicleStatus, string> = {
-  disponivel: 'text-green-700 dark:text-green-400',
-  alugado: 'text-blue-700 dark:text-blue-400',
-  manutencao: 'text-amber-700 dark:text-amber-400',
-  inativo: 'text-foreground/50',
-};
-
 function VehiclesList() {
   const t = useTranslations('vehicles');
   const apiClient = useApiClient();
+  const isTenantAdmin = useAuthStore((state) => state.user?.role === 'tenant_admin');
 
   const [vehicles, setVehicles] = useState<Vehicle[] | null>(null);
   const [status, setStatus] = useState<VehicleStatus | 'todos'>('todos');
   const [error, setError] = useState(false);
+  const [shareModalOpen, setShareModalOpen] = useState(false);
 
   useEffect(() => {
     const query = status === 'todos' ? '' : `?status=${status}`;
@@ -35,12 +33,25 @@ function VehiclesList() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">
-      <div className="mb-6 flex items-center justify-between">
+      <div className="mb-6 flex items-center justify-between gap-3">
         <h1 className="text-xl font-semibold">{t('title')}</h1>
-        <Link href="/vehicles/new" className="rounded bg-accent px-4 py-2 text-sm font-medium text-accent-foreground">
-          {t('newVehicle')}
-        </Link>
+        <div className="flex gap-2">
+          {isTenantAdmin && (
+            <button
+              type="button"
+              onClick={() => setShareModalOpen(true)}
+              className="rounded border border-black/15 px-4 py-2 text-sm font-medium hover:bg-foreground/5 dark:border-white/25"
+            >
+              {t('sharePortfolio')}
+            </button>
+          )}
+          <Link href="/vehicles/new" className="rounded bg-accent px-4 py-2 text-sm font-medium text-accent-foreground">
+            {t('newVehicle')}
+          </Link>
+        </div>
       </div>
+
+      {shareModalOpen && <SharePortfolioModal onClose={() => setShareModalOpen(false)} />}
 
       <div className="mb-4 flex gap-2">
         {STATUS_FILTERS.map((option) => (
